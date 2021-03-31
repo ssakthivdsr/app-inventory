@@ -1,0 +1,9 @@
+.mat-expansion-panel-header.mat-expanded,.mat-expansion-panel-header.mat-expanded:hover {
+    background: lightgreen;
+  }
+  .mat-expansion-panel {
+      background: #F4EFEA;
+  }
+  mat-expansion-head-text {
+    color:#7D141D
+  }

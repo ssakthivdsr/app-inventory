@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./expansionview.component.css']
 })
 export class ExpansionviewComponent implements OnInit {
-
+  panelOpenState = false
   constructor() { }
 
   ngOnInit(): void {
