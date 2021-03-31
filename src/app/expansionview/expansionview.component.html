@@ -1,0 +1,56 @@
+<mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title >
+          <p style="color:red">Application panel </p>
+        </mat-panel-title>
+        <mat-panel-description>
+          Capture of Application Details
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <!-- <p>I'm visible because I am open</p> -->
+      <mat-card>
+        <mat-tab-group mat-align-tabs="start">
+            <mat-tab label="Add Application"><app-add-application-details></app-add-application-details></mat-tab>
+            <mat-tab label="View Applications">Applications list here..</mat-tab>
+        </mat-tab-group>
+    </mat-card>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Department Panel
+        </mat-panel-title>
+        <mat-panel-description>
+          Capture of Department details
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-card>
+        <mat-tab-group mat-align-tabs="start">
+            <mat-tab label="Add Department"><app-add-dept-details></app-add-dept-details></mat-tab>
+            <mat-tab label="View Departments">Departments list here..</mat-tab>
+        </mat-tab-group>
+    </mat-card>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header >
+        <mat-panel-title>
+          Regulatory  Panel
+        </mat-panel-title>
+        <mat-panel-description >
+          Capture of Regulatory details
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-card>
+        <mat-tab-group mat-align-tabs="start">
+            <mat-tab label="Select applicable regulatories"><app-regulatory></app-regulatory></mat-tab>
+            <mat-tab label="View accepted regulatory details">Accepted regulatory list here..</mat-tab>
+        </mat-tab-group>
+    </mat-card>
+    </mat-expansion-panel>
+    
+  </mat-accordion>

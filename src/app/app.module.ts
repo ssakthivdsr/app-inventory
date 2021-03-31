@@ -25,6 +25,7 @@ import { AddApplicationDetailsComponent } from './component/application/add-appl
 import { DeptComponent } from './component/dept/dept.component';
 import { ApplicationComponent } from './component/application/application.component';
 import { RegulatoryComponent } from './regulatory/regulatory.component';
+import { ExpansionviewComponent } from './expansionview/expansionview.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { RegulatoryComponent } from './regulatory/regulatory.component';
     AddApplicationDetailsComponent,
     DeptComponent,
     ApplicationComponent,
-    RegulatoryComponent
+    RegulatoryComponent,
+    ExpansionviewComponent
   ],
   imports: [
     BrowserModule,
