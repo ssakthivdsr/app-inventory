@@ -29,4 +29,11 @@
        `<body>` to be our scrolling element for mobile layouts. */
     flex: 1 0 auto;
   }
+  .mat-expansion-panel-header.mat-expanded,.mat-expansion-panel-header.mat-expanded:hover {
+    background: lightgreen;
+  }
+  .mat-expansion-panel {
+      background: #F4EFEA;
+  }
+  
   

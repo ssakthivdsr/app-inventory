@@ -17,12 +17,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule }  from '@angular/material/select';
 import { AddDeptDetailsComponent } from './component/dept/add-dept-details/add-dept-details.component';
 import { AddApplicationDetailsComponent } from './component/application/add-application-details/add-application-details.component';
 import { DeptComponent } from './component/dept/dept.component';
 import { ApplicationComponent } from './component/application/application.component';
+import { RegulatoryComponent } from './regulatory/regulatory.component';
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import { ApplicationComponent } from './component/application/application.compon
     AddDeptDetailsComponent,
     AddApplicationDetailsComponent,
     DeptComponent,
-    ApplicationComponent
+    ApplicationComponent,
+    RegulatoryComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import { ApplicationComponent } from './component/application/application.compon
     MatListModule,
     MatTabsModule,
     MatFormFieldModule,
+    MatExpansionModule,
     MatSelectModule,
     MatRadioModule
   ],

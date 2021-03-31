@@ -8,6 +8,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 })
 export class HeaderComponent implements OnDestroy {
   
+  panelOpenState = false;
   mobileQuery: MediaQueryList;
 
   fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
