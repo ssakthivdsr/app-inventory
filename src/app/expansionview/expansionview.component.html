@@ -1,0 +1,40 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title >
+        <p><b>Application</b> </p>
+      </mat-panel-title>      
+    </mat-expansion-panel-header>
+    <!-- <p>I'm visible because I am open</p> -->
+    <mat-card>
+      <app-add-application-details></app-add-application-details>
+    </mat-card>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>Department</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card>
+       <app-add-dept-details></app-add-dept-details>
+    </mat-card>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header >
+      <mat-panel-title>
+        <b>Regulatory</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card>
+      <mat-tab-group mat-align-tabs="start">
+          <mat-tab label="Select applicable regulatories"><app-regulatory></app-regulatory></mat-tab>
+          <mat-tab label="View accepted regulatory details">Accepted regulatory list here..</mat-tab>
+      </mat-tab-group>
+  </mat-card>
+  </mat-expansion-panel>
+  
+</mat-accordion>
