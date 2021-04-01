@@ -4,12 +4,14 @@ import { ApplicationComponent } from './component/application/application.compon
 import { DeptComponent } from './component/dept/dept.component';
 import { ExpansionviewComponent } from './expansionview/expansionview.component';
 import { RegulatoryComponent } from './regulatory/regulatory.component';
+import { BusinesspartnerComponent} from './component/businesspartner/businesspartner.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/dept', pathMatch: 'full' },
   { path: 'dept', component: DeptComponent },
   { path: 'application', component: ApplicationComponent },
   { path: 'regulatory' , component: RegulatoryComponent },
+  { path: 'businesspartner' , component: BusinesspartnerComponent },
   { path: 'expansionview' , component: ExpansionviewComponent }
 ];
 

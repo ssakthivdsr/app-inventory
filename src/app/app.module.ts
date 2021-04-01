@@ -26,6 +26,7 @@ import { DeptComponent } from './component/dept/dept.component';
 import { ApplicationComponent } from './component/application/application.component';
 import { RegulatoryComponent } from './regulatory/regulatory.component';
 import { ExpansionviewComponent } from './expansionview/expansionview.component';
+import { BusinesspartnerComponent } from './component/businesspartner/businesspartner.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ExpansionviewComponent } from './expansionview/expansionview.component'
     DeptComponent,
     ApplicationComponent,
     RegulatoryComponent,
-    ExpansionviewComponent
+    ExpansionviewComponent,
+    BusinesspartnerComponent
   ],
   imports: [
     BrowserModule,

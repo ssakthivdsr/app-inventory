@@ -18,7 +18,12 @@
             <mat-icon matListIcon>rule</mat-icon>
             <a matLine>Regulatory Details</a>
           </mat-list-item>
-        </mat-nav-list>
+        
+        <mat-list-item [routerLink] = "['/businesspartner']">
+          <mat-icon matListIcon>add_business</mat-icon>
+          <a matLine>Business Partner Details</a>
+        </mat-list-item>
+      </mat-nav-list>
       </mat-sidenav>
       <mat-sidenav-content>
         <router-outlet></router-outlet>
