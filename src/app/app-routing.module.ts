@@ -5,6 +5,7 @@ import { DeptComponent } from './component/dept/dept.component';
 import { ExpansionviewComponent } from './expansionview/expansionview.component';
 import { RegulatoryComponent } from './regulatory/regulatory.component';
 import { BusinesspartnerComponent} from './component/businesspartner/businesspartner.component';
+import { VendorpackageComponent} from './component/vendorpackage/vendorpackage.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/dept', pathMatch: 'full' },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'application', component: ApplicationComponent },
   { path: 'regulatory' , component: RegulatoryComponent },
   { path: 'businesspartner' , component: BusinesspartnerComponent },
+  { path: 'vendorpackage' , component: VendorpackageComponent },
   { path: 'expansionview' , component: ExpansionviewComponent }
 ];
 
