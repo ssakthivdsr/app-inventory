@@ -18,12 +18,10 @@
       <textarea matInput placeholder=""></textarea>
     </mat-form-field>
 
-    <label>Line Of Business</label>
-    <mat-selection-list #lobs>
-      <mat-list-option *ngFor="let lob of lineOfBusiness">
-        {{lob}}
-      </mat-list-option>
-    </mat-selection-list>
+    <mat-form-field class="example-full-width">
+      <mat-label>LOB</mat-label>
+      <input matInput value="">
+    </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Functionality</mat-label>
@@ -38,6 +36,16 @@
     <mat-form-field class="example-full-width">
       <mat-label>SME Provided by Managers</mat-label>
       <input matInput>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Name of the Primary Tech. SME</mat-label>
+      <input matInput value="">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Name of Primary BA</mat-label>
+      <input matInput value="">
     </mat-form-field>
 
   </form>
