@@ -6,6 +6,7 @@ import { ExpansionviewComponent } from './expansionview/expansionview.component'
 import { RegulatoryComponent } from './regulatory/regulatory.component';
 
 const routes: Routes = [
+  { path: '',   redirectTo: '/expansionview', pathMatch: 'full' },
   { path: 'dept', component: DeptComponent },
   { path: 'application', component: ApplicationComponent },
   { path: 'regulatory' , component: RegulatoryComponent },
