@@ -7,6 +7,9 @@ import { MediaMatcher } from '@angular/cdk/layout';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnDestroy {
+
+  show : boolean = false;
+  opened : boolean = false;
   
   mobileQuery: MediaQueryList;
 
@@ -20,8 +23,14 @@ export class HeaderComponent implements OnDestroy {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
+  displayMenu(event : any){
+      this.show = event; 
+      this.opened = event;
+  }
+
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.show  = true;
   }
 
 }

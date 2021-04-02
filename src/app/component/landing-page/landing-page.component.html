@@ -1,0 +1,13 @@
+
+<mat-card class="example-card" *ngIf="show">
+    <mat-card-content>
+       <h1> Welcome to Insurance Assessment F/W</h1>
+        <mat-radio-group>
+            <mat-radio-button value="1">Create a new assessment</mat-radio-button> &nbsp;
+            <mat-radio-button value="2">Continue with existing assessment</mat-radio-button>
+        </mat-radio-group> <br/> <br/>
+        <div class="bp-button-row">
+            <button mat-raised-button color="primary" (click)="go()">Go</button> &nbsp;
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -6,11 +6,13 @@ import { ExpansionviewComponent } from './expansionview/expansionview.component'
 import { RegulatoryComponent } from './regulatory/regulatory.component';
 import { BusinesspartnerComponent} from './component/businesspartner/businesspartner.component';
 import { VendorpackageComponent} from './component/vendorpackage/vendorpackage.component';
-import { AddApplicationDetailsComponent } from './component/application/add-application-details/add-application-details.component';
 import { AddApplicationLifecycleDetailsComponent } from './component/applicationlifecycle/add-application-lifecycle-details/add-application-lifecycle-details.component';
+import { LandingPageComponent } from './component/landing-page/landing-page.component';
+import { HeaderComponent } from './component/header/header.component';
 
 const routes: Routes = [
-  { path: '',   redirectTo: '/dept', pathMatch: 'full' },
+  { path: 'header' , component: HeaderComponent },
+  { path: 'landingPage' , component: LandingPageComponent },
   { path: 'dept', component: DeptComponent },
   { path: 'application', component: ApplicationComponent },
   { path: 'regulatory' , component: RegulatoryComponent },

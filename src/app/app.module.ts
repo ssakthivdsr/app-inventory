@@ -29,6 +29,7 @@ import { ExpansionviewComponent } from './expansionview/expansionview.component'
 import { BusinesspartnerComponent } from './component/businesspartner/businesspartner.component';
 import { VendorpackageComponent } from './component/vendorpackage/vendorpackage.component';
 import { AddApplicationLifecycleDetailsComponent } from './component/applicationlifecycle/add-application-lifecycle-details/add-application-lifecycle-details.component';
+import { LandingPageComponent } from './component/landing-page/landing-page.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { AddApplicationLifecycleDetailsComponent } from './component/application
     ExpansionviewComponent,
     BusinesspartnerComponent,
     VendorpackageComponent,
-    AddApplicationLifecycleDetailsComponent
+    AddApplicationLifecycleDetailsComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
