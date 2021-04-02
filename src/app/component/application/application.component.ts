@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-application',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicationComponent implements OnInit {
 
-  constructor() { }
+  public constructor(private titleService: Title) { 
+     this.titleService.setTitle("Inventory - Application Details");
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
   }
 
 }

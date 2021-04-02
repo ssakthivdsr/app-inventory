@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-regulatory',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegulatoryComponent implements OnInit {
 
-  constructor() { }
+  public constructor(private titleService: Title) { 
+    this.titleService.setTitle("Inventory - Regulatory Details");
+  }
 
   ngOnInit(): void {
   }

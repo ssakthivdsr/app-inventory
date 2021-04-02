@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-add-application-lifecycle-details',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddApplicationLifecycleDetailsComponent implements OnInit {
 
-  constructor() { }
+  public constructor(private titleService: Title) { 
+    this.titleService.setTitle("Inventory - Application Lifecycle Details");
+  }
 
   ngOnInit(): void {
   }
