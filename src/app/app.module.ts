@@ -28,6 +28,7 @@ import { RegulatoryComponent } from './regulatory/regulatory.component';
 import { ExpansionviewComponent } from './expansionview/expansionview.component';
 import { BusinesspartnerComponent } from './component/businesspartner/businesspartner.component';
 import { VendorpackageComponent } from './component/vendorpackage/vendorpackage.component';
+import { AddApplicationLifecycleDetailsComponent } from './component/applicationlifecycle/add-application-lifecycle-details/add-application-lifecycle-details.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { VendorpackageComponent } from './component/vendorpackage/vendorpackage.
     RegulatoryComponent,
     ExpansionviewComponent,
     BusinesspartnerComponent,
-    VendorpackageComponent
+    VendorpackageComponent,
+    AddApplicationLifecycleDetailsComponent
   ],
   imports: [
     BrowserModule,
