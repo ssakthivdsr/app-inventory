@@ -6,35 +6,24 @@
     <mat-sidenav-container class="example-sidenav-container"  [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
       <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
         <mat-nav-list>
-          <mat-list-item [routerLink] = "['/dept']">
-            <mat-icon matListIcon>group</mat-icon>
-            <a matLine>Dept Details</a>
+          <mat-list-item [routerLink] = "['/dept']" [routerLinkActive]="['active']">
+            <a matLine><b>Dept Details</b></a>
           </mat-list-item>
-          <mat-list-item [routerLink] = "['/application']">
-            <mat-icon matListIcon>device_hub</mat-icon>
-            <a matLine>Application Details</a>
+          <mat-list-item [routerLink] = "['/application']" [routerLinkActive]="['active']">
+            <a matLine><b>Application Details</b></a>
           </mat-list-item>
 
-          <mat-list-item [routerLink] = "['/businesspartner']">
-            <mat-icon matListIcon>add_business</mat-icon>
-            <a matLine>Business Partner Details</a>
+          <mat-list-item [routerLink] = "['/businesspartner']" [routerLinkActive]="['active']">
+            <a matLine><b>Business Partner Details</b></a>
           </mat-list-item>
 
-          <mat-list-item [routerLink] = "['/regulatory']">
-            <mat-icon matListIcon>rule</mat-icon>
-            <a matLine>Regulatory Details</a>
+          <mat-list-item [routerLink] = "['/regulatory']" [routerLinkActive]="['active']">
+            <a matLine><b>Regulatory Details</b></a>
           </mat-list-item>
 
-          <mat-list-item [routerLink] = "['/vendorpackage']">
-            <mat-icon matListIcon>add_business</mat-icon>
-            <a matLine>Vendor Package Details</a>
+          <mat-list-item [routerLink] = "['/vendorpackage']" [routerLinkActive]="['active']">
+            <a matLine><b>Vendor Package Details</b></a>
           </mat-list-item>
-
-          
-        
-          
-
-          
       </mat-nav-list>
       </mat-sidenav>
       <mat-sidenav-content>

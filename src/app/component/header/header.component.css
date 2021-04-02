@@ -1,3 +1,19 @@
+.mat-toolbar.mat-primary {
+  background : #2a81ce;
+  color: #fff;
+}
+
+.mat-list-item.active {
+  color: #2a81ce;
+  border-left: 4px solid red;
+  background-color: #d8d2d2;
+}
+
+.mat-list-item {
+   font-size: 14px;
+   color: grey;
+}
+
 .example-container {
     display: flex;
     flex-direction: column;
@@ -29,4 +45,6 @@
        `<body>` to be our scrolling element for mobile layouts. */
     flex: 1 0 auto;
   }
+
+
   
