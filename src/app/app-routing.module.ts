@@ -9,17 +9,23 @@ import { VendorpackageComponent} from './component/vendorpackage/vendorpackage.c
 import { AddApplicationLifecycleDetailsComponent } from './component/applicationlifecycle/add-application-lifecycle-details/add-application-lifecycle-details.component';
 import { LandingPageComponent } from './component/landing-page/landing-page.component';
 import { HeaderComponent } from './component/header/header.component';
+import { AvailableApplicationsComponent } from './component/available-applications/available-applications.component';
 
 const routes: Routes = [
-  { path: 'header' , component: HeaderComponent },
+  { path: 'header' , component: HeaderComponent,
+      children: [
+        { path: 'application', component: ApplicationComponent },
+        { path: 'dept',component: DeptComponent  },
+        { path: 'regulatory' , component: RegulatoryComponent },
+        { path: 'businesspartner' , component: BusinesspartnerComponent },
+        { path: 'vendorpackage' , component: VendorpackageComponent },
+        { path: 'applicationLifeCycle' , component: AddApplicationLifecycleDetailsComponent }
+      ]
+  },
   { path: 'landingPage' , component: LandingPageComponent },
-  { path: 'dept', component: DeptComponent },
-  { path: 'application', component: ApplicationComponent },
-  { path: 'regulatory' , component: RegulatoryComponent },
-  { path: 'businesspartner' , component: BusinesspartnerComponent },
-  { path: 'vendorpackage' , component: VendorpackageComponent },
   { path: 'expansionview' , component: ExpansionviewComponent },
-  { path: 'applicationLifeCycle' , component: AddApplicationLifecycleDetailsComponent }
+  { path: 'availableApplications' , component: AvailableApplicationsComponent }
+  
 ];
 
 @NgModule({

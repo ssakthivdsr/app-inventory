@@ -8,13 +8,17 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent implements OnInit {
   show : boolean = true;
-  @Output() showMenu : EventEmitter<any> = new EventEmitter();
+  selected : string = '';
   constructor(private router: Router) { }
 
   go(){
     this.show = false;
-    this.router.navigate(['/dept']);
-    this.showMenu.emit(true);
+    if(this.selected === '1'){
+      this.router.navigate(['/header/dept']);
+    } else {
+      this.router.navigate(['/availableApplications']);
+    }
+    
   }
 
   ngOnInit(): void { }

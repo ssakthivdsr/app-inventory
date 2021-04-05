@@ -1,0 +1,12 @@
+
+<mat-toolbar color="primary" class="example-toolbar" *ngIf="show">
+    <h1 class="example-app-name">Data Collection Application</h1>
+</mat-toolbar>  
+<mat-card class="example-card" *ngIf="show">
+    <mat-card-content>
+      Show Available apps table here
+    </mat-card-content>
+    <div class="bp-button-row">
+        <button mat-raised-button color="primary" (click)="back()">Back</button> &nbsp;
+    </div>
+</mat-card>

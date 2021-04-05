@@ -1,37 +1,36 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
     <mat-toolbar color="primary" class="example-toolbar">
-      <button mat-icon-button (click)="snav.toggle()" *ngIf="show"><mat-icon>menu</mat-icon></button>
+      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
       <h1 class="example-app-name">Data Collection Application</h1>
     </mat-toolbar>  
-    <mat-sidenav-container class="example-sidenav-container"  [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav-container class="example-sidenav-container"  [style.marginTop.px]="mobileQuery.matches ? 56 : 0" opened="true">
       <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [opened]="opened">
         <mat-nav-list>
-          <mat-list-item [routerLink] = "['/dept']" [routerLinkActive]="['active']">
+          <mat-list-item [routerLink] = "['./dept']" [routerLinkActive]="['active']">
             <a matLine><b>Dept Details</b></a>
           </mat-list-item>
-          <mat-list-item [routerLink] = "['/application']" [routerLinkActive]="['active']">
+          <mat-list-item [routerLink] = "['./application']" [routerLinkActive]="['active']">
             <a matLine><b>Application Details</b></a>
           </mat-list-item>
 
-          <mat-list-item [routerLink] = "['/businesspartner']" [routerLinkActive]="['active']">
+          <mat-list-item [routerLink] = "['./businesspartner']" [routerLinkActive]="['active']">
             <a matLine><b>Business Partner Details</b></a>
           </mat-list-item>
 
-          <mat-list-item [routerLink] = "['/regulatory']" [routerLinkActive]="['active']">
+          <mat-list-item [routerLink] = "['./regulatory']" [routerLinkActive]="['active']">
             <a matLine><b>Regulatory Details</b></a>
           </mat-list-item>
 
-          <mat-list-item [routerLink] = "['/applicationLifeCycle']" [routerLinkActive]="['active']">
+          <mat-list-item [routerLink] = "['./applicationLifeCycle']" [routerLinkActive]="['active']">
             <a matLine><b>Application Life Cycle</b></a>
           </mat-list-item>
 
-          <mat-list-item [routerLink] = "['/vendorpackage']" [routerLinkActive]="['active']">
+          <mat-list-item [routerLink] = "['./vendorpackage']" [routerLinkActive]="['active']">
             <a matLine><b>Vendor Package Details</b></a>
           </mat-list-item>
       </mat-nav-list>
       </mat-sidenav>
       <mat-sidenav-content>
-        <app-landing-page (showMenu)= "displayMenu($event)"></app-landing-page>
         <router-outlet></router-outlet>
       </mat-sidenav-content>
     </mat-sidenav-container>

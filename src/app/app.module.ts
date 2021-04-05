@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +31,8 @@ import { BusinesspartnerComponent } from './component/businesspartner/businesspa
 import { VendorpackageComponent } from './component/vendorpackage/vendorpackage.component';
 import { AddApplicationLifecycleDetailsComponent } from './component/applicationlifecycle/add-application-lifecycle-details/add-application-lifecycle-details.component';
 import { LandingPageComponent } from './component/landing-page/landing-page.component';
+import { AvailableApplicationsComponent } from './component/available-applications/available-applications.component';
+
 
 
 @NgModule({
@@ -45,10 +48,12 @@ import { LandingPageComponent } from './component/landing-page/landing-page.comp
     BusinesspartnerComponent,
     VendorpackageComponent,
     AddApplicationLifecycleDetailsComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    AvailableApplicationsComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule, 

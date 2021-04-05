@@ -1,0 +1,23 @@
+.mat-toolbar.mat-primary {
+    background : #2a81ce;
+    color: #fff;
+  }
+  
+  .mat-list-item.active {
+    color: #2a81ce;
+    border-left: 4px solid red;
+    background-color: #d8d2d2;
+  }
+  
+  .mat-list-item {
+     font-size: 14px;
+     color: grey;
+  }
+
+  mat-card{
+    width: 80%;
+    height: 80%;
+    margin-left:auto;
+    margin-right:auto;  
+    vertical-align: middle;
+  }

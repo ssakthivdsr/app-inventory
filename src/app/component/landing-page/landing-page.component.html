@@ -1,8 +1,10 @@
-
+<mat-toolbar color="primary" class="example-toolbar" *ngIf="show">
+    <h1 class="example-app-name">Data Collection Application</h1>
+</mat-toolbar>  
 <mat-card class="example-card" *ngIf="show">
     <mat-card-content>
        <h1> Welcome to Insurance Assessment F/W</h1>
-        <mat-radio-group>
+        <mat-radio-group [(ngModel)]="selected">
             <mat-radio-button value="1">Create a new assessment</mat-radio-button> &nbsp;
             <mat-radio-button value="2">Continue with existing assessment</mat-radio-button>
         </mat-radio-group> <br/> <br/>
@@ -11,3 +13,4 @@
         </div>
     </mat-card-content>
 </mat-card>
+<router-outlet></router-outlet>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dept',
@@ -8,11 +9,15 @@ import { Title } from '@angular/platform-browser';
 })
 export class DeptComponent implements OnInit {
 
- public constructor(private titleService: Title) { 
+ public constructor(private titleService: Title, private router : Router) { 
     this.titleService.setTitle("Inventory - Department Details");
  }
 
   ngOnInit(): void {
+  }
+
+  cancel(){
+    this.router.navigate(['/landingPage']);
   }
 
 }

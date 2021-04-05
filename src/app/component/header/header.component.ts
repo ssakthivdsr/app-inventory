@@ -9,7 +9,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 export class HeaderComponent implements OnDestroy {
 
   show : boolean = false;
-  opened : boolean = false;
+  opened : boolean = true;
   
   mobileQuery: MediaQueryList;
 
@@ -21,11 +21,6 @@ export class HeaderComponent implements OnDestroy {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-  }
-
-  displayMenu(event : any){
-      this.show = event; 
-      this.opened = event;
   }
 
   ngOnDestroy(): void {
