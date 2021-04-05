@@ -16,8 +16,5 @@ export class DeptComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  cancel(){
-    this.router.navigate(['/landingPage']);
-  }
 
 }

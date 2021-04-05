@@ -21,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule }  from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 import { AddDeptDetailsComponent } from './component/dept/add-dept-details/add-dept-details.component';
 import { AddApplicationDetailsComponent } from './component/application/add-application-details/add-application-details.component';
 import { DeptComponent } from './component/dept/dept.component';
@@ -70,7 +71,8 @@ import { AvailableApplicationsComponent } from './component/available-applicatio
     MatFormFieldModule,
     MatSelectModule,
     MatRadioModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
