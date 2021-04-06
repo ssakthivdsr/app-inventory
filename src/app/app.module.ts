@@ -33,6 +33,7 @@ import { VendorpackageComponent } from './component/vendorpackage/vendorpackage.
 import { AddApplicationLifecycleDetailsComponent } from './component/applicationlifecycle/add-application-lifecycle-details/add-application-lifecycle-details.component';
 import { LandingPageComponent } from './component/landing-page/landing-page.component';
 import { AvailableApplicationsComponent } from './component/available-applications/available-applications.component';
+import { ServicemanagementComponent } from './component/servicemanagement/servicemanagement.component';
 
 
 
@@ -50,7 +51,8 @@ import { AvailableApplicationsComponent } from './component/available-applicatio
     VendorpackageComponent,
     AddApplicationLifecycleDetailsComponent,
     LandingPageComponent,
-    AvailableApplicationsComponent
+    AvailableApplicationsComponent,
+    ServicemanagementComponent
   ],
   imports: [
     BrowserModule,

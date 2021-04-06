@@ -10,7 +10,7 @@ import { AddApplicationLifecycleDetailsComponent } from './component/application
 import { LandingPageComponent } from './component/landing-page/landing-page.component';
 import { HeaderComponent } from './component/header/header.component';
 import { AvailableApplicationsComponent } from './component/available-applications/available-applications.component';
-
+import { ServicemanagementComponent} from './component/servicemanagement/servicemanagement.component';
 const routes: Routes = [
   { path: 'header' , component: HeaderComponent,
       children: [
@@ -19,7 +19,8 @@ const routes: Routes = [
         { path: 'regulatory' , component: RegulatoryComponent },
         { path: 'businesspartner' , component: BusinesspartnerComponent },
         { path: 'vendorpackage' , component: VendorpackageComponent },
-        { path: 'applicationLifeCycle' , component: AddApplicationLifecycleDetailsComponent }
+        { path: 'applicationLifeCycle' , component: AddApplicationLifecycleDetailsComponent },
+        { path: 'servviceManagement' , component: ServicemanagementComponent}
       ]
   },
   { path: 'landingPage' , component: LandingPageComponent },
