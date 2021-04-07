@@ -12,6 +12,10 @@ import { HeaderComponent } from './component/header/header.component';
 import { AvailableApplicationsComponent } from './component/available-applications/available-applications.component';
 import { ServicemanagementComponent} from './component/servicemanagement/servicemanagement.component';
 import { BusinessapplicationdetailsComponent} from './component/businessapplicationdetails/businessapplicationdetails.component'
+import { ReportsComponent } from './component/reports/reports.component';
+import { LayoutComponent } from './component/layout/layout.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { EditApplicationComponent } from './component/edit-application/edit-application.component';
 const routes: Routes = [
   { path: 'header' , component: HeaderComponent,
       children: [
@@ -27,8 +31,14 @@ const routes: Routes = [
   },
   { path: 'landingPage' , component: LandingPageComponent },
   { path: 'expansionview' , component: ExpansionviewComponent },
-  { path: 'availableApplications' , component: AvailableApplicationsComponent }
-  
+  { path: 'layout', component: LayoutComponent,
+      children: [
+        { path: 'availableApplications' , component: AvailableApplicationsComponent },
+        { path: 'editApplication' , component: EditApplicationComponent },
+        { path: 'dashboard', component: DashboardComponent },
+        { path: 'reports', component: ReportsComponent }
+      ]
+  } 
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-.bpd-form {
+ .bpd-form {
     min-width: 150px;
     max-width: 1800px;
     width: 100%;
@@ -7,9 +7,11 @@
   .bpd-full-width {
     width: 100%;
   }
+
   .bpd-five-width {
     width: 100%;
   }
+
   .bpd-h2 {
     margin: 10px;
   }
@@ -23,4 +25,8 @@
   
   .bpd-margin {
     margin: 0 10px;
+  }
+
+  panel-heading {
+    color: #2a81ce;
   }

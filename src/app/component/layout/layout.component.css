@@ -1,27 +1,4 @@
-  mat-card{
-    width: auto;
-    height: auto;
-    margin-left:auto;
-    margin-right:auto;  
-    vertical-align: middle;
-  }
-
-  table.center {
-    width: 60%;
-    margin-left:auto; 
-    margin-right:auto;
-  }
-  
-   
-  tr.example-element-row:not(.example-expanded-row):hover {
-    background: whitesmoke;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):active {
-    background: #efefef;
-  }
-
-  .mat-toolbar.mat-primary {
+.mat-toolbar.mat-primary {
     background : #2a81ce;
     color: #fff;
   }

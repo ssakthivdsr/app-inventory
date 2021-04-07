@@ -35,6 +35,10 @@ import { LandingPageComponent } from './component/landing-page/landing-page.comp
 import { AvailableApplicationsComponent } from './component/available-applications/available-applications.component';
 import { ServicemanagementComponent } from './component/servicemanagement/servicemanagement.component';
 import { BusinessapplicationdetailsComponent } from './component/businessapplicationdetails/businessapplicationdetails.component';
+import { ReportsComponent } from './component/reports/reports.component';
+import { LayoutComponent } from './component/layout/layout.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { EditApplicationComponent } from './component/edit-application/edit-application.component';
 
 
 
@@ -54,7 +58,11 @@ import { BusinessapplicationdetailsComponent } from './component/businessapplica
     LandingPageComponent,
     AvailableApplicationsComponent,
     ServicemanagementComponent,
-    BusinessapplicationdetailsComponent
+    BusinessapplicationdetailsComponent,
+    ReportsComponent,
+    LayoutComponent,
+    DashboardComponent,
+    EditApplicationComponent
   ],
   imports: [
     BrowserModule,

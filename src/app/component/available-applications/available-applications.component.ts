@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 export interface Application {
@@ -21,19 +22,42 @@ const ELEMENT_DATA: Application[] = [
   templateUrl: './available-applications.component.html',
   styleUrls: ['./available-applications.component.css']
 })
-export class AvailableApplicationsComponent implements OnInit {
+
+export class AvailableApplicationsComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['id', 'name', 'Action'];
   dataSource = ELEMENT_DATA;
-
+  _mobileQueryListener: () => void;
   show : boolean = true;
-  constructor(private router: Router) { }
+  mobileQuery: MediaQueryList;
+  
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.show = false;
   }
 
   back(){
     this.router.navigate(['/landingPage']);
+  }
+
+  hideApplications(){
+    this.show = false;
+  }
+
+  showApplications(){
+    this.show = true;
+  }
+
+  editApplication(int : number){
+    this.router.navigate(['/layout/editApplication']);
   }
 
 }
