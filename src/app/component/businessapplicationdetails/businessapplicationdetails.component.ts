@@ -19,7 +19,10 @@ export class BusinessapplicationdetailsComponent implements OnInit {
           name: ['', [Validators.required, Validators.minLength(5)]],
           addresses: this._fb.array([
               this.initAddress(),
-          ])
+          ]),
+          users: this._fb.array([
+            this.initUsers(),
+        ])
       });
   }
 
@@ -39,6 +42,23 @@ export class BusinessapplicationdetailsComponent implements OnInit {
       const control = <FormArray>this.myForm.controls['addresses'];
       control.removeAt(i);
   }
+
+  initUsers() {
+    return this._fb.group({
+        street: ['', Validators.required],
+        postcode: ['']
+    });
+}
+
+addUsers() {
+    const control = <FormArray>this.myForm.controls['users'];
+    control.push(this.initAddress());
+}
+
+removeUsers(i: number) {
+    const control = <FormArray>this.myForm.controls['users'];
+    control.removeAt(i);
+}
 
   save(model: businessapplication) {
       // call API to save
