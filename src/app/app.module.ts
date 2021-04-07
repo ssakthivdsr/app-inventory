@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +34,7 @@ import { AddApplicationLifecycleDetailsComponent } from './component/application
 import { LandingPageComponent } from './component/landing-page/landing-page.component';
 import { AvailableApplicationsComponent } from './component/available-applications/available-applications.component';
 import { ServicemanagementComponent } from './component/servicemanagement/servicemanagement.component';
+import { BusinessapplicationdetailsComponent } from './component/businessapplicationdetails/businessapplicationdetails.component';
 
 
 
@@ -52,11 +53,13 @@ import { ServicemanagementComponent } from './component/servicemanagement/servic
     AddApplicationLifecycleDetailsComponent,
     LandingPageComponent,
     AvailableApplicationsComponent,
-    ServicemanagementComponent
+    ServicemanagementComponent,
+    BusinessapplicationdetailsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule, 

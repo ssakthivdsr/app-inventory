@@ -1,0 +1,263 @@
+<mat-card>
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="margin-20">
+          <h4>Transaction Details</h4>
+        </div>
+        <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)" class="bpd-form">
+            
+          <!--addresses-->
+          <div formArrayName="addresses">
+            <div *ngFor="let address of myForm.controls.addresses.controls; let i=index" class="panel panel-default">
+              <div class="panel-heading">
+                <span>Transaction  {{i + 1}}</span>
+                <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)"></span>
+              </div>
+              <div class="panel-body" [formGroupName]="i">
+                <div class="form-group col-xs-12">
+                    <mat-form-field class="bpd-full-width">
+                        <mat-label>Type of Transaction</mat-label>
+                        <mat-select>
+                          <mat-option value="one">Quote</mat-option>
+                          <mat-option value="two">Policy Issuance</mat-option>
+                          <mat-option value="three">Endorsement</mat-option>
+                          <mat-option value="four">Cancel</mat-option>
+                          <mat-option value="five">Reinstate</mat-option>
+                          <mat-option value="six">Rebase</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-3">
+                    <mat-label>Volume Of Transactions</mat-label>
+                </div>
+                <div class="form-group col-xs-3">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>2020</mat-label>
+                        <textarea matInput placeholder=""></textarea>
+                      </mat-form-field>
+                </div>
+                <div class="form-group col-xs-3">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>2019</mat-label>
+                        <textarea matInput placeholder=""></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-3">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>2018</mat-label>
+                        <textarea matInput placeholder=""></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-xs-3">
+                    <mat-label>Type of Users</mat-label>
+                </div>
+                <div class="form-group col-xs-9">
+                    <mat-checkbox>Exclusive Agents</mat-checkbox> &nbsp;
+                    <mat-checkbox >Experience Center</mat-checkbox>&nbsp;
+                    <mat-checkbox >End Customers</mat-checkbox>&nbsp;
+                    <mat-checkbox >Undewriters</mat-checkbox>&nbsp;
+                    <mat-checkbox >Data Entry Operators</mat-checkbox>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-label>Volume of Transactions in 2020</mat-label>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Exclusive Agents</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Experience Center</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>End Customers</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Undewriters</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Data Entry Operators</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-label>Volume of Transactions in 2019</mat-label>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Exclusive Agents</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Experience Center</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>End Customers</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Undewriters</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Data Entry Operators</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-label>Volume of Transactions in 2018</mat-label>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Exclusive Agents</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Experience Center</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>End Customers</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Undewriters</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-2">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Data Entry Operators</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                
+                <div class="form-group col-xs-3">
+                    <mat-label>Channels Supported</mat-label>
+                </div>
+                <div class="form-group col-xs-9">
+                    <mat-checkbox>Internet</mat-checkbox> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <mat-checkbox>Agencies</mat-checkbox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <mat-checkbox>Mobile</mat-checkbox> 
+                </div>
+
+                <div class="form-group col-xs-3">
+                    <mat-label>Volume of Transactions in 2020</mat-label>
+                </div>
+                <div class="form-group col-xs-3">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Internet</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-3">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Agencies</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-3">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Mobile</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-3">
+                    <mat-label>Volume of Transactions in 2019</mat-label>
+                </div>
+                <div class="form-group col-xs-3">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Internet</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-3">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Agencies</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-3">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Mobile</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-3">
+                    <mat-label>Volume of Transactions in 2018</mat-label>
+                </div>
+                <div class="form-group col-xs-3">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Internet</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-3">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Agencies</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-3">
+                    <mat-form-field class="bpd-five-width">
+                        <mat-label>Mobile</mat-label>
+                        <input matInput value=""> 
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-xs-12">
+                    <mat-label>IS there a difference in which Internet Customers and Agents/CC users treated? For instance or end customers allowed to cancel policies?</mat-label> &nbsp;
+                    <mat-radio-group aria-label="Select an option">
+                        <mat-radio-button value="1">Banking</mat-radio-button> &nbsp;
+                        <mat-radio-button value="2">Insurance</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+  
+          <div class="margin-20">
+            <a (click)="addAddress()" style="cursor: default">
+              Add another Transaction +
+            </a>
+          </div>
+  
+          <div class="margin-20">
+            <button type="submit" class="btn btn-primary pull-right" [disabled]="!myForm.valid">Submit</button>
+          </div>
+          <div class="clearfix"></div>
+  
+         
+        </form>
+      </div>
+    </div>
+  </div>
+</mat-card>

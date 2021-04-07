@@ -11,6 +11,7 @@ import { LandingPageComponent } from './component/landing-page/landing-page.comp
 import { HeaderComponent } from './component/header/header.component';
 import { AvailableApplicationsComponent } from './component/available-applications/available-applications.component';
 import { ServicemanagementComponent} from './component/servicemanagement/servicemanagement.component';
+import { BusinessapplicationdetailsComponent} from './component/businessapplicationdetails/businessapplicationdetails.component'
 const routes: Routes = [
   { path: 'header' , component: HeaderComponent,
       children: [
@@ -20,7 +21,8 @@ const routes: Routes = [
         { path: 'businesspartner' , component: BusinesspartnerComponent },
         { path: 'vendorpackage' , component: VendorpackageComponent },
         { path: 'applicationLifeCycle' , component: AddApplicationLifecycleDetailsComponent },
-        { path: 'servviceManagement' , component: ServicemanagementComponent}
+        { path: 'servviceManagement' , component: ServicemanagementComponent},
+        { path: 'businessAppDetails' , component: BusinessapplicationdetailsComponent}
       ]
   },
   { path: 'landingPage' , component: LandingPageComponent },
