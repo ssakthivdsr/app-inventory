@@ -1,6 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface Application {
   id : number;
@@ -26,10 +27,13 @@ const ELEMENT_DATA: Application[] = [
 export class AvailableApplicationsComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['id', 'name', 'Action'];
-  dataSource = ELEMENT_DATA;
+  dataSource = new MatTableDataSource(ELEMENT_DATA);;
   _mobileQueryListener: () => void;
   show : boolean = true;
   mobileQuery: MediaQueryList;
+  filterValue: string = "";
+  searchString : String = "";
+  
   
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -37,6 +41,19 @@ export class AvailableApplicationsComponent implements OnInit, OnDestroy {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
+  // applyFilter() {
+  //   // alert("call came");
+  //   this.filterValue = this.filterValue.trim().toLowerCase(); // Remove whitespace
+  //   // filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+  //   this.dataSource.filter = this.filterValue;
+  // }
+  applyFilter(event : Event) {
+    
+    this.filterValue = (event.target as HTMLInputElement).value;
+    this.filterValue = this.filterValue.trim(); // Remove whitespace
+    this.filterValue = this.filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = this.filterValue;
+  }
   ngOnInit(): void {}
 
   ngOnDestroy(): void {

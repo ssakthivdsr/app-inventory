@@ -1,4 +1,13 @@
 <mat-card class="example-card" *ngIf="show">
+  <div class="col-xs-3"></div>
+    <div class="col-xs-9">
+      <div class=" searchBox example-header ">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event)" [value] = "searchString" placeholder="Enter the application id">
+        </mat-form-field>
+      </div>
+  </div>
+  
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 center">
       <!-- Position Column -->
       <ng-container matColumnDef="id">
