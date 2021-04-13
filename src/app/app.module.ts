@@ -39,7 +39,6 @@ import { ReportsComponent } from './component/reports/reports.component';
 import { LayoutComponent } from './component/layout/layout.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { EditApplicationComponent } from './component/edit-application/edit-application.component';
-import { TestComponent } from './component/test/test.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NewApplicationComponent } from './component/new-application/new-application.component';
 
@@ -67,7 +66,6 @@ import { NewApplicationComponent } from './component/new-application/new-applica
     LayoutComponent,
     DashboardComponent,
     EditApplicationComponent,
-    TestComponent,
     NewApplicationComponent
   ],
   imports: [
