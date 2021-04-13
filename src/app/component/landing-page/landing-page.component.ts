@@ -14,7 +14,7 @@ export class LandingPageComponent implements OnInit {
   go(){
     this.show = false;
     if(this.selected === '1'){
-      this.router.navigate(['/header/dept']);
+      this.router.navigate(['/layout/newApplication']);
     } else {
       this.router.navigate(['/layout/availableApplications']);
     }

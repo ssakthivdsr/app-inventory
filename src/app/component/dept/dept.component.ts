@@ -16,5 +16,9 @@ export class DeptComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  save(){
+    
+  }
+
 
 }

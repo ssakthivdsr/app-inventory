@@ -15,7 +15,8 @@ const ELEMENT_DATA: Application[] = [
   {id: 4, name: 'Application-4'},
   {id: 5, name: 'Application-5'},
   {id: 6, name: 'Application-6'},
-  {id: 7, name: 'Application-7'}  
+  {id: 7, name: 'Application-7'},
+  {id: 8, name: 'My-application'},
 ];
 
 @Component({
@@ -41,14 +42,7 @@ export class AvailableApplicationsComponent implements OnInit, OnDestroy {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
-  // applyFilter() {
-  //   // alert("call came");
-  //   this.filterValue = this.filterValue.trim().toLowerCase(); // Remove whitespace
-  //   // filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-  //   this.dataSource.filter = this.filterValue;
-  // }
   applyFilter(event : Event) {
-    
     this.filterValue = (event.target as HTMLInputElement).value;
     this.filterValue = this.filterValue.trim(); // Remove whitespace
     this.filterValue = this.filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches

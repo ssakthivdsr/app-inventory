@@ -16,6 +16,7 @@ import { ReportsComponent } from './component/reports/reports.component';
 import { LayoutComponent } from './component/layout/layout.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { EditApplicationComponent } from './component/edit-application/edit-application.component';
+import { NewApplicationComponent } from './component/new-application/new-application.component';
 const routes: Routes = [
   { path: 'header' , component: HeaderComponent,
       children: [
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'layout', component: LayoutComponent,
       children: [
         { path: 'availableApplications' , component: AvailableApplicationsComponent },
+        { path: 'newApplication' , component: NewApplicationComponent },
         { path: 'editApplication' , component: EditApplicationComponent },
         { path: 'dashboard', component: DashboardComponent },
         { path: 'reports', component: ReportsComponent }
