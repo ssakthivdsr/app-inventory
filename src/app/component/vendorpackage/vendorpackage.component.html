@@ -34,10 +34,12 @@
     <mat-label>Vendor Engagements Associated with Externally Hosted Vendor</mat-label>
     <textarea matInput placeholder="Multiple values are allowed"></textarea>
   </mat-form-field>
-  <mat-form-field class="vp-full-width">
-    <mat-label>Is the application the most current Vendor software version?</mat-label>
-    <input matInput value="">
-  </mat-form-field>
+ 
+  <mat-radio-group  class="vp-full-width">
+    <mat-label>Is the application the most current Vendor software version?</mat-label> <br/>&nbsp;&nbsp;&nbsp;
+    <mat-radio-button value="1">Yes</mat-radio-button> &nbsp;
+    <mat-radio-button value="2">No</mat-radio-button>
+  </mat-radio-group>
   <mat-form-field class="vp-full-width">
     <mat-label>What version of the Vendor package is being used?</mat-label>
     <input matInput value="">

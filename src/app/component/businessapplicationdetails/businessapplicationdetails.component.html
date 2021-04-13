@@ -28,6 +28,7 @@
                     <mat-option value="four">Cancel</mat-option>
                     <mat-option value="five">Reinstate</mat-option>
                     <mat-option value="six">Rebase</mat-option>
+                    <mat-option value="seven">Non Renew</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -290,7 +291,7 @@
 
 
         <mat-radio-group class="bpd-full-width">
-          <mat-label>Is there a difference in which internet customers and agents/CC users treated?</mat-label> &nbsp;
+          <mat-label>Is there a difference in which internet customers and agents/CC users treated? For instance or end customers allowed to cancel policies?</mat-label> &nbsp;
           <mat-radio-button value="1">Yes </mat-radio-button> &nbsp;
           <mat-radio-button value="2">No</mat-radio-button>
         </mat-radio-group>
@@ -361,15 +362,15 @@
         <mat-form-field class="bpd-full-width">
           <mat-label>How many product variants are live in the System?</mat-label>
           <mat-select>
-            <mat-option value="one">&gt; 10 products</mat-option>
+            <mat-option value="one">&lt; 10 products</mat-option>
             <mat-option value="two">10-20 products</mat-option>
-            <mat-option value="three">&lt; 20 products</mat-option>
+            <mat-option value="three">&gt; 20 products</mat-option>
           </mat-select>
         </mat-form-field>
         <br>
 
         <mat-form-field class="bpd-full-width">
-          <mat-label>How far back does the system allow for endorsements?</mat-label>
+          <mat-label>How far back does the system allow for endorsements (1/2/3/4 or more terms?)</mat-label>
           <mat-select>
             <mat-option value="one">1</mat-option>
             <mat-option value="two">2</mat-option>
@@ -381,7 +382,7 @@
         <br>
 
         <mat-form-field class="bpd-full-width">
-          <mat-label>How far back can transactions go to previous terms?</mat-label>
+          <mat-label>Haw far back can transactions go to previous terms (1/2/3/4 or more)</mat-label>
           <mat-select>
             <mat-option value="one">1</mat-option>
             <mat-option value="two">2</mat-option>
@@ -487,7 +488,7 @@
             <mat-option value="two">75-80%</mat-option>
             <mat-option value="three">80-85%</mat-option>
             <mat-option value="four">85-90%</mat-option>
-            <mat-option value="five">&gt; 90</mat-option>
+            <mat-option value="five">&gt; 90%</mat-option>
 
           </mat-select>
         </mat-form-field>
