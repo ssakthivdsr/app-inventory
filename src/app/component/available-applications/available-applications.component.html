@@ -1,34 +1,79 @@
 <mat-card class="example-card" *ngIf="show">
   <div class="col-xs-3"></div>
-    <div class="col-xs-9">
-      <div class=" searchBox example-header ">
-        <label>Search : </label> &nbsp;
-        <mat-form-field>
-          <input matInput (keyup)="applyFilter($event)" [value] = "searchString" placeholder="Enter the application name">
-        </mat-form-field>
-      </div>
+  <div class="col-xs-9">
+    <div class=" searchBox example-header ">
+      <label>Search : </label> &nbsp;
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event)" [value]="searchString" placeholder="Enter the application name">
+      </mat-form-field>
+    </div>
   </div>
-  
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 center">
-      <!-- Position Column -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-      </ng-container>
-    
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="Action">
-          <th mat-header-cell *matHeaderCellDef> Action </th>
-          <td mat-cell *matCellDef="let element"> <button mat-button color="primary" (click)="editApplication(1)">Edit</button> </td>
-        </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
-    </table>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 center" multiTemplateDataRows>
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="Action">
+      <th mat-header-cell *matHeaderCellDef> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action </th>
+      <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
+          (click)="editApplication(1)">Edit</button> </td>
+    </ng-container>
+
+    <!-- Score Column -->
+    <ng-container matColumnDef="Score">
+      <th mat-header-cell *matHeaderCellDef>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Score</th>
+      <td mat-cell *matCellDef="let element">
+        <a mat-button color="primary" href="javascript:void()" (click)="element.isExpanded = !element.isExpanded">
+          Retrieve Score </a>
+      </td>
+    </ng-container>
+
+     <!-- Application completion status -->
+     <ng-container matColumnDef="applicationCompletedStatus">
+      <th mat-header-cell *matHeaderCellDef> Application Completion Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.applicationCompletedStatus}} </td>
+    </ng-container>
+
+    <!-- Extra Content-->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div class="row example-element-detail" [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'">
+          
+          <table class= "table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Business Total</th>
+                <th scope="col">Business value</th>
+                <th scope="col">Agility</th>
+                <th scope="col">Tech total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>      
+                <td style="text-align:center" style="text-indent: 5mm">  {{ element.businessTotal }}</td>
+                <td style="text-align: center"style="text-indent: 5mm">  {{ element.businessValue }}</td>
+                <td style="text-align: center" style="text-indent: 5mm">   {{ element.agility }}</td>
+                <td style="text-align: center"style="text-indent: 5mm">  {{ element.techTotal }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+      [class.example-expanded-row]="element.isExpanded"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
 </mat-card>

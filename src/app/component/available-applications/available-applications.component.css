@@ -1,77 +1,102 @@
-  mat-card{
-    width: auto;
-    height: auto;
-    margin-left:auto;
-    margin-right:auto;  
-    vertical-align: middle;
-  }
+mat-card{
+  width: auto;
+  height: auto;
+  margin-left:auto;
+  margin-right:auto;  
+  vertical-align: middle;
+}
 
-  .searchBox {
-    min-height: 64px;
-    padding: 8px 24px 0;
-  }
-  table.center {
-    width: 60%;
-    margin-left:auto; 
-    margin-right:auto;
-  }
-  
-   
-  tr.example-element-row:not(.example-expanded-row):hover {
-    background: whitesmoke;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):active {
-    background: #efefef;
-  }
+mat-form-field {
+  margin-right: 12px;
+}
 
-  .mat-toolbar.mat-primary {
-    background : #2a81ce;
-    color: #fff;
-  }
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.searchBox {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+table.center {
+  width: 60%;
+  margin-left:auto; 
+  margin-right:auto;
+}
+
+table {
+  width: 100%;
   
-  .mat-list-item.active {
-    color: #2a81ce;
-    border-left: 4px solid red;
-    background-color: #d8d2d2;
-  }
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+.example-element-row {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.mat-toolbar.mat-primary {
+  background : #2a81ce;
+  color: #fff;
+}
+
+.mat-list-item.active {
+  color: #2a81ce;
+  border-left: 4px solid red;
+  background-color: #d8d2d2;
+}
+
+.mat-list-item {
+   font-size: 14px;
+   color: grey;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
   
-  .mat-list-item {
-     font-size: 14px;
-     color: grey;
-  }
-  
-  .example-container {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-    
-  .example-is-mobile .example-toolbar {
-    position: fixed;
-    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
-    z-index: 2;
-  }
-  
-  h1.example-app-name {
-    margin-left: 8px;
-  }
-  
-  .example-sidenav-container {
-    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
-        causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
-    flex: 1;
-  }
-  
-  .example-is-mobile .example-sidenav-container {
-    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
-        `<body>` to be our scrolling element for mobile layouts. */
-    flex: 1 0 auto;
-  }
-  
-  
-    
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+h1.example-app-name {
+  margin-left: 8px;
+}
+
+.example-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+      causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+.example-is-mobile .example-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+      `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
+}
