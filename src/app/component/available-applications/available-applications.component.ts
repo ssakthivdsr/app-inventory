@@ -15,14 +15,14 @@ export interface Application {
 }
 
 const ELEMENT_DATA: Application[] = [
-  { id: 1, name: 'Application-1', businessTotal: 11, businessValue: 11, agility: 11, techTotal: 11, applicationCompletedStatus: '70%' },
-  { id: 2, name: 'Application-2', businessTotal: 22, businessValue: 22, agility: 22, techTotal: 22, applicationCompletedStatus: '75%' },
-  { id: 3, name: 'Application-3', businessTotal: 33, businessValue: 33, agility: 33, techTotal: 33, applicationCompletedStatus: '62%' },
-  { id: 4, name: 'Application-4', businessTotal: 44, businessValue: 44, agility: 44, techTotal: 44, applicationCompletedStatus: '85%' },
-  { id: 5, name: 'Application-5', businessTotal: 55, businessValue: 55, agility: 55, techTotal: 55, applicationCompletedStatus: '78%' },
-  { id: 6, name: 'Application-6', businessTotal: 66, businessValue: 66, agility: 66, techTotal: 66, applicationCompletedStatus: '90%' },
-  { id: 7, name: 'Application-7', businessTotal: 77, businessValue: 77, agility: 77, techTotal: 77, applicationCompletedStatus: '95%' },
-  { id: 8, name: 'My-application', businessTotal: 88, businessValue: 88, agility: 88, techTotal: 88, applicationCompletedStatus: '88%' },
+  { id: 1, name: 'Application-1', businessTotal: 86, businessValue: 20, agility: 45, techTotal: 21, applicationCompletedStatus: '70%' },
+  { id: 2, name: 'Application-2', businessTotal: 90, businessValue: 22, agility: 46, techTotal: 22, applicationCompletedStatus: '75%' },
+  { id: 3, name: 'Application-3', businessTotal: 85, businessValue: 11, agility: 43, techTotal: 31, applicationCompletedStatus: '62%' },
+  { id: 4, name: 'Application-4', businessTotal: 94, businessValue: 20, agility: 44, techTotal: 30, applicationCompletedStatus: '85%' },
+  { id: 5, name: 'Application-5', businessTotal: 80, businessValue: 15, agility: 45, techTotal: 20, applicationCompletedStatus: '78%' },
+  { id: 6, name: 'Application-6', businessTotal: 85, businessValue: 13, agility: 42, techTotal: 30, applicationCompletedStatus: '90%' },
+  { id: 7, name: 'Application-7', businessTotal: 83, businessValue: 15, agility: 45, techTotal: 23, applicationCompletedStatus: '95%' },
+  { id: 8, name: 'My-application', businessTotal: 82, businessValue: 20, agility: 42, techTotal: 20, applicationCompletedStatus: '88%' },
 ];
 
 @Component({

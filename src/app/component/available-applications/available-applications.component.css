@@ -100,3 +100,21 @@ h1.example-app-name {
       `<body>` to be our scrolling element for mobile layouts. */
   flex: 1 0 auto;
 }
+.spangreen {
+  background-color: green;
+  width:100px;
+  display:block;
+  height: 35px;
+}
+.spanred {
+  background-color: red;
+  width:100px;
+  display:block;
+  height: 35px;
+}
+.spanamber {
+  background-color:#FFBF00;
+  width:100px;
+  display:block;
+  height: 35px;
+}

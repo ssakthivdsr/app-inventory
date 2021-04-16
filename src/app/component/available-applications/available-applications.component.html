@@ -52,18 +52,19 @@
           <table class= "table table-sm">
             <thead>
               <tr>
-                <th scope="col">Business Total</th>
-                <th scope="col">Business value</th>
-                <th scope="col">Agility</th>
-                <th scope="col">Tech total</th>
+                <th scope="col">Total Score</th>
+                <th scope="col">Business Value Score</th>
+                <th scope="col">Agility Score</th>
+                <th scope="col">Technology Score</th>
               </tr>
             </thead>
             <tbody>
               <tr>      
-                <td style="text-align:center" style="text-indent: 5mm">  {{ element.businessTotal }}</td>
-                <td style="text-align: center"style="text-indent: 5mm">  {{ element.businessValue }}</td>
-                <td style="text-align: center" style="text-indent: 5mm">   {{ element.agility }}</td>
-                <td style="text-align: center"style="text-indent: 5mm">  {{ element.techTotal }}</td>
+                <td style="text-align: center" style="text-indent: 5mm;"> 
+                  <span class=" spangreen">  {{ element.businessTotal }} </span></td>
+                <td style="text-align: center"style="text-indent: 5mm;"> <span class=" spanred"> {{ element.businessValue }}</span></td>
+                <td style="text-align: center" style="text-indent: 5mm;"><span class=" spanamber">  {{ element.agility }}</span></td>
+                <td style="text-align: center"style="text-indent: 5mm;"><span class=" spanred">  {{ element.techTotal }}</span></td>
               </tr>
             </tbody>
           </table>
