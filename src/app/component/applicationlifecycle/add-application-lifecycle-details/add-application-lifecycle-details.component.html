@@ -1,9 +1,10 @@
 <mat-card>
     <br />
-    <form class="example-form">
+    <form class="example-form"  >
         <mat-form-field class="example-full-width">
             <mat-label>Application Lifecycle</mat-label>
-            <input matInput [(ngModel)]="ApplicationLifecycle" name="input1">
+            <input matInput [(ngModel)]="ApplicationLifecycle" name="input1" >
+             
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>Sites Applications Run In</mat-label>
@@ -64,12 +65,11 @@
             <input matInput [(ngModel)]="ApplicationSize" name="input14">
         </mat-form-field>
 
-    </form> <br />
-    <div class="example-button-row">
-        <button mat-raised-button color="primary"
-            (click)="(count && check() ) ? openSnackBar(message, action) : save()">
-            Save
-        </button> &nbsp;
-        <button mat-raised-button color="primary">Cancel</button>
-    </div>
+    
+</form> <br />
+<div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="(count && check() ) ? openDialog() : save()">
+        Save</button>&nbsp;
+    <button mat-raised-button color="primary">Cancel</button>
+</div>
 </mat-card>

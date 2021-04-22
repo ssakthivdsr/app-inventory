@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-add-application-lifecycle-details',
@@ -8,8 +11,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./add-application-lifecycle-details.component.css']
 })
 export class AddApplicationLifecycleDetailsComponent implements OnInit {
-
-  public constructor(private titleService: Title, private _snackBar: MatSnackBar) {
+    
+  
+  public constructor(private titleService: Title, private dialog: MatDialog, private formBuilder: FormBuilder) { 
     this.titleService.setTitle("Inventory - Application Lifecycle Details");
   }
 
@@ -45,17 +49,67 @@ export class AddApplicationLifecycleDetailsComponent implements OnInit {
     else
       return false;
   }
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(this.message, this.action, {
-      verticalPosition: "top"
-    });
-    this.count = false;
+  openDialog() {
+    this.dialog.open(DialogElementsExampleDialog);
+    this.count=false;
   }
+  
 
   save() { }
 
+
   ngOnInit(): void {
 
+      
+  } ;
+  
+
+  
+}
+@Component({
+  selector: 'dialog-elements-example-dialog',
+  templateUrl: 'dialog-elements-example-dialog.html',
+})
+export class DialogElementsExampleDialog {
+  
+  constructor(
+    public dialogRef: MatDialogRef<DialogElementsExampleDialog>, public dialog: MatDialog)
+     {}
+    
+
+     clickMethod() {
+      this.dialog.open(SecondDialog);
+    }
+
+  
+    
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
+}
+
+@Component({
+  selector: 'second-dialog',
+  templateUrl: 'second-dialog.html',
+})
+
+export class SecondDialog{
+
 
 }
+
+  
+
+
+    
+     
+  
+
+  
+  
+ 
+  
+  
+  
+
