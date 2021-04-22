@@ -20,7 +20,8 @@
     </mat-form-field>
   </form> <br />
   <div class="bp-button-row">
-    <button mat-raised-button color="primary" [disabled]="!addBusFormGroup.valid">Save</button> &nbsp;
+    <button mat-raised-button color="primary" [disabled]="!addBusFormGroup.valid" mat-stroked-button
+      (click)="openSnackBar('Details are saved successfully')">Save</button> &nbsp;
     <button mat-raised-button color="primary">Cancel</button>
   </div>
 </mat-card>

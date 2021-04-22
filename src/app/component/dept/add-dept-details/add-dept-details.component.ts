@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-dept-details',
@@ -11,7 +12,7 @@ export class AddDeptDetailsComponent implements OnInit {
 
   public addDepFormGroup: FormGroup;
 
-  constructor(private router: Router) {
+  constructor(private _snackBar: MatSnackBar, private router: Router) {
     this.addDepFormGroup = new FormGroup({});
   }
 
@@ -19,8 +20,28 @@ export class AddDeptDetailsComponent implements OnInit {
     this.addDepFormGroup = new FormGroup({
       DpName: new FormControl('', [Validators.required]),
       DpOwner: new FormControl('', [Validators.required])
-      
     });
+
+  }
+  save() {
+
+    console.log("Saved");
+
+  }
+
+  openSnackBar(message: string) {
+
+    this._snackBar.open(message, "dismiss", {
+
+      duration: 3000,
+
+      verticalPosition: "top"
+
+    });
+
+
+
+    this.save();
 
   }
 

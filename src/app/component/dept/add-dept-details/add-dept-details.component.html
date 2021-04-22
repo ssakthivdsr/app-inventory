@@ -13,7 +13,8 @@
 
 </form> <br />
 <div class="example-button-row">
-  <button mat-raised-button color="primary" [disabled]="!addDepFormGroup.valid">Save</button> &nbsp;
+  <button mat-raised-button color="primary" [disabled]="!addDepFormGroup.valid" mat-stroked-button
+    (click)="openSnackBar('Details are saved successfully')">Save</button> &nbsp;
 
-  <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+  <button mat-raised-button color="primary">Cancel</button>
 </div>

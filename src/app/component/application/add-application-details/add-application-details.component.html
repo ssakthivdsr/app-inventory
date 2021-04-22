@@ -54,6 +54,8 @@
 
 </form>
 <div class="example-button-row">
-  <button mat-raised-button color="primary" [disabled]="!addAppFormGroup.valid">Save</button> &nbsp;
+  <button mat-raised-button color="primary" [disabled]="!addAppFormGroup.valid" mat-stroked-button
+    (click)="openSnackBar('Details are saved successfully')">Save</button> &nbsp;
+  <!-- <button mat-raised-button color="primary" (click)="openSnackBar('Details are saved successfully')">Save</button> -->
   <button mat-raised-button color="primary">Cancel</button>
 </div>
