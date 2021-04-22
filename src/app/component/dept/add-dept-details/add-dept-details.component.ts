@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-dept-details',
@@ -8,13 +9,26 @@ import { Router } from '@angular/router';
 })
 export class AddDeptDetailsComponent implements OnInit {
 
-  constructor(private router : Router) { }
+  public addDepFormGroup: FormGroup;
 
-  ngOnInit(): void {
+  constructor(private router: Router) {
+    this.addDepFormGroup = new FormGroup({});
   }
 
-  
-  cancel(){
+  ngOnInit() {
+    this.addDepFormGroup = new FormGroup({
+      DpName: new FormControl('', [Validators.required]),
+      DpOwner: new FormControl('', [Validators.required])
+      
+    });
+
+  }
+
+  public checkError = (controlName: string, errorName: string) => {
+    return this.addDepFormGroup.controls[controlName].hasError(errorName);
+  }
+
+  cancel() {
     this.router.navigate(['/landingPage']);
   }
 
