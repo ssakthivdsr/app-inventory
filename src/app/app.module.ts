@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
@@ -20,7 +20,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatSelectModule }  from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { AddDeptDetailsComponent } from './component/dept/add-dept-details/add-dept-details.component';
 import { AddApplicationDetailsComponent } from './component/application/add-application-details/add-application-details.component';
@@ -41,6 +41,8 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { EditApplicationComponent } from './component/edit-application/edit-application.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NewApplicationComponent } from './component/new-application/new-application.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 
 
@@ -74,7 +76,7 @@ import { NewApplicationComponent } from './component/new-application/new-applica
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule, 
+    MatButtonModule,
     MatCheckboxModule,
     MatToolbarModule,
     MatInputModule,
@@ -90,7 +92,8 @@ import { NewApplicationComponent } from './component/new-application/new-applica
     MatRadioModule,
     MatExpansionModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

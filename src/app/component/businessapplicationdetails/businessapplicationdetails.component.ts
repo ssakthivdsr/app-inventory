@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { Validators, FormGroup, FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { businessapplication } from './businessapplication.interface';
 
 @Component({
@@ -11,12 +11,14 @@ export class BusinessapplicationdetailsComponent implements OnInit {
     public myForm: any = null;
     checked = false;
     indeterminate = false;
+    ValidNumberIndicator = true;
 
     constructor(private _fb: FormBuilder) { }
 
     ngOnInit() {
         this.myForm = this._fb.group({
             name: ['', [Validators.required, Validators.minLength(5)]],
+            f: new FormControl("", [Validators.pattern(/\d/)]),
             addresses: this._fb.array([
                 this.initAddress(),
             ]),
@@ -105,4 +107,17 @@ export class BusinessapplicationdetailsComponent implements OnInit {
         // ...
         console.log(model);
     }
+    onlyNumbers(event: { which: any; keyCode: any; }) {
+
+        const ch = (event.which) ? event.which : event.keyCode;
+        if (ch > 31 && (ch < 48 || ch > 57)) {
+            this.ValidNumberIndicator = false;
+
+            return this.ValidNumberIndicator;
+        }
+
+        this.ValidNumberIndicator = true;
+        return this.ValidNumberIndicator;
+    }
+
 }

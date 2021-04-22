@@ -30,3 +30,7 @@
   panel-heading {
     color: #2a81ce;
   }
+
+  .valid-number{
+    color:rgb(243, 16, 16);
+  }

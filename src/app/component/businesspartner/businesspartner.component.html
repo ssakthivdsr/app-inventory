@@ -1,25 +1,26 @@
 <mat-card>
-<br/>
-<form class="bp-form">
-<mat-form-field class="bp-full-width">
-  <mat-label>Primary Business Partner</mat-label>
-  <input matInput value="">
-</mat-form-field>
-<mat-form-field class="bp-full-width">
-  <mat-label>Secondary Business Partner</mat-label>
-  <input matInput value="">
-</mat-form-field>
-<mat-form-field class="bp-full-width">
-    <mat-label>Business Partner Manager Names</mat-label>
-    <textarea matInput placeholder="Multiple names are allowed"></textarea>
-  </mat-form-field>
-  <mat-form-field class="bp-full-width">
-    <mat-label>Business Partner Director Names    </mat-label>
-    <textarea matInput placeholder="Multiple names are allowed"></textarea>
-  </mat-form-field>
-</form> <br/>
-<div class="bp-button-row">
-    <button mat-raised-button color="primary">Save</button> &nbsp;
+  <br />
+  <form [formGroup]="addBusFormGroup" class="bp-form">
+    <mat-form-field class="bp-full-width">
+      <mat-label>Primary Business Partner</mat-label>
+      <input matInput value="" formControlName="BusPart">
+      <mat-error *ngIf="checkError('BusPart', 'required')">Primary Business Partner is required</mat-error>
+    </mat-form-field>
+    <mat-form-field class="bp-full-width">
+      <mat-label>Secondary Business Partner</mat-label>
+      <input matInput value="">
+    </mat-form-field>
+    <mat-form-field class="bp-full-width">
+      <mat-label>Business Partner Manager Names</mat-label>
+      <textarea matInput placeholder="Multiple names are allowed"></textarea>
+    </mat-form-field>
+    <mat-form-field class="bp-full-width">
+      <mat-label>Business Partner Director Names </mat-label>
+      <textarea matInput placeholder="Multiple names are allowed"></textarea>
+    </mat-form-field>
+  </form> <br />
+  <div class="bp-button-row">
+    <button mat-raised-button color="primary" [disabled]="!addBusFormGroup.valid">Save</button> &nbsp;
     <button mat-raised-button color="primary">Cancel</button>
-</div>
+  </div>
 </mat-card>
