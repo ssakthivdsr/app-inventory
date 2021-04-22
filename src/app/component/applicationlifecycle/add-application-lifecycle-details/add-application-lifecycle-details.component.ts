@@ -2,7 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -11,9 +12,9 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
   styleUrls: ['./add-application-lifecycle-details.component.css']
 })
 export class AddApplicationLifecycleDetailsComponent implements OnInit {
-    
-  
-  public constructor(private titleService: Title, private dialog: MatDialog, private formBuilder: FormBuilder) { 
+
+
+  public constructor(private titleService: Title, private dialog: MatDialog, private formBuilder: FormBuilder) {
     this.titleService.setTitle("Inventory - Application Lifecycle Details");
   }
 
@@ -49,67 +50,53 @@ export class AddApplicationLifecycleDetailsComponent implements OnInit {
     else
       return false;
   }
+
   openDialog() {
     this.dialog.open(DialogElementsExampleDialog);
-    this.count=false;
+    this.count = false;
   }
-  
 
-  save() { }
+
+  save() {
+    //console.log("saved");
+  }
 
 
   ngOnInit(): void {
 
-      
-  } ;
-  
 
-  
+  };
+
+
+
 }
 @Component({
   selector: 'dialog-elements-example-dialog',
   templateUrl: 'dialog-elements-example-dialog.html',
 })
 export class DialogElementsExampleDialog {
-  
-  constructor(
-    public dialogRef: MatDialogRef<DialogElementsExampleDialog>, public dialog: MatDialog)
-     {}
-    
 
-     clickMethod() {
-      this.dialog.open(SecondDialog);
-    }
+  constructor(public dialogRef: MatDialogRef<DialogElementsExampleDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
-  
-    
+  save() {
+    //console.log("saved");
+  }
+
+  openSnackBar() {
+    this._snackBar.open("Details are saved successfully", "Dismiss", {
+    duration: 2000,
+    verticalPosition: "top"
+    });
+  }
+  clickMethod() {
+    this.save();
+    this.dialogRef.close();
+    this.openSnackBar();
+
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 }
-
-@Component({
-  selector: 'second-dialog',
-  templateUrl: 'second-dialog.html',
-})
-
-export class SecondDialog{
-
-
-}
-
-  
-
-
-    
-     
-  
-
-  
-  
- 
-  
-  
-  
 
