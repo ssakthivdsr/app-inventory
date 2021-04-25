@@ -1,60 +1,62 @@
 <mat-card>
-<br/>
-<form class="vp-form">
-<mat-form-field class="vp-full-width">
-  <mat-label>Vendor Engagements Associated with Managed Services Vendor</mat-label>
-  <input matInput value="">
-</mat-form-field>
-<mat-radio-group  class="vp-full-width">
-    <mat-label>Type of Package</mat-label>  &nbsp;
-    <mat-radio-button value="1">Vendor</mat-radio-button> &nbsp;
-    <mat-radio-button value="2">Customer</mat-radio-button>
-  </mat-radio-group>
-<mat-form-field class="vp-full-width">
-    <mat-label>Vendor Name </mat-label>
-  <input matInput value="">
-  </mat-form-field>
-  <mat-form-field class="vp-full-width">
-    <mat-label>Vendor Engagements Associated with Vendor Package Vendor</mat-label>
-    <textarea matInput placeholder="Multiple values are allowed"></textarea>
-  </mat-form-field>
-  <mat-form-field class="vp-full-width">
-    <mat-label>Degree of Customization</mat-label>
-    <textarea matInput placeholder="Multiple values are allowed"></textarea>
-  </mat-form-field>
-  <mat-form-field class="vp-full-width">
-    <mat-label>Hosted Location (internally or externally)</mat-label>
-    <input matInput value="">
-  </mat-form-field>
-  <mat-form-field class="vp-full-width">
-    <mat-label>Vendor Hosted Name (if external)</mat-label>
-    <input matInput value="">
-  </mat-form-field>
-  <mat-form-field class="vp-full-width">
-    <mat-label>Vendor Engagements Associated with Externally Hosted Vendor</mat-label>
-    <textarea matInput placeholder="Multiple values are allowed"></textarea>
-  </mat-form-field>
- 
-  <mat-radio-group  class="vp-full-width">
-    <mat-label>Is the application the most current Vendor software version?</mat-label> <br/>&nbsp;&nbsp;&nbsp;
-    <mat-radio-button value="1">Yes</mat-radio-button> &nbsp;
-    <mat-radio-button value="2">No</mat-radio-button>
-  </mat-radio-group>
-  <mat-form-field class="vp-full-width">
-    <mat-label>What version of the Vendor package is being used?</mat-label>
-    <input matInput value="">
-  </mat-form-field>
-  <mat-form-field class="vp-full-width">
-    <mat-label>What is the Frequency of Vendor Minor/Major Upgrades / Updates?</mat-label>
-    <input matInput value="">
-  </mat-form-field>
-  <mat-form-field class="vp-full-width">
-    <mat-label>What is the Frequency of Patches?</mat-label>
-    <input matInput value="">
-  </mat-form-field>
-</form> <br/>
-<div class="bp-button-row">
-    <button mat-raised-button color="primary">Save</button> &nbsp;
-    <button mat-raised-button color="primary">Cancel</button>
-</div>
+  <br />
+  <form class="vp-form">
+    <mat-form-field class="vp-full-width">
+      <mat-label>Vendor Engagements Associated With Managed Services Vendor</mat-label>
+      <input matInput [(ngModel)]="VendorEngagementsAssociatedWithManagedServicesVendor" name="input1">
+    </mat-form-field>
+    <mat-radio-group class="vp-full-width" [(ngModel)]="TypeOfPackage" name="input2">
+      <mat-label>Type Of Package</mat-label> &nbsp;
+      <mat-radio-button value="Vendor">Vendor</mat-radio-button> &nbsp;
+      <mat-radio-button value="Customer">Customer</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field class="vp-full-width">
+      <mat-label>Vendor Name</mat-label>
+      <input matInput [(ngModel)]="VendorName" name="input3">
+    </mat-form-field>
+    <mat-form-field class="vp-full-width">
+      <mat-label>Vendor Engagements Associated With Vendor Package Vendor</mat-label>
+      <textarea matInput placeholder="Multiple values are allowed"
+        [(ngModel)]="VendorEngagementsAssociatedWithVendorPackageVendor" name="input4"></textarea>
+    </mat-form-field>
+    <mat-form-field class="vp-full-width">
+      <mat-label>Degree Of Customization</mat-label>
+      <textarea matInput placeholder="Multiple values are allowed" [(ngModel)]="DegreeOfCustomization"
+        name="input5"></textarea>
+    </mat-form-field>
+    <mat-form-field class="vp-full-width">
+      <mat-label>Hosted Location (internally or externally)</mat-label>
+      <input matInput [(ngModel)]="HostedLocation" name="input6">
+    </mat-form-field>
+    <mat-form-field class="vp-full-width">
+      <mat-label>Vendor Hosted Name (if external)</mat-label>
+      <input matInput [(ngModel)]="VendorHostedName" name="input7">
+    </mat-form-field>
+    <mat-form-field class="vp-full-width">
+      <mat-label>Vendor Engagements Associated With Externally Hosted Vendor</mat-label>
+      <textarea matInput placeholder="Multiple values are allowed"
+        [(ngModel)]="VendorEngagementsAssociatedWithExternallyHostedVendor" name="input8"></textarea>
+    </mat-form-field>
+    <mat-radio-group class="vp-full-width" [(ngModel)]=" IsMostCurrentVendorSoftwareVersion" name="input9">
+      <mat-label>Is the application the most current Vendor Software Version?</mat-label> <br />&nbsp;&nbsp;&nbsp;
+      <mat-radio-button value="Yes">Yes</mat-radio-button> &nbsp;
+      <mat-radio-button value="No">No</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field class="vp-full-width">
+      <mat-label>What version of the Vendor package is being used?</mat-label>
+      <input matInput [(ngModel)]="VendorPackageVersion" name="input10">
+    </mat-form-field>
+    <mat-form-field class="vp-full-width">
+      <mat-label>What is the Frequency of Vendor Minor/Major Upgrades / Updates?</mat-label>
+      <input matInput [(ngModel)]="FrequencyOfVendorUpgrades" name="input11">
+    </mat-form-field>
+    <mat-form-field class="vp-full-width">
+      <mat-label>What is the Frequency of Patches?</mat-label>
+      <input matInput [(ngModel)]="FrequencyOfPatches" name="input12">
+    </mat-form-field>
+  </form> <br />
+  <div class="bp-button-row">
+    <button mat-raised-button color="primary" (click)="check() ? openDialog() : save()">Save</button> &nbsp;
+    <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+  </div>
 </mat-card>
