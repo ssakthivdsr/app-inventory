@@ -8,9 +8,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './add-dept-details.component.html',
   styleUrls: ['./add-dept-details.component.css']
 })
+
 export class AddDeptDetailsComponent implements OnInit {
 
   public addDepFormGroup: FormGroup;
+
+  DepartmentName: string = '';
+  DepartmentOwner: string = '';
 
   constructor(private _snackBar: MatSnackBar, private router: Router) {
     this.addDepFormGroup = new FormGroup({});
@@ -21,28 +25,18 @@ export class AddDeptDetailsComponent implements OnInit {
       DpName: new FormControl('', [Validators.required]),
       DpOwner: new FormControl('', [Validators.required])
     });
-
   }
+
   save() {
-
-    console.log("Saved");
-
+    //console.log("Saved");
+    this.openSnackBar();
   }
 
-  openSnackBar(message: string) {
-
-    this._snackBar.open(message, "dismiss", {
-
-      duration: 3000,
-
+  openSnackBar() {
+    this._snackBar.open("Details are saved successfully", "Dismiss", {
+      duration: 2000,
       verticalPosition: "top"
-
     });
-
-
-
-    this.save();
-
   }
 
   public checkError = (controlName: string, errorName: string) => {
@@ -52,5 +46,4 @@ export class AddDeptDetailsComponent implements OnInit {
   cancel() {
     this.router.navigate(['/landingPage']);
   }
-
 }

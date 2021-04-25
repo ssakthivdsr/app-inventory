@@ -17,8 +17,5 @@ export class DeptComponent implements OnInit {
   }
 
   save(){
-    
   }
-
-
 }
