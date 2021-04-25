@@ -2,7 +2,7 @@
 <form [formGroup]="addAppFormGroup" class="example-form">
   <mat-form-field class="example-full-width">
     <mat-label>Application Name</mat-label>
-    <input matInput value="" formControlName="AppName">
+    <input matInput formControlName="AppName">
     <mat-error *ngIf="checkError('AppName', 'required')">Application Name is required</mat-error>
   </mat-form-field>
 
@@ -16,46 +16,45 @@
 
   <mat-form-field class="example-full-width">
     <mat-label>Application Description</mat-label>
-    <textarea matInput placeholder="" formControlName="AppDesc"></textarea>
+    <textarea matInput formControlName="AppDesc"></textarea>
     <mat-error *ngIf="checkError('AppDesc', 'required')">Application Description is required</mat-error>
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Line Of Business</mat-label>
-    <input matInput value="" formControlName="AppLob">
+    <input matInput formControlName="AppLob">
     <mat-error *ngIf="checkError('AppLob', 'required')">Line of Business is required</mat-error>
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Functionality</mat-label>
-    <input matInput value="" formControlName="AppFun">
+    <input matInput formControlName="AppFun">
     <mat-error *ngIf="checkError('AppFun', 'required')">Functionality is required</mat-error>
   </mat-form-field>
-
+</form>
+<form class="example-form">
   <mat-form-field class="example-full-width">
-    <mat-label>Name Of the Component Manager</mat-label>
-    <input matInput>
+    <mat-label>Name Of The Component Manager</mat-label>
+    <input matInput [(ngModel)]="NameOfTheComponentManager" name="input5">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
-    <mat-label>SME Provided by Managers</mat-label>
-    <input matInput>
+    <mat-label>SME Provided By Managers</mat-label>
+    <input matInput [(ngModel)]="SMEProvidedByManagers" name="input6">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
-    <mat-label>Name of the Primary Tech. SME</mat-label>
-    <input matInput value="">
+    <mat-label>Name Of The Primary Tech SME</mat-label>
+    <input matInput [(ngModel)]="NameOfThePrimaryTechSME" name="input7">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
-    <mat-label>Name of Primary BA</mat-label>
-    <input matInput value="">
+    <mat-label>Name Of Primary BA</mat-label>
+    <input matInput [(ngModel)]="NameOfPrimaryBA" name="input8">
   </mat-form-field>
-
 </form>
 <div class="example-button-row">
   <button mat-raised-button color="primary" [disabled]="!addAppFormGroup.valid" mat-stroked-button
-    (click)="openSnackBar('Details are saved successfully')">Save</button> &nbsp;
-  <!-- <button mat-raised-button color="primary" (click)="openSnackBar('Details are saved successfully')">Save</button> -->
-  <button mat-raised-button color="primary">Cancel</button>
+    (click)="check() ? openDialog() : save()">Save</button> &nbsp;
+  <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
 </div>
