@@ -1,15 +1,14 @@
 .sm-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
 }
-  
-.sm-full-width {
-    width: 100%;
-    margin: 8px 20px;
-  }
-.sm-button-row {
-    width: 100%;
-    margin: 8px 20px;;
-  }
 
+.sm-full-width {
+  width: 100%;
+  margin: 8px 20px;
+}
+.sm-button-row {
+  width: 100%;
+  margin: 8px 20px;;
+}
