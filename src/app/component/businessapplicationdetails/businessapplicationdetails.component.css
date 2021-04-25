@@ -1,36 +1,36 @@
- .bpd-form {
-    min-width: 150px;
-    max-width: 1800px;
-    width: 100%;
-  }
-  
-  .bpd-full-width {
-    width: 100%;
-  }
+.bpd-form {
+  min-width: 150px;
+  max-width: 1800px;
+  width: 100%;
+}
 
-  .bpd-five-width {
-    width: 100%;
-  }
+.bpd-full-width {
+  width: 100%;
+}
 
-  .bpd-h2 {
-    margin: 10px;
-  }
-  
-  .bpd-section {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    height: 60px;
-  }
-  
-  .bpd-margin {
-    margin: 0 10px;
-  }
+.bpd-five-width {
+  width: 100%;
+}
 
-  panel-heading {
-    color: #2a81ce;
-  }
+.bpd-h2 {
+  margin: 10px;
+}
 
-  .valid-number{
-    color:rgb(243, 16, 16);
-  }
+.bpd-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.bpd-margin {
+  margin: 0 10px;
+}
+
+panel-heading {
+  color: #2a81ce;
+}
+
+.valid-number{
+  color:rgb(243, 16, 16);
+}

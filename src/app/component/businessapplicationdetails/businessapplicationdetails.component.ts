@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { businessapplication } from './businessapplication.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-businessapplicationdetails',
@@ -13,7 +15,7 @@ export class BusinessapplicationdetailsComponent implements OnInit {
     indeterminate = false;
     ValidNumberIndicator = true;
 
-    constructor(private _fb: FormBuilder) { }
+    constructor(private _fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router) { }
 
     ngOnInit() {
         this.myForm = this._fb.group({
@@ -105,8 +107,26 @@ export class BusinessapplicationdetailsComponent implements OnInit {
     save(model: businessapplication) {
         // call API to save
         // ...
-        console.log(model);
+        //console.log(model);
+        //this.openSnackBar();
     }
+
+    openSnackBar() {
+        this._snackBar.open("Details are saved successfully", "Dismiss", {
+            duration: 2000,
+            verticalPosition: "top"
+        });
+    }
+
+    onsave() {
+        //console.log("saved");
+        this.openSnackBar();
+    }
+
+    cancel() {
+        this.router.navigate(['/landingPage']);
+    }
+
     onlyNumbers(event: { which: any; keyCode: any; }) {
 
         const ch = (event.which) ? event.which : event.keyCode;
@@ -115,9 +135,7 @@ export class BusinessapplicationdetailsComponent implements OnInit {
 
             return this.ValidNumberIndicator;
         }
-
         this.ValidNumberIndicator = true;
         return this.ValidNumberIndicator;
     }
-
 }
