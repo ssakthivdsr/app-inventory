@@ -42,7 +42,7 @@ export class AddApplicationDetailsComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(DialogElementsExampleDialog);
+    this.dialog.open(ApplicationDetailsDialog);
   }
 
   openSnackBar() {
@@ -67,13 +67,13 @@ export class AddApplicationDetailsComponent implements OnInit {
 }
 
 @Component({
-  selector: 'dialog-elements-example-dialog',
-  templateUrl: 'dialog-elements-example-dialog.html',
+  selector: 'application-details-save-warning-dialog',
+  templateUrl: 'application-details-save-warning-dialog.html',
 })
 
-export class DialogElementsExampleDialog {
+export class ApplicationDetailsDialog {
 
-  constructor(public dialogRef: MatDialogRef<DialogElementsExampleDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  constructor(public dialogRef: MatDialogRef<ApplicationDetailsDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   save() {
     //console.log("saved");
