@@ -28,8 +28,8 @@ export class RegulatoryComponent implements OnInit {
   USEL: boolean = false;
 
   check() {
-    if (this.SOC && this.PCI && this.FFIEC && this.SBL && this.GLBA &&
-      this.PIPEDA && this.HIPAA && this.COPPA && this.USPA && this.USEL)
+    if (this.SOC || this.PCI || this.FFIEC || this.SBL || this.GLBA ||
+      this.PIPEDA || this.HIPAA || this.COPPA || this.USPA || this.USEL)
       return false;
     else
       return true;

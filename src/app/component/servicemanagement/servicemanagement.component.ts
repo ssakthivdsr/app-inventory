@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Validators, FormGroup, FormControl, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: 'app-servicemanagement',
@@ -10,9 +11,24 @@ import { Router } from '@angular/router';
 })
 
 export class ServicemanagementComponent implements OnInit {
-
-  constructor(private router: Router, private _snackBar: MatSnackBar, private dialog: MatDialog) { }
-
+  myForm: FormGroup;
+  ValidNumberIndicator = true;
+  constructor(private fb: FormBuilder, private router: Router, private _snackBar: MatSnackBar, private dialog: MatDialog) {
+    this.myForm = this.fb.group({
+      f: new FormControl("", [Validators.pattern(/\d/)]),
+      f1: new FormControl("", [Validators.pattern(/\d/)]),
+      f2: new FormControl("", [Validators.pattern(/\d/)]),
+      f3: new FormControl("", [Validators.pattern(/\d/)]),
+      f4: new FormControl("", [Validators.pattern(/\d/)]),
+      f5: new FormControl("", [Validators.pattern(/\d/)]),
+      f6: new FormControl("", [Validators.pattern(/\d/)]),
+      f7: new FormControl("", [Validators.pattern(/\d/)]),
+      f8: new FormControl("", [Validators.pattern(/\d/)]),
+      f9: new FormControl("", [Validators.pattern(/\d/)]),
+      f10: new FormControl("", [Validators.pattern(/\d/)])
+    });
+  }
+  
   v1: string = '';
   v2: string = '';
   v3: string = '';
@@ -91,6 +107,17 @@ export class ServicemanagementComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  onlyNumbers(event: { which: any; keyCode: any; }) {
+
+    const ch = (event.which) ? event.which : event.keyCode;
+    if (ch > 31 && (ch < 48 || ch > 57)) {
+        this.ValidNumberIndicator = false;
+
+        return this.ValidNumberIndicator;
+    }
+    this.ValidNumberIndicator = true;
+    return this.ValidNumberIndicator;
+}
 }
 
 @Component({
@@ -122,4 +149,5 @@ export class DialogElementsExampleDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  
 }

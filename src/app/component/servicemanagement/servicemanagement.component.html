@@ -13,15 +13,17 @@
     </mat-form-field>
     <br />
 
-    <mat-form-field class="sm-full-width">
+    <mat-form-field class="sm-full-width" [formGroup]="myForm">
       <mat-label>Number of Change Requests</mat-label>
-      <input matInput [(ngModel)]="v2" name="input2">
+      <input matInput [(ngModel)]="v2" name="input2" pattern="\d+" formControlName="f" (keypress)="onlyNumbers($event)">
+      <mat-hint>Numbers only allowed</mat-hint>
     </mat-form-field>
     <br />
 
-    <mat-form-field class="sm-full-width">
+    <mat-form-field class="sm-full-width" [formGroup]="myForm">
       <mat-label>Number of Checkouts</mat-label>
-      <input matInput [(ngModel)]="v3" name="input3">
+      <input matInput [(ngModel)]="v3" name="input3" pattern="\d+" formControlName="f1" (keypress)="onlyNumbers($event)">
+      <mat-hint>Numbers only allowed</mat-hint>
     </mat-form-field>
     <br />
 
@@ -49,9 +51,10 @@
     </mat-form-field>
     <br />
 
-    <mat-form-field class="sm-full-width">
+    <mat-form-field class="sm-full-width" [formGroup]="myForm">
       <mat-label>Number of unplanned Outages</mat-label>
-      <input matInput [(ngModel)]="v6" name="input6">
+      <input matInput [(ngModel)]="v6" name="input6" pattern="\d+" formControlName="f2" (keypress)="onlyNumbers($event)">
+      <mat-hint>Numbers only allowed</mat-hint>
     </mat-form-field>
     <br />
 
@@ -99,15 +102,17 @@
     </mat-form-field>
     <br />
 
-    <mat-form-field class="sm-full-width">
+    <mat-form-field class="sm-full-width" [formGroup]="myForm">
       <mat-label>Number of Proactive Incidents for the last 1 year</mat-label>
-      <input matInput [(ngModel)]="v10" name="input10">
+      <input matInput [(ngModel)]="v10" name="input10" pattern="\d+" formControlName="f3" (keypress)="onlyNumbers($event)">
+      <mat-hint>Numbers only allowed</mat-hint>
     </mat-form-field>
     <br />
 
-    <mat-form-field class="sm-full-width">
+    <mat-form-field class="sm-full-width" [formGroup]="myForm">
       <mat-label>Number of Reactive Incidents for the last 1 year</mat-label>
-      <input matInput [(ngModel)]="v11" name="input11">
+      <input matInput [(ngModel)]="v11" name="input11" pattern="\d+" formControlName="f4" (keypress)="onlyNumbers($event)">
+      <mat-hint>Numbers only allowed</mat-hint>
     </mat-form-field>
     <br />
 
@@ -191,15 +196,17 @@
     </mat-form-field>
     <br />
 
-    <mat-form-field class="sm-full-width">
+    <mat-form-field class="sm-full-width" [formGroup]="myForm">
       <mat-label>Number of Level "Critical Priority - Reactive Incident Requests</mat-label>
-      <input matInput [(ngModel)]="v18" name="input18">
+      <input matInput [(ngModel)]="v18" name="input18" pattern="\d+" formControlName="f5" (keypress)="onlyNumbers($event)">
+      <mat-hint>Numbers only allowed</mat-hint>
     </mat-form-field>
     <br />
 
-    <mat-form-field class="sm-full-width">
+    <mat-form-field class="sm-full-width" [formGroup]="myForm">
       <mat-label>Number of Level "High" Priority - Reactive Incident Requests(active / closed)</mat-label>
-      <input matInput [(ngModel)]="v19" name="input19">
+      <input matInput [(ngModel)]="v19" name="input19" pattern="\d+" formControlName="f6" (keypress)="onlyNumbers($event)">
+      <mat-hint>Numbers only allowed</mat-hint>
       <mat-select [(ngModel)]="v20" name="input20">
         <mat-form-field>
           <mat-option value="one">active</mat-option><input matInput>
@@ -211,9 +218,10 @@
     </mat-form-field>
     <br />
 
-    <mat-form-field class="sm-full-width">
+    <mat-form-field class="sm-full-width" [formGroup]="myForm">
       <mat-label>Number of Level "Average" Priority - Reactive Incident Requests(active / closed)</mat-label>
-      <input matInput [(ngModel)]="v21" name="input21">
+      <input matInput [(ngModel)]="v21" name="input21" pattern="\d+" formControlName="f7" (keypress)="onlyNumbers($event)">
+      <mat-hint>Numbers only allowed</mat-hint>
       <mat-select [(ngModel)]="v22" name="input22">
         <mat-form-field>
           <mat-option value="one">active</mat-option><input matInput>
@@ -225,9 +233,10 @@
     </mat-form-field>
     <br />
 
-    <mat-form-field class="sm-full-width">
+    <mat-form-field class="sm-full-width" [formGroup]="myForm">
       <mat-label>Number of Level "Low" Priority - Reactive Incident Requests (active / closed)</mat-label>
-      <input matInput [(ngModel)]="v23" name="input23">
+      <input matInput [(ngModel)]="v23" name="input23" pattern="\d+" formControlName="f8" (keypress)="onlyNumbers($event)">
+      <mat-hint>Numbers only allowed</mat-hint>
       <mat-select>
         <mat-form-field>
           <mat-option value="one">active</mat-option><input matInput>
@@ -323,15 +332,17 @@
     </mat-form-field>
     <br />
 
-    <mat-form-field class="sm-full-width">
+    <mat-form-field class="sm-full-width" [formGroup]="myForm">
       <mat-label>Recovery Time Objective(RTO) in Hours</mat-label>
-      <input matInput [(ngModel)]="v31" name="input31">
+      <input matInput [(ngModel)]="v31" name="input31" pattern="\d+" formControlName="f9" (keypress)="onlyNumbers($event)">
+      <mat-hint>Numbers only allowed</mat-hint>
     </mat-form-field>
     <br />
 
-    <mat-form-field class="sm-full-width">
+    <mat-form-field class="sm-full-width" [formGroup]="myForm">
       <mat-label>Recovery Point Objective(RPO) in Hours</mat-label>
-      <input matInput [(ngModel)]="v32" name="input32">
+      <input matInput [(ngModel)]="v32" name="input32" pattern="\d+" formControlName="f10" (keypress)="onlyNumbers($event)">
+      <mat-hint>Numbers only allowed</mat-hint>
     </mat-form-field>
     <br />
 
