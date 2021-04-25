@@ -1,18 +1,24 @@
 <mat-card>
-<section class="checkbox-section">
-    <mat-checkbox class="checkbox-margin">Sarbanes-Oxley Act(SOC)?</mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin">Payment Card Industry (PCI) Data security standard</mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin">Federal Financial Institutions Examination council (FFIEC)</mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin">State Breach Laws</mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin">Graham-Leach-Billey Act(GLBA)</mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin">Personal Information Protection and Electronic Documents Act (PIPEDA)</mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin">Health Insurance Portability and Accountability Act (HIPAA)</mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin">Children's On-Line Privacy Protection Act (COPPA)</mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin">U.S.PAtriot Act</mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin">U.S.Export law</mat-checkbox>
+  <section class="checkbox-section">
+    <mat-checkbox class="checkbox-margin" [(ngModel)]="SOC">Sarbanes-Oxley Act (SOA)</mat-checkbox><br>
+    <mat-checkbox class="checkbox-margin" [(ngModel)]="PCI">Payment Card Industry (PCI) Data security standard
+    </mat-checkbox><br>
+    <mat-checkbox class="checkbox-margin" [(ngModel)]="FFIEC">Federal Financial Institutions Examination council (FFIEC)
+    </mat-checkbox><br>
+    <mat-checkbox class="checkbox-margin" [(ngModel)]="SBL">State Breach Laws</mat-checkbox><br>
+    <mat-checkbox class="checkbox-margin" [(ngModel)]="GLBA">Graham-Leach-Billey Act (GLBA)</mat-checkbox><br>
+    <mat-checkbox class="checkbox-margin" [(ngModel)]="PIPEDA">Personal Information Protection and Electronic Documents
+      Act (PIPEDA)</mat-checkbox><br>
+    <mat-checkbox class="checkbox-margin" [(ngModel)]="HIPAA">Health Insurance Portability and Accountability Act
+      (HIPAA)
+    </mat-checkbox><br>
+    <mat-checkbox class="checkbox-margin" [(ngModel)]="COPPA">Children's On-Line Privacy Protection Act (COPPA)
+    </mat-checkbox><br>
+    <mat-checkbox class="checkbox-margin" [(ngModel)]="USPA">U.S.PAtriot Act</mat-checkbox><br>
+    <mat-checkbox class="checkbox-margin" [(ngModel)]="USEL">U.S.Export law</mat-checkbox>
   </section>
   <div class="example-button-row">
-    <button mat-raised-button color="primary">Save</button> &nbsp;
-    <button mat-raised-button color="primary">Cancel</button>
-</div>
+    <button mat-raised-button color="primary" (click)="check() ? openDialog() : save()">Save</button> &nbsp;
+    <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+  </div>
 </mat-card>
