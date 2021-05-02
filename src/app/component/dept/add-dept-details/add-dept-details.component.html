@@ -2,12 +2,12 @@
 <form [formGroup]="addDepFormGroup" class="example-form">
   <mat-form-field class="example-full-width">
     <mat-label>Department Name</mat-label>
-    <input matInput value="" formControlName="DpName" [(ngModel)]="dpName">
+    <input matInput value="" formControlName="DpName" [(ngModel)]="departmentModel.departmentName">
     <mat-error *ngIf="checkError('DpName', 'required')">Department Name is required</mat-error>
   </mat-form-field>
   <mat-form-field class="example-full-width">
     <mat-label>Department Owner</mat-label>
-    <input matInput value="" formControlName="DpOwner" [(ngModel)]="dpOwner">
+    <input matInput value="" formControlName="DpOwner" [(ngModel)]="departmentModel.departmentOwner">
     <mat-error *ngIf="checkError('DpOwner', 'required')">Department Owner is required</mat-error>
   </mat-form-field>
 
