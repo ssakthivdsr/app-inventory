@@ -12,7 +12,7 @@ import { Department } from '../../../model/department.model';
 })
 
 export class AddDeptDetailsComponent implements OnInit {
-
+  displayedColumns: string[] = ['id', 'departmentname', 'departmentowner'];
   public addDepFormGroup: FormGroup;
   departmentModel = new Department();
   departmentRetrieved = new Department();
@@ -43,7 +43,14 @@ export class AddDeptDetailsComponent implements OnInit {
     })
   }
 
-  
+  retrieveAllDepartmentDetails() {
+    this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
+      console.log(data);
+      this.departmentsRetrieved = data;
+      console.log("retrieved value:" + this.departmentsRetrieved);
+      console.log(JSON.stringify(this.departmentsRetrieved));
+    })
+  }
 
   save() {
     // this.userService.storeDeparttment(this.dpName,this.dpOwner).subscribe((data: any) => {
@@ -53,9 +60,10 @@ export class AddDeptDetailsComponent implements OnInit {
     this.userService.storeDepartmentDetails(this.departmentModel).subscribe((data: any) => {
       console.log(data);
     })
+    this.retrieveAllDepartmentDetails();
     this.openSnackBar();
   }
-
+  
   openSnackBar() {
     this._snackBar.open("Details are saved successfully", "Dismiss", {
       duration: 2000,
