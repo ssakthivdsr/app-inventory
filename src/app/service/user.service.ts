@@ -31,7 +31,7 @@ export class UserService {
   }
 
   getDepartment(): Observable<any> {
-    return this.http.get<Department1>(endpoint).pipe(
+    return this.http.get<Department>(endpoint).pipe(
       catchError(this.handleError)
     );
   }
@@ -57,9 +57,4 @@ export class UserService {
 
 }
 
-export interface Department1 {
-  id: number;  // required field
-  departmentName: string;
-  departmentOwner: string;
-}
 
