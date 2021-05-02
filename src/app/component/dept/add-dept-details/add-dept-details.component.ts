@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -19,7 +19,8 @@ export class AddDeptDetailsComponent implements OnInit {
   departmentsRetrieved: Department[] = [];
 
 
-  constructor(private _snackBar: MatSnackBar, private router: Router, private userService: UserService) {
+  constructor(private _snackBar: MatSnackBar, private router: Router, private userService: UserService,
+     private changeDetectorRefs: ChangeDetectorRef) {
     this.addDepFormGroup = new FormGroup({});
   }
 
@@ -38,6 +39,7 @@ export class AddDeptDetailsComponent implements OnInit {
     this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
       console.log(data);
       this.departmentsRetrieved = data;
+      this.changeDetectorRefs.detectChanges();
       console.log("retrieved value:" + this.departmentsRetrieved);
       console.log(JSON.stringify(this.departmentsRetrieved));
     })
