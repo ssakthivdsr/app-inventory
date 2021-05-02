@@ -36,6 +36,14 @@ export class UserService {
     );
   }
 
+  retrieveAllDepartmentDetails(): Observable<any> {
+    return this.http.get<Department[]>(endpoint1.concat('retrieveAllDepartmentDetails')).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+
   // storeDeparttment(departmentName: string, departmentOwner: string): Observable<any> {
   //     return this.http.get<Department>(endpoint1.concat(departmentName,'/',departmentOwner)).pipe(
   //     catchError(this.handleError)

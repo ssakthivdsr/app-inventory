@@ -15,6 +15,8 @@ export class AddDeptDetailsComponent implements OnInit {
 
   public addDepFormGroup: FormGroup;
   departmentModel = new Department();
+  departmentRetrieved = new Department();
+  departmentsRetrieved: Department[] = [];
 
 
   constructor(private _snackBar: MatSnackBar, private router: Router, private userService: UserService) {
@@ -26,8 +28,18 @@ export class AddDeptDetailsComponent implements OnInit {
       DpName: new FormControl('', [Validators.required]),
       DpOwner: new FormControl('', [Validators.required])
     });
-    this.userService.getDepartment().subscribe((data: any) => {
+    this.userService.getDepartment().subscribe((data: Department) => {
       console.log(data);
+      this.departmentRetrieved = data;
+      console.log("retrieved value:" + this.departmentRetrieved);
+      console.log(this.departmentRetrieved.departmentName);
+      console.log(this.departmentRetrieved.departmentOwner);
+    })
+    this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
+      console.log(data);
+      this.departmentsRetrieved = data;
+      console.log("retrieved value:" + this.departmentsRetrieved);
+      console.log(JSON.stringify(this.departmentsRetrieved));
     })
   }
 
