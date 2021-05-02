@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const endpoint = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/retrieveDepartmentData/11';
+const endpoint1 = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,11 +29,23 @@ export class UserService {
       'Something bad happened; please try again later.');
   }
 
-  getProducts(): Observable<any> {
+  getDepartment(): Observable<any> {
     return this.http.get<Department>(endpoint).pipe(
       catchError(this.handleError)
     );
   }
+
+  // storeDeparttment(departmentName: string, departmentOwner: string): Observable<any> {
+  //     return this.http.get<Department>(endpoint1.concat(departmentName,'/',departmentOwner)).pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  storeDeparttment(departmentName: string, departmentOwner: string): Observable<any> {
+    return this.http.get<Department>(endpoint1.concat('storeDepartmentData/', departmentName, '/', departmentOwner)).pipe(
+    catchError(this.handleError)
+  );
+}
   private extractData(res: Response): any {
     const body = res;
     return body || { };
@@ -43,6 +56,6 @@ export class UserService {
 export interface Department {
   id: number;  // required field
   departmentName: string;
-  departmentOwner: String;
+  departmentOwner: string;
 }
 

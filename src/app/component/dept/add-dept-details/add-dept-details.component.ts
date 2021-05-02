@@ -28,16 +28,21 @@ export class AddDeptDetailsComponent implements OnInit {
       DpName: new FormControl('', [Validators.required]),
       DpOwner: new FormControl('', [Validators.required])
     });
-    this.userService.getProducts().subscribe((data: any) => {
+    this.userService.getDepartment().subscribe((data: any) => {
       console.log(data);
-      this.department = data
+      this.department = data;
     })
   }
 
+  dpName: string = '';
+  dpOwner: string = '';
   
 
   save() {
-    //console.log("Saved");
+    this.userService.storeDeparttment(this.dpName,this.dpOwner).subscribe((data: any) => {
+      console.log(data);
+      this.department = data
+    })
     this.openSnackBar();
   }
 
