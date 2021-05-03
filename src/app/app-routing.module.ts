@@ -22,7 +22,6 @@ const routes: Routes = [
   { path: 'header' , component: HeaderComponent,
       children: [
         { path: 'application', component: ApplicationComponent },
-        { path: 'dept',component: DeptComponent  },
         { path: 'regulatory' , component: RegulatoryComponent },
         { path: 'businesspartner' , component: BusinesspartnerComponent },
         { path: 'vendorpackage' , component: VendorpackageComponent },
@@ -40,7 +39,8 @@ const routes: Routes = [
         { path: 'editApplication' , component: EditApplicationComponent },
         { path: 'dashboard', component: DashboardComponent },
         { path: 'reports', component: ReportsComponent },
-        { path: 'availabledepartments', component: AvailableDepartmentsComponent}
+        { path: 'availabledepartments', component: AvailableDepartmentsComponent},
+        { path: 'newdepartment', component: DeptComponent  }
       ]
   } 
 ];
