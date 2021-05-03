@@ -1,5 +1,14 @@
 <br />
 <form [formGroup]="addAppFormGroup" class="example-form">
+
+   <mat-form-field class="example-full-width">
+      <mat-label>Department</mat-label>
+      <mat-select [(ngModel)]="departmentsRetrieved">
+        <mat-option *ngFor="let item of this.departmentsRetrieved" [value]="item.id">{{item.departmentName}}</mat-option>
+        
+      </mat-select>
+    </mat-form-field>
+
   <mat-form-field class="example-full-width">
     <mat-label>Application Name</mat-label>
     <input matInput formControlName="AppName">

@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { UserService } from '../../../service/user.service';
+import { Department } from '../../../model/department.model';
 
 @Component({
   selector: 'app-add-application-details',
@@ -11,8 +13,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 })
 
 export class AddApplicationDetailsComponent implements OnInit {
-
-  public constructor(private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog) {
+  departmentsRetrieved: Department[] = [];
+  public constructor(private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private userService: UserService) {
     this.addAppFormGroup = new FormGroup({});
   }
 
@@ -31,6 +33,15 @@ export class AddApplicationDetailsComponent implements OnInit {
       AppLob: new FormControl('', [Validators.required]),
       AppFun: new FormControl('', [Validators.required])
     });
+    this.retrieveAllDepartmentDetails();
+  }
+  retrieveAllDepartmentDetails() {
+    this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
+      console.log(data);
+      this.departmentsRetrieved = data;
+      console.log("retrieved value:" + this.departmentsRetrieved);
+      console.log(JSON.stringify(this.departmentsRetrieved));
+    })
   }
 
   check() {
