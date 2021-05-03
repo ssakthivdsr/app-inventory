@@ -55,13 +55,11 @@ export class AddDeptDetailsComponent implements OnInit {
   }
 
   save() {
-    // this.userService.storeDeparttment(this.dpName,this.dpOwner).subscribe((data: any) => {
-    //   console.log(data);
-    //   // this.department = data
-    // })
+    
     this.userService.storeDepartmentDetails(this.departmentModel).subscribe((data: any) => {
       console.log(data);
     })
+    this.addDepFormGroup.reset();
     this.retrieveAllDepartmentDetails();
     this.openSnackBar();
   }
