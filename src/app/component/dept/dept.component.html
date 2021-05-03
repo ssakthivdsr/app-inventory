@@ -1,3 +1,10 @@
 <mat-card>
-    <app-add-dept-details></app-add-dept-details>
+    <mat-tab-group mat-align-tabs="start">
+        <mat-tab label="Add new Department">
+            <app-add-dept-details></app-add-dept-details>
+        </mat-tab>
+        <mat-tab label="View available Departments">
+            <app-available-departments></app-available-departments>
+        </mat-tab>
+    </mat-tab-group>
 </mat-card>
