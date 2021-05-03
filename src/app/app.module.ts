@@ -43,6 +43,7 @@ import { EditApplicationComponent } from './component/edit-application/edit-appl
 import { HttpClientModule } from '@angular/common/http';
 import { NewApplicationComponent } from './component/new-application/new-application.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AvailableDepartmentsComponent } from './component/available-departments/available-departments.component';
 
 
 
@@ -69,7 +70,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     LayoutComponent,
     DashboardComponent,
     EditApplicationComponent,
-    NewApplicationComponent
+    NewApplicationComponent,
+    AvailableDepartmentsComponent
   ],
   imports: [
     BrowserModule,

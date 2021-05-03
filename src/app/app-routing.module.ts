@@ -17,6 +17,7 @@ import { LayoutComponent } from './component/layout/layout.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { EditApplicationComponent } from './component/edit-application/edit-application.component';
 import { NewApplicationComponent } from './component/new-application/new-application.component';
+import { AvailableDepartmentsComponent} from './component/available-departments/available-departments.component';
 const routes: Routes = [
   { path: 'header' , component: HeaderComponent,
       children: [
@@ -38,7 +39,8 @@ const routes: Routes = [
         { path: 'newApplication' , component: NewApplicationComponent },
         { path: 'editApplication' , component: EditApplicationComponent },
         { path: 'dashboard', component: DashboardComponent },
-        { path: 'reports', component: ReportsComponent }
+        { path: 'reports', component: ReportsComponent },
+        { path: 'availabledepartments', component: AvailableDepartmentsComponent}
       ]
   } 
 ];
