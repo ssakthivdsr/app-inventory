@@ -7,20 +7,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent implements OnInit {
-  show : boolean = true;
-  selected : string = '';
+  show: boolean = true;
+  selected: string = '';
   constructor(private router: Router) { }
 
-  go(){
+  go() {
     this.show = false;
-    if(this.selected === '1'){
+    if (this.selected === '1') {
       this.router.navigate(['/layout/newApplication']);
     } else {
       this.router.navigate(['/layout/availableApplications']);
     }
-    
+
   }
 
-  ngOnInit(): void { }
-
+  ngOnInit(): void {
+  }
 }
