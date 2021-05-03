@@ -4,7 +4,9 @@
             <app-add-dept-details></app-add-dept-details>
         </mat-tab>
         <mat-tab label="View available Departments">
-            <app-available-departments></app-available-departments>
+            <ng-template matTabContent>
+                <app-available-departments></app-available-departments>
+            </ng-template> 
         </mat-tab>
     </mat-tab-group>
 </mat-card>
