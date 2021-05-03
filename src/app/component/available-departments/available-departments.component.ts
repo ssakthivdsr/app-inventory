@@ -9,12 +9,17 @@ import { Department } from '../../model/department.model';
 })
 export class AvailableDepartmentsComponent implements OnInit {
   departmentsRetrieved: Department[] = [];
-  displayedColumns: string[] = ['id', 'departmentname', 'departmentowner'];
+  displayedColumns: string[] = ['id', 'departmentname', 'departmentowner', 'Action'];
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.retrieveAllDepartmentDetails();
+    }
+
+    editApplication(departmentId: number ) {
+      alert("Edit is not enabled for Department:" + departmentId);
+      // this.router.navigate(['/layout/editApplication']);
     }
 
     retrieveAllDepartmentDetails() {

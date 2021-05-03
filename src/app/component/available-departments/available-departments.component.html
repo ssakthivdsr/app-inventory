@@ -21,6 +21,12 @@
         <td mat-cell *matCellDef="let element"> {{element.departmentOwner}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action </th>
+        <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
+            (click)="editApplication(element.id)">Edit</button> </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
         <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"></tr>
        
