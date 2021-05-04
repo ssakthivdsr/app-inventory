@@ -13,10 +13,26 @@ import { Department } from '../../../model/department.model';
 })
 
 export class AddApplicationDetailsComponent implements OnInit {
+  [x: string]: any;
   departmentsRetrieved: Department[] = [];
   public constructor(private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private userService: UserService) {
     this.addAppFormGroup = new FormGroup({});
   }
+
+  selectedLob: string | undefined;
+  selectedFunctionality: any;
+  functionalities: any = [];
+  lobDropdown = [
+    { value: 'Auto and Fire Insurance', viewValue: 'Auto and Fire Insurance', functionalities: ['Marketing', 'Sales and Distribution', 'Product management', 'Underwritting', 'Policy Acquisition & Servicing', 'Claims Management', 'Finance and Accounts', 'Reinsurance'] },
+    { value: 'Banking', viewValue: 'Banking', functionalities: ['Accounts', 'Loan', 'Mortgages', 'Payments', 'Fraud', 'Risk & Compliance', 'OutSourcing', 'Wealth & Retirement'] }
+  ];
+
+  onSelect(event: any) {
+    console.log(event.value.functionalities);
+    this.functionalities = event.value.functionalities;
+
+  }
+
 
   lineOfBusiness: string[] = ['Fire', 'Life', 'Auto'];
   public addAppFormGroup: FormGroup;

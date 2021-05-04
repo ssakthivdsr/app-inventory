@@ -1,16 +1,19 @@
 <div class="container">
-    <!-- logo -->
-    <img class="logo-image" src="log.png">
 
     <div class="centered">
+
+
         <h1> TCS Business Application Assessment Solution</h1>
         <mat-radio-group [(ngModel)]="selected">
             <mat-radio-button value="1">Create a New Assessment</mat-radio-button> &nbsp;
             <mat-radio-button value="2">Continue with Existing Assessment</mat-radio-button>
         </mat-radio-group> <br /> <br />
         <div>
-            <button mat-raised-button color="warn" (click)="go()">Go</button> &nbsp;
+            <button mat-raised-button color="primary" (click)="go()">Go</button> &nbsp;
         </div>
+
     </div>
+
+
 </div>
 <router-outlet></router-outlet>

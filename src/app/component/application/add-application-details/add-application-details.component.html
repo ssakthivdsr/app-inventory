@@ -1,20 +1,11 @@
 <br />
 <form [formGroup]="addAppFormGroup" class="example-form">
 
-   <mat-form-field class="example-full-width">
-      <mat-label>Department</mat-label>
-      <mat-select [(ngModel)]="departmentsRetrieved">
-        <mat-option *ngFor="let item of this.departmentsRetrieved" [value]="item.id">{{item.departmentName}}</mat-option>
-        
-      </mat-select>
-    </mat-form-field>
-
-  <mat-form-field class="example-full-width">
+ <mat-form-field class="example-full-width">
     <mat-label>Application Name</mat-label>
     <input matInput formControlName="AppName">
     <mat-error *ngIf="checkError('AppName', 'required')">Application Name is required</mat-error>
   </mat-form-field>
-
   <!-- <mat-form-field class="example-full-width">
       <mat-label>Department</mat-label>
       <mat-select>
@@ -30,15 +21,24 @@
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
+    <mat-label>Department</mat-label>
+    <mat-select [(ngModel)]="departmentsRetrieved">
+      <mat-option *ngFor="let item of this.departmentsRetrieved" [value]="item.id">{{item.departmentName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
     <mat-label>Line Of Business</mat-label>
-    <input matInput formControlName="AppLob">
-    <mat-error *ngIf="checkError('AppLob', 'required')">Line of Business is required</mat-error>
+    <mat-select [(ngModel)]="selectedLob" (selectionChange)="onSelect($event)">
+      <mat-option *ngFor="let lobList of lobDropdown" [value]="lobList"> {{lobList.viewValue}}</mat-option>
+    </mat-select>
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Functionality</mat-label>
-    <input matInput formControlName="AppFun">
-    <mat-error *ngIf="checkError('AppFun', 'required')">Functionality is required</mat-error>
+    <mat-select [(ngModel)]="selectedFunctionality">
+      <mat-option *ngFor="let functionality of functionalities" [value]="functionality">{{functionality}}</mat-option>
+    </mat-select>
   </mat-form-field>
 </form>
 <form class="example-form">

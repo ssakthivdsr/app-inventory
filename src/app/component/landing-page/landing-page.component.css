@@ -47,7 +47,7 @@ mat-card {
   min-height: 100%;
   text-align: center;
   background-size: cover;
-  background-image: url(belief.jpeg);
+  background-image: url(bg.jpeg);
   width: "100%";
   height: "900";
   text-align: center;
@@ -57,17 +57,9 @@ mat-card {
 }
 .centered {
   position: absolute;
-  top: 75%;
+  top: 65%;
   left: 45%;
   transform: translate(-40%, -50%);
   color: rgb(247, 253, 247);
   width: 600px;
-}
-.logo-image {
-  background-image: url(log.png);
-  height: 10%;
-  width: 12%;
-  position: fixed;
-  top: 0;
-  left: 0;
 }
