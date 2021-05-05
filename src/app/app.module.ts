@@ -44,10 +44,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NewApplicationComponent } from './component/new-application/new-application.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AvailableDepartmentsComponent } from './component/available-departments/available-departments.component';
-
-
-
-
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -97,7 +94,8 @@ import { AvailableDepartmentsComponent } from './component/available-departments
     MatTableModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
