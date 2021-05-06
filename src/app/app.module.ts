@@ -45,6 +45,7 @@ import { NewApplicationComponent } from './component/new-application/new-applica
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AvailableDepartmentsComponent } from './component/available-departments/available-departments.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     HttpClientModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    HighchartsChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
