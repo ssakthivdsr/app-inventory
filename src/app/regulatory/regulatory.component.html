@@ -1,21 +1,9 @@
 <mat-card>
-  <section class="checkbox-section">
-    <mat-checkbox class="checkbox-margin" [(ngModel)]="SOC">Sarbanes-Oxley Act (SOA)</mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin" [(ngModel)]="PCI">Payment Card Industry (PCI) Data security standard
-    </mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin" [(ngModel)]="FFIEC">Federal Financial Institutions Examination council (FFIEC)
-    </mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin" [(ngModel)]="SBL">State Breach Laws</mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin" [(ngModel)]="GLBA">Graham-Leach-Billey Act (GLBA)</mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin" [(ngModel)]="PIPEDA">Personal Information Protection and Electronic Documents
-      Act (PIPEDA)</mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin" [(ngModel)]="HIPAA">Health Insurance Portability and Accountability Act
-      (HIPAA)
-    </mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin" [(ngModel)]="COPPA">Children's On-Line Privacy Protection Act (COPPA)
-    </mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin" [(ngModel)]="USPA">U.S.PAtriot Act</mat-checkbox><br>
-    <mat-checkbox class="checkbox-margin" [(ngModel)]="USEL">U.S.Export law</mat-checkbox>
+  <section class="checkbox-section" *ngFor='let names of regulatoryName'>
+    <mat-checkbox class="checkbox-margin" name="{{names}}" (change)="onValueSelection($event,names)">
+      {{names}}
+    </mat-checkbox>
+    <br>
   </section>
   <div class="example-button-row">
     <button mat-raised-button color="primary" (click)="check() ? openDialog() : save()">Save</button> &nbsp;

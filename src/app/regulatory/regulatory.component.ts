@@ -3,6 +3,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { Regulatory } from '../model/regulatory.model';
+import { RegulatoryService } from '../service/regulatory.service';
 
 @Component({
   selector: 'app-regulatory',
@@ -11,32 +13,35 @@ import { Router } from '@angular/router';
 })
 
 export class RegulatoryComponent implements OnInit {
+  regulatoryModel = new Regulatory();
+  regulatoryName: string[] = ["Sarbanes-Oxley Act (SOA)", "Payment Card Industry (PCI) Data security standard", "State Breach Laws", "Graham-Leach-Billey Act (GLBA)", "Personal Information Protection and Electronic Documents Act (PIPEDA)", "Health Insurance Portability and Accountability Act (HIPAA)", "Children's On-Line Privacy Protection Act (COPPA)", "U.S.PAtriot Act", "U.S.Export law"];
 
-  public constructor(private titleService: Title, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog) {
+  public constructor(private titleService: Title, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private regulatoryService: RegulatoryService) {
     this.titleService.setTitle("Inventory - Regulatory Details");
   }
 
-  SOC: boolean = false;
-  PCI: boolean = false;
-  FFIEC: boolean = false;
-  SBL: boolean = false;
-  GLBA: boolean = false;
-  PIPEDA: boolean = false;
-  HIPAA: boolean = false;
-  COPPA: boolean = false;
-  USPA: boolean = false;
-  USEL: boolean = false;
+  onValueSelection(event: any, names: string) {
+    if (event.checked) {
+      console.log(names + ' checked');
+      this.regulatoryModel.regulatoryValue.push(names);
+    }
+    else {
+      console.log(names + ' unchecked');
+      this.regulatoryModel.regulatoryValue = this.regulatoryModel.regulatoryValue.filter(m => m != names);
+    }
+    //console.log(this.regulatoryModel.regulatoryValue)
+  }
 
   check() {
-    if (this.SOC || this.PCI || this.FFIEC || this.SBL || this.GLBA ||
-      this.PIPEDA || this.HIPAA || this.COPPA || this.USPA || this.USEL)
-      return false;
-    else
+    this.regulatoryModel.applicationId = 62;
+    if (this.regulatoryModel.regulatoryValue.length == 0)
       return true;
+    else
+      return false;
   }
 
   openDialog() {
-    this.dialog.open(DialogElementsExampleDialog);
+    this.dialog.open(RegulatoryDialog);
   }
 
   openSnackBar() {
@@ -47,6 +52,10 @@ export class RegulatoryComponent implements OnInit {
   }
 
   save() {
+    this.regulatoryService.storeRegulatoryDetails(this.regulatoryModel).subscribe((data: any) => {
+      //console.log(data);
+      //console.log(this.regulatoryModel);
+    })
     //console.log("saved");
     this.openSnackBar();
   }
@@ -56,20 +65,26 @@ export class RegulatoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.regulatoryModel.regulatoryValue = [];
   }
 }
 
 @Component({
-  selector: 'dialog-elements-example-dialog',
-  templateUrl: 'dialog-elements-example-dialog.html',
+  selector: 'regulatory-save-warning-dialog',
+  templateUrl: 'regulatory-save-warning-dialog.html',
 })
 
-export class DialogElementsExampleDialog {
+export class RegulatoryDialog {
+  regulatoryModel = new Regulatory();
 
-  constructor(public dialogRef: MatDialogRef<DialogElementsExampleDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  constructor(public dialogRef: MatDialogRef<RegulatoryDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private regulatoryService: RegulatoryService) { }
 
   save() {
-    //console.log("saved");
+    this.regulatoryModel.applicationId = 62;
+    this.regulatoryService.storeRegulatoryDetails(this.regulatoryModel).subscribe((data: any) => {
+      //console.log(data);
+      //console.log(this.regulatoryModel);
+    })
     this.openSnackBar();
   }
 

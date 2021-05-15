@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -18,9 +18,8 @@ export class AddDeptDetailsComponent implements OnInit {
   departmentRetrieved = new Department();
   departmentsRetrieved: Department[] = [];
 
-
   constructor(private _snackBar: MatSnackBar, private router: Router, private userService: UserService,
-     private changeDetectorRefs: ChangeDetectorRef) {
+    private changeDetectorRefs: ChangeDetectorRef) {
     this.addDepFormGroup = new FormGroup({});
   }
 
@@ -29,41 +28,42 @@ export class AddDeptDetailsComponent implements OnInit {
       DpName: new FormControl('', [Validators.required]),
       DpOwner: new FormControl('', [Validators.required])
     });
+
     this.userService.getDepartment().subscribe((data: Department) => {
-      console.log(data);
+      //console.log(data);
       this.departmentRetrieved = data;
-      console.log("retrieved value:" + this.departmentRetrieved);
-      console.log(this.departmentRetrieved.departmentName);
-      console.log(this.departmentRetrieved.departmentOwner);
+      //console.log("retrieved value:" + this.departmentRetrieved);
+      //console.log(this.departmentRetrieved.name);
+      //console.log(this.departmentRetrieved.owner);
     })
+
     this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
-      console.log(data);
+      //console.log(data);
       this.departmentsRetrieved = data;
       this.changeDetectorRefs.detectChanges();
-      console.log("retrieved value:" + this.departmentsRetrieved);
-      console.log(JSON.stringify(this.departmentsRetrieved));
+      //console.log("retrieved value:" + this.departmentsRetrieved);
+      //console.log(JSON.stringify(this.departmentsRetrieved));
     })
   }
 
   retrieveAllDepartmentDetails() {
     this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
-      console.log(data);
+      //console.log(data);
       this.departmentsRetrieved = data;
-      console.log("retrieved value:" + this.departmentsRetrieved);
-      console.log(JSON.stringify(this.departmentsRetrieved));
+      //console.log("retrieved value:" + this.departmentsRetrieved);
+      //console.log(JSON.stringify(this.departmentsRetrieved));
     })
   }
 
   save() {
-    
     this.userService.storeDepartmentDetails(this.departmentModel).subscribe((data: any) => {
-      console.log(data);
+      //console.log(data);
     })
-    this.addDepFormGroup.reset();
+
     this.retrieveAllDepartmentDetails();
     this.openSnackBar();
   }
-  
+
   openSnackBar() {
     this._snackBar.open("Details are saved successfully", "Dismiss", {
       duration: 2000,

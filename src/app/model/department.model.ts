@@ -1,10 +1,10 @@
 export class Department {
-    id: number;
+    departmentId: number;
     departmentName: string;
     departmentOwner: string;
 
-    constructor(){
-        this.id = 0;
+    constructor() {
+        this.departmentId = 0;
         this.departmentName = '';
         this.departmentOwner = '';
     }

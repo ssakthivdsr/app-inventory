@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { BusinessPartner } from '../../model/businesspartner.model';
+import { BusinessPartnerService } from '../../service/businesspartner.service';
 
 @Component({
   selector: 'app-businesspartner',
@@ -13,19 +15,18 @@ import { Router } from '@angular/router';
 export class BusinesspartnerComponent implements OnInit {
 
   public addBusFormGroup: FormGroup;
+  public businessPartnerModel = new BusinessPartner();
 
-  public constructor(private titleService: Title, private _snackBar: MatSnackBar, private dialog: MatDialog, private router: Router) {
+  public constructor(private titleService: Title, private _snackBar: MatSnackBar, private dialog: MatDialog, private router: Router, private businessPartnerService: BusinessPartnerService) {
     this.titleService.setTitle("Inventory - Business Partner Details");
     this.addBusFormGroup = new FormGroup({});
   }
 
-  SecondaryBusinessPartner: string = '';
-  BusinessPartnerManagerNames: string = '';
-  BusinessPartnerDirectorNames: string = '';
-
   check() {
-    if (this.SecondaryBusinessPartner === '' || this.BusinessPartnerManagerNames === '' ||
-      this.BusinessPartnerDirectorNames === '')
+    this.businessPartnerModel.applicationId = 62;
+    this.businessPartnerModel.primaryBusinessPartner = this.addBusFormGroup.get('PriBusPart')!.value;
+    if (this.businessPartnerModel.secondaryBusinessPartner === '' || this.businessPartnerModel.businessPartnerManagers === '' ||
+      this.businessPartnerModel.businessPartnerDirectors === '')
       return true;
     else
       return false;
@@ -33,16 +34,21 @@ export class BusinesspartnerComponent implements OnInit {
 
   ngOnInit(): void {
     this.addBusFormGroup = new FormGroup({
-      BusPart: new FormControl('', [Validators.required])
+      PriBusPart: new FormControl('', [Validators.required])
     });
   }
 
   openDialog() {
-    this.dialog.open(DialogElementsExampleDialog);
+    this.dialog.open(BusinessPartnerDialog, {
+      data: this.businessPartnerModel
+    });
   }
 
   save() {
     //console.log("Saved");
+    this.businessPartnerService.storeBusinessPartnerDetails(this.businessPartnerModel).subscribe((data: any) => {
+      //console.log(data);
+    })
     this.openSnackBar();
   }
 
@@ -63,16 +69,23 @@ export class BusinesspartnerComponent implements OnInit {
 }
 
 @Component({
-  selector: 'dialog-elements-example-dialog',
-  templateUrl: 'dialog-elements-example-dialog.html',
+  selector: 'business-partner-save-warning-dialog',
+  templateUrl: 'business-partner-save-warning-dialog.html',
 })
 
-export class DialogElementsExampleDialog {
+export class BusinessPartnerDialog {
 
-  constructor(public dialogRef: MatDialogRef<DialogElementsExampleDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  businessPartnerModelDialog = new BusinessPartner();
+
+  constructor(public dialogRef: MatDialogRef<BusinessPartnerDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private businessPartnerService: BusinessPartnerService, @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.businessPartnerModelDialog = data;
+  }
 
   save() {
     //console.log("saved");
+    this.businessPartnerService.storeBusinessPartnerDetails(this.businessPartnerModelDialog).subscribe((data: any) => {
+      //console.log(data);
+    })
     this.openSnackBar();
   }
 

@@ -1,7 +1,6 @@
 <br />
 <form [formGroup]="addAppFormGroup" class="example-form">
-
- <mat-form-field class="example-full-width">
+  <mat-form-field class="example-full-width">
     <mat-label>Application Name</mat-label>
     <input matInput formControlName="AppName">
     <mat-error *ngIf="checkError('AppName', 'required')">Application Name is required</mat-error>
@@ -22,44 +21,47 @@
 
   <mat-form-field class="example-full-width">
     <mat-label>Department</mat-label>
-    <mat-select [(ngModel)]="departmentsRetrieved">
-      <mat-option *ngFor="let item of this.departmentsRetrieved" [value]="item.id">{{item.departmentName}}</mat-option>
+    <mat-select formControlName="AppDept">
+      <mat-option *ngFor="let item of departmentsRetrieved" [value]="item">{{item.departmentName}}</mat-option>
     </mat-select>
+    <mat-error *ngIf="checkError('AppDept', 'required')">Department is required</mat-error>
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Line Of Business</mat-label>
-    <mat-select [(ngModel)]="selectedLob" (selectionChange)="onSelect($event)">
+    <mat-select formControlName="AppLob" (selectionChange)="onSelectLob($event)">
       <mat-option *ngFor="let lobList of lobDropdown" [value]="lobList"> {{lobList.viewValue}}</mat-option>
     </mat-select>
+    <mat-error *ngIf="checkError('AppLob', 'required')">Line of Business is required</mat-error>
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Functionality</mat-label>
-    <mat-select [(ngModel)]="selectedFunctionality">
+    <mat-select formControlName="AppFun">
       <mat-option *ngFor="let functionality of functionalities" [value]="functionality">{{functionality}}</mat-option>
     </mat-select>
+    <mat-error *ngIf="checkError('AppFun', 'required')">Functionality is required</mat-error>
   </mat-form-field>
 </form>
 <form class="example-form">
   <mat-form-field class="example-full-width">
     <mat-label>Name Of The Component Manager</mat-label>
-    <input matInput [(ngModel)]="NameOfTheComponentManager" name="input5">
+    <input matInput [(ngModel)]="applicationModel.nameOfTheComponentManager" name="input5">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>SME Provided By Managers</mat-label>
-    <input matInput [(ngModel)]="SMEProvidedByManagers" name="input6">
+    <input matInput [(ngModel)]="applicationModel.smeProvidedByManagers" name="input6">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Name Of The Primary Tech SME</mat-label>
-    <input matInput [(ngModel)]="NameOfThePrimaryTechSME" name="input7">
+    <input matInput [(ngModel)]="applicationModel.nameOfPrimaryTechSME" name="input7">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Name Of Primary BA</mat-label>
-    <input matInput [(ngModel)]="NameOfPrimaryBA" name="input8">
+    <input matInput [(ngModel)]="applicationModel.nameOfPrimaryBA" name="input8">
   </mat-form-field>
 </form>
 <div class="example-button-row">
