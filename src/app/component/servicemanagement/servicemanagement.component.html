@@ -68,7 +68,6 @@
         <mat-option value="five">>1.05</mat-option>
       </mat-select>
     </mat-form-field>
-
     <br />
 
     <mat-form-field class="sm-full-width">
@@ -83,25 +82,28 @@
     </mat-form-field>
     <br />
 
-    <mat-form-field class="sm-full-width">
-      <mat-label>Number of Service Requests(Enhancements/Research)</mat-label>
-      <mat-select [(ngModel)]="v9" name="input9">
-        <mat-form-field>
-          <mat-option value="one">active enhancements</mat-option><input matInput>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-option value="two">closed enhancements</mat-option><input matInput>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-option value="three">active research</mat-option><input matInput>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-option value="four">closed research</mat-option><input matInput>
-        </mat-form-field>
-      </mat-select>
+    <mat-label class="sm-full-width">Number of Service Requests(Enhancements / Research)</mat-label>
+  
+    <mat-form-field class="sm-four-items-width" > 
+      <mat-label>Active Enhancements</mat-label>
+      <input matInput>
     </mat-form-field>
-    <br />
+    
+    <mat-form-field class="sm-four-items-width" > 
+      <mat-label>Closed Enhancements</mat-label>
+      <input matInput>
+    </mat-form-field>
+ 
+    <mat-form-field class="sm-four-items-width" > 
+      <mat-label>Active Research</mat-label>
+      <input matInput>
+    </mat-form-field>
 
+    <mat-form-field class="sm-four-items-width" > 
+      <mat-label>Closed Research</mat-label>
+      <input matInput>
+    </mat-form-field>
+    
     <mat-form-field class="sm-full-width" [formGroup]="myForm">
       <mat-label>Number of Proactive Incidents for the last 1 year</mat-label>
       <input matInput [(ngModel)]="v10" name="input10" pattern="\d+" formControlName="f3" (keypress)="onlyNumbers($event)">
@@ -115,37 +117,49 @@
       <mat-hint>Numbers only allowed</mat-hint>
     </mat-form-field>
     <br />
-
-    <mat-form-field class="sm-full-width">
-      <mat-label>Breakup of Reactive Incidents Resolved at</mat-label>
-      <mat-select [(ngModel)]="v12" name="input12">
-        <mat-form-field>
-          <mat-option value="one">Level 1</mat-option><input matInput>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-option value="two">Level 2</mat-option><input matInput>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-option value="three">Level 3</mat-option><input matInput>
-        </mat-form-field>
-      </mat-select>
-    </mat-form-field>
     <br />
 
-    <mat-form-field class="sm-full-width">
-      <mat-label>Breakup of Proactive Incidents Resolved at</mat-label>
-      <mat-select [(ngModel)]="v13" name="input13">
-        <mat-form-field>
-          <mat-option value="one">Level 1</mat-option><input matInput>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-option value="two">Level 2</mat-option><input matInput>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-option value="three">Level 3</mat-option><input matInput>
-        </mat-form-field>
-      </mat-select>
+    
+    <mat-label class="sm-full-width">Breakup of Reactive Incidents Resolved at (Level 1/Level 2/Level 3)</mat-label>
+   
+    <mat-form-field class="sm-four-items-width" > 
+      <mat-label>Level 1</mat-label>
+      <input matInput>
     </mat-form-field>
+       
+    <mat-form-field class="sm-four-items-width" > 
+        <mat-label>Level 2</mat-label>
+        <input matInput>
+    </mat-form-field>
+      
+    <mat-form-field class="sm-four-items-width" > 
+        <mat-label>Level 3</mat-label>
+        <input matInput>
+    </mat-form-field>
+  
+
+   
+    <br/>
+    <mat-label class="sm-full-width">Breakup of Proactive Incidents Resolved at (Level 1/Level 2/Level 3)</mat-label><br/>
+    
+    <mat-form-field class="sm-four-items-width"> 
+      <mat-label>Level 1</mat-label>
+      <input matInput>
+    </mat-form-field>
+       
+    <mat-form-field class="sm-four-items-width"> 
+        <mat-label>Level 2</mat-label>
+        <input matInput>
+    </mat-form-field>
+      
+    <mat-form-field class="sm-four-items-width"> 
+        <mat-label>Level 3</mat-label>
+        <input matInput>
+    </mat-form-field>
+    
+   
+      
+    
     <br />
 
     <mat-form-field class="sm-full-width">
@@ -202,51 +216,48 @@
       <mat-hint>Numbers only allowed</mat-hint>
     </mat-form-field>
     <br />
+    <br/>
 
-    <mat-form-field class="sm-full-width" [formGroup]="myForm">
-      <mat-label>Number of Level "High" Priority - Reactive Incident Requests(active / closed)</mat-label>
-      <input matInput [(ngModel)]="v19" name="input19" pattern="\d+" formControlName="f6" (keypress)="onlyNumbers($event)">
-      <mat-hint>Numbers only allowed</mat-hint>
-      <mat-select [(ngModel)]="v20" name="input20">
-        <mat-form-field>
-          <mat-option value="one">active</mat-option><input matInput>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-option value="two">closed</mat-option><input matInput>
-        </mat-form-field>
-      </mat-select>
-    </mat-form-field>
-    <br />
+   
+    <mat-label class="sm-full-width">Number of Level "High" Priority - Reactive Incident Requests(active / closed)</mat-label>
 
-    <mat-form-field class="sm-full-width" [formGroup]="myForm">
-      <mat-label>Number of Level "Average" Priority - Reactive Incident Requests(active / closed)</mat-label>
-      <input matInput [(ngModel)]="v21" name="input21" pattern="\d+" formControlName="f7" (keypress)="onlyNumbers($event)">
-      <mat-hint>Numbers only allowed</mat-hint>
-      <mat-select [(ngModel)]="v22" name="input22">
-        <mat-form-field>
-          <mat-option value="one">active</mat-option><input matInput>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-option value="two">closed</mat-option><input matInput>
-        </mat-form-field>
-      </mat-select>
+    <mat-form-field class="sm-four-items-width"> 
+      <mat-label>Active</mat-label>
+      <input matInput>
+      </mat-form-field>
+      
+    <mat-form-field class="sm-four-items-width" > 
+        <mat-label>Closed</mat-label>
+        <input matInput>
     </mat-form-field>
-    <br />
-
-    <mat-form-field class="sm-full-width" [formGroup]="myForm">
-      <mat-label>Number of Level "Low" Priority - Reactive Incident Requests (active / closed)</mat-label>
-      <input matInput [(ngModel)]="v23" name="input23" pattern="\d+" formControlName="f8" (keypress)="onlyNumbers($event)">
-      <mat-hint>Numbers only allowed</mat-hint>
-      <mat-select>
-        <mat-form-field>
-          <mat-option value="one">active</mat-option><input matInput>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-option value="two">closed</mat-option><input matInput>
-        </mat-form-field>
-      </mat-select>
+   
+    <br/>
+    <mat-label class="sm-full-width">Number of Level "Average" Priority - Reactive Incident Requests(active / closed)</mat-label>
+    
+    <mat-form-field class="sm-four-items-width" > 
+      <mat-label>Active</mat-label>
+      <input matInput>
+      </mat-form-field>
+      
+    <mat-form-field class="sm-four-items-width" > 
+        <mat-label>Closed</mat-label>
+        <input matInput>
     </mat-form-field>
-    <br />
+      
+    <br/>
+    <mat-label class="sm-full-width">Number of Level "Low" Priority - Reactive Incident Requests(active / closed)</mat-label>
+   
+    <mat-form-field class="sm-four-items-width"> 
+      <mat-label>Active</mat-label>
+      <input matInput>
+    </mat-form-field>
+      
+    <mat-form-field class="sm-four-items-width"> 
+      <mat-label>Closed</mat-label>
+      <input matInput>
+    </mat-form-field>
+    
+    
 
     <mat-form-field class="sm-full-width">
       <mat-label>Percentage of Sev 1 Reactive incidents that breached SLAs</mat-label>
