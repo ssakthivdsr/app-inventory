@@ -1,11 +1,12 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { BusinessPartner } from '../../model/businesspartner.model';
-import { BusinessPartnerService } from '../../service/businesspartner.service';
+import { BusinessPartnerService } from 'src/app/service/businesspartner.service';
+import { BusinessPartner } from 'src/app/model/businesspartner.model';
+
 
 @Component({
   selector: 'app-businesspartner',
@@ -15,18 +16,20 @@ import { BusinessPartnerService } from '../../service/businesspartner.service';
 export class BusinesspartnerComponent implements OnInit {
 
   public addBusFormGroup: FormGroup;
-  public businessPartnerModel = new BusinessPartner();
+  businesspartnerModel = new BusinessPartner();
+  businesspartnersRetrieved: BusinessPartner[] = [];
 
-  public constructor(private titleService: Title, private _snackBar: MatSnackBar, private dialog: MatDialog, private router: Router, private businessPartnerService: BusinessPartnerService) {
+  public constructor(private titleService: Title, private _snackBar: MatSnackBar, private dialog: MatDialog, private router: Router, private businessPartnerService: BusinessPartnerService,
+    private changeDetectorRefs: ChangeDetectorRef) {
     this.titleService.setTitle("Inventory - Business Partner Details");
     this.addBusFormGroup = new FormGroup({});
   }
 
+
+
   check() {
-    this.businessPartnerModel.applicationId = 62;
-    this.businessPartnerModel.primaryBusinessPartner = this.addBusFormGroup.get('PriBusPart')!.value;
-    if (this.businessPartnerModel.secondaryBusinessPartner === '' || this.businessPartnerModel.businessPartnerManagers === '' ||
-      this.businessPartnerModel.businessPartnerDirectors === '')
+    if (this.businesspartnerModel.secondaryBusinessPartner === '' || this.businesspartnerModel.businessPartnerManagers === '' ||
+      this.businesspartnerModel.businessPartnerDirectors === '')
       return true;
     else
       return false;
@@ -34,20 +37,20 @@ export class BusinesspartnerComponent implements OnInit {
 
   ngOnInit(): void {
     this.addBusFormGroup = new FormGroup({
-      PriBusPart: new FormControl('', [Validators.required])
+      BusPart: new FormControl('', [Validators.required])
     });
   }
 
   openDialog() {
-    this.dialog.open(BusinessPartnerDialog, {
-      data: this.businessPartnerModel
+    this.dialog.open(BusinessPartnerSaveWarningDialog, {
+      data: this.businesspartnerModel
     });
   }
 
   save() {
     //console.log("Saved");
-    this.businessPartnerService.storeBusinessPartnerDetails(this.businessPartnerModel).subscribe((data: any) => {
-      //console.log(data);
+    this.businessPartnerService.storeBusinessPartnerDetails(this.businesspartnerModel).subscribe((data: any) => {
+      console.log(data);
     })
     this.openSnackBar();
   }
@@ -73,17 +76,18 @@ export class BusinesspartnerComponent implements OnInit {
   templateUrl: 'business-partner-save-warning-dialog.html',
 })
 
-export class BusinessPartnerDialog {
+export class BusinessPartnerSaveWarningDialog {
 
-  businessPartnerModelDialog = new BusinessPartner();
+  businesspartnerModelDialog = new BusinessPartner();
 
-  constructor(public dialogRef: MatDialogRef<BusinessPartnerDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private businessPartnerService: BusinessPartnerService, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.businessPartnerModelDialog = data;
+  constructor(public dialogRef: MatDialogRef<BusinessPartnerSaveWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private businessPartnerService: BusinessPartnerService,
+    private changeDetectorRefs: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.businesspartnerModelDialog = data;
   }
 
   save() {
     //console.log("saved");
-    this.businessPartnerService.storeBusinessPartnerDetails(this.businessPartnerModelDialog).subscribe((data: any) => {
+    this.businessPartnerService.storeBusinessPartnerDetails(this.businesspartnerModelDialog).subscribe((data: any) => {
       //console.log(data);
     })
     this.openSnackBar();
@@ -105,3 +109,4 @@ export class BusinessPartnerDialog {
     this.dialogRef.close();
   }
 }
+

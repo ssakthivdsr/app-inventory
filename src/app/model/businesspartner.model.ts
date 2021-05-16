@@ -8,7 +8,7 @@ export class BusinessPartner {
 
     constructor() {
         this.businessPartnerId = 0;
-        this.applicationId = 0;
+        this.applicationId = 1;
         this.primaryBusinessPartner = '';
         this.secondaryBusinessPartner = '';
         this.businessPartnerManagers = '';
