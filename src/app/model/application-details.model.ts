@@ -1,6 +1,7 @@
 export class ApplicationDetails {
     applicationId: number;
     departmentId: number;
+    departmentName: string;
     applicationName: string;
     nameOfTheComponentManager: string;
     smeProvidedByManagers: string;
@@ -13,6 +14,7 @@ export class ApplicationDetails {
     constructor() {
         this.applicationId = 0;
         this.departmentId = 0;
+        this.departmentName = '';
         this.applicationName = '';
         this.nameOfTheComponentManager = '';
         this.smeProvidedByManagers = '';

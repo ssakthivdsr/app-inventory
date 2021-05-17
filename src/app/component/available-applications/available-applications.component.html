@@ -9,84 +9,141 @@
     </div>
   </div>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z12 center" multiTemplateDataRows>
-    <!-- Position Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
+  <div class="col-xs-12">
+    <table mat-table #table [dataSource]="applicationDataSource" class="mat-elevation-z12 center" multiTemplateDataRows>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.applicationId}} </td>
+      </ng-container>
 
-    <!-- Department Column -->
-    <ng-container matColumnDef="department">
-      <th mat-header-cell *matHeaderCellDef> Department </th>
-      <td mat-cell *matCellDef="let element"> {{element.department}} </td>
-    </ng-container>
+      <ng-container matColumnDef="departmentid">
+        <th mat-header-cell *matHeaderCellDef> Department </th>
+        <td mat-cell *matCellDef="let element"> {{element.departmentName}} </td>
+      </ng-container>
 
-    <!-- LOB Column -->
-    <ng-container matColumnDef="lob">
-      <th mat-header-cell *matHeaderCellDef> LOB </th>
-      <td mat-cell *matCellDef="let element"> {{element.lob}} </td>
-    </ng-container>
+      <ng-container matColumnDef="lob">
+        <th mat-header-cell *matHeaderCellDef> LOB </th>
+        <td mat-cell *matCellDef="let element"> {{element.lineOfBusiness}} </td>
+      </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
+      <ng-container matColumnDef="applicationname">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.applicationName}} </td>
+      </ng-container>
 
-    <!-- Action Column -->
-    <ng-container matColumnDef="Action">
-      <th mat-header-cell *matHeaderCellDef> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action </th>
-      <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
-          (click)="editApplication(1)">Edit</button> </td>
-    </ng-container>
+       <!-- Action Column -->
+       <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action </th>
+        <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
+            (click)="editApplication(1)">Edit</button> </td>
+      </ng-container>
 
-    <!-- Score Column -->
-    <ng-container matColumnDef="Score">
-      <th mat-header-cell *matHeaderCellDef>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Score</th>
-      <td mat-cell *matCellDef="let element">
-        <a mat-button color="primary" href="javascript:void()" (click)="element.isExpanded = !element.isExpanded">
-          Retrieve Score </a>
-      </td>
-    </ng-container>
+      <!-- Score Column -->
+      <ng-container matColumnDef="Score">
+        <th mat-header-cell *matHeaderCellDef>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Score</th>
+        <td mat-cell *matCellDef="let element">
+          <a mat-button color="primary" href="javascript:void()" (click)="element.isExpanded = !element.isExpanded">
+            Retrieve Score </a>
+        </td>
+      </ng-container>
 
-     <!-- Application completion status -->
-     <ng-container matColumnDef="applicationCompletedStatus">
-      <th mat-header-cell *matHeaderCellDef> Application Completion Status </th>
-      <td mat-cell *matCellDef="let element"> {{element.applicationCompletedStatus}} </td>
-    </ng-container>
+      <!-- Application completion status -->
+      <ng-container matColumnDef="applicationCompletedStatus">
+        <th mat-header-cell *matHeaderCellDef> Application Completion Status </th>
+        <td mat-cell *matCellDef="let element"> 75%</td>
+      </ng-container>
 
-    <!-- Extra Content-->
-    <ng-container matColumnDef="expandedDetail">
-      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-        <div class="row example-element-detail" [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'">
-          
-          <table class= "table table-sm">
-            <thead>
-              <tr>
-                <th scope="col">Total Score</th>
-                <th scope="col">Business Value Score</th>
-                <th scope="col">Agility Score</th>
-                <th scope="col">Technology Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>      
-                <td style="text-align: center" style="text-indent: 5mm;"> 
-                  <span class=" spangreen">  {{ element.businessTotal }} </span></td>
-                <td style="text-align: center"style="text-indent: 5mm;"> <span class=" spanred"> {{ element.businessValue }}</span></td>
-                <td style="text-align: center" style="text-indent: 5mm;"><span class=" spanamber">  {{ element.agility }}</span></td>
-                <td style="text-align: center"style="text-indent: 5mm;"><span class=" spanred">  {{ element.techTotal }}</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </td>
-    </ng-container>
+      <tr mat-header-row *matHeaderRowDef="newDisplayedColumns;sticky: true"></tr>
+      <tr mat-row *matRowDef="let element; columns: newDisplayedColumns;" class="example-element-row"></tr>
+    </table>
+  </div>
+  <br />
+  <br />
+<!-- 
+  <div class="col-xs-12">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z12 center" multiTemplateDataRows>
+     
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
-    <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
-      [class.example-expanded-row]="element.isExpanded"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-  </table>
+      
+      <ng-container matColumnDef="department">
+        <th mat-header-cell *matHeaderCellDef> Department </th>
+        <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+      </ng-container>
+
+      
+      <ng-container matColumnDef="lob">
+        <th mat-header-cell *matHeaderCellDef> LOB </th>
+        <td mat-cell *matCellDef="let element"> {{element.lob}} </td>
+      </ng-container>
+
+     
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action </th>
+        <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
+            (click)="editApplication(1)">Edit</button> </td>
+      </ng-container>
+
+      
+      <ng-container matColumnDef="Score">
+        <th mat-header-cell *matHeaderCellDef>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Score</th>
+        <td mat-cell *matCellDef="let element">
+          <a mat-button color="primary" href="javascript:void()" (click)="element.isExpanded = !element.isExpanded">
+            Retrieve Score </a>
+        </td>
+      </ng-container>
+
+      
+      <ng-container matColumnDef="applicationCompletedStatus">
+        <th mat-header-cell *matHeaderCellDef> Application Completion Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.applicationCompletedStatus}} </td>
+      </ng-container>
+
+      
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+          <div class="row example-element-detail" [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'">
+
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Total Score</th>
+                  <th scope="col">Business Value Score</th>
+                  <th scope="col">Agility Score</th>
+                  <th scope="col">Technology Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align: center" style="text-indent: 5mm;">
+                    <span class=" spangreen"> {{ element.businessTotal }} </span>
+                  </td>
+                  <td style="text-align: center" style="text-indent: 5mm;"> <span class=" spanred"> {{
+                      element.businessValue }}</span></td>
+                  <td style="text-align: center" style="text-indent: 5mm;"><span class=" spanamber"> {{ element.agility
+                      }}</span></td>
+                  <td style="text-align: center" style="text-indent: 5mm;"><span class=" spanred"> {{ element.techTotal
+                      }}</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+      <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+        [class.example-expanded-row]="element.isExpanded"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+  </div> -->
 </mat-card>
