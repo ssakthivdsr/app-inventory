@@ -39,6 +39,12 @@ export class UserService {
     );
   }
 
+  retrieveDepartmentById(id: number): Observable<any> {
+    return this.http.get<Department>(endpoint1.concat('retrieveDepartmentById/' + id)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   retrieveAllDepartmentDetails(): Observable<any> {
     return this.http.get<Department[]>(endpoint1.concat('retrieveAllDepartmentDetails')).pipe(
       catchError(this.handleError)

@@ -35,6 +35,11 @@ export class RegulatoryService {
         );
     }
 
+    retrieveRegulatoryByApplicationId(body: number): Observable<any> {
+        return this.http.get<Regulatory>(endpoint.concat('retrieveRegulatoryByApplicationId/' + body)).pipe(
+            catchError(this.handleError));
+    }
+
     storeRegulatoryDetails(body: Regulatory): Observable<any> {
         return this.http.post<any>(endpoint.concat('storeRegulatoryDetails'), body);
     }

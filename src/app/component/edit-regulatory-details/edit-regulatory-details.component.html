@@ -1,0 +1,12 @@
+<mat-card>
+    <section class="checkbox-section" *ngFor='let names of regulatoryName'>
+        <mat-checkbox class="checkbox-margin" name="{{names}}" (change)="onValueSelection($event,names)">
+            {{names}}
+        </mat-checkbox>
+        <br>
+    </section>
+    <div class="example-button-row">
+        <button mat-raised-button color="primary" (click)="check() ? openDialog() : update()"> Update </button> &nbsp;
+        <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+    </div>
+</mat-card>
