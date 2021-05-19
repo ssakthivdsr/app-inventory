@@ -46,6 +46,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AvailableDepartmentsComponent } from './component/available-departments/available-departments.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { EditApplicationDetailsComponent } from './component/edit-application-details/edit-application-details.component';
+import { EditBusinessPartnerDetailsComponent } from './component/edit-business-partner-details/edit-business-partner-details.component';
+import { EditRegulatoryDetailsComponent } from './component/edit-regulatory-details/edit-regulatory-details.component';
+
 
 @NgModule({
   declarations: [
@@ -69,7 +73,10 @@ import { HighchartsChartModule } from 'highcharts-angular';
     DashboardComponent,
     EditApplicationComponent,
     NewApplicationComponent,
-    AvailableDepartmentsComponent
+    AvailableDepartmentsComponent,
+    EditApplicationDetailsComponent,
+    EditBusinessPartnerDetailsComponent,
+    EditRegulatoryDetailsComponent
   ],
   imports: [
     BrowserModule,

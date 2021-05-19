@@ -3,18 +3,20 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UserService } from '../../../service/user.service';
-import { Department } from '../../../model/department.model';
-import { ApplicationDetails } from '../../../model/application-details.model';
+import { UserService } from '../../service/user.service';
+import { Department } from '../../model/department.model';
+import { ApplicationDetails } from '../../model/application-details.model';
 import { ApplicationService } from 'src/app/service/application.service';
 
 @Component({
-  selector: 'app-add-application-details',
-  templateUrl: './add-application-details.component.html',
-  styleUrls: ['./add-application-details.component.css']
+  selector: 'app-edit-application-details',
+  templateUrl: './edit-application-details.component.html',
+  styleUrls: ['./edit-application-details.component.css']
 })
-
-export class AddApplicationDetailsComponent implements OnInit {
+export class EditApplicationDetailsComponent implements OnInit {
+  i: number;
+  existingApplicationId: number = 0;
+  departmentRetrieved = new Department();
   departmentsRetrieved: Department[] = [];
   public applicationModel = new ApplicationDetails();
   applicationsRetrieved: ApplicationDetails[] = [];
@@ -42,7 +44,30 @@ export class AddApplicationDetailsComponent implements OnInit {
       AppLob: new FormControl('', [Validators.required]),
       AppFun: new FormControl('', [Validators.required])
     });
+
     this.retrieveAllDepartmentDetails();
+    this.existingApplicationId = Number(localStorage.getItem('applicationID'));
+    console.log(this.existingApplicationId);
+    if (this.existingApplicationId != 0) {
+      this.applicationService.retrieveApplicationById(this.existingApplicationId).subscribe((data: ApplicationDetails) => {
+        this.applicationModel = data;
+        this.retrieveDepartmentById(this.applicationModel.departmentId);
+        console.log(this.applicationModel.departmentId);
+        //console.log(this.applicationModel.departmentName);
+        console.log(this.applicationModel.lineOfBusiness);
+        console.log(this.applicationModel.functionality);
+        this.addAppFormGroup.setValue({
+          AppName: this.applicationModel.applicationName,
+          AppDesc: this.applicationModel.applicationDescription,
+          AppDept: this.applicationModel.departmentName,
+          AppLob: this.applicationModel.lineOfBusiness,
+          AppFun: this.applicationModel.functionality
+        });
+        //this.addAppFormGroup.get("AppDept")?.setValue(this.applicationModel.departmentName);
+        //console.log("retrieved value:" + this.departmentsRetrieved);
+        //console.log(JSON.stringify(this.departmentsRetrieved));
+      })
+    }
   }
 
   onSelectDept(event: any) {
@@ -56,6 +81,17 @@ export class AddApplicationDetailsComponent implements OnInit {
     this.functionalities = event.value.functionalities;
   }
 
+  retrieveDepartmentById(id: number) {
+    this.userService.retrieveDepartmentById(id).subscribe((data: Department) => {
+      //console.log(data);
+      this.departmentRetrieved = data;
+      //this.applicationModel.departmentName = this.departmentRetrieved.departmentName;
+      //console.log("retrieved value:" + this.departmentsRetrieved);
+      //console.log(JSON.stringify(this.departmentsRetrieved));
+    })
+
+  }
+
   retrieveAllDepartmentDetails() {
     this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
       //console.log(data);
@@ -66,14 +102,6 @@ export class AddApplicationDetailsComponent implements OnInit {
   }
 
   check() {
-    this.applicationModel.applicationName = this.addAppFormGroup.get('AppName')!.value;
-    this.applicationModel.applicationDescription = this.addAppFormGroup.get('AppDesc')!.value;
-    this.selectedDepartment = this.addAppFormGroup.get('AppDept')!.value;
-    console.log(this.selectedDepartment);
-    this.applicationModel.departmentId = this.selectedDepartment.departmentId;
-    this.applicationModel.lineOfBusiness = this.addAppFormGroup.get('AppLob')!.value.viewValue;
-    this.applicationModel.functionality = this.addAppFormGroup.get('AppFun')!.value;
-
     if (this.applicationModel.nameOfTheComponentManager === '' || this.applicationModel.smeProvidedByManagers === '' ||
       this.applicationModel.nameOfPrimaryTechSME === '' || this.applicationModel.nameOfPrimaryBA === '')
       return true;
@@ -82,27 +110,28 @@ export class AddApplicationDetailsComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(ApplicationDetailsDialog, {
+    this.dialog.open(EditApplicationDetailsDialog, {
       data: this.applicationModel
     });
   }
 
   openSnackBar() {
-    this._snackBar.open("Details are saved successfully", "Dismiss", {
+    this._snackBar.open("Details are updated successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
     });
   }
 
-  save() {
-    //console.log("Saved");
-    this.applicationService.storeApplicationDetails(this.applicationModel).subscribe((data: any) => {
-      //console.log(data);
-    })
+  update() {
+    // console.log("updated");
+    // this.applicationService.storeApplicationDetails(this.applicationModel).subscribe((data: any) => {
+    //   console.log(data);
+    // })
     this.openSnackBar();
   }
 
   cancel() {
+    localStorage.clear();
     this.router.navigate(['/landingPage']);
   }
 
@@ -112,35 +141,34 @@ export class AddApplicationDetailsComponent implements OnInit {
 }
 
 @Component({
-  selector: 'application-details-save-warning-dialog',
-  templateUrl: 'application-details-save-warning-dialog.html',
+  selector: 'edit-application-details-save-warning-dialog',
+  templateUrl: 'edit-application-details-save-warning-dialog.html',
 })
 
-export class ApplicationDetailsDialog {
+export class EditApplicationDetailsDialog {
   applicationModelDialog = new ApplicationDetails();
 
-  constructor(public dialogRef: MatDialogRef<ApplicationDetailsDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private applicationService: ApplicationService, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(public dialogRef: MatDialogRef<EditApplicationDetailsDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private applicationService: ApplicationService, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.applicationModelDialog = data;
   }
 
-  save() {
-    //console.log("saved");
-    this.applicationService.storeApplicationDetails(this.applicationModelDialog).subscribe((data: any) => {
-      //console.log(data);
-    })
-    //this.addAppFormGroup.reset();
+  update() {
+    // console.log("updated");
+    // this.applicationService.storeApplicationDetails(this.applicationModelDialog).subscribe((data: any) => {
+    //   console.log(data);
+    // })
     this.openSnackBar();
   }
 
   openSnackBar() {
-    this._snackBar.open("Details are saved successfully", "Dismiss", {
+    this._snackBar.open("Details are updated successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
     });
   }
 
   clickMethod() {
-    this.save();
+    this.update();
     this.dialogRef.close();
   }
 
@@ -148,3 +176,4 @@ export class ApplicationDetailsDialog {
     this.dialogRef.close();
   }
 }
+

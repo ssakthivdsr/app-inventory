@@ -1,0 +1,32 @@
+<mat-card>
+    <br />
+    <form [formGroup]="addBusFormGroup" class="bp-form">
+        <mat-form-field class="bp-full-width">
+            <mat-label>Primary Business Partner</mat-label>
+            <input matInput value="" formControlName="BusPart"
+                [(ngModel)]="businesspartnerModel.primaryBusinessPartner">
+            <mat-error *ngIf="checkError('BusPart', 'required')">Primary Business Partner is required</mat-error>
+        </mat-form-field>
+    </form>
+    <form class="bp-form">
+        <mat-form-field class="bp-full-width">
+            <mat-label>Secondary Business Partner</mat-label>
+            <input matInput value="" name="input2" [(ngModel)]="businesspartnerModel.secondaryBusinessPartner">
+        </mat-form-field>
+        <mat-form-field class="bp-full-width">
+            <mat-label>Business Partner Manager Names</mat-label>
+            <textarea matInput value="" placeholder="Multiple names are allowed"
+                [(ngModel)]="businesspartnerModel.businessPartnerManagers" name="input3"></textarea>
+        </mat-form-field>
+        <mat-form-field class="bp-full-width">
+            <mat-label>Business Partner Director Names</mat-label>
+            <textarea matInput value="" placeholder="Multiple names are allowed"
+                [(ngModel)]="businesspartnerModel.businessPartnerDirectors" name="input4"></textarea>
+        </mat-form-field>
+    </form> <br />
+    <div class="bp-button-row">
+        <button mat-raised-button color="primary" [disabled]="!addBusFormGroup.valid" mat-stroked-button
+            (click)="check() ? openDialog() : update()"> Update </button> &nbsp;
+        <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+    </div>
+</mat-card>

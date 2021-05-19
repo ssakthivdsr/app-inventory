@@ -70,6 +70,7 @@ const ELEMENT_DATA: Application[] = [
 
 export class AvailableApplicationsComponent implements OnInit, OnDestroy {
   applicationsRetrieved: ApplicationDetails[] = [];
+  applicationRetrievedById: ApplicationDetails;
   departmentsRetrieved: Department[] = [];
   applicationDataSource: any;
   newDisplayedColumns: string[] = ['id', 'departmentid', 'lob', 'applicationname', 'Action', 'Score', 'applicationCompletedStatus'];
@@ -97,7 +98,7 @@ export class AvailableApplicationsComponent implements OnInit, OnDestroy {
 
   retrieveAllDepartmentDetails() {
     this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
-    this.departmentsRetrieved = data;
+      this.departmentsRetrieved = data;
     })
   }
 
@@ -129,7 +130,8 @@ export class AvailableApplicationsComponent implements OnInit, OnDestroy {
     this.show = true;
   }
 
-  editApplication(int: number) {
+  editApplication(localApplicationID: string) {
+    localStorage.setItem('applicationID', localApplicationID);
     this.router.navigate(['/layout/editApplication']);
   }
 }

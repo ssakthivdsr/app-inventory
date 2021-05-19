@@ -7,13 +7,13 @@ import { Router } from '@angular/router';
 import { BusinessPartnerService } from 'src/app/service/businesspartner.service';
 import { BusinessPartner } from 'src/app/model/businesspartner.model';
 
-
 @Component({
-  selector: 'app-businesspartner',
-  templateUrl: './businesspartner.component.html',
-  styleUrls: ['./businesspartner.component.css']
+  selector: 'app-edit-business-partner-details',
+  templateUrl: './edit-business-partner-details.component.html',
+  styleUrls: ['./edit-business-partner-details.component.css']
 })
-export class BusinesspartnerComponent implements OnInit {
+export class EditBusinessPartnerDetailsComponent implements OnInit {
+  existingApplicationId: number = 0;
   public addBusFormGroup: FormGroup;
   businesspartnerModel = new BusinessPartner();
   businesspartnersRetrieved: BusinessPartner[] = [];
@@ -24,6 +24,23 @@ export class BusinesspartnerComponent implements OnInit {
     this.addBusFormGroup = new FormGroup({});
   }
 
+  ngOnInit(): void {
+    this.addBusFormGroup = new FormGroup({
+      BusPart: new FormControl('', [Validators.required])
+    });
+
+    this.existingApplicationId = Number(localStorage.getItem('applicationID'));
+    if (this.existingApplicationId != 0) {
+      this.businessPartnerService.retrieveBusinessPartnerByApplicationId(this.existingApplicationId).subscribe((data: BusinessPartner) => {
+        this.businesspartnerModel = data;
+        this.addBusFormGroup.setValue({
+          BusPart: this.businesspartnerModel.primaryBusinessPartner
+        })
+        //console.log("retrieved value:" + this.businesspartnerModel);
+      })
+    }
+  }
+
   check() {
     if (this.businesspartnerModel.secondaryBusinessPartner === '' || this.businesspartnerModel.businessPartnerManagers === '' ||
       this.businesspartnerModel.businessPartnerDirectors === '')
@@ -32,20 +49,14 @@ export class BusinesspartnerComponent implements OnInit {
       return false;
   }
 
-  ngOnInit(): void {
-    this.addBusFormGroup = new FormGroup({
-      BusPart: new FormControl('', [Validators.required])
-    });
-  }
-
   openDialog() {
-    this.dialog.open(BusinessPartnerSaveWarningDialog, {
+    this.dialog.open(EditBusinessPartnerSaveWarningDialog, {
       data: this.businesspartnerModel
     });
   }
 
-  save() {
-    //console.log("Saved");
+  update() {
+    //console.log("updated");
     this.businessPartnerService.storeBusinessPartnerDetails(this.businesspartnerModel).subscribe((data: any) => {
       //console.log(data);
     })
@@ -53,11 +64,12 @@ export class BusinesspartnerComponent implements OnInit {
   }
 
   cancel() {
+    localStorage.clear();
     this.router.navigate(['/landingPage']);
   }
 
   openSnackBar() {
-    this._snackBar.open("Details are saved successfully", "Dismiss", {
+    this._snackBar.open("Details are updated successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
     });
@@ -69,21 +81,21 @@ export class BusinesspartnerComponent implements OnInit {
 }
 
 @Component({
-  selector: 'business-partner-save-warning-dialog',
-  templateUrl: 'business-partner-save-warning-dialog.html',
+  selector: 'edit-business-partner-save-warning-dialog',
+  templateUrl: 'edit-business-partner-save-warning-dialog.html',
 })
 
-export class BusinessPartnerSaveWarningDialog {
+export class EditBusinessPartnerSaveWarningDialog {
 
   businesspartnerModelDialog = new BusinessPartner();
 
-  constructor(public dialogRef: MatDialogRef<BusinessPartnerSaveWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private businessPartnerService: BusinessPartnerService,
+  constructor(public dialogRef: MatDialogRef<EditBusinessPartnerSaveWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private businessPartnerService: BusinessPartnerService,
     private changeDetectorRefs: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.businesspartnerModelDialog = data;
   }
 
-  save() {
-    //console.log("saved");
+  update() {
+    //console.log("updated");
     this.businessPartnerService.storeBusinessPartnerDetails(this.businesspartnerModelDialog).subscribe((data: any) => {
       //console.log(data);
     })
@@ -91,14 +103,14 @@ export class BusinessPartnerSaveWarningDialog {
   }
 
   openSnackBar() {
-    this._snackBar.open("Details are saved successfully", "Dismiss", {
+    this._snackBar.open("Details are updated successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
     });
   }
 
   clickMethod() {
-    this.save();
+    this.update();
     this.dialogRef.close();
   }
 
@@ -106,4 +118,5 @@ export class BusinessPartnerSaveWarningDialog {
     this.dialogRef.close();
   }
 }
+
 
