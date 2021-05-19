@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { VendorPackage } from 'src/app/model/vendorPackage.model';
+import { VendorPackageService } from 'src/app/service/vendorPackage.service';
+
 
 @Component({
   selector: 'app-vendorpackage',
@@ -11,40 +14,41 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 })
 
 export class VendorpackageComponent implements OnInit {
+  vendorPackageModel = new VendorPackage();
+  ValidNumberIndicator = true;
 
-  public constructor(private titleService: Title, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog) {
+  public constructor(private titleService: Title, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private vendorPackageService: VendorPackageService) {
     this.titleService.setTitle("Inventory - Vender Package Details");
   }
 
-  VendorEngagementsAssociatedWithManagedServicesVendor: string = '';
-  //TypeOfPackage: 'Vendor' | 'Customer' = 'Vendor';
-  TypeOfPackage: string = '';
-  VendorName: string = '';
-  VendorEngagementsAssociatedWithVendorPackageVendor: string = '';
-  DegreeOfCustomization: string = '';
-  HostedLocation: string = '';
-  VendorHostedName: string = '';
-  VendorEngagementsAssociatedWithExternallyHostedVendor: string = '';
-  //IsMostCurrentVendorSoftwareVersion: 'Yes' | 'No' = 'Yes';
-  IsMostCurrentVendorSoftwareVersion: string = '';
-  VendorPackageVersion: string = '';
-  FrequencyOfVendorUpgrades: string = '';
-  FrequencyOfPatches: string = '';
+
 
   check() {
-    if (this.VendorEngagementsAssociatedWithManagedServicesVendor === '' || this.TypeOfPackage === '' ||
-      this.VendorName === '' || this.VendorEngagementsAssociatedWithVendorPackageVendor === '' ||
-      this.DegreeOfCustomization === '' || this.HostedLocation === '' ||
-      this.VendorHostedName === '' || this.VendorEngagementsAssociatedWithExternallyHostedVendor === '' ||
-      this.IsMostCurrentVendorSoftwareVersion === '' || this.VendorPackageVersion === '' ||
-      this.FrequencyOfVendorUpgrades === '' || this.FrequencyOfPatches === '')
+    if (this.vendorPackageModel.engAssociatedManagedServices === "" || this.vendorPackageModel.packageType === null ||
+      this.vendorPackageModel.name === "" || this.vendorPackageModel.engAssociatedWithVendorPackage === "" ||
+      this.vendorPackageModel.degreeOfCustomization === "" || this.vendorPackageModel.hostedLocation === "" ||
+      this.vendorPackageModel.hostedName === "" || this.vendorPackageModel.engAssociatedWithEsternallyHostedVendor === '' ||
+      this.vendorPackageModel.isLatestSwVersion === null || this.vendorPackageModel.packageVersion === "" ||
+      this.vendorPackageModel.frequencyOfUpdates === "" || this.vendorPackageModel.frequencyOfPatches === "")
       return true;
     else
       return false;
   }
+  onlyNumbers(event: { which: any; keyCode: any; }) {
 
+    const ch = (event.which) ? event.which : event.keyCode;
+    if (ch > 31 && (ch < 48 || ch > 57)) {
+      this.ValidNumberIndicator = false;
+
+      return this.ValidNumberIndicator;
+    }
+    this.ValidNumberIndicator = true;
+    return this.ValidNumberIndicator;
+  }
   openDialog() {
-    this.dialog.open(DialogElementsExampleDialog);
+    this.dialog.open(VendorPacakageSaveWarningDialog, {
+      data: this.vendorPackageModel
+    });
   }
 
   openSnackBar() {
@@ -55,8 +59,15 @@ export class VendorpackageComponent implements OnInit {
   }
 
   save() {
-    //console.log("saved");
+    this.vendorPackageService.storeVendorPackageDetails(this.vendorPackageModel).subscribe((data: any) => {
+      console.log(this.vendorPackageModel);
+
+    })
+    console.log(this.vendorPackageModel);
+
+
     this.openSnackBar();
+
   }
 
   cancel() {
@@ -64,20 +75,28 @@ export class VendorpackageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.vendorPackageModel);
   }
 }
 
 @Component({
-  selector: 'dialog-elements-example-dialog',
-  templateUrl: 'dialog-elements-example-dialog.html',
+  selector: 'vendor-package-save-warning-dialog',
+  templateUrl: 'vendor-package-save-warning-dialog.html',
 })
 
-export class DialogElementsExampleDialog {
+export class VendorPacakageSaveWarningDialog {
 
-  constructor(public dialogRef: MatDialogRef<DialogElementsExampleDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  vendorPackageModelDialogue = new VendorPackage();
+  constructor(public dialogRef: MatDialogRef<VendorPacakageSaveWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private vendorPackageService: VendorPackageService, @Inject(MAT_DIALOG_DATA) public data: any) { this.vendorPackageModelDialogue = data; }
+
+
 
   save() {
-    //console.log("saved");
+    this.vendorPackageService.storeVendorPackageDetails(this.vendorPackageModelDialogue).subscribe((data: any) => {
+      console.log(this.vendorPackageModelDialogue);
+
+    })
+
     this.openSnackBar();
   }
 
@@ -96,4 +115,5 @@ export class DialogElementsExampleDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
 }
