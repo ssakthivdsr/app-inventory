@@ -32,7 +32,7 @@ export class BusinesspartnerComponent implements OnInit {
       return false;
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.addBusFormGroup = new FormGroup({
       BusPart: new FormControl('', [Validators.required])
     });
@@ -45,18 +45,23 @@ export class BusinesspartnerComponent implements OnInit {
   }
 
   save() {
+    this.businesspartnerModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
+    //console.log(this.businesspartnerModel.applicationId);
     //console.log("Saved");
     this.businessPartnerService.storeBusinessPartnerDetails(this.businesspartnerModel).subscribe((data: any) => {
       //console.log(data);
+      //console.log(localStorage.getItem('savedApplicationID'));
+      this.openSnackBar(data);
     })
-    this.openSnackBar();
+
   }
 
   cancel() {
+    localStorage.clear();
     this.router.navigate(['/landingPage']);
   }
 
-  openSnackBar() {
+  openSnackBar(id: number) {
     this._snackBar.open("Details are saved successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
@@ -84,13 +89,15 @@ export class BusinessPartnerSaveWarningDialog {
 
   save() {
     //console.log("saved");
+    this.businesspartnerModelDialog.applicationId = Number(localStorage.getItem('savedApplicationID'));
     this.businessPartnerService.storeBusinessPartnerDetails(this.businesspartnerModelDialog).subscribe((data: any) => {
       //console.log(data);
+      //console.log(localStorage.getItem('savedApplicationID'));
+      this.openSnackBar(data);
     })
-    this.openSnackBar();
   }
 
-  openSnackBar() {
+  openSnackBar(id: number) {
     this._snackBar.open("Details are saved successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"

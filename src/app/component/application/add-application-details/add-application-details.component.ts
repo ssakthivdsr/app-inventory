@@ -17,7 +17,6 @@ import { ApplicationService } from 'src/app/service/application.service';
 export class AddApplicationDetailsComponent implements OnInit {
   departmentsRetrieved: Department[] = [];
   public applicationModel = new ApplicationDetails();
-  applicationsRetrieved: ApplicationDetails[] = [];
   selectedDepartment = new Department();
   selectedLob: string = '';
   selectedFunctionality: string = '';
@@ -87,9 +86,10 @@ export class AddApplicationDetailsComponent implements OnInit {
     });
   }
 
-  openSnackBar() {
-    this._snackBar.open("Details are saved successfully", "Dismiss", {
-      duration: 2000,
+  openSnackBar(id: number) {
+    //this.retrieveAllApplicationDetails();
+    this._snackBar.open("Details are saved successfully. \nYour saved ID is " + id + '.', "Dismiss", {
+      duration: 5000,
       verticalPosition: "top"
     });
   }
@@ -98,11 +98,14 @@ export class AddApplicationDetailsComponent implements OnInit {
     //console.log("Saved");
     this.applicationService.storeApplicationDetails(this.applicationModel).subscribe((data: any) => {
       //console.log(data);
+      localStorage.setItem('savedApplicationID', data + '');
+      //console.log(localStorage.getItem('savedApplicationID'));
+      this.openSnackBar(data);
     })
-    this.openSnackBar();
   }
 
   cancel() {
+    localStorage.clear();
     this.router.navigate(['/landingPage']);
   }
 
@@ -127,14 +130,15 @@ export class ApplicationDetailsDialog {
     //console.log("saved");
     this.applicationService.storeApplicationDetails(this.applicationModelDialog).subscribe((data: any) => {
       //console.log(data);
+      localStorage.setItem('savedApplicationID', data + '');
+      //console.log(localStorage.getItem('savedApplicationID'));
+      this.openSnackBar(data);
     })
-    //this.addAppFormGroup.reset();
-    this.openSnackBar();
   }
 
-  openSnackBar() {
-    this._snackBar.open("Details are saved successfully", "Dismiss", {
-      duration: 2000,
+  openSnackBar(id: number) {
+    this._snackBar.open("Details are saved successfully. \nYour saved ID is " + id + '.', "Dismiss", {
+      duration: 5000,
       verticalPosition: "top"
     });
   }

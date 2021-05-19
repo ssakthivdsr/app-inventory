@@ -44,27 +44,29 @@ export class RegulatoryComponent implements OnInit {
     this.dialog.open(RegulatoryDialog);
   }
 
-  openSnackBar() {
+  openSnackBar(id: number) {
     this._snackBar.open("Details are saved successfully", "Dismiss", {
-      duration: 2000,
+      duration: 5000,
       verticalPosition: "top"
     });
   }
 
   save() {
+    this.regulatoryModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
+    //console.log(this.regulatoryModel.applicationId);
     this.regulatoryService.storeRegulatoryDetails(this.regulatoryModel).subscribe((data: any) => {
       //console.log(data);
-      //console.log(this.regulatoryModel);
+      //console.log(localStorage.getItem('savedApplicationID'));
+      this.openSnackBar(data);
     })
-    //console.log("saved");
-    this.openSnackBar();
   }
 
   cancel() {
+    localStorage.clear();
     this.router.navigate(['/landingPage']);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.regulatoryModel.regulatoryValue = [];
   }
 }
@@ -80,15 +82,15 @@ export class RegulatoryDialog {
   constructor(public dialogRef: MatDialogRef<RegulatoryDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private regulatoryService: RegulatoryService) { }
 
   save() {
-    this.regulatoryModel.applicationId = 75;
+    this.regulatoryModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
     this.regulatoryService.storeRegulatoryDetails(this.regulatoryModel).subscribe((data: any) => {
       //console.log(data);
-      //console.log(this.regulatoryModel);
+      //console.log(localStorage.getItem('savedApplicationID'));
+      this.openSnackBar(data);
     })
-    this.openSnackBar();
   }
 
-  openSnackBar() {
+  openSnackBar(id: number) {
     this._snackBar.open("Details are saved successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
