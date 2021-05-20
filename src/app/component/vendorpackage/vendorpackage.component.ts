@@ -59,6 +59,7 @@ export class VendorpackageComponent implements OnInit {
   }
 
   save() {
+    this.vendorPackageModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
     this.vendorPackageService.storeVendorPackageDetails(this.vendorPackageModel).subscribe((data: any) => {
       console.log(this.vendorPackageModel);
 

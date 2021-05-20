@@ -16,7 +16,7 @@ export class VendorPackage {
 
     constructor() {
         this.vendorPackageId = 0;
-        this.applicationId = 1;
+        this.applicationId = 0;
         this.engAssociatedManagedServices = '';
         this.packageType = '';
         this.name = '';

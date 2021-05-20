@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Validators, FormGroup, FormControl, FormBuilder } from "@angular/forms";
+import { ServiceManagement } from 'src/app/model/servicemanagement.model';
+import { ServiceManagementService } from 'src/app/service/servicemanagement.service';
 
 @Component({
   selector: 'app-servicemanagement',
@@ -13,7 +15,11 @@ import { Validators, FormGroup, FormControl, FormBuilder } from "@angular/forms"
 export class ServicemanagementComponent implements OnInit {
   myForm: FormGroup;
   ValidNumberIndicator = true;
-  constructor(private fb: FormBuilder, private router: Router, private _snackBar: MatSnackBar, private dialog: MatDialog) {
+  serviceManagementModel = new ServiceManagement();
+  serviceManagementsRetrieved: ServiceManagement[] = [];
+  checkId: number;
+  constructor(private fb: FormBuilder, private router: Router, private _snackBar: MatSnackBar, private dialog: MatDialog, private serviceManagementService: ServiceManagementService,
+    private changeDetectorRefs: ChangeDetectorRef) {
     this.myForm = this.fb.group({
       f: new FormControl("", [Validators.pattern(/\d/)]),
       f1: new FormControl("", [Validators.pattern(/\d/)]),
@@ -28,68 +34,24 @@ export class ServicemanagementComponent implements OnInit {
       f10: new FormControl("", [Validators.pattern(/\d/)])
     });
   }
-  
-  v1: string = '';
-  v2: string = '';
-  v3: string = '';
-  v4: string = '';
-  v5: string = '';
-  v6: string = '';
-  v7: string = '';
-  v8: string = '';
-  v9: string = '';
-  v10: string = '';
-  v11: string = '';
-  v12: string = '';
-  v13: string = '';
-  v14: string = '';
-  v15: string = '';
-  v16: string = '';
-  v17: string = '';
-  v18: string = '';
-  v19: string = '';
-  v20: string = '';
-  v21: string = '';
-  v22: string = '';
-  v23: string = '';
-  v24: string = '';
-  v25: string = '';
-  v26: string = '';
-  v27: string = '';
-  v28: string = '';
-  v29: string = '';
-  v30: string = '';
-  v31: string = '';
-  v32: string = '';
-  v33: string = '';
-  v34: string = '';
-  v35: string = '';
-  v36: string = '';
-  v37: string = '';
-  v38: string = '';
-  v39: string = '';
+
+
 
   check() {
-    if (this.v1 === '' || this.v2 === '' || this.v3 === '' || this.v4 === '' ||
-      this.v5 === '' || this.v6 === '' || this.v7 === '' || this.v8 === '' ||
-      this.v9 === '' || this.v10 === '' || this.v11 === '' || this.v12 === '' ||
-      this.v13 === '' || this.v14 === '' || this.v15 === '' || this.v16 === '' ||
-      this.v17 === '' || this.v18 === '' || this.v19 === '' || this.v20 === '' ||
-      this.v21 === '' || this.v22 === '' || this.v23 === '' || this.v24 === '' ||
-      this.v25 === '' || this.v26 === '' || this.v27 === '' || this.v28 === '' ||
-      this.v29 === '' || this.v30 === '' || this.v31 === '' || this.v32 === '' ||
-      this.v33 === '' || this.v34 === '' || this.v35 === '' || this.v36 === '' ||
-      this.v37 === '' || this.v38 === '' || this.v39 === '')
-      return true;
-    else
-      return false;
+    for (this.checkId = 0; this.checkId <= 46; this.checkId++) {
+      if (this.serviceManagementModel.questionAnswer[this.checkId].answer === '')
+        return true;
+    }
+    return false;
   }
 
   openDialog() {
-    this.dialog.open(DialogElementsExampleDialog);
+    this.dialog.open(ServiceManagementWarningDialog, {
+      data: this.serviceManagementModel
+    });
   }
 
-  openSnackBar() {
+  openSnackBar(id: number) {
     this._snackBar.open("Details are saved successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
@@ -97,11 +59,17 @@ export class ServicemanagementComponent implements OnInit {
   }
 
   save() {
+    this.serviceManagementModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
     //console.log("saved");
-    this.openSnackBar();
+    this.serviceManagementService.storeServiceManagementDetails(this.serviceManagementModel).subscribe((data: any) => {
+      // console.log(data);
+      this.openSnackBar(data);
+    })
+
   }
 
   cancel() {
+    localStorage.clear();
     this.router.navigate(['/landingPage']);
   }
 
@@ -111,30 +79,40 @@ export class ServicemanagementComponent implements OnInit {
 
     const ch = (event.which) ? event.which : event.keyCode;
     if (ch > 31 && (ch < 48 || ch > 57)) {
-        this.ValidNumberIndicator = false;
+      this.ValidNumberIndicator = false;
 
-        return this.ValidNumberIndicator;
+      return this.ValidNumberIndicator;
     }
     this.ValidNumberIndicator = true;
     return this.ValidNumberIndicator;
-}
+  }
 }
 
 @Component({
-  selector: 'dialog-elements-example-dialog',
-  templateUrl: 'dialog-elements-example-dialog.html',
+  selector: 'service-management-warning-dialog',
+  templateUrl: 'service-management-warning-dialog.html',
 })
 
-export class DialogElementsExampleDialog {
+export class ServiceManagementWarningDialog {
 
-  constructor(public dialogRef: MatDialogRef<DialogElementsExampleDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  serviceManagementModelDialog = new ServiceManagement();
 
-  save() {
-    //console.log("saved");
-    this.openSnackBar();
+  constructor(public dialogRef: MatDialogRef<ServiceManagementWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private serviceManagementService: ServiceManagementService,
+    private changeDetectorRefs: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.serviceManagementModelDialog = data;
   }
 
-  openSnackBar() {
+  save() {
+
+    this.serviceManagementModelDialog.applicationId = Number(localStorage.getItem('savedApplicationID'));
+    this.serviceManagementService.storeServiceManagementDetails(this.serviceManagementModelDialog).subscribe((data: any) => {
+      //console.log(data);
+      this.openSnackBar(data);
+    })
+
+  }
+
+  openSnackBar(id: number) {
     this._snackBar.open("Details are saved successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
@@ -149,5 +127,5 @@ export class DialogElementsExampleDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  
+
 }
