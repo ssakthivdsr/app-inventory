@@ -92,6 +92,7 @@ export class VendorPacakageSaveWarningDialog {
 
 
   save() {
+    this.vendorPackageModelDialogue.applicationId = Number(localStorage.getItem('savedApplicationID'));
     this.vendorPackageService.storeVendorPackageDetails(this.vendorPackageModelDialogue).subscribe((data: any) => {
       console.log(this.vendorPackageModelDialogue);
 
