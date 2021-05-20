@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { ApplicationLifecycle } from 'src/app/model/applicationlifecycle.model';
+import { ApplicationLifecycleService } from 'src/app/service/applicationlifecycle.service';
 
 @Component({
   selector: 'app-add-application-lifecycle-details',
@@ -12,40 +14,23 @@ import { Router } from '@angular/router';
 
 export class AddApplicationLifecycleDetailsComponent implements OnInit {
 
-  public constructor(private titleService: Title, private dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router) {
+  public applicationlifecycleModel = new ApplicationLifecycle();
+  checkId: number;
+
+  public constructor(private titleService: Title, private dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router, private applicationlifecycleservice: ApplicationLifecycleService) {
     this.titleService.setTitle("Inventory - Application Lifecycle Details");
   }
 
-  ApplicationLifecycle: string = '';
-  SitesApplicationsRunIn: string = '';
-  PrimaryHardwareOS: string = '';
-  PrimaryDevelopmentLanguage: string = '';
-  SecondaryDevelopmentLanguage: string = '';
-  PrimaryDatabaseTechnology: string = '';
-  PartIsWebBased: string = '';
-  FrequencyOfApplication: string = '';
-  SizeOfChange: string = '';
-  ApplicationTool: string = '';
-  UniqueSkills: string = '';
-  ReportingTool: string = '';
-  TestEnvironmentReady: string = '';
-  ApplicationSize: string = '';
-
   check() {
-    if (this.ApplicationLifecycle === '' || this.SitesApplicationsRunIn === '' ||
-      this.PrimaryHardwareOS === '' || this.PrimaryDevelopmentLanguage === '' ||
-      this.SecondaryDevelopmentLanguage === '' || this.PrimaryDatabaseTechnology === '' ||
-      this.PartIsWebBased === '' || this.FrequencyOfApplication === '' ||
-      this.SizeOfChange === '' || this.ApplicationTool === '' ||
-      this.UniqueSkills === '' || this.ReportingTool === '' ||
-      this.TestEnvironmentReady === '' || this.ApplicationSize === '')
-      return true;
-    else
-      return false;
+    for (this.checkId = 0; this.checkId <= 13; this.checkId++) {
+      if (this.applicationlifecycleModel.questionAnswer[this.checkId].answer === '')
+        return true;
+    }
+    return false;
   }
 
   openDialog() {
-    this.dialog.open(DialogElementsExampleDialog);
+    this.dialog.open(ApplicationLifecycleDialog, { data: this.applicationlifecycleModel });
   }
 
   openSnackBar() {
@@ -56,11 +41,21 @@ export class AddApplicationLifecycleDetailsComponent implements OnInit {
   }
 
   save() {
-    //console.log("saved");
+
+    this.applicationlifecycleModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
+
+    console.log("applicationlifecycleTO: " + this.applicationlifecycleModel)
+    this.applicationlifecycleservice.storeApplicationLifecycleDetails(this.applicationlifecycleModel).subscribe((data: any) => {
+    })
+
+    console.log(this.applicationlifecycleModel);
     this.openSnackBar();
+
   }
 
   cancel() {
+
+    localStorage.clear();
     this.router.navigate(['/landingPage']);
   }
 
@@ -69,16 +64,26 @@ export class AddApplicationLifecycleDetailsComponent implements OnInit {
 }
 
 @Component({
-  selector: 'dialog-elements-example-dialog',
-  templateUrl: 'dialog-elements-example-dialog.html',
+  selector: 'application-lifecycle-dialog',
+  templateUrl: 'application-lifecycle-dialog.html',
 })
 
-export class DialogElementsExampleDialog {
+export class ApplicationLifecycleDialog {
 
-  constructor(public dialogRef: MatDialogRef<DialogElementsExampleDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  public applicationlifecycleModel = new ApplicationLifecycle();
+
+  constructor(public dialogRef: MatDialogRef<ApplicationLifecycleDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private applicationlifecycleservice: ApplicationLifecycleService, @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.applicationlifecycleModel = data;
+  }
 
   save() {
-    //console.log("saved");
+
+    this.applicationlifecycleModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
+
+    this.applicationlifecycleservice.storeApplicationLifecycleDetails(this.applicationlifecycleModel).subscribe((data: any) => {
+    })
+    console.log(this.applicationlifecycleModel);
+
     this.openSnackBar();
   }
 

@@ -3,68 +3,62 @@
     <form class="example-form">
         <mat-form-field class="example-full-width">
             <mat-label>Application Lifecycle</mat-label>
-            <input matInput [(ngModel)]="ApplicationLifecycle" name="input1">
-
+            <input matInput [(ngModel)]="applicationlifecycleModel.questionAnswer[0].answer" name="input1">
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>Sites Applications Run In</mat-label>
-            <input matInput [(ngModel)]="SitesApplicationsRunIn" name="input2">
+            <input matInput [(ngModel)]="applicationlifecycleModel.questionAnswer[1].answer" name="input2">
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>Primary Hardware/OS</mat-label>
-            <input matInput [(ngModel)]="PrimaryHardwareOS" name="input3">
+            <input matInput [(ngModel)]="applicationlifecycleModel.questionAnswer[2].answer" name="input3">
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>Primary Development Language</mat-label>
-            <input matInput [(ngModel)]="PrimaryDevelopmentLanguage" name="input4">
+            <input matInput [(ngModel)]="applicationlifecycleModel.questionAnswer[3].answer" name="input4">
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>Secondary Development Language</mat-label>
-            <input matInput [(ngModel)]="SecondaryDevelopmentLanguage" name="input5">
+            <input matInput [(ngModel)]="applicationlifecycleModel.questionAnswer[4].answer" name="input5">
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>Primary Database Technology</mat-label>
-            <input matInput [(ngModel)]="PrimaryDatabaseTechnology" name="input6">
+            <input matInput [(ngModel)]="applicationlifecycleModel.questionAnswer[5].answer" name="input6">
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>If any part of the app/product is web based which web server platform(s) support it?</mat-label>
-            <input matInput [(ngModel)]="PartIsWebBased" name="input7">
+            <input matInput [(ngModel)]="applicationlifecycleModel.questionAnswer[6].answer" name="input7">
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>Frequency of Application/product Change (Enhancements/Upgrades)?</mat-label>
-            <input matInput [(ngModel)]="FrequencyOfApplication" name="input8">
+            <input matInput [(ngModel)]="applicationlifecycleModel.questionAnswer[7].answer" name="input8">
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>What is the size of the change?</mat-label>
-            <input matInput [(ngModel)]="SizeOfChange" name="input9">
+            <input matInput [(ngModel)]="applicationlifecycleModel.questionAnswer[8].answer" name="input9">
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>What tool is the application source code stored in?</mat-label>
-            <input matInput [(ngModel)]="ApplicationTool" name="input10">
+            <input matInput [(ngModel)]="applicationlifecycleModel.questionAnswer[9].answer" name="input10">
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>Unique skills not commonly used at Enterprise speccific to this application</mat-label>
-            <input matInput [(ngModel)]="UniqueSkills" name="input11">
+            <input matInput [(ngModel)]="applicationlifecycleModel.questionAnswer[10].answer" name="input11">
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>What query and reporting tool(s) are used by your app/product?</mat-label>
-            <input matInput [(ngModel)]="ReportingTool" name="input12">
+            <input matInput [(ngModel)]="applicationlifecycleModel.questionAnswer[11].answer" name="input12">
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>Do you have a persistent test environment readily available for troublshooting/testing production
                 applications?</mat-label>
-            <input matInput [(ngModel)]="TestEnvironmentReady" name="input13">
+            <input matInput [(ngModel)]="applicationlifecycleModel.questionAnswer[12].answer" name="input13">
         </mat-form-field>
-        <!-- <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">Readily available</mat-radio-button> &nbsp;
-        <mat-radio-button value="2">Not available</mat-radio-button>
-    </mat-radio-group> -->
         <p></p>
         <mat-form-field class="example-full-width">
             <mat-label>Application Size (LOC, FP etc)</mat-label>
-            <input matInput [(ngModel)]="ApplicationSize" name="input14">
+            <input matInput [(ngModel)]="applicationlifecycleModel.questionAnswer[13].answer" name="input14">
         </mat-form-field>
-
 
     </form> <br />
     <div class="example-button-row">
