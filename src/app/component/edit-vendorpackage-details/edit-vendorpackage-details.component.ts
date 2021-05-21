@@ -7,12 +7,13 @@ import { VendorPackage } from 'src/app/model/vendorPackage.model';
 import { VendorPackageService } from 'src/app/service/vendorPackage.service';
 
 @Component({
-  selector: 'app-vendorpackage',
-  templateUrl: './vendorpackage.component.html',
-  styleUrls: ['./vendorpackage.component.css']
+  selector: 'app-edit-vendorpackage-details',
+  templateUrl: './edit-vendorpackage-details.component.html',
+  styleUrls: ['./edit-vendorpackage-details.component.css']
 })
 
-export class VendorpackageComponent implements OnInit {
+export class EditVendorpackageDetailsComponent implements OnInit {
+  existingApplicationId: number = 0;
   vendorPackageModel = new VendorPackage();
   ValidNumberIndicator = true;
 
@@ -44,7 +45,7 @@ export class VendorpackageComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(VendorPacakageSaveWarningDialog, {
+    this.dialog.open(EditVendorPacakageSaveWarningDialog, {
       data: this.vendorPackageModel
     });
   }
@@ -56,8 +57,8 @@ export class VendorpackageComponent implements OnInit {
     });
   }
 
-  save() {
-    this.vendorPackageModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
+  update() {
+    //console.log("updated");
     this.vendorPackageService.storeVendorPackageDetails(this.vendorPackageModel).subscribe((data: any) => {
       //console.log(this.vendorPackageModel);
       this.openSnackBar();
@@ -71,22 +72,34 @@ export class VendorpackageComponent implements OnInit {
 
   ngOnInit(): void {
     //console.log(this.vendorPackageModel);
+    this.existingApplicationId = Number(localStorage.getItem('applicationID'));
+    //console.log(this.existingApplicationId);
+    if (this.existingApplicationId != 0) {
+      this.vendorPackageService.retrieveVendorPackageByApplicationId(this.existingApplicationId).subscribe((data: VendorPackage) => {
+        //console.log(this.vendorPackageModel);
+        this.vendorPackageModel = data;
+        //console.log(data.isLatestSwVersion);
+        this.vendorPackageModel.isLatestSwVersion = data.isLatestSwVersion;
+        console.log(this.vendorPackageModel.isLatestSwVersion);
+      })
+    }
   }
 }
 
 @Component({
-  selector: 'vendor-package-save-warning-dialog',
-  templateUrl: 'vendor-package-save-warning-dialog.html',
+  selector: 'edit-vendor-package-save-warning-dialog',
+  templateUrl: 'edit-vendor-package-save-warning-dialog.html',
 })
 
-export class VendorPacakageSaveWarningDialog {
+export class EditVendorPacakageSaveWarningDialog {
   vendorPackageModelDialogue = new VendorPackage();
-  constructor(public dialogRef: MatDialogRef<VendorPacakageSaveWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private vendorPackageService: VendorPackageService, @Inject(MAT_DIALOG_DATA) public data: any) {
+
+  constructor(public dialogRef: MatDialogRef<EditVendorPacakageSaveWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private vendorPackageService: VendorPackageService, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.vendorPackageModelDialogue = data;
   }
 
-  save() {
-    this.vendorPackageModelDialogue.applicationId = Number(localStorage.getItem('savedApplicationID'));
+  update() {
+    //console.log("updated");
     this.vendorPackageService.storeVendorPackageDetails(this.vendorPackageModelDialogue).subscribe((data: any) => {
       //console.log(this.vendorPackageModelDialogue);
       this.openSnackBar();
@@ -101,7 +114,7 @@ export class VendorPacakageSaveWarningDialog {
   }
 
   clickMethod() {
-    this.save();
+    this.update();
     this.dialogRef.close();
   }
 

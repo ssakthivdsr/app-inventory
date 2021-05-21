@@ -49,6 +49,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { EditApplicationDetailsComponent } from './component/edit-application-details/edit-application-details.component';
 import { EditBusinessPartnerDetailsComponent } from './component/edit-business-partner-details/edit-business-partner-details.component';
 import { EditRegulatoryDetailsComponent } from './component/edit-regulatory-details/edit-regulatory-details.component';
+import { EditVendorpackageDetailsComponent } from './component/edit-vendorpackage-details/edit-vendorpackage-details.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { EditRegulatoryDetailsComponent } from './component/edit-regulatory-deta
     AvailableDepartmentsComponent,
     EditApplicationDetailsComponent,
     EditBusinessPartnerDetailsComponent,
-    EditRegulatoryDetailsComponent
+    EditRegulatoryDetailsComponent,
+    EditVendorpackageDetailsComponent
   ],
   imports: [
     BrowserModule,

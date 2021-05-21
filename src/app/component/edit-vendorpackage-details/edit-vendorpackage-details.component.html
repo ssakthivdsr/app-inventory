@@ -1,0 +1,69 @@
+<mat-card>
+    <br />
+    <form class="vp-form">
+        <mat-form-field class="vp-full-width">
+            <mat-label>Vendor Engagements Associated With Managed Services Vendor</mat-label>
+            <input matInput [(ngModel)]="vendorPackageModel.engAssociatedManagedServices" value="" name="input1">
+        </mat-form-field>
+        <mat-radio-group class="vp-full-width" [(ngModel)]="vendorPackageModel.packageType" value="" name="input2">
+            <mat-label>Type Of Package</mat-label> &nbsp;
+            <mat-radio-button value="Vendor">Vendor</mat-radio-button>
+            &nbsp;
+            <mat-radio-button value="Customer">Customer</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field class="vp-full-width">
+            <mat-label>Vendor Name</mat-label>
+            <input matInput [(ngModel)]="vendorPackageModel.name" value="" name="input3">
+        </mat-form-field>
+        <mat-form-field class="vp-full-width">
+            <mat-label>Vendor Engagements Associated With Vendor Package Vendor</mat-label>
+            <textarea matInput placeholder="Multiple values are allowed"
+                [(ngModel)]="vendorPackageModel.engAssociatedWithVendorPackage" value="" name="input4"></textarea>
+        </mat-form-field>
+        <mat-form-field class="vp-full-width">
+            <mat-label>Degree Of Customization</mat-label>
+            <textarea matInput placeholder="Multiple values are allowed"
+                [(ngModel)]="vendorPackageModel.degreeOfCustomization" value="" name="input5"></textarea>
+        </mat-form-field>
+        <mat-form-field class="vp-full-width">
+            <mat-label>Hosted Location (internally or externally)</mat-label>
+            <input matInput [(ngModel)]="vendorPackageModel.hostedLocation" value="" name="input6">
+        </mat-form-field>
+        <mat-form-field class="vp-full-width">
+            <mat-label>Vendor Hosted Name (if external)</mat-label>
+            <input matInput [(ngModel)]="vendorPackageModel.hostedName" value="" name="input7">
+        </mat-form-field>
+        <mat-form-field class="vp-full-width">
+            <mat-label>Vendor Engagements Associated With Externally Hosted Vendor</mat-label>
+            <textarea matInput placeholder="Multiple values are allowed"
+                [(ngModel)]="vendorPackageModel.engAssociatedWithEsternallyHostedVendor" value=""
+                name="input8"></textarea>
+        </mat-form-field>
+        <mat-radio-group class="vp-full-width" [(ngModel)]="vendorPackageModel.isLatestSwVersion" value=null
+            name="input9">
+            <mat-label>Is the application the most current Vendor Software Version?</mat-label> <br />&nbsp;&nbsp;&nbsp;
+            <mat-radio-button value=true>Yes</mat-radio-button> &nbsp;
+            <mat-radio-button value=false>No</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field class="vp-full-width">
+            <mat-label>What version of the Vendor package is being used?</mat-label>
+            <input matInput [(ngModel)]="vendorPackageModel.packageVersion" value="" name="input10">
+        </mat-form-field>
+        <mat-form-field class="vp-full-width">
+            <mat-label>What is the Frequency of Vendor Minor/Major Upgrades / Updates?</mat-label>
+            <input matInput [(ngModel)]="vendorPackageModel.frequencyOfUpdates" value="" name="input11"
+                (keypress)="onlyNumbers($event)">
+            <mat-hint>Numbers only allowed</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="vp-full-width">
+            <mat-label>What is the Frequency of Patches?</mat-label>
+            <input matInput [(ngModel)]="vendorPackageModel.frequencyOfPatches" value="" name="input12"
+                (keypress)="onlyNumbers($event)">
+            <mat-hint>Numbers only allowed</mat-hint>
+        </mat-form-field>
+    </form> <br />
+    <div class="bp-button-row">
+        <button mat-raised-button color="primary" (click)="check() ? openDialog() : update()"> Update </button> &nbsp;
+        <button mat-raised-button color="primary" (click)="cancel()"> Cancel </button>
+    </div>
+</mat-card>
