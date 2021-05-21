@@ -21,6 +21,7 @@ export class EditApplicationDetailsComponent implements OnInit {
   public applicationModel = new ApplicationDetails();
   applicationsRetrieved: ApplicationDetails[] = [];
   selectedDepartment = new Department();
+  selectedDepartmentID: number = 0;
   selectedLob: string = '';
   selectedFunctionality: string = '';
   functionalities: string[] = [];
@@ -63,6 +64,8 @@ export class EditApplicationDetailsComponent implements OnInit {
           AppLob: this.applicationModel.lineOfBusiness,
           AppFun: this.applicationModel.functionality
         });
+        this.selectedDepartmentID = this.applicationModel.departmentId;
+        this.selectedLob = this.applicationModel.lineOfBusiness;
         //this.addAppFormGroup.get("AppDept")?.setValue(this.applicationModel.departmentName);
         //console.log("retrieved value:" + this.departmentsRetrieved);
         //console.log(JSON.stringify(this.departmentsRetrieved));

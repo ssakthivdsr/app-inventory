@@ -21,7 +21,7 @@
 
     <mat-form-field class="example-full-width">
         <mat-label>Department</mat-label>
-        <mat-select [(ngModel)]="applicationModel.departmentId" formControlName="AppDept">
+        <mat-select formControlName="AppDept"  [(ngModel)]= "selectedDepartmentID">
             <mat-option *ngFor="let item of departmentsRetrieved" [value]="item.departmentId">{{item.departmentName}}
             </mat-option>
         </mat-select>
