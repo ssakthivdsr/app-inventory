@@ -1,0 +1,469 @@
+<mat-card>
+    <br />
+    <form class="sm-form">
+        <mat-form-field class="sm-full-width">
+            <mat-label>Age of Code </mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[0].answer" name="input1">
+                <mat-option value="Less than 2 years">Less than 2 years</mat-option>
+                <mat-option value="2-5 years">2-5 years</mat-option>
+                <mat-option value="5-10 years">5-10 years</mat-option>
+                <mat-option value="10-20 years">10-20 years</mat-option>
+                <mat-option value="> 20 years"> > 20 years</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width" [formGroup]="myForm">
+            <mat-label>Number of Change Requests</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[1].answer" name="input2" pattern="\d+"
+                formControlName="f" (keypress)="onlyNumbers($event)">
+            <mat-hint>Numbers only allowed</mat-hint>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width" [formGroup]="myForm">
+            <mat-label>Number of Checkouts</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[2].answer" name="input3" pattern="\d+"
+                formControlName="f1" (keypress)="onlyNumbers($event)">
+            <mat-hint>Numbers only allowed</mat-hint>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Movement of code into production</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[3].answer" name="input4">
+                <mat-option value="About 1-2 code changes into production every quarter">About 1-2 code changes into
+                    production
+                    every quarter</mat-option>
+                <mat-option value="About 5 code changes into production every quarter">About 5 code changes into
+                    production
+                    every quarter</mat-option>
+                <mat-option value="About 1-2 code changes into production every month">About 1-2 code changes into
+                    production
+                    every month</mat-option>
+                <mat-option value="About 3-4 code changes into production every month">About 3-4 code changes into
+                    production
+                    every month</mat-option>
+                <mat-option value="About 1-2 code changes into production every week">About 1-2 code changes into
+                    production
+                    every week</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Business impact </mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[4].answer" name="input5">
+                <mat-option value="Not critical to day to day functioning">Not critical to day to day functioning
+                </mat-option>
+                <mat-option value="Manageable with no visibility to external world">Manageable with no visibility to
+                    external
+                    world</mat-option>
+                <mat-option value="Affects business image">Affects business image</mat-option>
+                <mat-option value="Critical to top mgmt and customers of client">Critical to top mgmt and customers of
+                    client
+                </mat-option>
+                <mat-option value="Affects business financially on downtime">Affects business financially on downtime
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width" [formGroup]="myForm">
+            <mat-label>Number of unplanned Outages</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[5].answer" name="input6" pattern="\d+"
+                formControlName="f2" (keypress)="onlyNumbers($event)">
+            <mat-hint>Numbers only allowed</mat-hint>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Ratio of Actual Planned Outages vs Total Planned Outages</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[6].answer" name="input7">
+                <mat-option value="Less than 0.95">Less than 0.95</mat-option>
+                <mat-option value="0.95-0.99">0.95-0.99</mat-option>
+                <mat-option value="1">1</mat-option>
+                <mat-option value="1.01-1.05">1.01-1.05</mat-option>
+                <mat-option value=">1.05">>1.05</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Number of Problems</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[7].answer" name="input8">
+                <mat-option value="No code changes due to bugs in the last 6 months">No code changes due to bugs in the
+                    last 6
+                    months</mat-option>
+                <mat-option value="No code changes due to bugs in the last 6 months">No code changes due to bugs in the
+                    last 6
+                    months</mat-option>
+                <mat-option value="Code changes once a month">Code changes once a month</mat-option>
+                <mat-option value="Code changes alternate week">Code changes alternate week</mat-option>
+                <mat-option value="Problems repeat every month with code changes every week">Problems repeat every month
+                    with
+                    code changes every week</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-label class="sm-full-width">Number of Service Requests(Enhancements / Research)</mat-label>
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Active Enhancements</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[8].answer" name="input9">
+        </mat-form-field>
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Closed Enhancements</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[9].answer" name="input10">
+        </mat-form-field>
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Active Research</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[10].answer" name="input11">
+        </mat-form-field>
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Closed Research</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[11].answer" name="input12">
+        </mat-form-field>
+
+        <mat-form-field class="sm-full-width" [formGroup]="myForm">
+            <mat-label>Number of Proactive Incidents for the last 1 year</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[12].answer" name="input13" pattern="\d+"
+                formControlName="f3" (keypress)="onlyNumbers($event)">
+            <mat-hint>Numbers only allowed</mat-hint>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width" [formGroup]="myForm">
+            <mat-label>Number of Reactive Incidents for the last 1 year</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[13].answer" name="input14" pattern="\d+"
+                formControlName="f4" (keypress)="onlyNumbers($event)">
+            <mat-hint>Numbers only allowed</mat-hint>
+        </mat-form-field>
+        <br />
+        <br />
+
+
+        <mat-label class="sm-full-width">Breakup of Reactive Incidents Resolved at (Level 1/Level 2/Level 3)</mat-label>
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Level 1</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[14].answer" name="input15">
+        </mat-form-field>
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Level 2</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[15].answer" name="input16">
+        </mat-form-field>
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Level 3</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[16].answer" name="input17">
+        </mat-form-field>
+
+
+
+        <br />
+        <mat-label class="sm-full-width">Breakup of Proactive Incidents Resolved at (Level 1/Level 2/Level 3)
+        </mat-label>
+        <br />
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Level 1</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[17].answer" name="input18">
+        </mat-form-field>
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Level 2</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[18].answer" name="input19">
+        </mat-form-field>
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Level 3</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[19].answer" name="input20">
+        </mat-form-field>
+
+
+
+
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Percentage of Proactive Incidents automatically resolved</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[20].answer" name="input21">
+                <mat-option value="Less than 50%">Less than 50%</mat-option>
+                <mat-option value="50-60%">50-60%</mat-option>
+                <mat-option value="60-70%">60-70%</mat-option>
+                <mat-option value="70-80%">70-80%</mat-option>
+                <mat-option value=">80%">>80%</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Percentage of Proactive Incidents automatically suppressed</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[21].answer" name="input22">
+                <mat-option value="Less than 50%">Less than 50%</mat-option>
+                <mat-option value="50-60%">50-60%</mat-option>
+                <mat-option value="60-70%">60-70%</mat-option>
+                <mat-option value="70-80%">70-80%</mat-option>
+                <mat-option value=">80%">>80%</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Percentage of Reactive incidents that have a reference to Knowledge Items</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[22].answer" name="input23">
+                <mat-option value="Less than 50%">Less than 50%</mat-option>
+                <mat-option value="50-60%">50-60%</mat-option>
+                <mat-option value="60-70%">60-70%</mat-option>
+                <mat-option value="70-80%">70-80%</mat-option>
+                <mat-option value=">80%">>80%</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Percentage of Proactive incidents that have a reference to Knowledge Items</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[23].answer" name="input24">
+                <mat-option value="Less than 50%">Less than 50%</mat-option>
+                <mat-option value="50-60%">50-60%</mat-option>
+                <mat-option value="60-70%">60-70%</mat-option>
+                <mat-option value="70-80%">70-80%</mat-option>
+                <mat-option value=">80%">>80%</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+
+
+
+
+        <mat-form-field class="sm-full-width" [formGroup]="myForm">
+            <mat-label>Number of Level "Critical Priority - Reactive Incident Requests</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[24].answer" name="input25" pattern="\d+"
+                formControlName="f5" (keypress)="onlyNumbers($event)">
+            <mat-hint>Numbers only allowed</mat-hint>
+        </mat-form-field>
+        <br />
+        <br />
+
+
+        <mat-label class="sm-full-width">Number of Level "High" Priority - Reactive Incident Requests(active / closed)
+        </mat-label>
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Active</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[25].answer" name="input26">
+        </mat-form-field>
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Closed</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[26].answer" name="input27">
+        </mat-form-field>
+
+        <br />
+        <mat-label class="sm-full-width">Number of Level "Average" Priority - Reactive Incident Requests(active /
+            closed)
+        </mat-label>
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Active</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[27].answer" name="input28">
+        </mat-form-field>
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Closed</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[28].answer" name="input29">
+        </mat-form-field>
+
+        <br />
+        <mat-label class="sm-full-width">Number of Level "Low" Priority - Reactive Incident Requests(active / closed)
+        </mat-label>
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Active</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[29].answer" name="input30">
+        </mat-form-field>
+
+        <mat-form-field class="sm-four-items-width">
+            <mat-label>Closed</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[30].answer" name="input31">
+        </mat-form-field>
+
+
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Percentage of Sev 1 Reactive incidents that breached SLAs</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[31].answer" name="input32">
+                <mat-option value="Less than 1%">Less than 1%</mat-option>
+                <mat-option value="1-3%">1-3%</mat-option>
+                <mat-option value="3-6%">3-6%</mat-option>
+                <mat-option value="6-10%">6-10%</mat-option>
+                <mat-option value=">10%">>10%</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Percentage of Sev 2 Reactive incidents that breached SLAs</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[32].answer" name="input33">
+                <mat-option value="Less than 3%">Less than 3%</mat-option>
+                <mat-option value="3-5%">3-5%</mat-option>
+                <mat-option value="5-10%">5-10%</mat-option>
+                <mat-option value="10-15%">10-15%</mat-option>
+                <mat-option value=">15%">>15%</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Percentage of Sev 3 Reactive incidents that breached SLAs</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[33].answer" name="input34">
+                <mat-option value="Less than 5%">Less than 5%</mat-option>
+                <mat-option value="5-8%">5-8%</mat-option>
+                <mat-option value="8-12%">8-12%</mat-option>
+                <mat-option value="12-20%">12-20%</mat-option>
+                <mat-option value=">20%">>20%</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Percentage of Sev 1 Proactive incidents that breached SLAs</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[34].answer" name="input35">
+                <mat-option value="Less than 1%">Less than 1%</mat-option>
+                <mat-option value="1-3%">1-3%</mat-option>
+                <mat-option value="3-6%">3-6%</mat-option>
+                <mat-option value="6-10%">6-10%</mat-option>
+                <mat-option value=">10%">>10%</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Percentage of Sev 2 Proactive incidents that breached SLAs</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[35].answer" name="input36">
+                <mat-option value="Less than 3%">Less than 3%</mat-option>
+                <mat-option value="3-5%">3-5%</mat-option>
+                <mat-option value="5-10%">5-10%</mat-option>
+                <mat-option value="10-15%">10-15%</mat-option>
+                <mat-option value=">15%">>15%</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Percentage of Sev 3 Proactive incidents that breached SLAs</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[36].answer" name="input37">
+                <mat-option value="Less than 5%">Less than 5%</mat-option>
+                <mat-option value="5-8%">5-8%</mat-option>
+                <mat-option value="8-12%">8-12%</mat-option>
+                <mat-option value="12-20%">12-20%</mat-option>
+                <mat-option value=">20%">>20%</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Ratio of Actual Application Availability vs Planned Application Availability</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[37].answer" name="input38">
+                <mat-option value="Less than 0.99">Less than 0.99</mat-option>
+                <mat-option value="0.99">0.99</mat-option>
+                <mat-option value="1">1</mat-option>
+                <mat-option value="1.01">1.01</mat-option>
+                <mat-option value=">1.01">>1.01</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width" [formGroup]="myForm">
+            <mat-label>Recovery Time Objective(RTO) in Hours</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[38].answer" name="input39" pattern="\d+"
+                formControlName="f9" (keypress)="onlyNumbers($event)">
+            <mat-hint>Numbers only allowed</mat-hint>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width" [formGroup]="myForm">
+            <mat-label>Recovery Point Objective(RPO) in Hours</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[39].answer" name="input40" pattern="\d+"
+                formControlName="f10" (keypress)="onlyNumbers($event)">
+            <mat-hint>Numbers only allowed</mat-hint>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Support Window</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[40].answer" name="input41">
+                <mat-option value="5 work days a week (8 hours)">5 work days a week (8 hours)</mat-option>
+                <mat-option value="7 work days a week (8 hours)">7 work days a week (8 hours)</mat-option>
+                <mat-option value="16X5 days a week">16X5 days a week</mat-option>
+                <mat-option value="24X6 days a week">24X6 days a week</mat-option>
+                <mat-option value="7 work days a week (24 hours)">7 work days a week (24 hours)</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Maintanence documents</mat-label>
+            <mat-select [(ngModel)]="serviceManagementsRetrieved[41].answer" name="input42">
+                <mat-option value="Maintanance (last 2 years) formally documented">Maintanance (last 2 years) formally
+                    documented</mat-option>
+                <mat-option value="Maintanance (last 1 year) formally documented">Maintanance (last 1 year) formally
+                    documented
+                </mat-option>
+                <mat-option value="Maintanance (last 6 months) formally documented">Maintanance (last 6 months) formally
+                    documented</mat-option>
+                <mat-option value="Some change requests documented but some are not">Some change requests documented but
+                    some
+                    are not</mat-option>
+                <mat-option value="No maintance document available for code">No maintance document available for code
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>State of Jurisdiction</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[42].answer" name="input43">
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Governing Support Service</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[43].answer" name="input44">
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Uses Business Process</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[44].answer" name="input45">
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Workgroup</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[45].answer" name="input46">
+        </mat-form-field>
+        <br />
+
+        <mat-form-field class="sm-full-width">
+            <mat-label>Configuration Item</mat-label>
+            <input matInput [(ngModel)]="serviceManagementsRetrieved[46].answer" name="input47">
+        </mat-form-field>
+        <br />
+
+
+    </form>
+    <div class="example-button-row">
+        <button mat-raised-button color="primary" (click)=" check() ? openDialog() : update()">Update</button>&nbsp;
+        <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+    </div>
+</mat-card>

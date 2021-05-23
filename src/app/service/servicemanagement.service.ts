@@ -3,8 +3,9 @@ import { catchError } from 'rxjs/internal/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { ServiceManagement } from 'src/app/model/servicemanagement.model';
+import { ServiceManagementRetrieve } from '../model/servicemanagementretrieve.model';
 
-// const endpoint2 = 'http://localhost:8000/applicationinventoryservice/';
+//const endpoint = 'http://localhost:8000/applicationinventoryservice/';
 // const endpoint3 = 'http://localhost:8000/applicationinventoryservice/retrieveRegulatoryByApplicationId/1';
 const endpoint = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/';
 
@@ -30,7 +31,7 @@ export class ServiceManagementService {
     }
 
     retrieveServiceManagementByApplicationId(body: number): Observable<any> {
-        return this.http.get<ServiceManagement[]>(endpoint.concat('retrieveServiceManagementByApplicationId/' + body)).pipe(
+        return this.http.get<ServiceManagementRetrieve[]>(endpoint.concat('retrieveServiceManagementByApplicationId/' + body)).pipe(
             catchError(this.handleError));
     }
 
