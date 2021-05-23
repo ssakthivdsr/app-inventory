@@ -4,8 +4,10 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { Department } from '../model/department.model';
 import { ApplicationLifecycle } from '../model/applicationlifecycle.model';
+import { ApplicationLifecycleRetrieve } from '../model/applicationlifecycleretrieve.model';
 
-const endpoint1 = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/';
+const endpoint2 = 'http://localhost:8000/applicationinventoryservice/';
+const endpoint = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/';
 
 @Injectable({
     providedIn: 'root'
@@ -27,14 +29,14 @@ export class ApplicationLifecycleService {
             'Something bad happened; please try again later.');
     }
 
-    retrieveAllApplicationLifecycleDetails(): Observable<any> {
-        return this.http.get<ApplicationLifecycle[]>(endpoint1.concat('retrieveAllApplicationDetails')).pipe(
+    retrieveApplicationLifecycleByApplicationId(body: number): Observable<any> {
+        return this.http.get<ApplicationLifecycleRetrieve[]>(endpoint.concat('retrieveApplicationLifecycleByApplicationId/' + body)).pipe(
             catchError(this.handleError)
         );
     }
 
     storeApplicationLifecycleDetails(body: ApplicationLifecycle): Observable<any> {
-        return this.http.post<any>(endpoint1.concat('storeApplicationLifecycleDetails'), body);
+        return this.http.post<any>(endpoint.concat('storeApplicationLifecycleDetails'), body);
     }
 
     private extractData(res: Response): any {

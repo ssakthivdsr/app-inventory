@@ -18,6 +18,7 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { EditApplicationComponent } from './component/edit-application/edit-application.component';
 import { NewApplicationComponent } from './component/new-application/new-application.component';
 import { AvailableDepartmentsComponent} from './component/available-departments/available-departments.component';
+import { EditApplicationlifecycleComponent } from './component/edit-applicationlifecycle/edit-applicationlifecycle.component';
 const routes: Routes = [
   { path: 'header' , component: HeaderComponent,
       children: [
