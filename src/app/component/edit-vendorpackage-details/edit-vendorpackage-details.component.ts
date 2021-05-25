@@ -59,7 +59,7 @@ export class EditVendorpackageDetailsComponent implements OnInit {
 
   update() {
     //console.log("updated");
-    this.vendorPackageService.storeVendorPackageDetails(this.vendorPackageModel).subscribe((data: any) => {
+    this.vendorPackageService.updateVendorPackageDetails(this.vendorPackageModel).subscribe((data: any) => {
       //console.log(this.vendorPackageModel);
       this.openSnackBar();
     })
@@ -100,7 +100,7 @@ export class EditVendorPacakageSaveWarningDialog {
 
   update() {
     //console.log("updated");
-    this.vendorPackageService.storeVendorPackageDetails(this.vendorPackageModelDialogue).subscribe((data: any) => {
+    this.vendorPackageService.updateVendorPackageDetails(this.vendorPackageModelDialogue).subscribe((data: any) => {
       //console.log(this.vendorPackageModelDialogue);
       this.openSnackBar();
     })
