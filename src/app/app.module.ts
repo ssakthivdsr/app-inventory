@@ -52,6 +52,7 @@ import { EditRegulatoryDetailsComponent } from './component/edit-regulatory-deta
 import { EditVendorpackageDetailsComponent } from './component/edit-vendorpackage-details/edit-vendorpackage-details.component';
 import { EditApplicationlifecycleComponent } from './component/edit-applicationlifecycle/edit-applicationlifecycle.component';
 import { EditServiceManagementDetailsComponent } from './component/edit-service-management-details/edit-service-management-details.component';
+import { EditBusinessApplicationDetailsComponent } from './component/edit-business-application-details/edit-business-application-details.component';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { EditServiceManagementDetailsComponent } from './component/edit-service-
     EditRegulatoryDetailsComponent,
     EditVendorpackageDetailsComponent,
     EditApplicationlifecycleComponent,
-    EditServiceManagementDetailsComponent
+    EditServiceManagementDetailsComponent,
+    EditBusinessApplicationDetailsComponent
   ],
   imports: [
     BrowserModule,

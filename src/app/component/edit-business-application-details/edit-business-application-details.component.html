@@ -1,0 +1,564 @@
+<mat-card>
+    <mat-accordion>
+        <mat-expansion-panel >
+            <mat-expansion-panel-header >
+                <mat-panel-title>
+                    <span style="color:#8b9196;font-weight: bold;">Transaction Data</span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form [formGroup]="myForm" class="bpd-form">
+                <!--transactions-->
+                <div formArrayName="addresses">
+                    <div *ngFor="let address of myForm.controls.addresses.controls; let i=index"
+                        class="panel panel-default">
+                        <div class="panel-heading">
+                            <span style="color:#2a81ce">Transaction {{i + 1}}</span>
+                            <span class="glyphicon glyphicon-remove pull-right"
+                                *ngIf="myForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)"></span>
+                        </div>
+                        <div class="panel-body" [formGroupName]="i">
+                            <div class="form-group col-xs-12">
+                                <mat-form-field class="bpd-full-width">
+                                    <mat-label>Type of Transaction</mat-label>
+                                    <mat-select [(ngModel)]="businessApplicationModel.transactions[i].transactionType"
+                                        value="businessApplicationModel.transactions[i].transactionType"
+                                        [ngModelOptions]="{standalone: true}">
+                                        <mat-option value="Quote">Quote</mat-option>
+                                        <mat-option value="Policy Issuance">Policy Issuance</mat-option>
+                                        <mat-option value="Endorsement">Endorsement</mat-option>
+                                        <mat-option value="Cancel">Cancel</mat-option>
+                                        <mat-option value="Reinstate">Reinstate</mat-option>
+                                        <mat-option value="Rebase">Rebase</mat-option>
+                                        <mat-option value="Non Renew">Non Renew</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <mat-label>Volume Of Transactions</mat-label>
+                            </div>
+                            <div class="form-group col-xs-3">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>2020</mat-label>
+                                    <textarea matInput (keypress)="onlyNumbers($event)"
+                                        [(ngModel)]="businessApplicationModel.transactions[i].volumeObject.transaction2020"
+                                        value="businessApplicationModel.transactions[i].volumeObject.transaction2020"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                    <mat-hint>Numbers only allowed</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-xs-3">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>2019</mat-label>
+                                    <textarea matInput (keypress)="onlyNumbers($event)"
+                                        [(ngModel)]="businessApplicationModel.transactions[i].volumeObject.transaction2019"
+                                        value="businessApplicationModel.transactions[i].volumeObject.transaction2019"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                    <mat-hint>Numbers only allowed</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-xs-5">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>2018</mat-label>
+                                    <textarea matInput (keypress)="onlyNumbers($event)"
+                                        [(ngModel)]="businessApplicationModel.transactions[i].volumeObject.transaction2018"
+                                        value="businessApplicationModel.transactions[i].volumeObject.transaction2018"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                    <mat-hint>Numbers only allowed</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="margin-30">
+                    <a (click)="addAddress()" style="cursor: default"> Add another Transaction </a>
+                </div>
+                <div class="clearfix"></div>
+            </form>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <span style="color:#8b9196;font-weight: bold;">Users Data</span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form [formGroup]="myForm" class="bpd-form">
+                <!--users-->
+                <div formArrayName="users">
+                    <div *ngFor="let address of myForm.controls.users.controls; let i=index"
+                        class="panel panel-default">
+                        <div class="panel-heading">
+                            <span style="color:#2a81ce">User Type {{i + 1}}</span>
+                            <span class="glyphicon glyphicon-remove pull-right"
+                                *ngIf="myForm.controls.users.controls.length > 1" (click)="removeUsers(i)"></span>
+                        </div>
+                        <div class="panel-body" [formGroupName]="i">
+                            <div class="form-group col-xs-12">
+                                <mat-form-field class="bpd-full-width">
+                                    <mat-label>Type of User</mat-label>
+                                    <mat-select [(ngModel)]="businessApplicationModel.users[i].userType"
+                                        value="businessApplicationModel.users[i].userType"
+                                        [ngModelOptions]="{standalone: true}">
+                                        <mat-option value="Exclusive Agents">Exclusive Agents</mat-option>
+                                        <mat-option value="Experience Center">Experience Center</mat-option>
+                                        <mat-option value="End Customers">End Customers</mat-option>
+                                        <mat-option value="Undewriters">Undewriters</mat-option>
+                                        <mat-option value="Data Entry Operators">Data Entry Operators</mat-option>
+                                        <mat-option value="Other Internal User">Other Internal User</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <mat-label>Volume Of Transactions</mat-label>
+                            </div>
+                            <div class="form-group col-xs-3">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>2020</mat-label>
+                                    <textarea matInput (keypress)="onlyNumbers($event)"
+                                        [(ngModel)]="businessApplicationModel.users[i].volumeObject.transaction2020"
+                                        value="businessApplicationModel.users[i].volumeObject.transaction2020"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                    <mat-hint>Numbers only allowed</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-xs-3">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>2019</mat-label>
+                                    <textarea matInput (keypress)="onlyNumbers($event)"
+                                        [(ngModel)]="businessApplicationModel.users[i].volumeObject.transaction2019"
+                                        value="businessApplicationModel.users[i].volumeObject.transaction2019"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                    <mat-hint>Numbers only allowed</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class=" form-group col-xs-5">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>2018</mat-label>
+                                    <textarea matInput (keypress)="onlyNumbers($event)"
+                                        [(ngModel)]="businessApplicationModel.users[i].volumeObject.transaction2018"
+                                        value="businessApplicationModel.users[i].volumeObject.transaction2018"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                    <mat-hint>Numbers only allowed</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="margin-30">
+                    <a (click)="addUsers()" style="cursor: default">Add another Type of User</a>
+                </div>
+                <div class="clearfix"></div>
+            </form>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <span style="color:#8b9196;font-weight: bold;">Channels Data</span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form [formGroup]="myForm" class="bpd-form">
+                <!--channels-->
+                <div formArrayName="channels">
+                    <div *ngFor="let address of myForm.controls.channels.controls; let i=index"
+                        class="panel panel-default">
+                        <div class="panel-heading">
+                            <span style="color:#2a81ce">Channel Type {{i + 1}}</span>
+                            <span class="glyphicon glyphicon-remove pull-right"
+                                *ngIf="myForm.controls.channels.controls.length > 1" (click)="removeChannels(i)"></span>
+                        </div>
+                        <div class="panel-body" [formGroupName]="i">
+                            <div class="form-group col-xs-12">
+                                <mat-form-field class="bpd-full-width">
+                                    <mat-label>Type of Channels</mat-label>
+                                    <mat-select [(ngModel)]="businessApplicationModel.channels[i].channelType"
+                                        value="businessApplicationModel.channels[i].channelType"
+                                        [ngModelOptions]="{standalone: true}">
+                                        <mat-option value="Internet">Internet</mat-option>
+                                        <mat-option value="Agencies">Agencies</mat-option>
+                                        <mat-option value="Mobile">Mobile</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <mat-label>Volume Of Transactions</mat-label>
+                            </div>
+                            <div class="form-group col-xs-3">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>2020</mat-label>
+                                    <textarea matInput (keypress)="onlyNumbers($event)"
+                                        [(ngModel)]="businessApplicationModel.channels[i].volumeObject.transaction2020"
+                                        value="businessApplicationModel.channels[i].volumeObject.transaction2020"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                    <mat-hint>Numbers only allowed</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-xs-3">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>2019</mat-label>
+                                    <textarea matInput (keypress)="onlyNumbers($event)"
+                                        [(ngModel)]="businessApplicationModel.channels[i].volumeObject.transaction2019"
+                                        value="businessApplicationModel.channels[i].volumeObject.transaction2019"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                    <mat-hint>Numbers only allowed</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-xs-5">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>2018</mat-label>
+                                    <textarea matInput (keypress)="onlyNumbers($event)"
+                                        [(ngModel)]="businessApplicationModel.channels[i].volumeObject.transaction2018"
+                                        value="businessApplicationModel.channels[i].volumeObject.transaction2018"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                    <mat-hint>Numbers only allowed</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="margin-30">
+                    <a (click)="addChannels()" style="cursor: default">Add another Type of Channel</a>
+                </div>
+                <div class="clearfix"></div>
+            </form>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <span style="color:#8b9196;font-weight: bold;">Products Data</span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form [formGroup]="myForm" class="bpd-form">
+                <!--products-->
+                <div formArrayName="products">
+                    <div *ngFor="let address of myForm.controls.products.controls; let i=index"
+                        class="panel panel-default">
+                        <div class="panel-heading">
+                            <span style="color:#2a81ce">Product Type {{i + 1}}</span>
+                            <span class="glyphicon glyphicon-remove pull-right"
+                                *ngIf="myForm.controls.products.controls.length > 1" (click)="removeProducts(i)"></span>
+                        </div>
+                        <div class="panel-body" [formGroupName]="i">
+                            <div class="form-group col-xs-12">
+                                <mat-form-field class="bpd-full-width">
+                                    <mat-label>Type of Products</mat-label>
+                                    <mat-select [(ngModel)]="businessApplicationModel.products[i].productType"
+                                        value="businessApplicationModel.products[i].productType"
+                                        [ngModelOptions]="{standalone: true}">
+                                        <mat-option value="Auto">Auto</mat-option>
+                                        <mat-option value="Motorcycle">Motorcycle</mat-option>
+                                        <mat-option value="Boat">Boat</mat-option>
+                                        <mat-option value="RV">RV</mat-option>
+                                        <mat-option value="Antique">Antique</mat-option>
+                                        <mat-option value="Dune Buggy">Dune Buggy</mat-option>
+                                        <mat-option value="Home Owners">Home Owners</mat-option>
+                                        <mat-option value="Rental">Rental</mat-option>
+                                        <mat-option value="Condo">Condo</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <mat-label>Volume Of Products</mat-label>
+                            </div>
+                            <div class="form-group col-xs-3">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>2020</mat-label>
+                                    <textarea matInput (keypress)="onlyNumbers($event)"
+                                        [(ngModel)]="businessApplicationModel.products[i].volumeObject.transaction2020"
+                                        value="businessApplicationModel.products[i].volumeObject.transaction2020"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                    <mat-hint>Numbers only allowed</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-xs-3">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>2019</mat-label>
+                                    <textarea matInput (keypress)="onlyNumbers($event)"
+                                        [(ngModel)]="businessApplicationModel.products[i].volumeObject.transaction2019"
+                                        value="businessApplicationModel.products[i].volumeObject.transaction2019"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                    <mat-hint>Numbers only allowed</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-xs-5">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>2018</mat-label>
+                                    <textarea matInput (keypress)="onlyNumbers($event)"
+                                        [(ngModel)]="businessApplicationModel.products[i].volumeObject.transaction2018"
+                                        value="businessApplicationModel.products[i].volumeObject.transaction2018"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                    <mat-hint>Numbers only allowed</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <mat-label>Written Premium Of Products</mat-label>
+                            </div>
+                            <div class="form-group col-xs-3">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>2020</mat-label>
+                                    <textarea matInput (keypress)="onlyNumbers($event)"
+                                        [(ngModel)]="businessApplicationModel.products[i].writtenPremiumOfProductsObject.transaction2020"
+                                        value="businessApplicationModel.products[i].writtenPremiumOfProductsObject.transaction2020"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                    <mat-hint>Numbers only allowed</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-xs-3">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>2019</mat-label>
+                                    <textarea matInput (keypress)="onlyNumbers($event)"
+                                        [(ngModel)]="businessApplicationModel.products[i].writtenPremiumOfProductsObject.transaction2019"
+                                        value="businessApplicationModel.products[i].writtenPremiumOfProductsObject.transaction2019"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                    <mat-hint>Numbers only allowed</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-xs-5">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>2018</mat-label>
+                                    <textarea matInput (keypress)="onlyNumbers($event)"
+                                        [(ngModel)]="businessApplicationModel.products[i].writtenPremiumOfProductsObject.transaction2018"
+                                        value="businessApplicationModel.products[i].writtenPremiumOfProductsObject.transaction2018"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                    <mat-hint>Numbers only allowed</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="margin-30">
+                    <a (click)="addProducts()" style="cursor: default">Add another Type of Product</a>
+                </div>
+                <div class="clearfix"></div>
+            </form>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <span style="color:#8b9196;font-weight: bold;">Others</span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form [formGroup]="myForm" class="bpd-form">
+                <!--others-->
+                <mat-radio-group class="bpd-full-width"
+                    [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[0].answer"
+                    [ngModelOptions]="{standalone: true}">
+                    <mat-label>Is there a difference in which internet customers and agents/CC users treated? For
+                        instance or
+                        end customers allowed to cancel policies?</mat-label> &nbsp;
+                    <mat-radio-button value="Yes">Yes</mat-radio-button> &nbsp;
+                    <mat-radio-button value="No">No</mat-radio-button>
+                </mat-radio-group>
+                <br>
+                <mat-form-field class="bpd-full-width">
+                    <mat-label>Is UW manual or automated?</mat-label>
+                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[1].answer"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option value="Manual">Manual</mat-option>
+                        <mat-option value="Automated">Automated</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="bpd-full-width">
+                    <mat-label>If automated, volume of transactions that are not STP from an underwriting standpoint
+                    </mat-label>
+                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[2].answer"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option value="less than 10%">&lt; 10%</mat-option>
+                        <mat-option value="10%-20%">10%-20%</mat-option>
+                        <mat-option value="20%-35%">20%-35%</mat-option>
+                        <mat-option value=" greater than 50%">&gt; 50%</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="bpd-full-width">
+                    <mat-label>Volume of transactions that are overridden in CY2020 & CY2019</mat-label>
+                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[3].answer"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option value="less than 10%">&lt; 10%</mat-option>
+                        <mat-option value="10%-20%">10%-20%</mat-option>
+                        <mat-option value="20%-35%">20%-35%</mat-option>
+                        <mat-option value="greater than 50%">&gt; 50%</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-radio-group class="bpd-full-width"
+                    [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[4].answer"
+                    [ngModelOptions]="{standalone: true}">
+                    <mat-label>Does it have a product workbench?</mat-label> &nbsp;
+                    <mat-radio-button value="Yes">Yes</mat-radio-button> &nbsp;
+                    <mat-radio-button value="No">No</mat-radio-button>
+                </mat-radio-group>
+                <br>
+                <mat-form-field class="bpd-full-width">
+                    <mat-label>How long does it take to launch a new product end-end(concept to implementation)?
+                    </mat-label>
+                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[5].answer"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option value="less than 3 months">&lt; 3 months</mat-option>
+                        <mat-option value="3-6 months">3-6 months</mat-option>
+                        <mat-option value="6-12 months">6-12 months</mat-option>
+                        <mat-option value="greater than 12 months">&gt; 12 months</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="bpd-full-width">
+                    <mat-label>Different products sold by the PAS</mat-label>
+                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[6].answer"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option value="Auto">Auto</mat-option>
+                        <mat-option value="Motor cycle">Motor cycle</mat-option>
+                        <mat-option value="Boat">Boat</mat-option>
+                        <mat-option value="RV">RV</mat-option>
+                        <mat-option value="Antique">Antique</mat-option>
+                        <mat-option value="Dune buggy">Dune buggy</mat-option>
+                        <mat-option value="Homeowners">Homeowners</mat-option>
+                        <mat-option value="Rental">Rental</mat-option>
+                        <mat-option value="Condo">Condo</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="bpd-full-width">
+                    <mat-label>How many product variants are live in the System?</mat-label>
+                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[7].answer"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option value="less than 10 products">&lt; 10 products</mat-option>
+                        <mat-option value="10-20 products">10-20 products</mat-option>
+                        <mat-option value="greater than 20 products">&gt; 20 products</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="bpd-full-width">
+                    <mat-label>How far back does the system allow for endorsements (1/2/3/4 or more terms?)</mat-label>
+                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[8].answer"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                        <mat-option value="3">3</mat-option>
+                        <mat-option value="4">4</mat-option>
+                        <mat-option value="more than 4">&gt; 4</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="bpd-full-width">
+                    <mat-label>Haw far back can transactions go to previous terms (1/2/3/4 or more)</mat-label>
+                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[9].answer"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                        <mat-option value="3">3</mat-option>
+                        <mat-option value="4">4</mat-option>
+                        <mat-option value="more than 4">&gt; 4</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="bpd-full-width">
+                    <mat-label>Is rating manual or automated?</mat-label>
+                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[10].answer"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option value="Manual">Manual</mat-option>
+                        <mat-option value="Automated">Automated</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-radio-group class="bpd-full-width"
+                    [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[11].answer"
+                    [ngModelOptions]="{standalone: true}">
+                    <mat-label>If Automated, is this integrated as part of thr PAS or an engine like Ratabase?
+                    </mat-label>
+                    &nbsp;
+                    <mat-radio-button value="Yes">Yes</mat-radio-button> &nbsp;
+                    <mat-radio-button value="No">No</mat-radio-button>
+                </mat-radio-group>
+                <br>
+                <mat-form-field class="bpd-full-width">
+                    <mat-label>How many internal interfacing applications (like GL, claims, CRM, Documents and so on)
+                        does it
+                        interact with</mat-label>
+                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[12].answer"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option value="CRM">CRM</mat-option>
+                        <mat-option value="Rating Engine">Rating Engine</mat-option>
+                        <mat-option value="Underwritten Engine">Underwritten Engine</mat-option>
+                        <mat-option value="Billing and Payments">Billing and Payments</mat-option>
+                        <mat-option value="Claims">Claims</mat-option>
+                        <mat-option value="Reinsurrance">Reinsurrance</mat-option>
+                        <mat-option value="Product Workbench">Product Workbench</mat-option>
+                        <mat-option value="Financial Reporting">Financial Reporting</mat-option>
+                        <mat-option value="State Reporting">State Reporting</mat-option>
+                        <mat-option value="Compensation">Compensation</mat-option>
+                        <mat-option value="Producer and License">Producer and License</mat-option>
+                        <mat-option value="others">others</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="bpd-full-width">
+                    <mat-label>How many external interfacing applications(like MVR, Lexis Nexus, CLUE and so on) does it
+                        interact
+                        with? </mat-label>
+                    <input matInput [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[13].answer"
+                        [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="bpd-full-width">
+                    <mat-label>Is there is a difference in which internet Customer and Agents/CC users treated? Number
+                        of
+                        transactions difference</mat-label>
+                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[14].answer"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                        <mat-option value="3">3</mat-option>
+                        <mat-option value="4">4</mat-option>
+                        <mat-option value="more than 4">&gt; 4</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-radio-group class="bpd-full-width"
+                    [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[15].answer"
+                    [ngModelOptions]="{standalone: true}">
+                    <mat-label>Is the PAS system used in all states</mat-label> &nbsp;
+                    <mat-radio-button value="Yes">Yes</mat-radio-button> &nbsp;
+                    <mat-radio-button value="No">No</mat-radio-button>
+                </mat-radio-group>
+                <br>
+                <mat-form-field class="bpd-full-width">
+                    <mat-label>If sold in certain states please list them out( by product by volume in Cy2020,19,18)
+                    </mat-label>
+                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[16].answer"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option value="less than 10 States">&lt;10 States</mat-option>
+                        <mat-option value="10-20 Stateso">10-20 States</mat-option>
+                        <mat-option value="20-30 states">20-30 States</mat-option>
+                        <mat-option value="30-40 states">30-40 States</mat-option>
+                        <mat-option value="greater than 40 states">&gt;40 States</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="bpd-full-width">
+                    <mat-label>NPS score in last 3 years</mat-label>
+                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[17].answer"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option value="0-30">0-30</mat-option>
+                        <mat-option value="30-70">30-70</mat-option>
+                        <mat-option value="70-100">70-100</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="bpd-full-width">
+                    <mat-label>Customer satisfaction score in last 3 years</mat-label>
+                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[18].answer"
+                        value={{businessApplicationModel.businessApplicationQuestionAnswer[18].answer}}
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option value="less than 75%">&lt; 75%</mat-option>
+                        <mat-option value="75-80%">75-80%</mat-option>
+                        <mat-option value="80-85%">80-85%</mat-option>
+                        <mat-option value="85-90%">85-90%</mat-option>
+                        <mat-option value="greater than 90%">&gt; 90%</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </mat-expansion-panel>
+    </mat-accordion> <br />
+    <div class="margin-20">
+        <button mat-raised-button color="primary" (click)="check() ? openDialog() : update()"> Update </button>&nbsp;
+        <button mat-raised-button color="primary" (click)="cancel()"> Cancel </button>
+        <!-- <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Save</button> -->
+    </div>
+</mat-card>
