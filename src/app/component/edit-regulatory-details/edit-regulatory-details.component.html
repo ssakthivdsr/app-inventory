@@ -1,9 +1,45 @@
 <mat-card>
-    <section class="checkbox-section" *ngFor='let names of regulatoryName'>
-        <mat-checkbox class="checkbox-margin" name="{{names}}" (change)="onValueSelection($event,names)">
-            {{names}}
+    <section class="checkbox-section">
+        <mat-checkbox class="checkbox-margin" [(ngModel)]="regulatoryRetrieved[0].regulatoryValue">Sarbanes-Oxley
+            Act (SOA)</mat-checkbox>
+        <br>
+        <mat-checkbox class="checkbox-margin" [(ngModel)]="regulatoryRetrieved[1].regulatoryValue">Payment Card
+            Industry (PCI) Data security standard
         </mat-checkbox>
         <br>
+        <mat-checkbox class="checkbox-margin" [(ngModel)]="regulatoryRetrieved[2].regulatoryValue">Federal
+            Financial Institutions Examination Council
+            (FFIEC)
+        </mat-checkbox>
+        <br>
+        <mat-checkbox class="checkbox-margin" [(ngModel)]="regulatoryRetrieved[3].regulatoryValue">State Breach
+            Laws</mat-checkbox>
+        <br>
+        <mat-checkbox class="checkbox-margin" [(ngModel)]="regulatoryRetrieved[4].regulatoryValue">
+            Graham-Leach-Billey Act (GLBA)</mat-checkbox>
+        <br>
+        <mat-checkbox class="checkbox-margin" [(ngModel)]="regulatoryRetrieved[5].regulatoryValue">Personal
+            Information Protection and Electronic
+            Documents
+            Act (PIPEDA)
+        </mat-checkbox>
+        <br>
+        <mat-checkbox class="checkbox-margin" [(ngModel)]="regulatoryRetrieved[6].regulatoryValue">Health
+            Insurance Portability and Accountability Act
+            (HIPAA)
+        </mat-checkbox>
+        <br>
+        <mat-checkbox class="checkbox-margin" [(ngModel)]="regulatoryRetrieved[7].regulatoryValue">Children's
+            On-Line Privacy Protection Act (COPPA)
+        </mat-checkbox>
+        <br>
+        <mat-checkbox class="checkbox-margin" [(ngModel)]="regulatoryRetrieved[8].regulatoryValue">U.S.PAtriot
+            Act</mat-checkbox>
+        <br>
+        <mat-checkbox class="checkbox-margin" [(ngModel)]="regulatoryRetrieved[9].regulatoryValue">U.S.Export law
+        </mat-checkbox>
+        <br>
+
     </section>
     <div class="example-button-row">
         <button mat-raised-button color="primary" (click)="check() ? openDialog() : update()"> Update </button> &nbsp;

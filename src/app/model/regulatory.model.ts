@@ -1,10 +1,10 @@
 export class Regulatory {
-    id: number;
+    regulatoryId: number;
     applicationId: number;
-    regulatoryValue: String[];
+    regulatoryValue: boolean;
     constructor() {
-        this.id = 1;
+        this.regulatoryId = 0;
         this.applicationId = 1;
-        this.regulatoryValue = [];
+        this.regulatoryValue = false;
     }
 }

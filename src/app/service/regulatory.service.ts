@@ -4,7 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Regulatory } from '../model/regulatory.model';
 
-// const endpoint2 = 'http://localhost:8000/applicationinventoryservice/';
+// const endpoint = 'http://localhost:8000/applicationinventoryservice/';
 // const endpoint3 = 'http://localhost:8000/applicationinventoryservice/retrieveRegulatoryByApplicationId/1';
 const endpoint = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/';
 
@@ -40,8 +40,12 @@ export class RegulatoryService {
             catchError(this.handleError));
     }
 
-    storeRegulatoryDetails(body: Regulatory): Observable<any> {
+    storeRegulatoryDetails(body: Regulatory[]): Observable<any> {
         return this.http.post<any>(endpoint.concat('storeRegulatoryDetails'), body);
+    }
+
+    updateRegulatoryDetails(body: Regulatory[]): Observable<any> {
+        return this.http.post<any>(endpoint.concat('updateRegulatoryDetails'), body);
     }
 
     private extractData(res: Response): any {
