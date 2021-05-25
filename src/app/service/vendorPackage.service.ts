@@ -5,9 +5,9 @@ import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { VendorPackage } from '../model/vendorPackage.model';
 
-const endpoint = 'http://localhost:8000/applicationinventoryservice/';
+// const endpoint = 'http://localhost:8000/applicationinventoryservice/';
 //const endpoint2 = 'http://localhost:8000/applicationinventoryservice/retrieveVendorPackageData/1';
-// const endpoint = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/';
+const endpoint = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/';
 
 @Injectable({
     providedIn: 'root'
