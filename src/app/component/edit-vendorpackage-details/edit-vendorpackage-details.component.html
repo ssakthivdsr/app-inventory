@@ -39,11 +39,10 @@
                 [(ngModel)]="vendorPackageModel.engAssociatedWithEsternallyHostedVendor" value=""
                 name="input8"></textarea>
         </mat-form-field>
-        <mat-radio-group class="vp-full-width" [(ngModel)]="vendorPackageModel.isLatestSwVersion" value=null
-            name="input9">
+        <mat-radio-group class="vp-full-width" [(ngModel)]="vendorPackageModel.isLatestSwVersion" name="input9">
             <mat-label>Is the application the most current Vendor Software Version?</mat-label> <br />&nbsp;&nbsp;&nbsp;
-            <mat-radio-button value=true>Yes</mat-radio-button> &nbsp;
-            <mat-radio-button value=false>No</mat-radio-button>
+            <mat-radio-button [value]="true">Yes</mat-radio-button> &nbsp;
+            <mat-radio-button [value]="false">No</mat-radio-button>
         </mat-radio-group>
         <mat-form-field class="vp-full-width">
             <mat-label>What version of the Vendor package is being used?</mat-label>
