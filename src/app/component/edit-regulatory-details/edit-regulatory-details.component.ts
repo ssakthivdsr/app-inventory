@@ -56,6 +56,9 @@ export class EditRegulatoryDetailsComponent implements OnInit {
   }
 
   update() {
+    for (this.i = 0; this.i < this.regulatoryRetrieved.length; this.i++) {
+      this.regulatoryRetrieved[this.i].applicationId = Number(localStorage.getItem('applicationID'));
+    }
     this.regulatoryService.updateRegulatoryDetails(this.regulatoryRetrieved).subscribe((data: any) => {
     })
     console.log(this.regulatoryRetrieved);
@@ -75,21 +78,26 @@ export class EditRegulatoryDetailsComponent implements OnInit {
 })
 
 export class EditRegulatoryDialog {
+
+  i: number;
   public regulatoryRetrievedModel: Regulatory[] = [{ regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false }];
+  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false }];
 
 
   constructor(public dialogRef: MatDialogRef<EditRegulatoryDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private regulatoryService: RegulatoryService) { }
 
   update() {
+    for (this.i = 0; this.i < this.regulatoryRetrievedModel.length; this.i++) {
+      this.regulatoryRetrievedModel[this.i].applicationId = Number(localStorage.getItem('applicationID'));
+    }
     this.regulatoryService.updateRegulatoryDetails(this.regulatoryRetrievedModel).subscribe((data: any) => {
     })
     this.openSnackBar();

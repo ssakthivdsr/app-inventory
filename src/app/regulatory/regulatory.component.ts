@@ -45,8 +45,8 @@ export class RegulatoryComponent implements OnInit {
   }
 
   save() {
-    for (this.i = 0; this.i < 10; this.i++) {
-      this.regulatoryModel[this.i] = { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false }
+    for (this.i = 0; this.i < this.regulatoryModel.length; this.i++) {
+      this.regulatoryModel[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
     }
 
     this.regulatoryService.storeRegulatoryDetails(this.regulatoryModel).subscribe((data: any) => {
@@ -75,7 +75,7 @@ export class RegulatoryComponent implements OnInit {
 
 export class DialogElementsExampleDialog {
 
-
+  i: number;
   regulatoryModel: Regulatory[] = [{ regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
   { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
   { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
@@ -93,6 +93,10 @@ export class DialogElementsExampleDialog {
   }
 
   save() {
+    for (this.i = 0; this.i < this.regulatoryModel.length; this.i++) {
+      this.regulatoryModel[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
+    }
+
     this.regulatoryService.storeRegulatoryDetails(this.regulatoryModel).subscribe((data: any) => {
     })
     console.log(this.regulatoryModel);
