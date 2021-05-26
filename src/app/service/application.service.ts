@@ -46,6 +46,9 @@ export class ApplicationService {
         return this.http.post<any>(endpoint1.concat('storeApplicationDetails'), body);
     }
 
+    updateApplicationDetails(body: ApplicationDetails): Observable<any> {
+        return this.http.post<any>(endpoint1.concat('updateApplicationDetails'), body);
+    }
     private extractData(res: Response): any {
         const body = res;
         return body || {};

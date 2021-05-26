@@ -2,7 +2,7 @@
 <form [formGroup]="addAppFormGroup" class="example-form">
     <mat-form-field class="example-full-width">
         <mat-label>Application Name</mat-label>
-        <input matInput formControlName="AppName">
+        <input matInput [(ngModel)]="applicationModel.applicationName" formControlName="AppName">
         <mat-error *ngIf="checkError('AppName', 'required')">Application Name is required</mat-error>
     </mat-form-field>
     <!-- <mat-form-field class="example-full-width">
@@ -15,13 +15,13 @@
 
     <mat-form-field class="example-full-width">
         <mat-label>Application Description</mat-label>
-        <textarea matInput formControlName="AppDesc"></textarea>
+        <textarea matInput [(ngModel)]="applicationModel.applicationDescription" formControlName="AppDesc"></textarea>
         <mat-error *ngIf="checkError('AppDesc', 'required')">Application Description is required</mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
         <mat-label>Department</mat-label>
-        <mat-select formControlName="AppDept"  [(ngModel)]= "selectedDepartmentID">
+        <mat-select [(ngModel)]="selectedDepartmentID" formControlName="AppDept">
             <mat-option *ngFor="let item of departmentsRetrieved" [value]="item.departmentId">{{item.departmentName}}
             </mat-option>
         </mat-select>
@@ -30,15 +30,16 @@
 
     <mat-form-field class="example-full-width">
         <mat-label>Line Of Business</mat-label>
-        <mat-select formControlName="AppLob" (selectionChange)="onSelectLob($event)">
-            <mat-option *ngFor="let lobList of lobDropdown" [value]="lobList"> {{lobList.viewValue}}</mat-option>
+        <mat-select [(ngModel)]="selectedLob" formControlName="AppLob" (selectionChange)="onSelectLob($event)">
+            <mat-option *ngFor="let lob  of lineOfBusiness" [value]="lob"> {{lob}}
+            </mat-option>
         </mat-select>
         <mat-error *ngIf="checkError('AppLob', 'required')">Line of Business is required</mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
         <mat-label>Functionality</mat-label>
-        <mat-select formControlName="AppFun">
+        <mat-select [(ngModel)]="selectedFunctionality" formControlName="AppFun">
             <mat-option *ngFor="let functionality of functionalities" [value]="functionality">{{functionality}}
             </mat-option>
         </mat-select>

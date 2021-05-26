@@ -25,11 +25,7 @@ export class EditApplicationDetailsComponent implements OnInit {
   selectedLob: string = '';
   selectedFunctionality: string = '';
   functionalities: string[] = [];
-  lobDropdown = [
-    { value: 'Auto and Fire Insurance', viewValue: 'Auto and Fire Insurance', functionalities: ['Marketing', 'Sales and Distribution', 'Product management', 'Underwritting', 'Policy Acquisition & Servicing', 'Claims Management', 'Finance and Accounts', 'Reinsurance'] },
-    { value: 'Banking', viewValue: 'Banking', functionalities: ['Accounts', 'Loan', 'Mortgages', 'Payments', 'Fraud', 'Risk & Compliance', 'OutSourcing', 'Wealth & Retirement'] }
-  ];
-  lineOfBusiness: string[] = ['Fire', 'Life', 'Auto'];
+  lineOfBusiness: string[] = ['Auto and Fire Insurance', 'Banking'];
   public addAppFormGroup: FormGroup;
 
   public constructor(private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog,
@@ -48,15 +44,14 @@ export class EditApplicationDetailsComponent implements OnInit {
 
     this.retrieveAllDepartmentDetails();
     this.existingApplicationId = Number(localStorage.getItem('applicationID'));
-    console.log(this.existingApplicationId);
+    //console.log(this.existingApplicationId);
     if (this.existingApplicationId != 0) {
       this.applicationService.retrieveApplicationById(this.existingApplicationId).subscribe((data: ApplicationDetails) => {
         this.applicationModel = data;
         this.retrieveDepartmentById(this.applicationModel.departmentId);
-        console.log(this.applicationModel.departmentId);
+        //console.log(this.applicationModel.departmentId);
         //console.log(this.applicationModel.departmentName);
-        console.log(this.applicationModel.lineOfBusiness);
-        console.log(this.applicationModel.functionality);
+
         this.addAppFormGroup.setValue({
           AppName: this.applicationModel.applicationName,
           AppDesc: this.applicationModel.applicationDescription,
@@ -66,6 +61,14 @@ export class EditApplicationDetailsComponent implements OnInit {
         });
         this.selectedDepartmentID = this.applicationModel.departmentId;
         this.selectedLob = this.applicationModel.lineOfBusiness;
+        if (this.selectedLob === "Auto and Fire Insurance") {
+          this.functionalities = ['Marketing', 'Sales and Distribution', 'Product management', 'Underwritting', 'Policy Acquisition & Servicing', 'Claims Management', 'Finance and Accounts', 'Reinsurance'];
+        }
+        if (this.selectedLob === "Banking") {
+          this.functionalities = ['Accounts', 'Loan', 'Mortgages', 'Payments', 'Fraud', 'Risk & Compliance', 'OutSourcing', 'Wealth & Retirement'];
+        }
+        this.selectedFunctionality = this.applicationModel.functionality;
+        //console.log(this.selectedFunctionality);
         //this.addAppFormGroup.get("AppDept")?.setValue(this.applicationModel.departmentName);
         //console.log("retrieved value:" + this.departmentsRetrieved);
         //console.log(JSON.stringify(this.departmentsRetrieved));
@@ -79,9 +82,13 @@ export class EditApplicationDetailsComponent implements OnInit {
   }
 
   onSelectLob(event: any) {
-    //console.log(event.value.functionalities);
     //console.log(this.selectedLob);
-    this.functionalities = event.value.functionalities;
+    if (event.value === "Auto and Fire Insurance") {
+      this.functionalities = ['Marketing', 'Sales and Distribution', 'Product management', 'Underwritting', 'Policy Acquisition & Servicing', 'Claims Management', 'Finance and Accounts', 'Reinsurance']
+    }
+    if (event.value === "Banking") {
+      this.functionalities = ['Accounts', 'Loan', 'Mortgages', 'Payments', 'Fraud', 'Risk & Compliance', 'OutSourcing', 'Wealth & Retirement'];
+    }
   }
 
   retrieveDepartmentById(id: number) {
@@ -105,6 +112,7 @@ export class EditApplicationDetailsComponent implements OnInit {
   }
 
   check() {
+
     if (this.applicationModel.nameOfTheComponentManager === '' || this.applicationModel.smeProvidedByManagers === '' ||
       this.applicationModel.nameOfPrimaryTechSME === '' || this.applicationModel.nameOfPrimaryBA === '')
       return true;
@@ -113,6 +121,9 @@ export class EditApplicationDetailsComponent implements OnInit {
   }
 
   openDialog() {
+    this.applicationModel.departmentId = this.selectedDepartmentID;
+    this.applicationModel.lineOfBusiness = this.selectedLob;
+    this.applicationModel.functionality = this.selectedFunctionality;
     this.dialog.open(EditApplicationDetailsDialog, {
       data: this.applicationModel
     });
@@ -126,10 +137,12 @@ export class EditApplicationDetailsComponent implements OnInit {
   }
 
   update() {
-    // console.log("updated");
-    // this.applicationService.storeApplicationDetails(this.applicationModel).subscribe((data: any) => {
-    //   console.log(data);
-    // })
+    this.applicationModel.departmentId = this.selectedDepartmentID;
+    this.applicationModel.lineOfBusiness = this.selectedLob;
+    this.applicationModel.functionality = this.selectedFunctionality;
+    this.applicationService.updateApplicationDetails(this.applicationModel).subscribe((data: any) => {
+      // console.log(data);
+    })
     this.openSnackBar();
   }
 
@@ -149,7 +162,9 @@ export class EditApplicationDetailsComponent implements OnInit {
 })
 
 export class EditApplicationDetailsDialog {
+
   applicationModelDialog = new ApplicationDetails();
+
 
   constructor(public dialogRef: MatDialogRef<EditApplicationDetailsDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private applicationService: ApplicationService, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.applicationModelDialog = data;
@@ -157,9 +172,9 @@ export class EditApplicationDetailsDialog {
 
   update() {
     // console.log("updated");
-    // this.applicationService.storeApplicationDetails(this.applicationModelDialog).subscribe((data: any) => {
-    //   console.log(data);
-    // })
+    this.applicationService.updateApplicationDetails(this.applicationModelDialog).subscribe((data: any) => {
+      //   console.log(data);
+    })
     this.openSnackBar();
   }
 
