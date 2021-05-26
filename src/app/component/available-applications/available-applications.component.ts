@@ -1,5 +1,5 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -7,6 +7,7 @@ import { ApplicationService } from 'src/app/service/application.service';
 import { ApplicationDetails } from '../../model/application-details.model';
 import { UserService } from '../../service/user.service';
 import { Department } from '../../model/department.model';
+import { MatPaginator } from '@angular/material/paginator';
 
 export interface Application {
   id: number;
@@ -82,6 +83,14 @@ export class AvailableApplicationsComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   filterValue: string = "";
   searchString: String = "";
+  
+
+  @ViewChild(MatPaginator, {static: false})
+  set paginator(value: MatPaginator) {
+    if (this.applicationDataSource){
+      this.applicationDataSource.paginator = value;
+    }
+  }
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private userService: UserService, private applicationService: ApplicationService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -96,21 +105,17 @@ export class AvailableApplicationsComponent implements OnInit, OnDestroy {
     this.applicationDataSource.filter = this.filterValue;
   }
 
-  retrieveAllDepartmentDetails() {
-    this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
-      this.departmentsRetrieved = data;
-    })
-  }
-
-  retrieveAllApplicationDetails() {
+   retrieveAllApplicationDetails() {
     this.applicationService.retrieveAllApplicationDetails().subscribe((data: ApplicationDetails[]) => {
       this.applicationsRetrieved = data;
+      this.applicationDataSource = new MatTableDataSource(this.applicationsRetrieved);
       this.applicationDataSource = new MatTableDataSource(this.applicationsRetrieved);
     })
   }
 
   ngOnInit(): void {
     this.retrieveAllApplicationDetails();
+    this.applicationDataSource.paginator = this.paginator;
   }
 
   ngOnDestroy(): void {
