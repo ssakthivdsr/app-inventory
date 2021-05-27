@@ -18,19 +18,21 @@ export class AddApplicationDetailsComponent implements OnInit {
   departmentsRetrieved: Department[] = [];
   public applicationModel = new ApplicationDetails();
   selectedDepartment = new Department();
+  selectedDepartmentID: number = 0;
   selectedLob: string = '';
   selectedFunctionality: string = '';
   functionalities: string[] = [];
-  lobDropdown = [
-    { value: 'Auto and Fire Insurance', viewValue: 'Auto and Fire Insurance', functionalities: ['Marketing', 'Sales and Distribution', 'Product management', 'Underwritting', 'Policy Acquisition & Servicing', 'Claims Management', 'Finance and Accounts', 'Reinsurance'] },
-    { value: 'Banking', viewValue: 'Banking', functionalities: ['Accounts', 'Loan', 'Mortgages', 'Payments', 'Fraud', 'Risk & Compliance', 'OutSourcing', 'Wealth & Retirement'] }
-  ];
-  lineOfBusiness: string[] = ['Fire', 'Life', 'Auto'];
+  lineOfBusiness: string[] = ['Auto and Fire Insurance', 'Banking'];
   public addAppFormGroup: FormGroup;
+  initialId: number = 0;
+  passedId: number = 0;
 
   public constructor(private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog,
     private userService: UserService, private applicationService: ApplicationService, private changeDetectorRefs: ChangeDetectorRef) {
     this.addAppFormGroup = new FormGroup({});
+    localStorage.setItem('savedApplicationID', 0 + '');
+    this.initialId = Number(localStorage.getItem('savedApplicationID'));
+    console.log(this.initialId);
   }
 
   ngOnInit(): void {
@@ -42,6 +44,15 @@ export class AddApplicationDetailsComponent implements OnInit {
       AppFun: new FormControl('', [Validators.required])
     });
     this.retrieveAllDepartmentDetails();
+    this.selectedDepartmentID = this.applicationModel.departmentId;
+    this.selectedLob = this.applicationModel.lineOfBusiness;
+    if (this.selectedLob === "Auto and Fire Insurance") {
+      this.functionalities = ['Marketing', 'Sales and Distribution', 'Product management', 'Underwritting', 'Policy Acquisition & Servicing', 'Claims Management', 'Finance and Accounts', 'Reinsurance'];
+    }
+    if (this.selectedLob === "Banking") {
+      this.functionalities = ['Accounts', 'Loan', 'Mortgages', 'Payments', 'Fraud', 'Risk & Compliance', 'OutSourcing', 'Wealth & Retirement'];
+    }
+    this.selectedFunctionality = this.applicationModel.functionality;
   }
 
   onSelectDept(event: any) {
@@ -50,14 +61,16 @@ export class AddApplicationDetailsComponent implements OnInit {
   }
 
   onSelectLob(event: any) {
-    //console.log(event.value.functionalities);
-    //console.log(this.selectedLob);
-    this.functionalities = event.value.functionalities;
+    if (event.value === "Auto and Fire Insurance") {
+      this.functionalities = ['Marketing', 'Sales and Distribution', 'Product management', 'Underwritting', 'Policy Acquisition & Servicing', 'Claims Management', 'Finance and Accounts', 'Reinsurance']
+    }
+    if (event.value === "Banking") {
+      this.functionalities = ['Accounts', 'Loan', 'Mortgages', 'Payments', 'Fraud', 'Risk & Compliance', 'OutSourcing', 'Wealth & Retirement'];
+    }
   }
 
   retrieveAllDepartmentDetails() {
     this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
-      //console.log(data);
       this.departmentsRetrieved = data;
       //console.log("retrieved value:" + this.departmentsRetrieved);
       //console.log(JSON.stringify(this.departmentsRetrieved));
@@ -68,7 +81,6 @@ export class AddApplicationDetailsComponent implements OnInit {
     this.applicationModel.applicationName = this.addAppFormGroup.get('AppName')!.value;
     this.applicationModel.applicationDescription = this.addAppFormGroup.get('AppDesc')!.value;
     this.selectedDepartment = this.addAppFormGroup.get('AppDept')!.value;
-    console.log(this.selectedDepartment);
     this.applicationModel.departmentId = this.selectedDepartment.departmentId;
     this.applicationModel.lineOfBusiness = this.addAppFormGroup.get('AppLob')!.value.viewValue;
     this.applicationModel.functionality = this.addAppFormGroup.get('AppFun')!.value;
@@ -81,8 +93,17 @@ export class AddApplicationDetailsComponent implements OnInit {
   }
 
   openDialog() {
+    this.applicationModel.departmentId = this.selectedDepartmentID;
+    this.applicationModel.lineOfBusiness = this.selectedLob;
+    this.applicationModel.functionality = this.selectedFunctionality;
+    if (this.initialId == Number(localStorage.getItem('savedApplicationID'))) {
+      this.passedId = 0;
+    }
+    else {
+      this.passedId = 1;
+    }
     this.dialog.open(ApplicationDetailsDialog, {
-      data: this.applicationModel
+      data: { model: this.applicationModel, id: this.passedId }
     });
   }
 
@@ -94,14 +115,31 @@ export class AddApplicationDetailsComponent implements OnInit {
     });
   }
 
+  openUpdateSnackBar() {
+    this._snackBar.open("Details are updated successfully", "Dismiss", {
+      duration: 2000,
+      verticalPosition: "top"
+    });
+  }
+
+
+
   save() {
-    //console.log("Saved");
-    this.applicationService.storeApplicationDetails(this.applicationModel).subscribe((data: any) => {
-      //console.log(data);
-      localStorage.setItem('savedApplicationID', data + '');
-      //console.log(localStorage.getItem('savedApplicationID'));
-      this.openSnackBar(data);
-    })
+    this.applicationModel.departmentId = this.selectedDepartmentID;
+    this.applicationModel.lineOfBusiness = this.selectedLob;
+    this.applicationModel.functionality = this.selectedFunctionality;
+    if (this.initialId == Number(localStorage.getItem('savedApplicationID'))) {
+      this.applicationService.storeApplicationDetails(this.applicationModel).subscribe((data: any) => {
+        localStorage.setItem('savedApplicationID', data + '');
+        this.openSnackBar(data);
+      })
+    }
+    else {
+      this.applicationModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
+      this.applicationService.updateApplicationDetails(this.applicationModel).subscribe((data: any) => {
+      })
+      this.openUpdateSnackBar();
+    }
   }
 
   cancel() {
@@ -121,24 +159,39 @@ export class AddApplicationDetailsComponent implements OnInit {
 
 export class ApplicationDetailsDialog {
   applicationModelDialog = new ApplicationDetails();
+  saveId: number = 0;
 
   constructor(public dialogRef: MatDialogRef<ApplicationDetailsDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private applicationService: ApplicationService, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.applicationModelDialog = data;
+    this.applicationModelDialog = data.model;
+    this.saveId = data.id;
   }
-
   save() {
-    //console.log("saved");
-    this.applicationService.storeApplicationDetails(this.applicationModelDialog).subscribe((data: any) => {
-      //console.log(data);
-      localStorage.setItem('savedApplicationID', data + '');
-      //console.log(localStorage.getItem('savedApplicationID'));
-      this.openSnackBar(data);
-    })
+    if (this.saveId == 0) {
+      this.applicationService.storeApplicationDetails(this.applicationModelDialog).subscribe((data: any) => {
+        localStorage.setItem('savedApplicationID', data + '');
+        this.openSnackBar(data);
+      })
+      this.saveId++;
+    }
+    else {
+      this.applicationModelDialog.applicationId = Number(localStorage.getItem('savedApplicationID'));
+      this.applicationService.updateApplicationDetails(this.applicationModelDialog).subscribe((data: any) => {
+      })
+      this.openUpdateSnackBar();
+    }
+
   }
 
   openSnackBar(id: number) {
     this._snackBar.open("Details are saved successfully. \nYour saved ID is " + id + '.', "Dismiss", {
       duration: 5000,
+      verticalPosition: "top"
+    });
+  }
+
+  openUpdateSnackBar() {
+    this._snackBar.open("Details are updated successfully", "Dismiss", {
+      duration: 2000,
       verticalPosition: "top"
     });
   }
