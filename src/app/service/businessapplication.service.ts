@@ -4,9 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { BusinessApplicationDetails } from '../model/businessApplicationDetails.model';
 
-//const endpoint = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/retrieveDepartmentData/11';
 const endpoint = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/';
-//const endpoint = 'http://localhost:8000/applicationinventoryservice/retrieveApplicationById/11';
 // const endpoint1 = 'http://localhost:8000/applicationinventoryservice/';
 
 @Injectable({
@@ -41,10 +39,12 @@ export class BusinessApplicationService {
         return this.http.post<any>(endpoint.concat('storeBusinessApplicationDetails'), body);
     }
 
+    updateBusinessApplicationDetails(body: BusinessApplicationDetails): Observable<any> {
+        return this.http.post<any>(endpoint.concat('updateBusinessApplicationDetails'), body);
+    }
+
     private extractData(res: Response): any {
         const body = res;
         return body || {};
     }
 }
-
-

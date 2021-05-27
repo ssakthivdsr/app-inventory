@@ -163,28 +163,27 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
   }
 
   update() {
-    // this.existingAppId = Number(localStorage.getItem('savedApplicationID'));
-    // console.log(this.existingAppId);
-    // for (this.i = 0; this.i < this.businessApplicationModel.channels.length; this.i++) {
-    //     this.businessApplicationModel.channels[this.i].applicationId = this.existingAppId;
-    // }
-    // for (this.i = 0; this.i < this.businessApplicationModel.products.length; this.i++) {
-    //     this.businessApplicationModel.products[this.i].applicationId = this.existingAppId;
-    // }
-    // for (this.i = 0; this.i < this.businessApplicationModel.transactions.length; this.i++) {
-    //     this.businessApplicationModel.transactions[this.i].applicationId = this.existingAppId;
-    // }
-    // for (this.i = 0; this.i < this.businessApplicationModel.users.length; this.i++) {
-    //     this.businessApplicationModel.users[this.i].applicationId = this.existingAppId;
-    // }
-    // for (this.i = 0; this.i < this.businessApplicationModel.businessApplicationQuestionAnswer.length; this.i++) {
-    //     this.businessApplicationModel.businessApplicationQuestionAnswer[this.i].applicationId = this.existingAppId;
-    // }
-    // this.businessApplicationService.storeBusinessApplicationDetails(this.businessApplicationModel).subscribe((data: any) => {
-    // })
-    // //console.log(this.businessApplicationModel);
-    // //console.log(this.businessApplicationModel.businessApplicationQuestionAnswer);
-    // this.openSnackBar();
+
+    for (this.i = 0; this.i < this.businessApplicationModel.channels.length; this.i++) {
+      this.businessApplicationModel.channels[this.i].applicationId = this.existingAppIdEdit;
+    }
+    for (this.i = 0; this.i < this.businessApplicationModel.products.length; this.i++) {
+      this.businessApplicationModel.products[this.i].applicationId = this.existingAppIdEdit;
+    }
+    for (this.i = 0; this.i < this.businessApplicationModel.transactions.length; this.i++) {
+      this.businessApplicationModel.transactions[this.i].applicationId = this.existingAppIdEdit;
+    }
+    for (this.i = 0; this.i < this.businessApplicationModel.users.length; this.i++) {
+      this.businessApplicationModel.users[this.i].applicationId = this.existingAppIdEdit;
+    }
+    for (this.i = 0; this.i < this.businessApplicationModel.businessApplicationQuestionAnswer.length; this.i++) {
+      this.businessApplicationModel.businessApplicationQuestionAnswer[this.i].applicationId = this.existingAppIdEdit;
+    }
+    this.businessApplicationService.updateBusinessApplicationDetails(this.businessApplicationModel).subscribe((data: any) => {
+    })
+    //console.log(this.businessApplicationModel);
+    //console.log(this.businessApplicationModel.businessApplicationQuestionAnswer);
+    this.openSnackBar();
   }
 
   openSnackBar() {
