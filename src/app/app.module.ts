@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -53,7 +53,7 @@ import { EditVendorpackageDetailsComponent } from './component/edit-vendorpackag
 import { EditApplicationlifecycleComponent } from './component/edit-applicationlifecycle/edit-applicationlifecycle.component';
 import { EditServiceManagementDetailsComponent } from './component/edit-service-management-details/edit-service-management-details.component';
 import { EditBusinessApplicationDetailsComponent } from './component/edit-business-application-details/edit-business-application-details.component';
-
+import { AvailableDepartmentsDialogBoxComponent } from './component/available-departments/available-departments-dialog-box/available-departments-dialog-box.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +84,8 @@ import { EditBusinessApplicationDetailsComponent } from './component/edit-busine
     EditVendorpackageDetailsComponent,
     EditApplicationlifecycleComponent,
     EditServiceManagementDetailsComponent,
-    EditBusinessApplicationDetailsComponent
+    EditBusinessApplicationDetailsComponent,
+    AvailableDepartmentsDialogBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -112,6 +113,7 @@ import { EditBusinessApplicationDetailsComponent } from './component/edit-busine
     MatSnackBarModule,
     MatDialogModule,
     MatPaginatorModule,
+    NgxSpinnerModule,
     HighchartsChartModule
   ],
   providers: [],

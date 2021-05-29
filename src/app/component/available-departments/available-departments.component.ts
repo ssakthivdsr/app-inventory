@@ -1,8 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { Department } from '../../model/department.model';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table'
+import { MatDialog } from '@angular/material/dialog';
+import * as _ from 'lodash';
+import { AvailableDepartmentsDialogBoxComponent } from './available-departments-dialog-box/available-departments-dialog-box.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-available-departments',
@@ -10,23 +15,17 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./available-departments.component.css']
 })
 export class AvailableDepartmentsComponent implements OnInit {
+
+  departmentModel = new Department();
   departmentsRetrieved: Department[] = [];
   dataSourceD: any;
-  displayedColumns: string[] = ['id', 'departmentname', 'departmentowner'];
+  displayedColumns: string[] = ['departmentId', 'departmentName', 'departmentOwner', 'action'];
 
-  constructor(private userService: UserService) { }
-
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatPaginator, {static: false})
-  set paginator(value: MatPaginator) {
-    if (this.dataSourceD){
-      this.dataSourceD.paginator = value;
-    }
-  }
+  constructor(public dialog: MatDialog, private userService: UserService, public changeDetectorRefs: ChangeDetectorRef, private router: Router) { }
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
 
   ngOnInit(): void {
     this.retrieveAllDepartmentDetails();
-    this.dataSourceD.paginator = this.paginator;
   }
 
   retrieveAllDepartmentDetails() {
@@ -34,10 +33,27 @@ export class AvailableDepartmentsComponent implements OnInit {
       //console.log(data);
       this.departmentsRetrieved = data;
       this.dataSourceD = new MatTableDataSource(this.departmentsRetrieved);
-      console.log(this.dataSourceD.filteredData);
-      //console.log("retrieved value:" + this.departmentsRetrieved);
-      //console.log(JSON.stringify(this.departmentsRetrieved));
+      this.dataSourceD.paginator = this.paginator;
     })
   }
 
+  openServerDialog(element: any) {
+    this.departmentModel = _.cloneDeep(element);
+    if (this.router.url === '/layout/newdepartment') {
+      this.dialog.open(AvailableDepartmentsDialogBoxComponent, {
+        width: '250px',
+        data: { model: this.departmentModel }
+      })
+        .afterClosed()
+        .subscribe(() => this.router.navigate(['/layout/availabledepartments']));
+    }
+    else {
+      this.dialog.open(AvailableDepartmentsDialogBoxComponent, {
+        width: '250px',
+        data: { model: this.departmentModel }
+      })
+        .afterClosed()
+        .subscribe(() => this.router.navigate(['/layout/newdepartment']));
+    }
+  }
 }

@@ -8,6 +8,7 @@ import { ApplicationDetails } from '../../model/application-details.model';
 import { UserService } from '../../service/user.service';
 import { Department } from '../../model/department.model';
 import { MatPaginator } from '@angular/material/paginator';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export interface Application {
   id: number;
@@ -92,7 +93,7 @@ export class AvailableApplicationsComponent implements OnInit, OnDestroy {
     }
   }
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private userService: UserService, private applicationService: ApplicationService) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private userService: UserService, private applicationService: ApplicationService, private spinnerService: NgxSpinnerService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -106,16 +107,21 @@ export class AvailableApplicationsComponent implements OnInit, OnDestroy {
   }
 
    retrieveAllApplicationDetails() {
+    // this.spinnerService.show();
     this.applicationService.retrieveAllApplicationDetails().subscribe((data: ApplicationDetails[]) => {
       this.applicationsRetrieved = data;
       this.applicationDataSource = new MatTableDataSource(this.applicationsRetrieved);
-      this.applicationDataSource = new MatTableDataSource(this.applicationsRetrieved);
+          
     })
+    // this.spinnerService.hide();
   }
 
   ngOnInit(): void {
+    
     this.retrieveAllApplicationDetails();
     this.applicationDataSource.paginator = this.paginator;
+    this.spinnerService.show();
+    this.spinnerService.hide();
   }
 
   ngOnDestroy(): void {

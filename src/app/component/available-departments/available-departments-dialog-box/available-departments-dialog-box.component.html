@@ -1,0 +1,20 @@
+<h2 mat-dialog-title> Row Action - Update </h2>
+<div mat-dialog-content>
+  <form [formGroup]="editDepFormGroup" class="example-form">
+    <mat-form-field>
+      <input matInput placeholder="Department Name" formControlName="DpName" name="departmentName" required
+        [(ngModel)]="departmentModelDialog.departmentName">
+      <mat-error *ngIf="checkError('DpName', 'required')">Department Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Department owner" formControlName="DpOwner" name="departmentOwner" required
+        [(ngModel)]="departmentModelDialog.departmentOwner">
+      <mat-error *ngIf="checkError('DpOwner', 'required')">Department Owner is required</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" [disabled]="!editDepFormGroup.valid" mat-stroked-button
+    (click)="updateDepartmentDetails()"> Update </button>
+  <button mat-button color="primary" (click)="closeDialog()"> Cancel </button>
+</div>
