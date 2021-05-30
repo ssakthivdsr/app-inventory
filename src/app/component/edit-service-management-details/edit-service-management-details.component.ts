@@ -4,9 +4,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Validators, FormGroup, FormControl, FormBuilder } from "@angular/forms";
-import { ServiceManagement } from 'src/app/model/servicemanagement.model';
+
 import { ServiceManagementService } from 'src/app/service/servicemanagement.service';
-import { ServiceManagementRetrieve } from '../../model/servicemanagementretrieve.model';
+import { ServiceManagement } from '../../model/servicemanagement.model';
 
 @Component({
   selector: 'app-edit-service-management-details',
@@ -20,8 +20,7 @@ export class EditServiceManagementDetailsComponent implements OnInit {
   existingApplicationId: number = 0;
   myForm: FormGroup;
   ValidNumberIndicator = true;
-  serviceManagementModel = new ServiceManagement();
-  serviceManagementsRetrieved: ServiceManagementRetrieve[] = [];
+  serviceManagementsRetrieved: ServiceManagement[] = [];
   checkId: number;
   constructor(private fb: FormBuilder, private router: Router, private _snackBar: MatSnackBar, private dialog: MatDialog, private serviceManagementService: ServiceManagementService,
     private changeDetectorRefs: ChangeDetectorRef) {
@@ -38,10 +37,7 @@ export class EditServiceManagementDetailsComponent implements OnInit {
       f9: new FormControl("", [Validators.pattern(/\d/)]),
       f10: new FormControl("", [Validators.pattern(/\d/)])
     });
-    for (this.retrieveId = 0; this.retrieveId < 47; this.retrieveId++) {
-      this.serviceManagementsRetrieved[this.retrieveId] = new ServiceManagementRetrieve();
-      this.serviceManagementsRetrieved[this.retrieveId].questionId = this.retrieveId + 1;
-    }
+
   }
 
 
@@ -50,18 +46,11 @@ export class EditServiceManagementDetailsComponent implements OnInit {
 
     this.existingApplicationId = Number(localStorage.getItem('applicationID'));
     if (this.existingApplicationId !== 0) {
-      this.serviceManagementService.retrieveServiceManagementByApplicationId(this.existingApplicationId).subscribe((data: ServiceManagementRetrieve[]) => {
-        this.dataId = 0;
-        for (this.retrieveId = 0; this.retrieveId < 47; this.retrieveId++) {
-          if (data[this.dataId].questionId === this.retrieveId + 1) {
-            this.serviceManagementsRetrieved[this.retrieveId] = data[this.dataId];
-            this.dataId++;
-          }
-          else {
-            this.serviceManagementsRetrieved[this.retrieveId].answer = '';
-          }
-        }
+      this.serviceManagementService.retrieveServiceManagementByApplicationId(this.existingApplicationId).subscribe((data: ServiceManagement[]) => {
+        this.serviceManagementsRetrieved = data;
+        console.log(this.serviceManagementsRetrieved);
       })
+      console.log(this.serviceManagementsRetrieved);
     }
   }
 
@@ -76,7 +65,7 @@ export class EditServiceManagementDetailsComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(EditServiceManagementWarningDialog, {
-      data: this.serviceManagementModel
+      data: this.serviceManagementsRetrieved
     });
   }
 
@@ -88,9 +77,11 @@ export class EditServiceManagementDetailsComponent implements OnInit {
   }
 
   update() {
-    this.serviceManagementService.storeServiceManagementDetails(this.serviceManagementModel).subscribe((data: any) => {
-      //console.log(data);
+    console.log(this.serviceManagementsRetrieved);
+    this.serviceManagementService.storeAndupdateServiceManagementDetails(this.serviceManagementsRetrieved).subscribe((data: any) => {
+
     })
+
     this.openSnackBar();
   }
 
@@ -120,7 +111,7 @@ export class EditServiceManagementDetailsComponent implements OnInit {
 
 export class EditServiceManagementWarningDialog {
 
-  serviceManagementModelDialog = new ServiceManagement();
+  serviceManagementModelDialog: ServiceManagement[] = [];
 
   constructor(public dialogRef: MatDialogRef<EditServiceManagementWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private serviceManagementService: ServiceManagementService,
     private changeDetectorRefs: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -128,7 +119,8 @@ export class EditServiceManagementWarningDialog {
   }
 
   update() {
-    this.serviceManagementService.storeServiceManagementDetails(this.serviceManagementModelDialog).subscribe((data: any) => {
+    console.log(this.serviceManagementModelDialog);
+    this.serviceManagementService.storeAndupdateServiceManagementDetails(this.serviceManagementModelDialog).subscribe((data: any) => {
       //console.log(data);
     })
     this.openSnackBar();

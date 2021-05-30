@@ -15,9 +15,10 @@ import { ServiceManagementService } from 'src/app/service/servicemanagement.serv
 export class ServicemanagementComponent implements OnInit {
   myForm: FormGroup;
   ValidNumberIndicator = true;
-  serviceManagementModel = new ServiceManagement();
-  serviceManagementsRetrieved: ServiceManagement[] = [];
+  serviceManagementModel: ServiceManagement[] = [];
   checkId: number;
+  i: number;
+  LocalStorageValue: Number;
   constructor(private fb: FormBuilder, private router: Router, private _snackBar: MatSnackBar, private dialog: MatDialog, private serviceManagementService: ServiceManagementService,
     private changeDetectorRefs: ChangeDetectorRef) {
     this.myForm = this.fb.group({
@@ -33,13 +34,14 @@ export class ServicemanagementComponent implements OnInit {
       f9: new FormControl("", [Validators.pattern(/\d/)]),
       f10: new FormControl("", [Validators.pattern(/\d/)])
     });
+
   }
 
 
 
   check() {
     for (this.checkId = 0; this.checkId <= 46; this.checkId++) {
-      if (this.serviceManagementModel.questionAnswer[this.checkId].answer === '')
+      if (this.serviceManagementModel[this.checkId].answer === '')
         return true;
     }
     return false;
@@ -58,10 +60,21 @@ export class ServicemanagementComponent implements OnInit {
     });
   }
 
+  checkAppId() {
+    if (this.LocalStorageValue === Number(localStorage.getItem('savedApplicationID'))) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   save() {
-    this.serviceManagementModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
+    for (this.i = 0; this.i < 47; this.i++) {
+      this.serviceManagementModel[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
+    }
     //console.log("saved");
-    this.serviceManagementService.storeServiceManagementDetails(this.serviceManagementModel).subscribe((data: any) => {
+    this.serviceManagementService.storeAndupdateServiceManagementDetails(this.serviceManagementModel).subscribe((data: any) => {
       // console.log(data);
       this.openSnackBar(data);
     })
@@ -74,6 +87,10 @@ export class ServicemanagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    for (this.i = 0; this.i < 47; this.i++) {
+      this.serviceManagementModel[this.i] = { serviceManagementId: 1, applicationId: 1, questionId: this.i + 1, answer: '' };
+    }
+    this.LocalStorageValue = Number(localStorage.getItem('savedApplicationID'));
   }
   onlyNumbers(event: { which: any; keyCode: any; }) {
 
@@ -94,23 +111,24 @@ export class ServicemanagementComponent implements OnInit {
 })
 
 export class ServiceManagementWarningDialog {
-
-  serviceManagementModelDialog = new ServiceManagement();
-
+  i: number;
+  serviceManagementModelDialog: ServiceManagement[] = [];
   constructor(public dialogRef: MatDialogRef<ServiceManagementWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private serviceManagementService: ServiceManagementService,
     private changeDetectorRefs: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.serviceManagementModelDialog = data;
   }
 
   save() {
-
-    this.serviceManagementModelDialog.applicationId = Number(localStorage.getItem('savedApplicationID'));
-    this.serviceManagementService.storeServiceManagementDetails(this.serviceManagementModelDialog).subscribe((data: any) => {
-      //console.log(data);
+    for (this.i = 0; this.i < 47; this.i++) {
+      this.serviceManagementModelDialog[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
+    }
+    console.log(this.serviceManagementModelDialog);
+    this.serviceManagementService.storeAndupdateServiceManagementDetails(this.serviceManagementModelDialog).subscribe((data: any) => {
       this.openSnackBar(data);
     })
 
   }
+
 
   openSnackBar(id: number) {
     this._snackBar.open("Details are saved successfully", "Dismiss", {
