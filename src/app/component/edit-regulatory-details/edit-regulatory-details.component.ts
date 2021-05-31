@@ -27,7 +27,7 @@ export class EditRegulatoryDetailsComponent implements OnInit {
     if (this.existingApplicationId != 0) {
       this.regulatoryService.retrieveRegulatoryByApplicationId(this.existingApplicationId).subscribe((data: Regulatory[]) => {
         this.regulatoryRetrieved = data;
-        console.log(data);
+        //console.log(data);
       })
     }
   }
@@ -59,7 +59,7 @@ export class EditRegulatoryDetailsComponent implements OnInit {
     }
     this.regulatoryService.updateRegulatoryDetails(this.regulatoryRetrieved).subscribe((data: any) => {
     })
-    console.log(this.regulatoryRetrieved);
+    //console.log(this.regulatoryRetrieved);
 
     this.openSnackBar();
   }
@@ -99,7 +99,7 @@ export class EditRegulatoryDialog {
     this.regulatoryService.updateRegulatoryDetails(this.regulatoryRetrievedModel).subscribe((data: any) => {
     })
     this.openSnackBar();
-    console.log(this.regulatoryRetrievedModel);
+    //console.log(this.regulatoryRetrievedModel);
   }
 
   openSnackBar() {
