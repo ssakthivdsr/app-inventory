@@ -45,10 +45,57 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
     this.existingAppIdEdit = Number(localStorage.getItem('applicationID'));
     if (this.existingAppIdEdit != 0) {
       this.businessApplicationService.retrieveBusinessApplicationByApplicationId(this.existingAppIdEdit).subscribe((data: BusinessApplicationDetails) => {
-        this.businessApplicationModel = data;
         console.log(data);
-        console.log(JSON.stringify(this.businessApplicationModel));
-        //console.log("retrieved value:" + this.businessApplicationModel);
+        if (data.channels.length > 0) {
+          this.businessApplicationModel.channels = data.channels;
+        }
+        else {
+          this.businessApplicationModel.channels = [{ id: 1, applicationId: 1, channelType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
+        }
+        if (data.transactions.length > 0) {
+          this.businessApplicationModel.transactions = data.transactions;
+        }
+        else {
+          this.businessApplicationModel.transactions = [{ id: 1, applicationId: 1, transactionType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
+        }
+        if (data.products.length > 0) {
+          this.businessApplicationModel.products = data.products;
+        }
+        else {
+          this.businessApplicationModel.products = [{ id: 1, applicationId: 1, productType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' }, writtenPremiumOfProducts: null, writtenPremiumOfProductsObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
+        }
+        if (data.users.length > 0) {
+          this.businessApplicationModel.users = data.users;
+        }
+        else {
+          this.businessApplicationModel.users = [{ id: 1, applicationId: 1, userType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
+        }
+        if (data.businessApplicationQuestionAnswer.length > 0) {
+          this.businessApplicationModel.businessApplicationQuestionAnswer = data.businessApplicationQuestionAnswer;
+        }
+        else {
+          this.businessApplicationModel.businessApplicationQuestionAnswer = [
+            { applicationId: 1, questionId: 1, answer: '' },
+            { applicationId: 1, questionId: 2, answer: '' },
+            { applicationId: 1, questionId: 3, answer: '' },
+            { applicationId: 1, questionId: 4, answer: '' },
+            { applicationId: 1, questionId: 5, answer: '' },
+            { applicationId: 1, questionId: 6, answer: '' },
+            { applicationId: 1, questionId: 7, answer: '' },
+            { applicationId: 1, questionId: 8, answer: '' },
+            { applicationId: 1, questionId: 9, answer: '' },
+            { applicationId: 1, questionId: 10, answer: '' },
+            { applicationId: 1, questionId: 11, answer: '' },
+            { applicationId: 1, questionId: 12, answer: '' },
+            { applicationId: 1, questionId: 13, answer: '' },
+            { applicationId: 1, questionId: 14, answer: '' },
+            { applicationId: 1, questionId: 15, answer: '' },
+            { applicationId: 1, questionId: 16, answer: '' },
+            { applicationId: 1, questionId: 17, answer: '' },
+            { applicationId: 1, questionId: 18, answer: '' },
+            { applicationId: 1, questionId: 19, answer: '' },
+          ];
+        }
       })
 
       for (this.i = 0; this.i < this.businessApplicationModel.transactions.length; this.i++) {
@@ -223,7 +270,10 @@ export class EditBusinessApplicationSaveWarningDialog {
     this.businessApplicationModelDialog = data;
   }
 
-  save() {
+  update() {
+    for (this.i = 0; this.i < this.businessApplicationModelDialog.transactions.length; this.i++) {
+      this.businessApplicationModelDialog.transactions[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
+    }
     for (this.i = 0; this.i < this.businessApplicationModelDialog.channels.length; this.i++) {
       this.businessApplicationModelDialog.channels[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
     }
@@ -251,7 +301,7 @@ export class EditBusinessApplicationSaveWarningDialog {
   }
 
   clickMethod() {
-    this.save();
+    this.update();
     this.dialogRef.close();
   }
 

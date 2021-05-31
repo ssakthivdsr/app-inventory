@@ -4,7 +4,7 @@ export class Regulatory {
     regulatoryValue: boolean;
     constructor() {
         this.regulatoryId = 0;
-        this.applicationId = 1;
+        this.applicationId = 0;
         this.regulatoryValue = false;
     }
 }

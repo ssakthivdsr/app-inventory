@@ -199,6 +199,9 @@ export class BusinessApplicationSaveWarningDialog {
     }
 
     save() {
+        for (this.i = 0; this.i < this.businessApplicationModelDialog.transactions.length; this.i++) {
+            this.businessApplicationModelDialog.transactions[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
+        }
         for (this.i = 0; this.i < this.businessApplicationModelDialog.channels.length; this.i++) {
             this.businessApplicationModelDialog.channels[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
         }

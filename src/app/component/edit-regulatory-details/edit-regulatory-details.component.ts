@@ -14,10 +14,12 @@ import { RegulatoryService } from 'src/app/service/regulatory.service';
 export class EditRegulatoryDetailsComponent implements OnInit {
   i: number = 0;
   existingApplicationId: number = 0;
-  public regulatoryRetrieved: Regulatory[];
+  public regulatoryRetrieved: Regulatory[] = [];
 
   public constructor(private titleService: Title, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private regulatoryService: RegulatoryService, private route: ActivatedRoute) {
     this.titleService.setTitle("Inventory - Regulatory Details");
+    for (this.i = 0; this.i < 10; this.i++)
+      this.regulatoryRetrieved[this.i] = new Regulatory();
 
   }
 
@@ -26,15 +28,25 @@ export class EditRegulatoryDetailsComponent implements OnInit {
 
     if (this.existingApplicationId != 0) {
       this.regulatoryService.retrieveRegulatoryByApplicationId(this.existingApplicationId).subscribe((data: Regulatory[]) => {
-        this.regulatoryRetrieved = data;
-        //console.log(data);
+        if (data.length != 0) {
+          this.regulatoryRetrieved = data;
+        }
+        else {
+          for (this.i = 0; this.i < 10; this.i++) {
+            this.regulatoryRetrieved[this.i] = new Regulatory();
+            this.regulatoryRetrieved[this.i].regulatoryValue = false;
+          }
+          // console.log(this.regulatoryRetrieved);
+        }
+
+
       })
     }
   }
 
   check() {
 
-    for (this.i = 0; this.i < this.regulatoryRetrieved.length; this.i++) {
+    for (this.i = 0; this.i < 10; this.i++) {
       if (this.regulatoryRetrieved[this.i].regulatoryValue) {
         return false;
       }
@@ -54,7 +66,7 @@ export class EditRegulatoryDetailsComponent implements OnInit {
   }
 
   update() {
-    for (this.i = 0; this.i < this.regulatoryRetrieved.length; this.i++) {
+    for (this.i = 0; this.i < 10; this.i++) {
       this.regulatoryRetrieved[this.i].applicationId = Number(localStorage.getItem('applicationID'));
     }
     this.regulatoryService.updateRegulatoryDetails(this.regulatoryRetrieved).subscribe((data: any) => {
@@ -93,7 +105,7 @@ export class EditRegulatoryDialog {
   constructor(public dialogRef: MatDialogRef<EditRegulatoryDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private regulatoryService: RegulatoryService) { }
 
   update() {
-    for (this.i = 0; this.i < this.regulatoryRetrievedModel.length; this.i++) {
+    for (this.i = 0; this.i < 10; this.i++) {
       this.regulatoryRetrievedModel[this.i].applicationId = Number(localStorage.getItem('applicationID'));
     }
     this.regulatoryService.updateRegulatoryDetails(this.regulatoryRetrievedModel).subscribe((data: any) => {

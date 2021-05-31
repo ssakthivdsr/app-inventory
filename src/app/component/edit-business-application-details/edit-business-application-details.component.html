@@ -1,7 +1,7 @@
 <mat-card>
     <mat-accordion>
-        <mat-expansion-panel >
-            <mat-expansion-panel-header >
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
                 <mat-panel-title>
                     <span style="color:#8b9196;font-weight: bold;">Transaction Data</span>
                 </mat-panel-title>
@@ -544,7 +544,6 @@
                 <mat-form-field class="bpd-full-width">
                     <mat-label>Customer satisfaction score in last 3 years</mat-label>
                     <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[18].answer"
-                        value={{businessApplicationModel.businessApplicationQuestionAnswer[18].answer}}
                         [ngModelOptions]="{standalone: true}">
                         <mat-option value="less than 75%">&lt; 75%</mat-option>
                         <mat-option value="75-80%">75-80%</mat-option>
