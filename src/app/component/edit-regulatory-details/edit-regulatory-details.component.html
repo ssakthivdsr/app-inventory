@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="regulatoryRetrieved">
     <section class="checkbox-section">
         <mat-checkbox class="checkbox-margin" [(ngModel)]="regulatoryRetrieved[0].regulatoryValue">Sarbanes-Oxley
             Act (SOA)</mat-checkbox>

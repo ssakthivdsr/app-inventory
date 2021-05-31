@@ -14,18 +14,16 @@ import { RegulatoryService } from 'src/app/service/regulatory.service';
 export class EditRegulatoryDetailsComponent implements OnInit {
   i: number = 0;
   existingApplicationId: number = 0;
-  public regulatoryRetrieved: Regulatory[] = [];
+  public regulatoryRetrieved: Regulatory[];
 
   public constructor(private titleService: Title, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private regulatoryService: RegulatoryService, private route: ActivatedRoute) {
     this.titleService.setTitle("Inventory - Regulatory Details");
+
   }
 
   ngOnInit(): void {
-    this.regulatoryRetrieved = [];
     this.existingApplicationId = Number(localStorage.getItem('applicationID'));
-    for (this.i = 0; this.i < this.regulatoryRetrieved.length; this.i++) {
-      this.regulatoryRetrieved[this.i].applicationId = this.existingApplicationId;
-    }
+
     if (this.existingApplicationId != 0) {
       this.regulatoryService.retrieveRegulatoryByApplicationId(this.existingApplicationId).subscribe((data: Regulatory[]) => {
         this.regulatoryRetrieved = data;
