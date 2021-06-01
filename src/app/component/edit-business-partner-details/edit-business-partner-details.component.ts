@@ -32,11 +32,17 @@ export class EditBusinessPartnerDetailsComponent implements OnInit {
     this.existingApplicationId = Number(localStorage.getItem('applicationID'));
     if (this.existingApplicationId != 0) {
       this.businessPartnerService.retrieveBusinessPartnerByApplicationId(this.existingApplicationId).subscribe((data: BusinessPartner) => {
-        this.businesspartnerModel = data;
-        this.addBusFormGroup.setValue({
-          BusPart: this.businesspartnerModel.primaryBusinessPartner
-        })
-        //console.log("retrieved value:" + this.businesspartnerModel);
+        console.log(data);
+        if (data == null) {
+          this.businesspartnerModel = new BusinessPartner();
+        }
+        else {
+          this.businesspartnerModel = data;
+          this.addBusFormGroup.setValue({
+            BusPart: this.businesspartnerModel.primaryBusinessPartner
+          })
+          //console.log("retrieved value:" + this.businesspartnerModel);
+        }
       })
     }
   }
@@ -57,7 +63,8 @@ export class EditBusinessPartnerDetailsComponent implements OnInit {
 
   update() {
     //console.log("updated");
-    this.businessPartnerService.storeBusinessPartnerDetails(this.businesspartnerModel).subscribe((data: any) => {
+    this.businesspartnerModel.applicationId = Number(localStorage.getItem('applicationID'));
+    this.businessPartnerService.updateBusinessPartnerDetails(this.businesspartnerModel).subscribe((data: any) => {
       //console.log(data);
     })
     this.openSnackBar();
@@ -96,7 +103,8 @@ export class EditBusinessPartnerSaveWarningDialog {
 
   update() {
     //console.log("updated");
-    this.businessPartnerService.storeBusinessPartnerDetails(this.businesspartnerModelDialog).subscribe((data: any) => {
+    this.businesspartnerModelDialog.applicationId = Number(localStorage.getItem('applicationID'));
+    this.businessPartnerService.updateBusinessPartnerDetails(this.businesspartnerModelDialog).subscribe((data: any) => {
       //console.log(data);
     })
     this.openSnackBar();

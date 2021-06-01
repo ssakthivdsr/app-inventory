@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { BusinessPartner } from '../model/businesspartner.model';
 
-// const endpoint1 = "http://localhost:8000/applicationinventoryservice/";
+// const endpoint = "http://localhost:8000/applicationinventoryservice/";
 const endpoint = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/';
 
 @Injectable({
@@ -46,6 +46,10 @@ export class BusinessPartnerService {
     }
     storeBusinessPartnerDetails(body: BusinessPartner): Observable<any> {
         return this.http.post<any>(endpoint.concat('storeBusinessPartnerDetails'), body);
+    }
+
+    updateBusinessPartnerDetails(body: BusinessPartner): Observable<any> {
+        return this.http.post<any>(endpoint.concat('updateBusinessPartnerDetails'), body);
     }
     private extractData(res: Response): any {
         const body = res;

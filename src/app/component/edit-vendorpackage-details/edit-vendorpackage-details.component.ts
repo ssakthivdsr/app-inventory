@@ -59,6 +59,7 @@ export class EditVendorpackageDetailsComponent implements OnInit {
 
   update() {
     //console.log("updated");
+    this.vendorPackageModel.applicationId = Number(localStorage.getItem('applicationID'));
     this.vendorPackageService.updateVendorPackageDetails(this.vendorPackageModel).subscribe((data: any) => {
       //console.log(this.vendorPackageModel);
       this.openSnackBar();
@@ -76,11 +77,17 @@ export class EditVendorpackageDetailsComponent implements OnInit {
     //console.log(this.existingApplicationId);
     if (this.existingApplicationId != 0) {
       this.vendorPackageService.retrieveVendorPackageByApplicationId(this.existingApplicationId).subscribe((data: VendorPackage) => {
-        //console.log(this.vendorPackageModel);
-        this.vendorPackageModel = data;
-        //console.log(data.isLatestSwVersion);
-        this.vendorPackageModel.isLatestSwVersion = data.isLatestSwVersion;
-        console.log(this.vendorPackageModel.isLatestSwVersion);
+        console.log(data);
+        if (data == null) {
+          this.vendorPackageModel = new VendorPackage();
+        }
+        else {
+          // //console.log(this.vendorPackageModel);
+          this.vendorPackageModel = data;
+          // //console.log(data.isLatestSwVersion);
+          // this.vendorPackageModel.isLatestSwVersion = data.isLatestSwVersion;
+          // console.log(this.vendorPackageModel.isLatestSwVersion);
+        }
       })
     }
   }
@@ -100,6 +107,7 @@ export class EditVendorPacakageSaveWarningDialog {
 
   update() {
     //console.log("updated");
+    this.vendorPackageModelDialogue.applicationId = Number(localStorage.getItem('applicationID'));
     this.vendorPackageService.updateVendorPackageDetails(this.vendorPackageModelDialogue).subscribe((data: any) => {
       //console.log(this.vendorPackageModelDialogue);
       this.openSnackBar();
