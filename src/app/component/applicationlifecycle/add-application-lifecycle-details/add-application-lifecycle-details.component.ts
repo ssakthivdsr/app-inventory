@@ -14,8 +14,10 @@ import { ApplicationLifecycleService } from 'src/app/service/applicationlifecycl
 
 export class AddApplicationLifecycleDetailsComponent implements OnInit {
 
-  public applicationlifecycleModel = new ApplicationLifecycle();
+  applicationlifecycleModel: ApplicationLifecycle[] = [];
   checkId: number;
+  i: number;
+  LocalStorageValue: Number;
 
   public constructor(private titleService: Title, private dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router, private applicationlifecycleservice: ApplicationLifecycleService) {
     this.titleService.setTitle("Inventory - Application Lifecycle Details");
@@ -23,7 +25,7 @@ export class AddApplicationLifecycleDetailsComponent implements OnInit {
 
   check() {
     for (this.checkId = 0; this.checkId <= 13; this.checkId++) {
-      if (this.applicationlifecycleModel.questionAnswer[this.checkId].answer === '')
+      if (this.applicationlifecycleModel[this.checkId].answer === '')
         return true;
     }
     return false;
@@ -33,24 +35,32 @@ export class AddApplicationLifecycleDetailsComponent implements OnInit {
     this.dialog.open(ApplicationLifecycleDialog, { data: this.applicationlifecycleModel });
   }
 
-  openSnackBar() {
+  openSnackBar(id: number) {
     this._snackBar.open("Details are saved successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
     });
   }
 
+  checkAppId() {
+    if (this.LocalStorageValue === Number(localStorage.getItem('savedApplicationID'))) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   save() {
 
-    this.applicationlifecycleModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
-
-    console.log("applicationlifecycleTO: " + this.applicationlifecycleModel)
-    this.applicationlifecycleservice.storeApplicationLifecycleDetails(this.applicationlifecycleModel).subscribe((data: any) => {
+    for (this.i = 0; this.i < 14; this.i++) {
+      this.applicationlifecycleModel[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
+    }
+    //console.log("saved");
+    this.applicationlifecycleservice.storeAndupdateApplicationLifecycleDetails(this.applicationlifecycleModel).subscribe((data: any) => {
+      // console.log(data);
+      this.openSnackBar(data);
     })
-
-    console.log(this.applicationlifecycleModel);
-    this.openSnackBar();
-
   }
 
   cancel() {
@@ -60,6 +70,12 @@ export class AddApplicationLifecycleDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    for (this.i = 0; this.i < 14; this.i++) {
+      this.applicationlifecycleModel[this.i] = { id: 1, applicationId: 1, questionId: this.i + 1, answer: '' };
+    }
+    this.LocalStorageValue = Number(localStorage.getItem('savedApplicationID'));
+
+
   }
 }
 
@@ -70,7 +86,8 @@ export class AddApplicationLifecycleDetailsComponent implements OnInit {
 
 export class ApplicationLifecycleDialog {
 
-  public applicationlifecycleModel = new ApplicationLifecycle();
+  public applicationlifecycleModel: ApplicationLifecycle[] = [];
+  i: number;
 
   constructor(public dialogRef: MatDialogRef<ApplicationLifecycleDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private applicationlifecycleservice: ApplicationLifecycleService, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.applicationlifecycleModel = data;
@@ -78,16 +95,18 @@ export class ApplicationLifecycleDialog {
 
   save() {
 
-    this.applicationlifecycleModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
-
-    this.applicationlifecycleservice.storeApplicationLifecycleDetails(this.applicationlifecycleModel).subscribe((data: any) => {
+    for (this.i = 0; this.i < 14; this.i++) {
+      this.applicationlifecycleModel[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
+    }
+    //console.log("saved");
+    this.applicationlifecycleservice.storeAndupdateApplicationLifecycleDetails(this.applicationlifecycleModel).subscribe((data: any) => {
+      // console.log(data);
+      this.openSnackBar(data);
     })
-    console.log(this.applicationlifecycleModel);
-
-    this.openSnackBar();
   }
 
-  openSnackBar() {
+
+  openSnackBar(id: number) {
     this._snackBar.open("Details are saved successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"

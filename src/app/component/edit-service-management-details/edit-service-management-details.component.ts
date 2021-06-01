@@ -16,7 +16,7 @@ import { ServiceManagement } from '../../model/servicemanagement.model';
 
 export class EditServiceManagementDetailsComponent implements OnInit {
   retrieveId: number;
-  dataId: number;
+  i: number;
   existingApplicationId: number = 0;
   myForm: FormGroup;
   ValidNumberIndicator = true;
@@ -44,13 +44,20 @@ export class EditServiceManagementDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    for (this.i = 0; this.i < 47; this.i++) {
+      this.serviceManagementsRetrieved[this.i] = { serviceManagementId: 1, applicationId: this.existingApplicationId, questionId: this.i + 1, answer: '' };
+    }
     this.existingApplicationId = Number(localStorage.getItem('applicationID'));
     if (this.existingApplicationId !== 0) {
       this.serviceManagementService.retrieveServiceManagementByApplicationId(this.existingApplicationId).subscribe((data: ServiceManagement[]) => {
-        this.serviceManagementsRetrieved = data;
-        console.log(this.serviceManagementsRetrieved);
+        if (data.length == 0) {
+          for (this.i = 0; this.i < 47; this.i++) {
+            this.serviceManagementsRetrieved[this.i] = { serviceManagementId: 1, applicationId: this.existingApplicationId, questionId: this.i + 1, answer: '' };
+          }
+        } else {
+          this.serviceManagementsRetrieved = data;
+        }
       })
-      console.log(this.serviceManagementsRetrieved);
     }
   }
 
@@ -77,7 +84,6 @@ export class EditServiceManagementDetailsComponent implements OnInit {
   }
 
   update() {
-    console.log(this.serviceManagementsRetrieved);
     this.serviceManagementService.storeAndupdateServiceManagementDetails(this.serviceManagementsRetrieved).subscribe((data: any) => {
 
     })
@@ -119,9 +125,7 @@ export class EditServiceManagementWarningDialog {
   }
 
   update() {
-    console.log(this.serviceManagementModelDialog);
     this.serviceManagementService.storeAndupdateServiceManagementDetails(this.serviceManagementModelDialog).subscribe((data: any) => {
-      //console.log(data);
     })
     this.openSnackBar();
   }

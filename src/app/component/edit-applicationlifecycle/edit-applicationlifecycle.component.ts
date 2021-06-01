@@ -3,9 +3,10 @@ import { Title } from '@angular/platform-browser';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { ApplicationLifecycle } from 'src/app/model/applicationlifecycle.model';
-import { ApplicationLifecycleRetrieve } from 'src/app/model/applicationlifecycleretrieve.model';
+
 import { ApplicationLifecycleService } from 'src/app/service/applicationlifecycle.service';
+import { ApplicationLifecycle } from 'src/app/model/applicationlifecycle.model';
+// import { ApplicationLifecycle } from 'src/app/model/applicationlifecycle.model';
 
 @Component({
   selector: 'app-edit-applicationlifecycle',
@@ -14,44 +15,42 @@ import { ApplicationLifecycleService } from 'src/app/service/applicationlifecycl
 })
 export class EditApplicationlifecycleComponent implements OnInit {
   existingApplicationId: number = 0;
-  public applicationlifecycleModel = new ApplicationLifecycle();
-  public applicationlifecycleRetrieve: ApplicationLifecycleRetrieve[] = [];
+  // public applicationlifecycleModel = new ApplicationLifecycle();
+  applicationlifecycleRetrieve: ApplicationLifecycle[] = [];
   checkId: number;
   id: number;
   dataId: number;
+  i: number;
 
   public constructor(private titleService: Title, private dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router, private applicationlifecycleservice: ApplicationLifecycleService) {
     this.titleService.setTitle("Inventory - Application Lifecycle Details");
 
-    for (this.id = 0; this.id <= 13; this.id++) {
-      this.applicationlifecycleRetrieve[this.id] = new ApplicationLifecycleRetrieve();
-      this.applicationlifecycleRetrieve[this.id].questionId = this.id + 1;
-    }
+    // for (this.id = 0; this.id <= 13; this.id++) {
+    //   this.applicationlifecycleRetrieve[this.id] = new ApplicationLifecycle();
+    //   this.applicationlifecycleRetrieve[this.id].questionId = this.id + 1;
+    // }
 
   }
 
   ngOnInit(): void {
 
     this.existingApplicationId = Number(localStorage.getItem('applicationID'));
-    if (this.existingApplicationId != 0) {
-
-      this.applicationlifecycleservice.retrieveApplicationLifecycleByApplicationId(this.existingApplicationId).subscribe((data: ApplicationLifecycleRetrieve[]) => {
-        this.dataId = 0;
-
-        for (this.id = 0; this.id <= 13; this.id++) {
-          if (data[this.dataId].questionId == this.id + 1) {
-            this.applicationlifecycleRetrieve[this.id] = data[this.dataId];
-            this.dataId++;
+    for (this.i = 0; this.i < 14; this.i++) {
+      this.applicationlifecycleRetrieve[this.i] = { id: 1, applicationId: this.existingApplicationId, questionId: this.i + 1, answer: '' };
+    }
+    if (this.existingApplicationId !== 0) {
+      this.applicationlifecycleservice.retrieveApplicationLifecycleByApplicationId(this.existingApplicationId).subscribe((data: ApplicationLifecycle[]) => {
+        if (data.length == 0) {
+          for (this.i = 0; this.i < 14; this.i++) {
+            this.applicationlifecycleRetrieve[this.i] = { id: 1, applicationId: this.existingApplicationId, questionId: this.i + 1, answer: '' };
           }
-          else {
-            this.applicationlifecycleRetrieve[this.id].answer = '';
-          }
+        } else {
+          this.applicationlifecycleRetrieve = data;
         }
       })
+
     }
-
   }
-
 
   check() {
     for (this.id = 0; this.id <= 13; this.id++) {
@@ -74,15 +73,12 @@ export class EditApplicationlifecycleComponent implements OnInit {
 
   update() {
 
-    // this.applicationlifecycleModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
+    console.log(this.applicationlifecycleRetrieve);
+    this.applicationlifecycleservice.storeAndupdateApplicationLifecycleDetails(this.applicationlifecycleRetrieve).subscribe((data: any) => {
 
-    // console.log("applicationlifecycleTO: " + this.applicationlifecycleModel)
-    this.applicationlifecycleservice.storeApplicationLifecycleDetails(this.applicationlifecycleModel).subscribe((data: any) => {
     })
 
-    // console.log(this.applicationlifecycleModel);
     this.openSnackBar();
-
   }
 
   cancel() {
@@ -99,7 +95,7 @@ export class EditApplicationlifecycleComponent implements OnInit {
 
 export class EditApplicationLifecycleDialog {
 
-  public applicationlifecycleModel = new ApplicationLifecycle();
+  applicationlifecycleModel: ApplicationLifecycle[] = [];
 
   constructor(public dialogRef: MatDialogRef<EditApplicationLifecycleDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private applicationlifecycleservice: ApplicationLifecycleService, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.applicationlifecycleModel = data;
@@ -107,11 +103,10 @@ export class EditApplicationLifecycleDialog {
 
   update() {
 
-    // this.applicationlifecycleModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
+    console.log(this.applicationlifecycleModel);
+    this.applicationlifecycleservice.storeAndupdateApplicationLifecycleDetails(this.applicationlifecycleModel).subscribe((data: any) => {
 
-    this.applicationlifecycleservice.storeApplicationLifecycleDetails(this.applicationlifecycleModel).subscribe((data: any) => {
     })
-    // console.log(this.applicationlifecycleModel);
 
     this.openSnackBar();
   }
