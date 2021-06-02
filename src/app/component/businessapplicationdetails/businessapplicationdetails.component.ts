@@ -20,10 +20,12 @@ export class BusinessapplicationdetailsComponent implements OnInit {
     checked = false;
     indeterminate = false;
     ValidNumberIndicator = true;
+    LocalStorageValue: Number;
 
     constructor(private _fb: FormBuilder, private dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router, private businessApplicationService: BusinessApplicationService) { }
 
     ngOnInit() {
+        this.LocalStorageValue = Number(localStorage.getItem('savedApplicationID'));
         this.myForm = this._fb.group({
             name: ['', [Validators.required, Validators.minLength(5)]],
             f: new FormControl("", [Validators.pattern(/\d/)]),
@@ -134,6 +136,14 @@ export class BusinessapplicationdetailsComponent implements OnInit {
         this.dialog.open(BusinessApplicationSaveWarningDialog, {
             data: this.businessApplicationModel
         });
+    }
+    checkAppId() {
+        if (this.LocalStorageValue === Number(localStorage.getItem('savedApplicationID'))) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     save() {

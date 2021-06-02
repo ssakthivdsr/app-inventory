@@ -15,7 +15,7 @@ import { VendorPackageService } from 'src/app/service/vendorPackage.service';
 export class VendorpackageComponent implements OnInit {
   vendorPackageModel = new VendorPackage();
   ValidNumberIndicator = true;
-
+  LocalStorageValue: Number;
   public constructor(private titleService: Title, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private vendorPackageService: VendorPackageService) {
     this.titleService.setTitle("Inventory - Vender Package Details");
   }
@@ -55,7 +55,14 @@ export class VendorpackageComponent implements OnInit {
       verticalPosition: "top"
     });
   }
-
+  checkAppId() {
+    if (this.LocalStorageValue === Number(localStorage.getItem('savedApplicationID'))) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
   save() {
     this.vendorPackageModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
     this.vendorPackageService.storeVendorPackageDetails(this.vendorPackageModel).subscribe((data: any) => {
@@ -70,7 +77,7 @@ export class VendorpackageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //console.log(this.vendorPackageModel);
+    this.LocalStorageValue = Number(localStorage.getItem('savedApplicationID'));
   }
 }
 

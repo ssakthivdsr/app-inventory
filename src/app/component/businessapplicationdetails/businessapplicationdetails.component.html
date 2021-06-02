@@ -567,7 +567,8 @@
   </mat-accordion> <br />
 
   <div class="margin-20">
-    <button mat-raised-button color="primary" (click)="check() ? openDialog() : save()"> Save </button>&nbsp;
+    <button mat-raised-button color="primary" [disabled]="checkAppId()" (click)="check() ? openDialog() : save()"
+      [disabled]="checkAppId()"> Save </button>&nbsp;
     <button mat-raised-button color="primary" (click)="cancel()"> Cancel </button>
     <!-- <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Save</button> -->
   </div>

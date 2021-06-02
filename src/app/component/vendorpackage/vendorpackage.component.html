@@ -61,7 +61,8 @@
     </mat-form-field>
   </form> <br />
   <div class="bp-button-row">
-    <button mat-raised-button color="primary" (click)="check() ? openDialog() : save()"> Save </button> &nbsp;
+    <button mat-raised-button color="primary" [disabled]="checkAppId()" (click)="check() ? openDialog() : save()"
+      disabled="checkAppId()"> Save </button> &nbsp;
     <button mat-raised-button color="primary" (click)="cancel()"> Cancel </button>
   </div>
 </mat-card>

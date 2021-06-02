@@ -17,6 +17,8 @@ export class BusinesspartnerComponent implements OnInit {
   public addBusFormGroup: FormGroup;
   businesspartnerModel = new BusinessPartner();
   businesspartnersRetrieved: BusinessPartner[] = [];
+  LocalStorageValue: Number;
+
 
   public constructor(private titleService: Title, private _snackBar: MatSnackBar, private dialog: MatDialog, private router: Router, private businessPartnerService: BusinessPartnerService,
     private changeDetectorRefs: ChangeDetectorRef) {
@@ -33,6 +35,7 @@ export class BusinesspartnerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.LocalStorageValue = Number(localStorage.getItem('savedApplicationID'));
     this.addBusFormGroup = new FormGroup({
       BusPart: new FormControl('', [Validators.required])
     });
@@ -43,7 +46,14 @@ export class BusinesspartnerComponent implements OnInit {
       data: this.businesspartnerModel
     });
   }
-
+  checkAppId() {
+    if (this.LocalStorageValue === Number(localStorage.getItem('savedApplicationID'))) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
   save() {
     this.businesspartnerModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
     //console.log(this.businesspartnerModel.applicationId);

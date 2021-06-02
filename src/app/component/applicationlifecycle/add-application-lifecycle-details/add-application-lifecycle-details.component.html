@@ -62,7 +62,8 @@
 
     </form> <br />
     <div class="example-button-row">
-        <button mat-raised-button color="primary" (click)="check()? openDialog() : save()">
+        <button mat-raised-button color="primary" [disabled]="checkAppId()" (click)="check()? openDialog() : save()"
+            [disabled]="checkAppId()">
             Save</button>&nbsp;
         <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
     </div>

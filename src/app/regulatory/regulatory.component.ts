@@ -17,6 +17,7 @@ import { RegulatoryService } from '../service/regulatory.service';
 export class RegulatoryComponent implements OnInit {
   i: number = 0;
   regulatoryModel: Regulatory[] = [];
+  LocalStorageValue: Number;
 
   public constructor(private titleService: Title, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private regulatoryService: RegulatoryService) {
     this.titleService.setTitle("Inventory - Regulatory Details");
@@ -43,7 +44,14 @@ export class RegulatoryComponent implements OnInit {
       verticalPosition: "top"
     });
   }
-
+  checkAppId() {
+    if (this.LocalStorageValue === Number(localStorage.getItem('savedApplicationID'))) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
   save() {
     for (this.i = 0; this.i < this.regulatoryModel.length; this.i++) {
       this.regulatoryModel[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
@@ -61,6 +69,7 @@ export class RegulatoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.LocalStorageValue = Number(localStorage.getItem('savedApplicationID'));
     for (this.i = 0; this.i < 10; this.i++) {
       this.regulatoryModel[this.i] = { regulatoryId: 0, applicationId: 0, regulatoryValue: false }
     }
