@@ -1,5 +1,5 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 
 @Component({
   selector: 'app-layout',
@@ -8,9 +8,9 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  show : boolean = false;
-  opened : boolean = true;
-  
+  show: boolean = false;
+  opened: boolean = true;
+
   mobileQuery: MediaQueryList;
 
   _mobileQueryListener: () => void;
@@ -21,10 +21,15 @@ export class LayoutComponent implements OnInit {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
-  ngOnInit(){}
+  ngOnInit() { }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
-    this.show  = true;
+    this.show = true;
   }
+  clear() {
+    localStorage.clear();
+  }
+
+
 }
