@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import { AvailableDepartmentsDialogBoxComponent } from './available-departments-dialog-box/available-departments-dialog-box.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-available-departments',
@@ -20,13 +21,18 @@ export class AvailableDepartmentsComponent implements OnInit {
   departmentsRetrieved: Department[] = [];
   dataSourceD: any;
   displayedColumns: string[] = ['departmentId', 'departmentName', 'departmentOwner', 'action'];
+  private updateSubscription: Subscription;
+
 
   constructor(public dialog: MatDialog, private userService: UserService, public changeDetectorRefs: ChangeDetectorRef, private router: Router) { }
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
 
   ngOnInit(): void {
     this.retrieveAllDepartmentDetails();
+
   }
+
+
 
   retrieveAllDepartmentDetails() {
     this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
@@ -39,21 +45,16 @@ export class AvailableDepartmentsComponent implements OnInit {
 
   openServerDialog(element: any) {
     this.departmentModel = _.cloneDeep(element);
-    if (this.router.url === '/layout/newdepartment') {
-      this.dialog.open(AvailableDepartmentsDialogBoxComponent, {
-        width: '250px',
-        data: { model: this.departmentModel }
-      })
-        .afterClosed()
-        .subscribe(() => this.router.navigate(['/layout/availabledepartments']));
-    }
-    else {
-      this.dialog.open(AvailableDepartmentsDialogBoxComponent, {
-        width: '250px',
-        data: { model: this.departmentModel }
-      })
-        .afterClosed()
-        .subscribe(() => this.router.navigate(['/layout/newdepartment']));
-    }
+    this.dialog.open(AvailableDepartmentsDialogBoxComponent, {
+      width: '250px',
+      data: { model: this.departmentModel }
+    })
+      .afterClosed()
+      .subscribe(
+        () => { this.retrieveAllDepartmentDetails() });
+    this.router.navigate(['/layout/newdepartment']);
   }
+
 }
+
+

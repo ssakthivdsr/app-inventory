@@ -59,7 +59,7 @@ export class AddDeptDetailsComponent implements OnInit {
     this.userService.storeDepartmentDetails(this.departmentModel).subscribe((data: any) => {
       //console.log(data);
     })
-
+    this.addDepFormGroup.reset();
     this.retrieveAllDepartmentDetails();
     this.openSnackBar();
   }

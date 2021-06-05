@@ -9,13 +9,14 @@ import { Router } from '@angular/router';
 })
 export class DeptComponent implements OnInit {
 
- public constructor(private titleService: Title, private router : Router) { 
+  public constructor(private titleService: Title, private router: Router) {
     this.titleService.setTitle("Inventory - Department Details");
- }
-
-  ngOnInit(): void {
   }
 
-  save(){
+  ngOnInit(): void {
+
+  }
+
+  save() {
   }
 }

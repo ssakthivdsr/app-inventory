@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import * as _ from 'lodash';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AvailableDepartmentsComponent } from '../available-departments.component';
 
 @Component({
   selector: 'app-available-departments-dialog-box',
@@ -32,17 +33,18 @@ export class AvailableDepartmentsDialogBoxComponent implements OnInit {
 
   updateDepartmentDetails() {
     this.userService.updateDepartmentDetails(this.departmentModelDialog).subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       if (data > 0) {
         this.dialogRef.close();
         this.openSnackBar();
       }
     });
+
   }
 
   openSnackBar() {
     this._snackBar.open("Details are updated successfully", "Dismiss", {
-      duration: 2000,
+      duration: 3000,
       verticalPosition: "top"
     });
   }
