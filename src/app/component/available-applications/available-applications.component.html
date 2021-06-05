@@ -60,24 +60,37 @@
             <table class="table table-sm">
               <thead>
                 <tr>
-                  <th scope="col">Business Total</th>
                   <th scope="col">Business Value</th>
-                  <th scope="col">Agility</th>
+                  <th scope="col">agility</th>
+                  <th scope="col">Business Total</th>
                   <th scope="col">Tech Total</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td style="text-align: center" style="text-indent: 5mm;">
-                    <span class=" spangreen"> {{ element.businessValue }} </span>
+                    <span [ngClass] = "element.businessValue > businessValueScore[0] ? 'spangreen' :
+                      element.businessValue > businessValueScore[1] ?  'spanamber':  'spanred'" > 
+                      {{ element.businessValue }} 
+                    </span>
                   </td>
-                  <td style="text-align: center" style="text-indent: 5mm;"> <span class=" spanred"> {{
-                      element.agility }}</span></td>
-                  <td style="text-align: center" style="text-indent: 5mm;"><span class=" spanamber"> {{
-                      element.businessTotal
-                      }}</span></td>
-                  <td style="text-align: center" style="text-indent: 5mm;"><span class=" spanred"> {{ element.techTotal
-                      }}</span></td>
+                  <td style="text-align: center" style="text-indent: 5mm;"> 
+                    <span  [ngClass] = "element.agility > agilityScore[0] ? 'spangreen' :
+                      element.agility > agilityScore[1] ?  'spanamber':  'spanred'" > 
+                      {{ element.agility }}
+                    </span>
+                  </td>
+                  <td style="text-align: center" style="text-indent: 5mm;">
+                    <span [ngClass] = "element.businessTotal > businessTotalScore[0] ? 'spangreen' :
+                      element.businessTotal > businessTotalScore[1] ?  'spanamber':  'spanred'" > 
+                      {{ element.businessTotal }}
+                    </span>
+                </td>
+                  <td style="text-align: center" style="text-indent: 5mm;">
+                    <span [ngClass] = "element.techTotal > businessTotalScore[0] ? 'spangreen' :
+                      element.techTotal > businessTotalScore[1] ?  'spanamber':  'spanred'" > 
+                      {{ element.techTotal }}
+                    </span></td>
                 </tr>
               </tbody>
             </table>

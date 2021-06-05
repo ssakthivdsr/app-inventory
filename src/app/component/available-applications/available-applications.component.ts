@@ -84,6 +84,10 @@ export class AvailableApplicationsComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   filterValue: string = "";
   searchString: String = "";
+  businessValueScore: number[] = [80, 70 ];
+  businessTotalScore: number[] = [275, 250 ];
+  agilityScore: number[] = [200, 150 ];
+  techTotalScore: number[] = [200, 150 ];
   
 
   @ViewChild(MatPaginator, {static: false})
