@@ -6,7 +6,7 @@ import { Department } from '../model/department.model';
 
 //const endpoint = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/retrieveDepartmentData/11';
 const endpoint = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/';
-// const endpoint1 = 'http://localhost:8000/applicationinventoryservice/';
+// const endpoint = 'http://localhost:8000/applicationinventoryservice/';
 
 @Injectable({
   providedIn: 'root'

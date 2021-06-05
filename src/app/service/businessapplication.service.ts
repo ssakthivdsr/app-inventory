@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { BusinessApplicationDetails } from '../model/businessApplicationDetails.model';
 
 const endpoint = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/';
-// const endpoint1 = 'http://localhost:8000/applicationinventoryservice/';
+// const endpoint = 'http://localhost:8000/applicationinventoryservice/';
 
 @Injectable({
     providedIn: 'root'

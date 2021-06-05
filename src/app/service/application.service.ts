@@ -5,9 +5,9 @@ import { Observable, throwError } from 'rxjs';
 import { ApplicationDetails } from '../model/application-details.model';
 
 //const endpoint = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/retrieveDepartmentData/11';
-const endpoint1 = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/';
+const endpoint = 'https://app-inventory-restapi-test.herokuapp.com/applicationinventoryservice/';
 //const endpoint = 'http://localhost:8000/applicationinventoryservice/retrieveApplicationById/11';
-// const endpoint1 = 'http://localhost:8000/applicationinventoryservice/';
+// const endpoint = 'http://localhost:8000/applicationinventoryservice/';
 
 @Injectable({
     providedIn: 'root'
@@ -33,21 +33,21 @@ export class ApplicationService {
     }
 
     retrieveApplicationById(body: number): Observable<any> {
-        return this.http.get<ApplicationDetails[]>(endpoint1.concat('retrieveApplicationById/' + body)).pipe(
+        return this.http.get<ApplicationDetails[]>(endpoint.concat('retrieveApplicationById/' + body)).pipe(
             catchError(this.handleError));
     }
 
     retrieveAllApplicationDetails(): Observable<any> {
-        return this.http.get<ApplicationDetails[]>(endpoint1.concat('retrieveAllApplicationDetails')).pipe(
+        return this.http.get<ApplicationDetails[]>(endpoint.concat('retrieveAllApplicationDetails')).pipe(
             catchError(this.handleError));
     }
 
     storeApplicationDetails(body: ApplicationDetails): Observable<any> {
-        return this.http.post<any>(endpoint1.concat('storeApplicationDetails'), body);
+        return this.http.post<any>(endpoint.concat('storeApplicationDetails'), body);
     }
 
     updateApplicationDetails(body: ApplicationDetails): Observable<any> {
-        return this.http.post<any>(endpoint1.concat('updateApplicationDetails'), body);
+        return this.http.post<any>(endpoint.concat('updateApplicationDetails'), body);
     }
     private extractData(res: Response): any {
         const body = res;

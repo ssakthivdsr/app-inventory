@@ -96,6 +96,10 @@ export class AddApplicationDetailsComponent implements OnInit {
     this.applicationModel.departmentId = this.selectedDepartmentID;
     this.applicationModel.lineOfBusiness = this.selectedLob;
     this.applicationModel.functionality = this.selectedFunctionality;
+    this.applicationModel.businessValue = 0;
+    this.applicationModel.agility = 0;
+    this.applicationModel.businessTotal = 0;
+    this.applicationModel.techTotal = 0;
     if (this.initialId == Number(localStorage.getItem('savedApplicationID'))) {
       this.passedId = 0;
     }
@@ -122,12 +126,14 @@ export class AddApplicationDetailsComponent implements OnInit {
     });
   }
 
-
-
   save() {
     this.applicationModel.departmentId = this.selectedDepartmentID;
     this.applicationModel.lineOfBusiness = this.selectedLob;
     this.applicationModel.functionality = this.selectedFunctionality;
+    this.applicationModel.businessValue = 0;
+    this.applicationModel.agility = 0;
+    this.applicationModel.businessTotal = 0;
+    this.applicationModel.techTotal = 0;
     if (this.initialId == Number(localStorage.getItem('savedApplicationID'))) {
       this.applicationService.storeApplicationDetails(this.applicationModel).subscribe((data: any) => {
         localStorage.setItem('savedApplicationID', data + '');

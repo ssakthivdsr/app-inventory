@@ -124,6 +124,10 @@ export class EditApplicationDetailsComponent implements OnInit {
     this.applicationModel.departmentId = this.selectedDepartmentID;
     this.applicationModel.lineOfBusiness = this.selectedLob;
     this.applicationModel.functionality = this.selectedFunctionality;
+    this.applicationModel.businessValue = 0;
+    this.applicationModel.agility = 0;
+    this.applicationModel.businessTotal = 0;
+    this.applicationModel.techTotal = 0;
     this.dialog.open(EditApplicationDetailsDialog, {
       data: this.applicationModel
     });
@@ -140,6 +144,10 @@ export class EditApplicationDetailsComponent implements OnInit {
     this.applicationModel.departmentId = this.selectedDepartmentID;
     this.applicationModel.lineOfBusiness = this.selectedLob;
     this.applicationModel.functionality = this.selectedFunctionality;
+    this.applicationModel.businessValue = 0;
+    this.applicationModel.agility = 0;
+    this.applicationModel.businessTotal = 0;
+    this.applicationModel.techTotal = 0;
     this.applicationService.updateApplicationDetails(this.applicationModel).subscribe((data: any) => {
       // console.log(data);
     })
