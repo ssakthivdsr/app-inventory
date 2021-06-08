@@ -84,18 +84,12 @@ export class AvailableApplicationsComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   filterValue: string = "";
   searchString: String = "";
-  businessValueScore: number[] = [80, 70 ];
-  businessTotalScore: number[] = [275, 250 ];
-  agilityScore: number[] = [200, 150 ];
-  techTotalScore: number[] = [200, 150 ];
-  
+  businessValueScore: number[] = [80, 70];
+  businessTotalScore: number[] = [275, 250];
+  agilityScore: number[] = [200, 150];
+  techTotalScore: number[] = [200, 150];
 
-  @ViewChild(MatPaginator, {static: false})
-  set paginator(value: MatPaginator) {
-    if (this.applicationDataSource){
-      this.applicationDataSource.paginator = value;
-    }
-  }
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private userService: UserService, private applicationService: ApplicationService, private spinnerService: NgxSpinnerService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -110,20 +104,19 @@ export class AvailableApplicationsComponent implements OnInit, OnDestroy {
     this.applicationDataSource.filter = this.filterValue;
   }
 
-   retrieveAllApplicationDetails() {
+  retrieveAllApplicationDetails() {
     // this.spinnerService.show();
     this.applicationService.retrieveAllApplicationDetails().subscribe((data: ApplicationDetails[]) => {
       this.applicationsRetrieved = data;
       this.applicationDataSource = new MatTableDataSource(this.applicationsRetrieved);
-          
+      this.applicationDataSource.paginator = this.paginator;
     })
     // this.spinnerService.hide();
   }
 
   ngOnInit(): void {
-    
+
     this.retrieveAllApplicationDetails();
-    this.applicationDataSource.paginator = this.paginator;
     this.spinnerService.show();
     this.spinnerService.hide();
   }
