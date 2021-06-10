@@ -42,30 +42,49 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
       ])
     });
 
+
+
     this.existingAppIdEdit = Number(localStorage.getItem('applicationID'));
     if (this.existingAppIdEdit != 0) {
       this.businessApplicationService.retrieveBusinessApplicationByApplicationId(this.existingAppIdEdit).subscribe((data: BusinessApplicationDetails) => {
         console.log(data);
         if (data.channels.length > 0) {
           this.businessApplicationModel.channels = data.channels;
+          for (this.i = 0; this.i < data.channels.length - 1; this.i++) {
+            const c3 = <FormArray>this.myForm.controls['channels'];
+            c3.push(this.initChannels());
+          }
         }
         else {
           this.businessApplicationModel.channels = [{ id: 1, applicationId: 1, channelType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
         }
         if (data.transactions.length > 0) {
           this.businessApplicationModel.transactions = data.transactions;
+          for (this.i = 0; this.i < data.transactions.length - 1; this.i++) {
+            const c1 = <FormArray>this.myForm.controls['addresses'];
+            c1.push(this.initAddress());
+          }
         }
         else {
           this.businessApplicationModel.transactions = [{ id: 1, applicationId: 1, transactionType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
         }
         if (data.products.length > 0) {
           this.businessApplicationModel.products = data.products;
+          for (this.i = 0; this.i < data.products.length - 1; this.i++) {
+            const c2 = <FormArray>this.myForm.controls['products'];
+            c2.push(this.initProducts());
+          }
         }
         else {
           this.businessApplicationModel.products = [{ id: 1, applicationId: 1, productType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' }, writtenPremiumOfProducts: null, writtenPremiumOfProductsObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
         }
         if (data.users.length > 0) {
           this.businessApplicationModel.users = data.users;
+          for (this.i = 0; this.i < data.users.length - 1; this.i++) {
+            const c4 = <FormArray>this.myForm.controls['users'];
+            c4.push(this.initUsers());
+          }
+
         }
         else {
           this.businessApplicationModel.users = [{ id: 1, applicationId: 1, userType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
@@ -97,26 +116,6 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
           ];
         }
       })
-
-      for (this.i = 0; this.i < this.businessApplicationModel.transactions.length; this.i++) {
-        const c1 = <FormArray>this.myForm.controls['addresses'];
-        c1.push(this.initAddress());
-      }
-
-      for (this.i = 0; this.i < this.businessApplicationModel.products.length; this.i++) {
-        const c2 = <FormArray>this.myForm.controls['products'];
-        c2.push(this.initProducts());
-      }
-
-      for (this.i = 0; this.i < this.businessApplicationModel.channels.length; this.i++) {
-        const c3 = <FormArray>this.myForm.controls['channels'];
-        c3.push(this.initChannels());
-      }
-
-      for (this.i = 0; this.i < this.businessApplicationModel.users.length; this.i++) {
-        const c4 = <FormArray>this.myForm.controls['users'];
-        c4.push(this.initUsers());
-      }
     }
   }
 
@@ -209,6 +208,7 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
     });
   }
 
+
   update() {
 
     for (this.i = 0; this.i < this.businessApplicationModel.channels.length; this.i++) {
@@ -254,6 +254,8 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
     this.ValidNumberIndicator = true;
     return this.ValidNumberIndicator;
   }
+
+
 }
 
 @Component({
