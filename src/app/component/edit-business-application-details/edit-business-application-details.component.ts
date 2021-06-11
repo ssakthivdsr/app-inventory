@@ -228,8 +228,6 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
     }
     this.businessApplicationService.updateBusinessApplicationDetails(this.businessApplicationModel).subscribe((data: any) => {
     })
-    //console.log(this.businessApplicationModel);
-    //console.log(this.businessApplicationModel.businessApplicationQuestionAnswer);
     this.openSnackBar();
   }
 
@@ -290,8 +288,6 @@ export class EditBusinessApplicationSaveWarningDialog {
     }
     this.businessApplicationService.storeBusinessApplicationDetails(this.businessApplicationModelDialog).subscribe((data: any) => {
     })
-    //console.log(this.businessApplicationModel);
-    //console.log(this.businessApplicationModel.businessApplicationQuestionAnswer);
     this.openSnackBar();
   }
 

@@ -75,8 +75,8 @@ export class AvailableApplicationsComponent implements OnInit, OnDestroy {
   applicationRetrievedById: ApplicationDetails;
   departmentsRetrieved: Department[] = [];
   applicationDataSource: any;
-  newDisplayedColumns: string[] = ['id', 'departmentid', 'lob', 'applicationname', 'Action', 'Score', 'applicationCompletedStatus'];
-  displayedColumns: string[] = ['id', 'department', 'lob', 'name', 'Action', 'Score', 'applicationCompletedStatus'];
+  newDisplayedColumns: string[] = ['id', 'departmentid', 'lob', 'applicationname', 'Action', 'Score'];
+  displayedColumns: string[] = ['id', 'department', 'lob', 'name', 'Action', 'Score'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   _mobileQueryListener: () => void;
   isExpanded: Application | undefined;
