@@ -17,6 +17,9 @@ export class EditBusinessPartnerDetailsComponent implements OnInit {
   public addBusFormGroup: FormGroup;
   businesspartnerModel = new BusinessPartner();
   businesspartnersRetrieved: BusinessPartner[] = [];
+  showSpinner: Boolean;
+  showDialogue: Boolean;
+
 
   public constructor(private titleService: Title, private _snackBar: MatSnackBar, private dialog: MatDialog, private router: Router, private businessPartnerService: BusinessPartnerService,
     private changeDetectorRefs: ChangeDetectorRef) {
@@ -47,6 +50,25 @@ export class EditBusinessPartnerDetailsComponent implements OnInit {
     }
   }
 
+  Method() {
+
+    this.showSpinner = true;
+    setTimeout(() => { this.showSpinner = false }
+      , 5000);
+
+  }
+
+  clickMethod() {
+
+    this.update();
+    this.showDialogue = false;
+
+  }
+
+  onNoClick(): void {
+    this.showDialogue = false;
+  }
+
   check() {
     if (this.businesspartnerModel.secondaryBusinessPartner === '' || this.businesspartnerModel.businessPartnerManagers === '' ||
       this.businesspartnerModel.businessPartnerDirectors === '')
@@ -56,18 +78,21 @@ export class EditBusinessPartnerDetailsComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(EditBusinessPartnerSaveWarningDialog, {
-      data: this.businesspartnerModel
-    });
+    // this.dialog.open(EditBusinessPartnerSaveWarningDialog, {
+    //   data: this.businesspartnerModel
+    // });
+    this.showDialogue = true;
   }
 
   update() {
+    this.showSpinner = true;
     //console.log("updated");
     this.businesspartnerModel.applicationId = Number(localStorage.getItem('applicationID'));
     this.businessPartnerService.updateBusinessPartnerDetails(this.businesspartnerModel).subscribe((data: any) => {
-      //console.log(data);
+      this.showSpinner = false;
+      this.openSnackBar();
     })
-    this.openSnackBar();
+    // this.openSnackBar();
   }
 
   cancel() {
@@ -76,6 +101,7 @@ export class EditBusinessPartnerDetailsComponent implements OnInit {
   }
 
   openSnackBar() {
+    this.showSpinner = false;
     this._snackBar.open("Details are updated successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
@@ -87,44 +113,44 @@ export class EditBusinessPartnerDetailsComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'edit-business-partner-save-warning-dialog',
-  templateUrl: 'edit-business-partner-save-warning-dialog.html',
-})
+// @Component({
+//   selector: 'edit-business-partner-save-warning-dialog',
+//   templateUrl: 'edit-business-partner-save-warning-dialog.html',
+// })
 
-export class EditBusinessPartnerSaveWarningDialog {
+// export class EditBusinessPartnerSaveWarningDialog {
 
-  businesspartnerModelDialog = new BusinessPartner();
+//   businesspartnerModelDialog = new BusinessPartner();
 
-  constructor(public dialogRef: MatDialogRef<EditBusinessPartnerSaveWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private businessPartnerService: BusinessPartnerService,
-    private changeDetectorRefs: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.businesspartnerModelDialog = data;
-  }
+//   constructor(public dialogRef: MatDialogRef<EditBusinessPartnerSaveWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private businessPartnerService: BusinessPartnerService,
+//     private changeDetectorRefs: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public data: any) {
+//     this.businesspartnerModelDialog = data;
+//   }
 
-  update() {
-    //console.log("updated");
-    this.businesspartnerModelDialog.applicationId = Number(localStorage.getItem('applicationID'));
-    this.businessPartnerService.updateBusinessPartnerDetails(this.businesspartnerModelDialog).subscribe((data: any) => {
-      //console.log(data);
-    })
-    this.openSnackBar();
-  }
+//   update() {
+//     //console.log("updated");
+//     this.businesspartnerModelDialog.applicationId = Number(localStorage.getItem('applicationID'));
+//     this.businessPartnerService.updateBusinessPartnerDetails(this.businesspartnerModelDialog).subscribe((data: any) => {
+//       //console.log(data);
+//     })
+//     this.openSnackBar();
+//   }
 
-  openSnackBar() {
-    this._snackBar.open("Details are updated successfully", "Dismiss", {
-      duration: 2000,
-      verticalPosition: "top"
-    });
-  }
+//   openSnackBar() {
+//     this._snackBar.open("Details are updated successfully", "Dismiss", {
+//       duration: 2000,
+//       verticalPosition: "top"
+//     });
+//   }
 
-  clickMethod() {
-    this.update();
-    this.dialogRef.close();
-  }
+//   clickMethod() {
+//     this.update();
+//     this.dialogRef.close();
+//   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }
+// }
 
 

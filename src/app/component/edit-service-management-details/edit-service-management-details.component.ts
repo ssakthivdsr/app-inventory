@@ -22,6 +22,9 @@ export class EditServiceManagementDetailsComponent implements OnInit {
   ValidNumberIndicator = true;
   serviceManagementsRetrieved: ServiceManagement[] = [];
   checkId: number;
+  showSpinner: Boolean;
+  showDialogue: Boolean;
+
   constructor(private fb: FormBuilder, private router: Router, private _snackBar: MatSnackBar, private dialog: MatDialog, private serviceManagementService: ServiceManagementService,
     private changeDetectorRefs: ChangeDetectorRef) {
     this.myForm = this.fb.group({
@@ -61,6 +64,24 @@ export class EditServiceManagementDetailsComponent implements OnInit {
     }
   }
 
+  Method() {
+
+    this.showSpinner = true;
+    setTimeout(() => { this.showSpinner = false }
+      , 5000);
+
+  }
+
+  clickMethod() {
+
+    this.update();
+    this.showDialogue = false;
+
+  }
+
+  onNoClick(): void {
+    this.showDialogue = false;
+  }
 
   check() {
     for (this.checkId = 0; this.checkId < 47; this.checkId++) {
@@ -71,12 +92,14 @@ export class EditServiceManagementDetailsComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(EditServiceManagementWarningDialog, {
-      data: this.serviceManagementsRetrieved
-    });
+    // this.dialog.open(EditServiceManagementWarningDialog, {
+    //   data: this.serviceManagementsRetrieved
+    // });
+    this.showDialogue = true;
   }
 
   openSnackBar() {
+    this.showSpinner = false;
     this._snackBar.open("Details are saved successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
@@ -84,11 +107,13 @@ export class EditServiceManagementDetailsComponent implements OnInit {
   }
 
   update() {
+    this.showSpinner = true;
     this.serviceManagementService.storeAndupdateServiceManagementDetails(this.serviceManagementsRetrieved).subscribe((data: any) => {
-
+      this.showSpinner = false;
+      this.openSnackBar();
     })
 
-    this.openSnackBar();
+    // this.openSnackBar();
   }
 
   cancel() {
@@ -110,40 +135,40 @@ export class EditServiceManagementDetailsComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'edit-service-management-warning-dialog',
-  templateUrl: 'edit-service-management-warning-dialog.html',
-})
+// @Component({
+//   selector: 'edit-service-management-warning-dialog',
+//   templateUrl: 'edit-service-management-warning-dialog.html',
+// })
 
-export class EditServiceManagementWarningDialog {
+// export class EditServiceManagementWarningDialog {
 
-  serviceManagementModelDialog: ServiceManagement[] = [];
+//   serviceManagementModelDialog: ServiceManagement[] = [];
 
-  constructor(public dialogRef: MatDialogRef<EditServiceManagementWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private serviceManagementService: ServiceManagementService,
-    private changeDetectorRefs: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.serviceManagementModelDialog = data;
-  }
+//   constructor(public dialogRef: MatDialogRef<EditServiceManagementWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private serviceManagementService: ServiceManagementService,
+//     private changeDetectorRefs: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public data: any) {
+//     this.serviceManagementModelDialog = data;
+//   }
 
-  update() {
-    this.serviceManagementService.storeAndupdateServiceManagementDetails(this.serviceManagementModelDialog).subscribe((data: any) => {
-    })
-    this.openSnackBar();
-  }
+//   update() {
+//     this.serviceManagementService.storeAndupdateServiceManagementDetails(this.serviceManagementModelDialog).subscribe((data: any) => {
+//     })
+//     this.openSnackBar();
+//   }
 
-  openSnackBar() {
-    this._snackBar.open("Details are saved successfully", "Dismiss", {
-      duration: 2000,
-      verticalPosition: "top"
-    });
-  }
+//   openSnackBar() {
+//     this._snackBar.open("Details are saved successfully", "Dismiss", {
+//       duration: 2000,
+//       verticalPosition: "top"
+//     });
+//   }
 
-  clickMethod() {
-    this.update();
-    this.dialogRef.close();
-  }
+//   clickMethod() {
+//     this.update();
+//     this.dialogRef.close();
+//   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }
 
-}
+// }

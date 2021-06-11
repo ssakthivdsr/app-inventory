@@ -21,6 +21,9 @@ export class EditApplicationlifecycleComponent implements OnInit {
   id: number;
   dataId: number;
   i: number;
+  showSpinner: Boolean;
+  showDialogue: Boolean;
+
 
   public constructor(private titleService: Title, private dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router, private applicationlifecycleservice: ApplicationLifecycleService) {
     this.titleService.setTitle("Inventory - Application Lifecycle Details");
@@ -52,6 +55,25 @@ export class EditApplicationlifecycleComponent implements OnInit {
     }
   }
 
+  Method() {
+
+    this.showSpinner = true;
+    setTimeout(() => { this.showSpinner = false }
+      , 5000);
+
+  }
+
+  clickMethod() {
+
+    this.update();
+    this.showDialogue = false;
+
+  }
+
+  onNoClick(): void {
+    this.showDialogue = false;
+  }
+
   check() {
     for (this.id = 0; this.id <= 13; this.id++) {
       if (this.applicationlifecycleRetrieve[this.id].answer === '')
@@ -61,10 +83,12 @@ export class EditApplicationlifecycleComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(EditApplicationLifecycleDialog, { data: this.applicationlifecycleRetrieve });
+    // this.dialog.open(EditApplicationLifecycleDialog, { data: this.applicationlifecycleRetrieve });
+    this.showDialogue = true;
   }
 
   openSnackBar() {
+    this.showSpinner = false;
     this._snackBar.open("Details are updated successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
@@ -73,12 +97,15 @@ export class EditApplicationlifecycleComponent implements OnInit {
 
   update() {
 
+    this.showSpinner = true;
     console.log(this.applicationlifecycleRetrieve);
     this.applicationlifecycleservice.storeAndupdateApplicationLifecycleDetails(this.applicationlifecycleRetrieve).subscribe((data: any) => {
+      this.showSpinner = false;
+      this.openSnackBar();
 
     })
 
-    this.openSnackBar();
+    // this.openSnackBar();
   }
 
   cancel() {
@@ -88,45 +115,45 @@ export class EditApplicationlifecycleComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'edit-application-lifecycle-dialog',
-  templateUrl: 'edit-application-lifecycle-dialog.html',
-})
+// @Component({
+//   selector: 'edit-application-lifecycle-dialog',
+//   templateUrl: 'edit-application-lifecycle-dialog.html',
+// })
 
-export class EditApplicationLifecycleDialog {
+// export class EditApplicationLifecycleDialog {
 
-  applicationlifecycleModel: ApplicationLifecycle[] = [];
+//   applicationlifecycleModel: ApplicationLifecycle[] = [];
 
-  constructor(public dialogRef: MatDialogRef<EditApplicationLifecycleDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private applicationlifecycleservice: ApplicationLifecycleService, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.applicationlifecycleModel = data;
-  }
+//   constructor(public dialogRef: MatDialogRef<EditApplicationLifecycleDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private applicationlifecycleservice: ApplicationLifecycleService, @Inject(MAT_DIALOG_DATA) public data: any) {
+//     this.applicationlifecycleModel = data;
+//   }
 
-  update() {
+//   update() {
 
-    console.log(this.applicationlifecycleModel);
-    this.applicationlifecycleservice.storeAndupdateApplicationLifecycleDetails(this.applicationlifecycleModel).subscribe((data: any) => {
+//     console.log(this.applicationlifecycleModel);
+//     this.applicationlifecycleservice.storeAndupdateApplicationLifecycleDetails(this.applicationlifecycleModel).subscribe((data: any) => {
 
-    })
+//     })
 
-    this.openSnackBar();
-  }
+//     this.openSnackBar();
+//   }
 
-  openSnackBar() {
-    this._snackBar.open("Details are saved successfully", "Dismiss", {
-      duration: 2000,
-      verticalPosition: "top"
-    });
-  }
+//   openSnackBar() {
+//     this._snackBar.open("Details are saved successfully", "Dismiss", {
+//       duration: 2000,
+//       verticalPosition: "top"
+//     });
+//   }
 
-  clickMethod() {
-    this.update();
-    this.dialogRef.close();
-  }
+//   clickMethod() {
+//     this.update();
+//     this.dialogRef.close();
+//   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }
+// }
 
 
 

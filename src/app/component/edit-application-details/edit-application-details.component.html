@@ -5,6 +5,7 @@
         <input matInput [(ngModel)]="applicationModel.applicationName" formControlName="AppName">
         <mat-error *ngIf="checkError('AppName', 'required')">Application Name is required</mat-error>
     </mat-form-field>
+
     <!-- <mat-form-field class="example-full-width">
       <mat-label>Department</mat-label>
       <mat-select>
@@ -69,8 +70,25 @@
     </mat-form-field>
 </form>
 
+<div class="overlay" *ngIf="showSpinner">
+    <div class="spinnerCenter">
+        <mat-spinner *ngIf="showSpinner" style="margin:0 auto;"></mat-spinner>
+    </div>
+</div>
+
 <div class="example-button-row">
     <button mat-raised-button color="primary" [disabled]="!addAppFormGroup.valid" mat-stroked-button
         (click)="check() ? openDialog() : update()"> Update </button> &nbsp;
     <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+</div>
+
+<div class="overlay" *ngIf="showDialogue">
+    <div class="center">
+        <h1 mat-dialog-title>Warning!</h1>
+        <div mat-dialog-content>Some fields are still empty. Do you still want to save it?</div>&nbsp;
+        <div mat-dialog-actions>
+            <button class="button" mat-button (click)="clickMethod()">Yes</button>&nbsp;
+            <button class="button" mat-button (click)="onNoClick()">No </button>
+        </div>
+    </div>
 </div>

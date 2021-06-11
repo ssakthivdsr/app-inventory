@@ -15,6 +15,9 @@ export class EditRegulatoryDetailsComponent implements OnInit {
   i: number = 0;
   existingApplicationId: number = 0;
   public regulatoryRetrieved: Regulatory[] = [];
+  showSpinner: Boolean;
+  showDialogue: Boolean;
+
 
   public constructor(private titleService: Title, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private regulatoryService: RegulatoryService, private route: ActivatedRoute) {
     this.titleService.setTitle("Inventory - Regulatory Details");
@@ -44,6 +47,25 @@ export class EditRegulatoryDetailsComponent implements OnInit {
     }
   }
 
+  Method() {
+
+    this.showSpinner = true;
+    setTimeout(() => { this.showSpinner = false }
+      , 5000);
+
+  }
+
+  clickMethod() {
+
+    this.update();
+    this.showDialogue = false;
+
+  }
+
+  onNoClick(): void {
+    this.showDialogue = false;
+  }
+
   check() {
 
     for (this.i = 0; this.i < 10; this.i++) {
@@ -55,10 +77,12 @@ export class EditRegulatoryDetailsComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(EditRegulatoryDialog);
+    // this.dialog.open(EditRegulatoryDialog);
+    this.showDialogue = true;
   }
 
   openSnackBar() {
+    this.showSpinner = false;
     this._snackBar.open("Details are updated successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
@@ -66,14 +90,17 @@ export class EditRegulatoryDetailsComponent implements OnInit {
   }
 
   update() {
+    this.showSpinner = true;
     for (this.i = 0; this.i < 10; this.i++) {
       this.regulatoryRetrieved[this.i].applicationId = Number(localStorage.getItem('applicationID'));
     }
     this.regulatoryService.updateRegulatoryDetails(this.regulatoryRetrieved).subscribe((data: any) => {
+      this.showSpinner = false;
+      this.openSnackBar();
     })
     //console.log(this.regulatoryRetrieved);
 
-    this.openSnackBar();
+    // this.openSnackBar();
   }
 
   cancel() {
@@ -82,51 +109,51 @@ export class EditRegulatoryDetailsComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'edit-regulatory-save-warning-dialog',
-  templateUrl: 'edit-regulatory-save-warning-dialog.html',
-})
+// @Component({
+//   selector: 'edit-regulatory-save-warning-dialog',
+//   templateUrl: 'edit-regulatory-save-warning-dialog.html',
+// })
 
-export class EditRegulatoryDialog {
+// export class EditRegulatoryDialog {
 
-  i: number;
-  public regulatoryRetrievedModel: Regulatory[] = [{ regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false }];
+//   i: number;
+//   public regulatoryRetrievedModel: Regulatory[] = [{ regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
+//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
+//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false }];
 
 
-  constructor(public dialogRef: MatDialogRef<EditRegulatoryDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private regulatoryService: RegulatoryService) { }
+//   constructor(public dialogRef: MatDialogRef<EditRegulatoryDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private regulatoryService: RegulatoryService) { }
 
-  update() {
-    for (this.i = 0; this.i < 10; this.i++) {
-      this.regulatoryRetrievedModel[this.i].applicationId = Number(localStorage.getItem('applicationID'));
-    }
-    this.regulatoryService.updateRegulatoryDetails(this.regulatoryRetrievedModel).subscribe((data: any) => {
-    })
-    this.openSnackBar();
-    //console.log(this.regulatoryRetrievedModel);
-  }
+//   update() {
+//     for (this.i = 0; this.i < 10; this.i++) {
+//       this.regulatoryRetrievedModel[this.i].applicationId = Number(localStorage.getItem('applicationID'));
+//     }
+//     this.regulatoryService.updateRegulatoryDetails(this.regulatoryRetrievedModel).subscribe((data: any) => {
+//     })
+//     this.openSnackBar();
+//     //console.log(this.regulatoryRetrievedModel);
+//   }
 
-  openSnackBar() {
-    this._snackBar.open("Details are updated successfully", "Dismiss", {
-      duration: 2000,
-      verticalPosition: "top"
-    });
-  }
+//   openSnackBar() {
+//     this._snackBar.open("Details are updated successfully", "Dismiss", {
+//       duration: 2000,
+//       verticalPosition: "top"
+//     });
+//   }
 
-  clickMethod() {
-    this.update();
-    this.dialogRef.close();
-  }
+//   clickMethod() {
+//     this.update();
+//     this.dialogRef.close();
+//   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }
+// }

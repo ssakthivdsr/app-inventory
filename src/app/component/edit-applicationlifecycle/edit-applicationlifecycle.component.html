@@ -60,6 +60,12 @@
             <input matInput [(ngModel)]="applicationlifecycleRetrieve[13].answer" name="input14">
         </mat-form-field>
 
+        <div class="overlay" *ngIf="showSpinner">
+            <div class="spinnerCenter">
+                <mat-spinner *ngIf="showSpinner" style="margin:0 auto;"></mat-spinner>
+            </div>
+        </div>
+
     </form> <br />
     <div class="example-button-row">
         <button mat-raised-button color="primary" (click)="check()? openDialog() : update()">
@@ -67,3 +73,14 @@
         <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
     </div>
 </mat-card>
+
+<div class="overlay" *ngIf="showDialogue">
+    <div class="center">
+        <h1 mat-dialog-title>Warning!</h1>
+        <div mat-dialog-content>Some fields are still empty. Do you still want to save it?</div>&nbsp;
+        <div mat-dialog-actions>
+            <button class="button" mat-button (click)="clickMethod()">Yes</button>&nbsp;
+            <button class="button" mat-button (click)="onNoClick()">No </button>
+        </div>
+    </div>
+</div>

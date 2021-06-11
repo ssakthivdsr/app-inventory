@@ -27,6 +27,8 @@ export class EditApplicationDetailsComponent implements OnInit {
   functionalities: string[] = [];
   lineOfBusiness: string[] = ['Auto and Fire Insurance', 'Banking'];
   public addAppFormGroup: FormGroup;
+  showSpinner: Boolean;
+  showDialogue: Boolean;
 
   public constructor(private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog,
     private userService: UserService, private applicationService: ApplicationService, private changeDetectorRefs: ChangeDetectorRef) {
@@ -76,6 +78,14 @@ export class EditApplicationDetailsComponent implements OnInit {
     }
   }
 
+  Method() {
+
+    this.showSpinner = true;
+    setTimeout(() => { this.showSpinner = false }
+      , 5000);
+
+  }
+
   onSelectDept(event: any) {
     //console.log(event.value.selectedDepartment);
     //this.functionalities = event.value.functionalities;
@@ -111,6 +121,17 @@ export class EditApplicationDetailsComponent implements OnInit {
     })
   }
 
+  clickMethod() {
+
+    this.update();
+    this.showDialogue = false;
+
+  }
+
+  onNoClick(): void {
+    this.showDialogue = false;
+  }
+
   check() {
 
     if (this.applicationModel.nameOfTheComponentManager === '' || this.applicationModel.smeProvidedByManagers === '' ||
@@ -121,19 +142,23 @@ export class EditApplicationDetailsComponent implements OnInit {
   }
 
   openDialog() {
-    this.applicationModel.departmentId = this.selectedDepartmentID;
-    this.applicationModel.lineOfBusiness = this.selectedLob;
-    this.applicationModel.functionality = this.selectedFunctionality;
-    this.applicationModel.businessValue = 0;
-    this.applicationModel.agility = 0;
-    this.applicationModel.businessTotal = 0;
-    this.applicationModel.techTotal = 0;
-    this.dialog.open(EditApplicationDetailsDialog, {
-      data: this.applicationModel
-    });
+    // this.applicationModel.departmentId = this.selectedDepartmentID;
+    // this.applicationModel.lineOfBusiness = this.selectedLob;
+    // this.applicationModel.functionality = this.selectedFunctionality;
+    // this.applicationModel.businessValue = 0;
+    // this.applicationModel.agility = 0;
+    // this.applicationModel.businessTotal = 0;
+    // this.applicationModel.techTotal = 0;
+    // this.dialog.open(EditApplicationDetailsDialog, {
+    //   data: this.applicationModel
+    // });
+
+    this.showDialogue = true;
+
   }
 
   openSnackBar() {
+    this.showSpinner = false;
     this._snackBar.open("Details are updated successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
@@ -141,6 +166,7 @@ export class EditApplicationDetailsComponent implements OnInit {
   }
 
   update() {
+    this.showSpinner = true;
     this.applicationModel.departmentId = this.selectedDepartmentID;
     this.applicationModel.lineOfBusiness = this.selectedLob;
     this.applicationModel.functionality = this.selectedFunctionality;
@@ -150,8 +176,10 @@ export class EditApplicationDetailsComponent implements OnInit {
     this.applicationModel.techTotal = 0;
     this.applicationService.updateApplicationDetails(this.applicationModel).subscribe((data: any) => {
       // console.log(data);
+      this.showSpinner = false;
+      this.openSnackBar();
     })
-    this.openSnackBar();
+
   }
 
   cancel() {
@@ -164,42 +192,42 @@ export class EditApplicationDetailsComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'edit-application-details-save-warning-dialog',
-  templateUrl: 'edit-application-details-save-warning-dialog.html',
-})
+// @Component({
+//   selector: 'edit-application-details-save-warning-dialog',
+//   templateUrl: 'edit-application-details-save-warning-dialog.html',
+// })
 
-export class EditApplicationDetailsDialog {
+// export class EditApplicationDetailsDialog {
 
-  applicationModelDialog = new ApplicationDetails();
+//   applicationModelDialog = new ApplicationDetails();
 
 
-  constructor(public dialogRef: MatDialogRef<EditApplicationDetailsDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private applicationService: ApplicationService, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.applicationModelDialog = data;
-  }
+//   constructor(public dialogRef: MatDialogRef<EditApplicationDetailsDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private applicationService: ApplicationService, @Inject(MAT_DIALOG_DATA) public data: any) {
+//     this.applicationModelDialog = data;
+//   }
 
-  update() {
-    // console.log("updated");
-    this.applicationService.updateApplicationDetails(this.applicationModelDialog).subscribe((data: any) => {
-      //   console.log(data);
-    })
-    this.openSnackBar();
-  }
+//   update() {
+//     // console.log("updated");
+//     this.applicationService.updateApplicationDetails(this.applicationModelDialog).subscribe((data: any) => {
+//       //   console.log(data);
+//     })
+//     this.openSnackBar();
+//   }
 
-  openSnackBar() {
-    this._snackBar.open("Details are updated successfully", "Dismiss", {
-      duration: 2000,
-      verticalPosition: "top"
-    });
-  }
+//   openSnackBar() {
+//     this._snackBar.open("Details are updated successfully", "Dismiss", {
+//       duration: 2000,
+//       verticalPosition: "top"
+//     });
+//   }
 
-  clickMethod() {
-    this.update();
-    this.dialogRef.close();
-  }
+//   clickMethod() {
+//     this.update();
+//     this.dialogRef.close();
+//   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }
+// }
 

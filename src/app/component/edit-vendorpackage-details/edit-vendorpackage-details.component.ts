@@ -16,9 +16,30 @@ export class EditVendorpackageDetailsComponent implements OnInit {
   existingApplicationId: number = 0;
   vendorPackageModel = new VendorPackage();
   ValidNumberIndicator = true;
+  showSpinner: Boolean;
+  showDialogue: Boolean;
 
   public constructor(private titleService: Title, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private vendorPackageService: VendorPackageService) {
     this.titleService.setTitle("Inventory - Vender Package Details");
+  }
+
+  Method() {
+
+    this.showSpinner = true;
+    setTimeout(() => { this.showSpinner = false }
+      , 5000);
+
+  }
+
+  clickMethod() {
+
+    this.update();
+    this.showDialogue = false;
+
+  }
+
+  onNoClick(): void {
+    this.showDialogue = false;
   }
 
   check() {
@@ -45,12 +66,14 @@ export class EditVendorpackageDetailsComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(EditVendorPacakageSaveWarningDialog, {
-      data: this.vendorPackageModel
-    });
+    // this.dialog.open(EditVendorPacakageSaveWarningDialog, {
+    //   data: this.vendorPackageModel
+    // });
+    this.showDialogue = true;
   }
 
   openSnackBar() {
+    this.showSpinner = false;
     this._snackBar.open("Details are saved successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
@@ -58,10 +81,12 @@ export class EditVendorpackageDetailsComponent implements OnInit {
   }
 
   update() {
+    this.showSpinner = true;
     //console.log("updated");
     this.vendorPackageModel.applicationId = Number(localStorage.getItem('applicationID'));
     this.vendorPackageService.updateVendorPackageDetails(this.vendorPackageModel).subscribe((data: any) => {
       //console.log(this.vendorPackageModel);
+      this.showSpinner = false;
       this.openSnackBar();
     })
   }
@@ -93,40 +118,40 @@ export class EditVendorpackageDetailsComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'edit-vendor-package-save-warning-dialog',
-  templateUrl: 'edit-vendor-package-save-warning-dialog.html',
-})
+// @Component({
+//   selector: 'edit-vendor-package-save-warning-dialog',
+//   templateUrl: 'edit-vendor-package-save-warning-dialog.html',
+// })
 
-export class EditVendorPacakageSaveWarningDialog {
-  vendorPackageModelDialogue = new VendorPackage();
+// export class EditVendorPacakageSaveWarningDialog {
+//   vendorPackageModelDialogue = new VendorPackage();
 
-  constructor(public dialogRef: MatDialogRef<EditVendorPacakageSaveWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private vendorPackageService: VendorPackageService, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.vendorPackageModelDialogue = data;
-  }
+//   constructor(public dialogRef: MatDialogRef<EditVendorPacakageSaveWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private vendorPackageService: VendorPackageService, @Inject(MAT_DIALOG_DATA) public data: any) {
+//     this.vendorPackageModelDialogue = data;
+//   }
 
-  update() {
-    //console.log("updated");
-    this.vendorPackageModelDialogue.applicationId = Number(localStorage.getItem('applicationID'));
-    this.vendorPackageService.updateVendorPackageDetails(this.vendorPackageModelDialogue).subscribe((data: any) => {
-      //console.log(this.vendorPackageModelDialogue);
-      this.openSnackBar();
-    })
-  }
+//   update() {
+//     //console.log("updated");
+//     this.vendorPackageModelDialogue.applicationId = Number(localStorage.getItem('applicationID'));
+//     this.vendorPackageService.updateVendorPackageDetails(this.vendorPackageModelDialogue).subscribe((data: any) => {
+//       //console.log(this.vendorPackageModelDialogue);
+//       this.openSnackBar();
+//     })
+//   }
 
-  openSnackBar() {
-    this._snackBar.open("Details are saved successfully", "Dismiss", {
-      duration: 2000,
-      verticalPosition: "top"
-    });
-  }
+//   openSnackBar() {
+//     this._snackBar.open("Details are saved successfully", "Dismiss", {
+//       duration: 2000,
+//       verticalPosition: "top"
+//     });
+//   }
 
-  clickMethod() {
-    this.update();
-    this.dialogRef.close();
-  }
+//   clickMethod() {
+//     this.update();
+//     this.dialogRef.close();
+//   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }
+// }
