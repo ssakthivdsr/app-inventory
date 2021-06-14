@@ -18,11 +18,28 @@ export class AddApplicationLifecycleDetailsComponent implements OnInit {
   checkId: number;
   i: number;
   LocalStorageValue: Number;
+  showSpinner: Boolean;
+  showDialogue: Boolean;
 
   public constructor(private titleService: Title, private dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router, private applicationlifecycleservice: ApplicationLifecycleService) {
     this.titleService.setTitle("Inventory - Application Lifecycle Details");
   }
+  ngOnInit(): void {
+    for (this.i = 0; this.i < 14; this.i++) {
+      this.applicationlifecycleModel[this.i] = { id: 1, applicationId: 1, questionId: this.i + 1, answer: '' };
+    }
+    this.LocalStorageValue = Number(localStorage.getItem('savedApplicationID'));
 
+
+  }
+  clickMethod() {
+    this.save();
+    this.showDialogue = false;
+  }
+
+  onNoClick(): void {
+    this.showDialogue = false;
+  }
   check() {
     for (this.checkId = 0; this.checkId <= 13; this.checkId++) {
       if (this.applicationlifecycleModel[this.checkId].answer === '')
@@ -32,7 +49,7 @@ export class AddApplicationLifecycleDetailsComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(ApplicationLifecycleDialog, { data: this.applicationlifecycleModel });
+    this.showDialogue = true;
   }
 
   openSnackBar(id: number) {
@@ -52,13 +69,12 @@ export class AddApplicationLifecycleDetailsComponent implements OnInit {
   }
 
   save() {
-
+    this.showSpinner = true;
     for (this.i = 0; this.i < 14; this.i++) {
       this.applicationlifecycleModel[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
     }
-    //console.log("saved");
     this.applicationlifecycleservice.storeAndupdateApplicationLifecycleDetails(this.applicationlifecycleModel).subscribe((data: any) => {
-      // console.log(data);
+      this.showSpinner = false;
       this.openSnackBar(data);
     })
   }
@@ -69,56 +85,6 @@ export class AddApplicationLifecycleDetailsComponent implements OnInit {
     this.router.navigate(['/landingPage']);
   }
 
-  ngOnInit(): void {
-    for (this.i = 0; this.i < 14; this.i++) {
-      this.applicationlifecycleModel[this.i] = { id: 1, applicationId: 1, questionId: this.i + 1, answer: '' };
-    }
-    this.LocalStorageValue = Number(localStorage.getItem('savedApplicationID'));
 
-
-  }
 }
 
-@Component({
-  selector: 'application-lifecycle-dialog',
-  templateUrl: 'application-lifecycle-dialog.html',
-})
-
-export class ApplicationLifecycleDialog {
-
-  public applicationlifecycleModel: ApplicationLifecycle[] = [];
-  i: number;
-
-  constructor(public dialogRef: MatDialogRef<ApplicationLifecycleDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private applicationlifecycleservice: ApplicationLifecycleService, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.applicationlifecycleModel = data;
-  }
-
-  save() {
-
-    for (this.i = 0; this.i < 14; this.i++) {
-      this.applicationlifecycleModel[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
-    }
-    //console.log("saved");
-    this.applicationlifecycleservice.storeAndupdateApplicationLifecycleDetails(this.applicationlifecycleModel).subscribe((data: any) => {
-      // console.log(data);
-      this.openSnackBar(data);
-    })
-  }
-
-
-  openSnackBar(id: number) {
-    this._snackBar.open("Details are saved successfully", "Dismiss", {
-      duration: 2000,
-      verticalPosition: "top"
-    });
-  }
-
-  clickMethod() {
-    this.save();
-    this.dialogRef.close();
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}

@@ -19,6 +19,8 @@ export class ServicemanagementComponent implements OnInit {
   checkId: number;
   i: number;
   LocalStorageValue: Number;
+  showSpinner: Boolean;
+  showDialogue: Boolean;
   constructor(private fb: FormBuilder, private router: Router, private _snackBar: MatSnackBar, private dialog: MatDialog, private serviceManagementService: ServiceManagementService,
     private changeDetectorRefs: ChangeDetectorRef) {
     this.myForm = this.fb.group({
@@ -38,7 +40,16 @@ export class ServicemanagementComponent implements OnInit {
   }
 
 
+  clickMethod() {
+    this.save();
+    this.showDialogue = false;
 
+  }
+
+  onNoClick(): void {
+    this.showDialogue = false;
+
+  }
   check() {
     for (this.checkId = 0; this.checkId <= 46; this.checkId++) {
       if (this.serviceManagementModel[this.checkId].answer === '')
@@ -48,9 +59,8 @@ export class ServicemanagementComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(ServiceManagementWarningDialog, {
-      data: this.serviceManagementModel
-    });
+    this.showDialogue = true;;
+
   }
 
   openSnackBar(id: number) {
@@ -70,12 +80,12 @@ export class ServicemanagementComponent implements OnInit {
   }
 
   save() {
+    this.showSpinner = true;
     for (this.i = 0; this.i < 47; this.i++) {
       this.serviceManagementModel[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
     }
-    //console.log("saved");
     this.serviceManagementService.storeAndupdateServiceManagementDetails(this.serviceManagementModel).subscribe((data: any) => {
-      // console.log(data);
+      this.showSpinner = false;
       this.openSnackBar(data);
     })
 
@@ -105,45 +115,3 @@ export class ServicemanagementComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'service-management-warning-dialog',
-  templateUrl: 'service-management-warning-dialog.html',
-})
-
-export class ServiceManagementWarningDialog {
-  i: number;
-  serviceManagementModelDialog: ServiceManagement[] = [];
-  constructor(public dialogRef: MatDialogRef<ServiceManagementWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private serviceManagementService: ServiceManagementService,
-    private changeDetectorRefs: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.serviceManagementModelDialog = data;
-  }
-
-  save() {
-    for (this.i = 0; this.i < 47; this.i++) {
-      this.serviceManagementModelDialog[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
-    }
-    console.log(this.serviceManagementModelDialog);
-    this.serviceManagementService.storeAndupdateServiceManagementDetails(this.serviceManagementModelDialog).subscribe((data: any) => {
-      this.openSnackBar(data);
-    })
-
-  }
-
-
-  openSnackBar(id: number) {
-    this._snackBar.open("Details are saved successfully", "Dismiss", {
-      duration: 2000,
-      verticalPosition: "top"
-    });
-  }
-
-  clickMethod() {
-    this.save();
-    this.dialogRef.close();
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}

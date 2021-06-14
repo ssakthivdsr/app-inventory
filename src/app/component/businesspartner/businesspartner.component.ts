@@ -18,6 +18,8 @@ export class BusinesspartnerComponent implements OnInit {
   businesspartnerModel = new BusinessPartner();
   businesspartnersRetrieved: BusinessPartner[] = [];
   LocalStorageValue: Number;
+  showSpinner: Boolean;
+  showDialogue: Boolean;
 
 
   public constructor(private titleService: Title, private _snackBar: MatSnackBar, private dialog: MatDialog, private router: Router, private businessPartnerService: BusinessPartnerService,
@@ -25,7 +27,14 @@ export class BusinesspartnerComponent implements OnInit {
     this.titleService.setTitle("Inventory - Business Partner Details");
     this.addBusFormGroup = new FormGroup({});
   }
+  clickMethod() {
+    this.save();
+    this.showDialogue = false;
+  }
 
+  onNoClick(): void {
+    this.showDialogue = false;
+  }
   check() {
     if (this.businesspartnerModel.secondaryBusinessPartner === '' || this.businesspartnerModel.businessPartnerManagers === '' ||
       this.businesspartnerModel.businessPartnerDirectors === '')
@@ -42,9 +51,7 @@ export class BusinesspartnerComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(BusinessPartnerSaveWarningDialog, {
-      data: this.businesspartnerModel
-    });
+    this.showDialogue = true;
   }
   checkAppId() {
     if (this.LocalStorageValue === Number(localStorage.getItem('savedApplicationID'))) {
@@ -55,12 +62,10 @@ export class BusinesspartnerComponent implements OnInit {
     }
   }
   save() {
+    this.showSpinner = true;
     this.businesspartnerModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
-    //console.log(this.businesspartnerModel.applicationId);
-    //console.log("Saved");
     this.businessPartnerService.storeBusinessPartnerDetails(this.businesspartnerModel).subscribe((data: any) => {
-      //console.log(data);
-      //console.log(localStorage.getItem('savedApplicationID'));
+      this.showSpinner = false;
       this.openSnackBar(data);
     })
 
@@ -83,44 +88,5 @@ export class BusinesspartnerComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'business-partner-save-warning-dialog',
-  templateUrl: 'business-partner-save-warning-dialog.html',
-})
 
-export class BusinessPartnerSaveWarningDialog {
-
-  businesspartnerModelDialog = new BusinessPartner();
-
-  constructor(public dialogRef: MatDialogRef<BusinessPartnerSaveWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private businessPartnerService: BusinessPartnerService,
-    private changeDetectorRefs: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.businesspartnerModelDialog = data;
-  }
-
-  save() {
-    //console.log("saved");
-    this.businesspartnerModelDialog.applicationId = Number(localStorage.getItem('savedApplicationID'));
-    this.businessPartnerService.storeBusinessPartnerDetails(this.businesspartnerModelDialog).subscribe((data: any) => {
-      //console.log(data);
-      //console.log(localStorage.getItem('savedApplicationID'));
-      this.openSnackBar(data);
-    })
-  }
-
-  openSnackBar(id: number) {
-    this._snackBar.open("Details are saved successfully", "Dismiss", {
-      duration: 2000,
-      verticalPosition: "top"
-    });
-  }
-
-  clickMethod() {
-    this.save();
-    this.dialogRef.close();
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
 

@@ -18,10 +18,20 @@ export class RegulatoryComponent implements OnInit {
   i: number = 0;
   regulatoryModel: Regulatory[] = [];
   LocalStorageValue: Number;
-
+  showSpinner: Boolean;
+  showDialogue: Boolean;
   public constructor(private titleService: Title, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private regulatoryService: RegulatoryService) {
     this.titleService.setTitle("Inventory - Regulatory Details");
 
+  }
+  clickMethod() {
+    this.showDialogue = false;
+    this.save();
+
+  }
+
+  onNoClick(): void {
+    this.showDialogue = false;
   }
 
   check() {
@@ -35,7 +45,7 @@ export class RegulatoryComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(DialogElementsExampleDialog);
+    this.showDialogue = true;
   }
 
   openSnackBar() {
@@ -53,15 +63,15 @@ export class RegulatoryComponent implements OnInit {
     }
   }
   save() {
+    this.showSpinner = true;
     for (this.i = 0; this.i < this.regulatoryModel.length; this.i++) {
       this.regulatoryModel[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
     }
 
     this.regulatoryService.storeRegulatoryDetails(this.regulatoryModel).subscribe((data: any) => {
     })
-    console.log(this.regulatoryModel);
+    this.showSpinner = false;
 
-    this.openSnackBar();
   }
 
   cancel() {
@@ -77,57 +87,3 @@ export class RegulatoryComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'dialog-elements-example-dialog',
-  templateUrl: 'dialog-elements-example-dialog.html',
-})
-
-export class DialogElementsExampleDialog {
-
-  i: number;
-  regulatoryModel: Regulatory[] = [{ regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-  { regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false }];
-
-
-
-  constructor(public dialogRef: MatDialogRef<DialogElementsExampleDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private regulatoryService: RegulatoryService) {
-  }
-
-  save() {
-    for (this.i = 0; this.i < this.regulatoryModel.length; this.i++) {
-      this.regulatoryModel[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
-    }
-
-    this.regulatoryService.storeRegulatoryDetails(this.regulatoryModel).subscribe((data: any) => {
-    })
-    console.log(this.regulatoryModel);
-    this.openSnackBar();
-  }
-
-
-  openSnackBar() {
-    this._snackBar.open("Details are saved successfully", "Dismiss", {
-      duration: 2000,
-      verticalPosition: "top"
-    });
-  }
-
-  clickMethod() {
-    this.save();
-    this.dialogRef.close();
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-
-}

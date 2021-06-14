@@ -3,6 +3,7 @@ import { Validators, FormArray, FormBuilder, FormControl } from '@angular/forms'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BusinessApplicationDetails } from '../../model/businessApplicationDetails.model';
 import { BusinessApplicationService } from '../../service/businessapplication.service';
 
@@ -11,6 +12,7 @@ import { BusinessApplicationService } from '../../service/businessapplication.se
     templateUrl: './businessapplicationdetails.component.html',
     styleUrls: ['./businessapplicationdetails.component.css']
 })
+
 
 export class BusinessapplicationdetailsComponent implements OnInit {
     existingAppId: number = 0;
@@ -21,8 +23,10 @@ export class BusinessapplicationdetailsComponent implements OnInit {
     indeterminate = false;
     ValidNumberIndicator = true;
     LocalStorageValue: Number;
-
+    showSpinner: Boolean;
+    showDialogue: Boolean;
     constructor(private _fb: FormBuilder, private dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router, private businessApplicationService: BusinessApplicationService) { }
+
 
     ngOnInit() {
         this.LocalStorageValue = Number(localStorage.getItem('savedApplicationID'));
@@ -125,6 +129,17 @@ export class BusinessapplicationdetailsComponent implements OnInit {
         control.removeAt(i);
     }
 
+    clickMethod() {
+
+        this.save();
+        this.showDialogue = false;
+
+    }
+
+    onNoClick(): void {
+        this.showDialogue = false;
+    }
+
     check() {
         if (false)
             return true;
@@ -133,9 +148,7 @@ export class BusinessapplicationdetailsComponent implements OnInit {
     }
 
     openDialog() {
-        this.dialog.open(BusinessApplicationSaveWarningDialog, {
-            data: this.businessApplicationModel
-        });
+        this.showDialogue = true;
     }
     checkAppId() {
         if (this.LocalStorageValue === Number(localStorage.getItem('savedApplicationID'))) {
@@ -147,6 +160,8 @@ export class BusinessapplicationdetailsComponent implements OnInit {
     }
 
     save() {
+        this.showSpinner = true;
+
         this.existingAppId = Number(localStorage.getItem('savedApplicationID'));
         console.log(this.existingAppId);
         for (this.i = 0; this.i < this.businessApplicationModel.channels.length; this.i++) {
@@ -165,10 +180,10 @@ export class BusinessapplicationdetailsComponent implements OnInit {
             this.businessApplicationModel.businessApplicationQuestionAnswer[this.i].applicationId = this.existingAppId;
         }
         this.businessApplicationService.storeBusinessApplicationDetails(this.businessApplicationModel).subscribe((data: any) => {
+            this.showSpinner = false;
+            this.openSnackBar();
         })
-        //console.log(this.businessApplicationModel);
-        //console.log(this.businessApplicationModel.businessApplicationQuestionAnswer);
-        this.openSnackBar();
+
     }
 
     openSnackBar() {
@@ -194,56 +209,3 @@ export class BusinessapplicationdetailsComponent implements OnInit {
     }
 }
 
-@Component({
-    selector: 'business-application-save-warning-dialog',
-    templateUrl: 'business-application-save-warning-dialog.html',
-})
-
-export class BusinessApplicationSaveWarningDialog {
-    i: number = 0;
-    businessApplicationModelDialog = new BusinessApplicationDetails();
-
-    constructor(public dialogRef: MatDialogRef<BusinessApplicationSaveWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private businessApplicationService: BusinessApplicationService,
-        private changeDetectorRefs: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public data: any) {
-        this.businessApplicationModelDialog = data;
-    }
-
-    save() {
-        for (this.i = 0; this.i < this.businessApplicationModelDialog.transactions.length; this.i++) {
-            this.businessApplicationModelDialog.transactions[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
-        }
-        for (this.i = 0; this.i < this.businessApplicationModelDialog.channels.length; this.i++) {
-            this.businessApplicationModelDialog.channels[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
-        }
-        for (this.i = 0; this.i < this.businessApplicationModelDialog.products.length; this.i++) {
-            this.businessApplicationModelDialog.products[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
-        }
-        for (this.i = 0; this.i < this.businessApplicationModelDialog.users.length; this.i++) {
-            this.businessApplicationModelDialog.users[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
-        }
-        for (this.i = 0; this.i < this.businessApplicationModelDialog.businessApplicationQuestionAnswer.length; this.i++) {
-            this.businessApplicationModelDialog.businessApplicationQuestionAnswer[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
-        }
-        this.businessApplicationService.storeBusinessApplicationDetails(this.businessApplicationModelDialog).subscribe((data: any) => {
-        })
-        //console.log(this.businessApplicationModel);
-        //console.log(this.businessApplicationModel.businessApplicationQuestionAnswer);
-        this.openSnackBar();
-    }
-
-    openSnackBar() {
-        this._snackBar.open("Details are saved successfully", "Dismiss", {
-            duration: 2000,
-            verticalPosition: "top"
-        });
-    }
-
-    clickMethod() {
-        this.save();
-        this.dialogRef.close();
-    }
-
-    onNoClick(): void {
-        this.dialogRef.close();
-    }
-}

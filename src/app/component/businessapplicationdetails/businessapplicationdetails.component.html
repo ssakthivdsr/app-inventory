@@ -7,7 +7,6 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <form [formGroup]="myForm" class="bpd-form">
-
         <!--transactions-->
         <div formArrayName="addresses">
           <div *ngFor="let address of myForm.controls.addresses.controls; let i=index" class="panel panel-default">
@@ -75,7 +74,6 @@
         <div class="clearfix"></div>
       </form>
     </mat-expansion-panel>
-
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -83,7 +81,6 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <form [formGroup]="myForm" class="bpd-form">
-
         <!--users-->
         <div formArrayName="users">
           <div *ngFor="let address of myForm.controls.users.controls; let i=index" class="panel panel-default">
@@ -149,7 +146,6 @@
         <div class="clearfix"></div>
       </form>
     </mat-expansion-panel>
-
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -157,7 +153,6 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <form [formGroup]="myForm" class="bpd-form">
-
         <!--channels-->
         <div formArrayName="channels">
           <div *ngFor="let address of myForm.controls.channels.controls; let i=index" class="panel panel-default">
@@ -220,7 +215,6 @@
         <div class="clearfix"></div>
       </form>
     </mat-expansion-panel>
-
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -228,7 +222,6 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <form [formGroup]="myForm" class="bpd-form">
-
         <!--products-->
         <div formArrayName="products">
           <div *ngFor="let address of myForm.controls.products.controls; let i=index" class="panel panel-default">
@@ -330,7 +323,6 @@
         <div class="clearfix"></div>
       </form>
     </mat-expansion-panel>
-
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -338,12 +330,12 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <form [formGroup]="myForm" class="bpd-form">
-
         <!--others-->
         <mat-radio-group class="bpd-full-width"
           [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[0].answer"
           [ngModelOptions]="{standalone: true}">
-          <mat-label>Is there a difference in which internet customers and agents/CC users treated? For instance or
+          <mat-label>Is there a difference in which internet customers and agents/CC users treated? For
+            instance or
             end customers allowed to cancel policies?</mat-label> &nbsp;
           <mat-radio-button value="Yes">Yes</mat-radio-button> &nbsp;
           <mat-radio-button value="No">No</mat-radio-button>
@@ -359,7 +351,8 @@
         </mat-form-field>
         <br>
         <mat-form-field class="bpd-full-width">
-          <mat-label>If automated, volume of transactions that are not STP from an underwriting standpoint</mat-label>
+          <mat-label>If automated, volume of transactions that are not STP from an underwriting standpoint
+          </mat-label>
           <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[2].answer"
             [ngModelOptions]="{standalone: true}">
             <mat-option value="less than 10%">&lt; 10%</mat-option>
@@ -389,7 +382,8 @@
         </mat-radio-group>
         <br>
         <mat-form-field class="bpd-full-width">
-          <mat-label>How long does it take to launch a new product end-end(concept to implementation)?</mat-label>
+          <mat-label>How long does it take to launch a new product end-end(concept to implementation)?
+          </mat-label>
           <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[5].answer"
             [ngModelOptions]="{standalone: true}">
             <mat-option value="less than 3 months">&lt; 3 months</mat-option>
@@ -401,21 +395,11 @@
         <br>
         <mat-form-field class="bpd-full-width">
           <mat-label>Different products sold by the PAS</mat-label>
-          <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[6].answer"
+          <input matInput [value]="businessApplicationModel.businessApplicationQuestionAnswer[6].answer"
+            [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[6].answer"
             [ngModelOptions]="{standalone: true}">
-            <mat-option value="Auto">Auto</mat-option>
-            <mat-option value="Motor cycle">Motor cycle</mat-option>
-            <mat-option value="Boat">Boat</mat-option>
-            <mat-option value="RV">RV</mat-option>
-            <mat-option value="Antique">Antique</mat-option>
-            <mat-option value="Dune buggy">Dune buggy</mat-option>
-            <mat-option value="Homeowners">Homeowners</mat-option>
-            <mat-option value="Rental">Rental</mat-option>
-            <mat-option value="Condo">Condo</mat-option>
-          </mat-select>
         </mat-form-field>
         <br>
-
         <mat-form-field class="bpd-full-width">
           <mat-label>How many product variants are live in the System?</mat-label>
           <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[7].answer"
@@ -426,7 +410,6 @@
           </mat-select>
         </mat-form-field>
         <br>
-
         <mat-form-field class="bpd-full-width">
           <mat-label>How far back does the system allow for endorsements (1/2/3/4 or more terms?)</mat-label>
           <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[8].answer"
@@ -439,7 +422,6 @@
           </mat-select>
         </mat-form-field>
         <br>
-
         <mat-form-field class="bpd-full-width">
           <mat-label>Haw far back can transactions go to previous terms (1/2/3/4 or more)</mat-label>
           <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[9].answer"
@@ -452,7 +434,6 @@
           </mat-select>
         </mat-form-field>
         <br>
-
         <mat-form-field class="bpd-full-width">
           <mat-label>Is rating manual or automated?</mat-label>
           <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[10].answer"
@@ -462,48 +443,43 @@
           </mat-select>
         </mat-form-field>
         <br>
-
         <mat-radio-group class="bpd-full-width"
           [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[11].answer"
           [ngModelOptions]="{standalone: true}">
-          <mat-label>If Automated, is this integrated as part of thr PAS or an engine like Ratabase?</mat-label>
+          <mat-label>If Automated, is this integrated as part of thr PAS or an engine like Ratabase?
+          </mat-label>
           &nbsp;
           <mat-radio-button value="Yes">Yes</mat-radio-button> &nbsp;
           <mat-radio-button value="No">No</mat-radio-button>
         </mat-radio-group>
         <br>
-
         <mat-form-field class="bpd-full-width">
-          <mat-label>How many internal interfacing applications (like GL, claims, CRM, Documents and so on) does it
+          <mat-label>How many internal interfacing applications (like GL, claims, CRM, Documents and so on)
+            does it
             interact with</mat-label>
           <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[12].answer"
             [ngModelOptions]="{standalone: true}">
-            <mat-option value="CRM">CRM</mat-option>
-            <mat-option value="Rating Engine">Rating Engine</mat-option>
-            <mat-option value="Underwritten Engine">Underwritten Engine</mat-option>
-            <mat-option value="Billing and Payments">Billing and Payments</mat-option>
-            <mat-option value="Claims">Claims</mat-option>
-            <mat-option value="Reinsurrance">Reinsurrance</mat-option>
-            <mat-option value="Product Workbench">Product Workbench</mat-option>
-            <mat-option value="Financial Reporting">Financial Reporting</mat-option>
-            <mat-option value="State Reporting">State Reporting</mat-option>
-            <mat-option value="Compensation">Compensation</mat-option>
-            <mat-option value="Producer and License">Producer and License</mat-option>
-            <mat-option value="others">others</mat-option>
+            <mat-option value="less than 5 Interfaces">&lt; 5 Interfaces</mat-option>
+            <mat-option value="5-10 Interfaces">5-10 Interfaces</mat-option>
+            <mat-option value="greater 10 Interfaces">&gt; 10 Interfaces</mat-option>
           </mat-select>
         </mat-form-field>
         <br>
-
         <mat-form-field class="bpd-full-width">
           <mat-label>How many external interfacing applications(like MVR, Lexis Nexus, CLUE and so on) does it
             interact
             with? </mat-label>
-          <input matInput [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[13].answer"
+          <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[13].answer"
             [ngModelOptions]="{standalone: true}">
+            <mat-option value="less than 5 Interfaces">&lt; 5 Interfaces</mat-option>
+            <mat-option value="5-10 Interfaces">5-10 Interfaces</mat-option>
+            <mat-option value="greater 10 Interfaces">&gt; 10 Interfaces</mat-option>
+          </mat-select>
         </mat-form-field>
         <br>
         <mat-form-field class="bpd-full-width">
-          <mat-label>Is there is a difference in which internet Customer and Agents/CC users treated? Number of
+          <mat-label>Is there is a difference in which internet Customer and Agents/CC users treated? Number
+            of
             transactions difference</mat-label>
           <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[14].answer"
             [ngModelOptions]="{standalone: true}">
@@ -523,9 +499,9 @@
           <mat-radio-button value="No">No</mat-radio-button>
         </mat-radio-group>
         <br>
-
         <mat-form-field class="bpd-full-width">
-          <mat-label>If sold in certain states please list them out( by product by volume in Cy2020,19,18)</mat-label>
+          <mat-label>If sold in certain states please list them out( by product by volume in Cy2020,19,18)
+          </mat-label>
           <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[16].answer"
             [ngModelOptions]="{standalone: true}">
             <mat-option value="less than 10 States">&lt;10 States</mat-option>
@@ -535,9 +511,6 @@
             <mat-option value="greater than 40 States">&gt;40 States</mat-option>
           </mat-select>
         </mat-form-field>
-
-
-
         <mat-form-field class="bpd-full-width">
           <mat-label>NPS score in last 3 years</mat-label>
           <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[17].answer"
@@ -547,8 +520,6 @@
             <mat-option value="70-100">70-100</mat-option>
           </mat-select>
         </mat-form-field>
-
-
         <mat-form-field class="bpd-full-width">
           <mat-label>Customer satisfaction score in last 3 years</mat-label>
           <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[18].answer"
@@ -563,11 +534,27 @@
       </form>
     </mat-expansion-panel>
   </mat-accordion> <br />
+  <div class="overlay" *ngIf="showSpinner">
+    <div class="spinnerCenter">
+      <mat-spinner *ngIf="showSpinner" style="margin:0 auto;"></mat-spinner>
+    </div>
+  </div>
+
+  <div class="overlay" *ngIf="showDialogue">
+    <div class="center">
+      <h1 mat-dialog-title>Warning!</h1>
+      <div mat-dialog-content>Some fields are still empty. Do you still want to save it?</div>&nbsp;
+      <div mat-dialog-actions>
+        <button class="button" mat-button (click)="clickMethod()">Yes</button>&nbsp;
+        <button class="button" mat-button (click)="onNoClick()">No </button>
+      </div>
+    </div>
+  </div>
 
   <div class="margin-20">
-    <button mat-raised-button color="primary" [disabled]="checkAppId()" (click)="check() ? openDialog() : save()"
+    <!-- n -->
+    <button mat-raised-button color="primary" [disabled]="checkAppId()" (click)="check() ? openDialog() : save() "
       [disabled]="checkAppId()"> Save </button>&nbsp;
     <button mat-raised-button color="primary" (click)="cancel()"> Cancel </button>
-    <!-- <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Save</button> -->
   </div>
 </mat-card>

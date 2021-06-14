@@ -86,7 +86,7 @@
       <mat-select [(ngModel)]="serviceManagementModel[7].answer" name="input8">
         <mat-option value="No code changes due to bugs in the last 6 months">No code changes due to bugs in the last 6
           months</mat-option>
-        <mat-option value="No code changes due to bugs in the last 6 months">No code changes due to bugs in the last 6
+        <mat-option value="No code changes due to bugs in the last 3 months">No code changes due to bugs in the last 3
           months</mat-option>
         <mat-option value="Code changes once a month">Code changes once a month</mat-option>
         <mat-option value="Code changes alternate week">Code changes alternate week</mat-option>
@@ -451,5 +451,21 @@
     <button mat-raised-button color="primary" [disabled]="checkAppId()" (click)=" check() ? openDialog() : save()"
       disabled="checkAppId()">Save</button>&nbsp;
     <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+  </div>
+  <div class="overlay" *ngIf="showSpinner">
+    <div class="spinnerCenter">
+      <mat-spinner *ngIf="showSpinner" style="margin:0 auto;"></mat-spinner>
+    </div>
+  </div>
+
+  <div class="overlay" *ngIf="showDialogue">
+    <div class="center">
+      <h1 mat-dialog-title>Warning!</h1>
+      <div mat-dialog-content>Some fields are still empty. Do you still want to save it?</div>&nbsp;
+      <div mat-dialog-actions>
+        <button class="button" mat-button (click)="clickMethod()">Yes</button>&nbsp;
+        <button class="button" mat-button (click)="onNoClick()">No </button>
+      </div>
+    </div>
   </div>
 </mat-card>

@@ -7,6 +7,7 @@ import { UserService } from '../../../service/user.service';
 import { Department } from '../../../model/department.model';
 import { ApplicationDetails } from '../../../model/application-details.model';
 import { ApplicationService } from 'src/app/service/application.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-add-application-details',
@@ -26,7 +27,8 @@ export class AddApplicationDetailsComponent implements OnInit {
   public addAppFormGroup: FormGroup;
   initialId: number = 0;
   passedId: number = 0;
-
+  showSpinner: Boolean;
+  showDialogue: Boolean;
   public constructor(private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog,
     private userService: UserService, private applicationService: ApplicationService, private changeDetectorRefs: ChangeDetectorRef) {
     this.addAppFormGroup = new FormGroup({});
@@ -54,10 +56,14 @@ export class AddApplicationDetailsComponent implements OnInit {
     }
     this.selectedFunctionality = this.applicationModel.functionality;
   }
+  Method() {
 
+    this.showSpinner = true;
+    setTimeout(() => { this.showSpinner = false }
+      , 5000);
+
+  }
   onSelectDept(event: any) {
-    //console.log(event.value.selectedDepartment);
-    //this.functionalities = event.value.functionalities;
   }
 
   onSelectLob(event: any) {
@@ -72,11 +78,18 @@ export class AddApplicationDetailsComponent implements OnInit {
   retrieveAllDepartmentDetails() {
     this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
       this.departmentsRetrieved = data;
-      //console.log("retrieved value:" + this.departmentsRetrieved);
-      //console.log(JSON.stringify(this.departmentsRetrieved));
     })
   }
+  clickMethod() {
 
+    this.save();
+    this.showDialogue = false;
+
+  }
+
+  onNoClick(): void {
+    this.showDialogue = false;
+  }
   check() {
     this.applicationModel.applicationName = this.addAppFormGroup.get('AppName')!.value;
     this.applicationModel.applicationDescription = this.addAppFormGroup.get('AppDesc')!.value;
@@ -93,26 +106,12 @@ export class AddApplicationDetailsComponent implements OnInit {
   }
 
   openDialog() {
-    this.applicationModel.departmentId = this.selectedDepartmentID;
-    this.applicationModel.lineOfBusiness = this.selectedLob;
-    this.applicationModel.functionality = this.selectedFunctionality;
-    this.applicationModel.businessValue = 0;
-    this.applicationModel.agility = 0;
-    this.applicationModel.businessTotal = 0;
-    this.applicationModel.techTotal = 0;
-    if (this.initialId == Number(localStorage.getItem('savedApplicationID'))) {
-      this.passedId = 0;
-    }
-    else {
-      this.passedId = 1;
-    }
-    this.dialog.open(ApplicationDetailsDialog, {
-      data: { model: this.applicationModel, id: this.passedId }
-    });
+    this.showDialogue = true;
+
   }
 
   openSnackBar(id: number) {
-    //this.retrieveAllApplicationDetails();
+    this.showSpinner = false;
     this._snackBar.open("Details are saved successfully. \nYour saved ID is " + id + '.', "Dismiss", {
       duration: 5000,
       verticalPosition: "top"
@@ -120,6 +119,7 @@ export class AddApplicationDetailsComponent implements OnInit {
   }
 
   openUpdateSnackBar() {
+    this.showSpinner = false;
     this._snackBar.open("Details are updated successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
@@ -127,6 +127,8 @@ export class AddApplicationDetailsComponent implements OnInit {
   }
 
   save() {
+    this.showSpinner = true;
+
     this.applicationModel.departmentId = this.selectedDepartmentID;
     this.applicationModel.lineOfBusiness = this.selectedLob;
     this.applicationModel.functionality = this.selectedFunctionality;
@@ -137,6 +139,7 @@ export class AddApplicationDetailsComponent implements OnInit {
     if (this.initialId == Number(localStorage.getItem('savedApplicationID'))) {
       this.applicationService.storeApplicationDetails(this.applicationModel).subscribe((data: any) => {
         localStorage.setItem('savedApplicationID', data + '');
+        this.showSpinner = false;
         this.openSnackBar(data);
       })
     }
@@ -144,70 +147,23 @@ export class AddApplicationDetailsComponent implements OnInit {
       this.applicationModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
       this.applicationService.updateApplicationDetails(this.applicationModel).subscribe((data: any) => {
       })
+      this.showSpinner = false;
       this.openUpdateSnackBar();
     }
+
+
   }
+
+
 
   cancel() {
     localStorage.clear();
     this.router.navigate(['/landingPage']);
   }
 
+
   public checkError = (controlName: string, errorName: string) => {
     return this.addAppFormGroup.controls[controlName].hasError(errorName);
   }
 }
 
-@Component({
-  selector: 'application-details-save-warning-dialog',
-  templateUrl: 'application-details-save-warning-dialog.html',
-})
-
-export class ApplicationDetailsDialog {
-  applicationModelDialog = new ApplicationDetails();
-  saveId: number = 0;
-
-  constructor(public dialogRef: MatDialogRef<ApplicationDetailsDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private applicationService: ApplicationService, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.applicationModelDialog = data.model;
-    this.saveId = data.id;
-  }
-  save() {
-    if (this.saveId == 0) {
-      this.applicationService.storeApplicationDetails(this.applicationModelDialog).subscribe((data: any) => {
-        localStorage.setItem('savedApplicationID', data + '');
-        this.openSnackBar(data);
-      })
-      this.saveId++;
-    }
-    else {
-      this.applicationModelDialog.applicationId = Number(localStorage.getItem('savedApplicationID'));
-      this.applicationService.updateApplicationDetails(this.applicationModelDialog).subscribe((data: any) => {
-      })
-      this.openUpdateSnackBar();
-    }
-
-  }
-
-  openSnackBar(id: number) {
-    this._snackBar.open("Details are saved successfully. \nYour saved ID is " + id + '.', "Dismiss", {
-      duration: 5000,
-      verticalPosition: "top"
-    });
-  }
-
-  openUpdateSnackBar() {
-    this._snackBar.open("Details are updated successfully", "Dismiss", {
-      duration: 2000,
-      verticalPosition: "top"
-    });
-  }
-
-  clickMethod() {
-    this.save();
-    this.dialogRef.close();
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}

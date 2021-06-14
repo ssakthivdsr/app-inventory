@@ -16,8 +16,18 @@ export class VendorpackageComponent implements OnInit {
   vendorPackageModel = new VendorPackage();
   ValidNumberIndicator = true;
   LocalStorageValue: Number;
+  showSpinner: Boolean;
+  showDialogue: Boolean;
   public constructor(private titleService: Title, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private vendorPackageService: VendorPackageService) {
     this.titleService.setTitle("Inventory - Vender Package Details");
+  }
+  clickMethod() {
+    this.save();
+    this.showDialogue = false;
+  }
+
+  onNoClick(): void {
+    this.showDialogue = false;
   }
 
   check() {
@@ -44,9 +54,7 @@ export class VendorpackageComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(VendorPacakageSaveWarningDialog, {
-      data: this.vendorPackageModel
-    });
+    this.showDialogue = true;
   }
 
   openSnackBar() {
@@ -64,9 +72,10 @@ export class VendorpackageComponent implements OnInit {
     }
   }
   save() {
+    this.showSpinner = true;
     this.vendorPackageModel.applicationId = Number(localStorage.getItem('savedApplicationID'));
     this.vendorPackageService.storeVendorPackageDetails(this.vendorPackageModel).subscribe((data: any) => {
-      //console.log(this.vendorPackageModel);
+      this.showSpinner = false;
       this.openSnackBar();
     })
   }
@@ -81,38 +90,3 @@ export class VendorpackageComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'vendor-package-save-warning-dialog',
-  templateUrl: 'vendor-package-save-warning-dialog.html',
-})
-
-export class VendorPacakageSaveWarningDialog {
-  vendorPackageModelDialogue = new VendorPackage();
-  constructor(public dialogRef: MatDialogRef<VendorPacakageSaveWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private vendorPackageService: VendorPackageService, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.vendorPackageModelDialogue = data;
-  }
-
-  save() {
-    this.vendorPackageModelDialogue.applicationId = Number(localStorage.getItem('savedApplicationID'));
-    this.vendorPackageService.storeVendorPackageDetails(this.vendorPackageModelDialogue).subscribe((data: any) => {
-      //console.log(this.vendorPackageModelDialogue);
-      this.openSnackBar();
-    })
-  }
-
-  openSnackBar() {
-    this._snackBar.open("Details are saved successfully", "Dismiss", {
-      duration: 2000,
-      verticalPosition: "top"
-    });
-  }
-
-  clickMethod() {
-    this.save();
-    this.dialogRef.close();
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
