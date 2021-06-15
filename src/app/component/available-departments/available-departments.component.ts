@@ -15,11 +15,12 @@ import { Observable, Subscription, interval } from 'rxjs';
   templateUrl: './available-departments.component.html',
   styleUrls: ['./available-departments.component.css']
 })
-export class AvailableDepartmentsComponent implements OnInit {
 
+export class AvailableDepartmentsComponent implements OnInit {
   departmentModel = new Department();
   departmentsRetrieved: Department[] = [];
   dataSourceD: any;
+  showSpinner: boolean = false;
   displayedColumns: string[] = ['departmentId', 'departmentName', 'departmentOwner', 'action'];
   private updateSubscription: Subscription;
 
@@ -35,11 +36,13 @@ export class AvailableDepartmentsComponent implements OnInit {
 
 
   retrieveAllDepartmentDetails() {
+    this.showSpinner = true;
     this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
-      //console.log(data);
+      this.showSpinner = false;
       this.departmentsRetrieved = data;
       this.dataSourceD = new MatTableDataSource(this.departmentsRetrieved);
       this.dataSourceD.paginator = this.paginator;
+
     })
   }
 
@@ -54,7 +57,7 @@ export class AvailableDepartmentsComponent implements OnInit {
         () => { this.retrieveAllDepartmentDetails() });
     this.router.navigate(['/layout/newdepartment']);
   }
-
 }
+
 
 

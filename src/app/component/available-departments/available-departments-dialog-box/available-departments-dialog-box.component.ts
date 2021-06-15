@@ -16,6 +16,7 @@ import { AvailableDepartmentsComponent } from '../available-departments.componen
 export class AvailableDepartmentsDialogBoxComponent implements OnInit {
   departmentModelDialog = new Department();
   public editDepFormGroup: FormGroup;
+  showSpinner: boolean = false;
 
   constructor(private _snackBar: MatSnackBar, private userService: UserService,
     public dialogRef: MatDialogRef<AvailableDepartmentsDialogBoxComponent>,
@@ -32,10 +33,11 @@ export class AvailableDepartmentsDialogBoxComponent implements OnInit {
   }
 
   updateDepartmentDetails() {
+    this.showSpinner = true;
     this.userService.updateDepartmentDetails(this.departmentModelDialog).subscribe((data: any) => {
-      // console.log(data);
       if (data > 0) {
         this.dialogRef.close();
+        this.showSpinner = false;
         this.openSnackBar();
       }
     });

@@ -31,14 +31,14 @@
         <td mat-cell *matCellDef="let element"> {{element.applicationName}} </td>
       </ng-container>
 
-      <!-- Action Column -->
+
       <ng-container matColumnDef="Action">
         <th mat-header-cell *matHeaderCellDef> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action </th>
         <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
             (click)="editApplication(element.applicationId)">Edit</button> </td>
       </ng-container>
 
-      <!-- Score Column -->
+
       <ng-container matColumnDef="Score">
         <th mat-header-cell *matHeaderCellDef>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Score</th>
         <td mat-cell *matCellDef="let element">
@@ -63,28 +63,29 @@
               <tbody>
                 <tr>
                   <td style="text-align: center" style="text-indent: 5mm;">
-                    <span [ngClass] = "element.businessValue > businessValueScore[0] ? 'spangreen' :
-                      element.businessValue > businessValueScore[1] ?  'spanamber':  'spanred'" > 
-                      {{ element.businessValue }} 
+                    <span [ngClass]="element.businessValue > businessValueScore[0] ? 'spangreen' :
+                      element.businessValue > businessValueScore[1] ?  'spanamber':  'spanred'">
+                      {{ element.businessValue }}
                     </span>
                   </td>
-                  <td style="text-align: center" style="text-indent: 5mm;"> 
-                    <span  [ngClass] = "element.agility > agilityScore[0] ? 'spangreen' :
-                      element.agility > agilityScore[1] ?  'spanamber':  'spanred'" > 
+                  <td style="text-align: center" style="text-indent: 5mm;">
+                    <span [ngClass]="element.agility > agilityScore[0] ? 'spangreen' :
+                      element.agility > agilityScore[1] ?  'spanamber':  'spanred'">
                       {{ element.agility }}
                     </span>
                   </td>
                   <td style="text-align: center" style="text-indent: 5mm;">
-                    <span [ngClass] = "element.businessTotal > businessTotalScore[0] ? 'spangreen' :
-                      element.businessTotal > businessTotalScore[1] ?  'spanamber':  'spanred'" > 
+                    <span [ngClass]="element.businessTotal > businessTotalScore[0] ? 'spangreen' :
+                      element.businessTotal > businessTotalScore[1] ?  'spanamber':  'spanred'">
                       {{ element.businessTotal }}
                     </span>
-                </td>
+                  </td>
                   <td style="text-align: center" style="text-indent: 5mm;">
-                    <span [ngClass] = "element.techTotal > businessTotalScore[0] ? 'spangreen' :
-                      element.techTotal > businessTotalScore[1] ?  'spanamber':  'spanred'" > 
+                    <span [ngClass]="element.techTotal > businessTotalScore[0] ? 'spangreen' :
+                      element.techTotal > businessTotalScore[1] ?  'spanamber':  'spanred'">
                       {{ element.techTotal }}
-                    </span></td>
+                    </span>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -93,7 +94,7 @@
       </ng-container>
 
 
-      <tr mat-header-row *matHeaderRowDef="newDisplayedColumns;sticky: true"></tr>
+      <tr mat-header-row *matHeaderRowDef="newDisplayedColumns;sticky: false"></tr>
       <tr mat-row *matRowDef="let element; columns: newDisplayedColumns;" class="example-element-row"
         [class.example-expanded-row]="element.isExpanded"></tr>
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
@@ -106,91 +107,8 @@
   <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
     <p style="color: white">Please Wait. </p>
   </ngx-spinner>
-  <!-- 
-  <div class="col-xs-12">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z12 center" multiTemplateDataRows>
-     
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-      </ng-container>
-
-      
-      <ng-container matColumnDef="department">
-        <th mat-header-cell *matHeaderCellDef> Department </th>
-        <td mat-cell *matCellDef="let element"> {{element.department}} </td>
-      </ng-container>
-
-      
-      <ng-container matColumnDef="lob">
-        <th mat-header-cell *matHeaderCellDef> LOB </th>
-        <td mat-cell *matCellDef="let element"> {{element.lob}} </td>
-      </ng-container>
-
-     
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-
-      
-      <ng-container matColumnDef="Action">
-        <th mat-header-cell *matHeaderCellDef> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action </th>
-        <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
-            (click)="editApplication(1)">Edit</button> </td>
-      </ng-container>
-
-      
-      <ng-container matColumnDef="Score">
-        <th mat-header-cell *matHeaderCellDef>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Score</th>
-        <td mat-cell *matCellDef="let element">
-          <a mat-button color="primary" href="javascript:void()" (click)="element.isExpanded = !element.isExpanded">
-            Retrieve Score </a>
-        </td>
-      </ng-container>
-
-      
-      <ng-container matColumnDef="applicationCompletedStatus">
-        <th mat-header-cell *matHeaderCellDef> Application Completion Status </th>
-        <td mat-cell *matCellDef="let element"> {{element.applicationCompletedStatus}} </td>
-      </ng-container>
-
-      
-      <ng-container matColumnDef="expandedDetail">
-        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-          <div class="row example-element-detail" [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'">
-
-            <table class="table table-sm">
-              <thead>
-                <tr>
-                  <th scope="col">Total Score</th>
-                  <th scope="col">Business Value Score</th>
-                  <th scope="col">Agility Score</th>
-                  <th scope="col">Technology Score</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="text-align: center" style="text-indent: 5mm;">
-                    <span class=" spangreen"> {{ element.businessTotal }} </span>
-                  </td>
-                  <td style="text-align: center" style="text-indent: 5mm;"> <span class=" spanred"> {{
-                      element.businessValue }}</span></td>
-                  <td style="text-align: center" style="text-indent: 5mm;"><span class=" spanamber"> {{ element.agility
-                      }}</span></td>
-                  <td style="text-align: center" style="text-indent: 5mm;"><span class=" spanred"> {{ element.techTotal
-                      }}</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
-      <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
-        [class.example-expanded-row]="element.isExpanded"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-    </table>
-  </div> -->
-</mat-card>
+  <div class="overlay" *ngIf="showSpinner">
+    <div class="spinnerCenter">
+      <mat-spinner *ngIf="showSpinner" style="margin:0 auto;"></mat-spinner>
+    </div>
+  </div>

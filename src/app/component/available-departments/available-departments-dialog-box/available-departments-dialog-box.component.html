@@ -18,3 +18,8 @@
     (click)="updateDepartmentDetails()"> Update </button>
   <button mat-button color="primary" (click)="closeDialog()"> Cancel </button>
 </div>
+<div class="overlay" *ngIf="showSpinner">
+  <div class="spinnerCenter">
+    <mat-spinner *ngIf="showSpinner" style="margin:0 auto;"></mat-spinner>
+  </div>
+</div>
