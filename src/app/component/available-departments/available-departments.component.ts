@@ -33,8 +33,6 @@ export class AvailableDepartmentsComponent implements OnInit {
 
   }
 
-
-
   retrieveAllDepartmentDetails() {
     this.showSpinner = true;
     this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
