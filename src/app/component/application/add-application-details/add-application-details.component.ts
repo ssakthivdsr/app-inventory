@@ -150,18 +150,12 @@ export class AddApplicationDetailsComponent implements OnInit {
       this.showSpinner = false;
       this.openUpdateSnackBar();
     }
-
-
   }
-
-
 
   cancel() {
     localStorage.clear();
     this.router.navigate(['/landingPage']);
   }
-
-
   public checkError = (controlName: string, errorName: string) => {
     return this.addAppFormGroup.controls[controlName].hasError(errorName);
   }
