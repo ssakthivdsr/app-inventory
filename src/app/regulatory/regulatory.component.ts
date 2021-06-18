@@ -6,8 +6,6 @@ import { Router } from '@angular/router';
 import { Regulatory } from '../model/regulatory.model';
 import { RegulatoryService } from '../service/regulatory.service';
 
-
-
 @Component({
   selector: 'app-regulatory',
   templateUrl: './regulatory.component.html',
@@ -24,6 +22,7 @@ export class RegulatoryComponent implements OnInit {
     this.titleService.setTitle("Inventory - Regulatory Details");
 
   }
+
   clickMethod() {
     this.showDialogue = false;
     this.save();
@@ -54,6 +53,7 @@ export class RegulatoryComponent implements OnInit {
       verticalPosition: "top"
     });
   }
+
   checkAppId() {
     if (this.LocalStorageValue === Number(localStorage.getItem('savedApplicationID'))) {
       return true;
@@ -62,6 +62,7 @@ export class RegulatoryComponent implements OnInit {
       return false;
     }
   }
+
   save() {
     this.showSpinner = true;
     for (this.i = 0; this.i < this.regulatoryModel.length; this.i++) {
@@ -69,8 +70,8 @@ export class RegulatoryComponent implements OnInit {
     }
 
     this.regulatoryService.storeRegulatoryDetails(this.regulatoryModel).subscribe((data: any) => {
+      this.showSpinner = false;
     })
-    this.showSpinner = false;
 
   }
 

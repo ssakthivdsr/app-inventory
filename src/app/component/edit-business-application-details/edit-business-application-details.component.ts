@@ -21,6 +21,8 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
   checked = false;
   indeterminate = false;
   ValidNumberIndicator = true;
+  showSpinner: Boolean;
+  showDialogue: Boolean;
 
   constructor(private _fb: FormBuilder, private dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router, private businessApplicationService: BusinessApplicationService) { }
 
@@ -42,12 +44,15 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
       ])
     });
 
-
+    this.businessApplicationModel.transactions = [{ id: 1, applicationId: 1, transactionType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
+    this.businessApplicationModel.products = [{ id: 1, applicationId: 1, productType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' }, writtenPremiumOfProducts: null, writtenPremiumOfProductsObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
+    this.businessApplicationModel.channels = [{ id: 1, applicationId: 1, channelType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
+    this.businessApplicationModel.users = [{ id: 1, applicationId: 1, userType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
 
     this.existingAppIdEdit = Number(localStorage.getItem('applicationID'));
     if (this.existingAppIdEdit != 0) {
       this.businessApplicationService.retrieveBusinessApplicationByApplicationId(this.existingAppIdEdit).subscribe((data: BusinessApplicationDetails) => {
-        console.log(data);
+
         if (data.channels.length > 0) {
           this.businessApplicationModel.channels = data.channels;
           for (this.i = 0; this.i < data.channels.length - 1; this.i++) {
@@ -55,9 +60,7 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
             c3.push(this.initChannels());
           }
         }
-        else {
-          this.businessApplicationModel.channels = [{ id: 1, applicationId: 1, channelType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
-        }
+
         if (data.transactions.length > 0) {
           this.businessApplicationModel.transactions = data.transactions;
           for (this.i = 0; this.i < data.transactions.length - 1; this.i++) {
@@ -65,9 +68,7 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
             c1.push(this.initAddress());
           }
         }
-        else {
-          this.businessApplicationModel.transactions = [{ id: 1, applicationId: 1, transactionType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
-        }
+
         if (data.products.length > 0) {
           this.businessApplicationModel.products = data.products;
           for (this.i = 0; this.i < data.products.length - 1; this.i++) {
@@ -75,9 +76,7 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
             c2.push(this.initProducts());
           }
         }
-        else {
-          this.businessApplicationModel.products = [{ id: 1, applicationId: 1, productType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' }, writtenPremiumOfProducts: null, writtenPremiumOfProductsObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
-        }
+
         if (data.users.length > 0) {
           this.businessApplicationModel.users = data.users;
           for (this.i = 0; this.i < data.users.length - 1; this.i++) {
@@ -86,9 +85,7 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
           }
 
         }
-        else {
-          this.businessApplicationModel.users = [{ id: 1, applicationId: 1, userType: '', volume: null, volumeObject: { transaction2018: '', transaction2019: '', transaction2020: '' } }];
-        }
+
         if (data.businessApplicationQuestionAnswer.length > 0) {
           this.businessApplicationModel.businessApplicationQuestionAnswer = data.businessApplicationQuestionAnswer;
         }
@@ -195,6 +192,17 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
     control.removeAt(i);
   }
 
+  clickMethod() {
+
+    this.update();
+    this.showDialogue = false;
+
+  }
+
+  onNoClick(): void {
+    this.showDialogue = false;
+  }
+
   check() {
     if (false)
       return true;
@@ -203,13 +211,13 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(EditBusinessApplicationSaveWarningDialog, {
-      data: this.businessApplicationModel
-    });
+
+    this.showDialogue = true;
   }
 
 
   update() {
+    this.showSpinner = true;
 
     for (this.i = 0; this.i < this.businessApplicationModel.channels.length; this.i++) {
       this.businessApplicationModel.channels[this.i].applicationId = this.existingAppIdEdit;
@@ -227,11 +235,15 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
       this.businessApplicationModel.businessApplicationQuestionAnswer[this.i].applicationId = this.existingAppIdEdit;
     }
     this.businessApplicationService.updateBusinessApplicationDetails(this.businessApplicationModel).subscribe((data: any) => {
+
+      this.showSpinner = false;
+      this.openSnackBar();
     })
-    this.openSnackBar();
+
   }
 
   openSnackBar() {
+    this.showSpinner = false;
     this._snackBar.open("Details are saved successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"
@@ -256,55 +268,5 @@ export class EditBusinessApplicationDetailsComponent implements OnInit {
 
 }
 
-@Component({
-  selector: 'edit-business-application-save-warning-dialog',
-  templateUrl: 'edit-business-application-save-warning-dialog.html',
-})
 
-export class EditBusinessApplicationSaveWarningDialog {
-  i: number = 0;
-  businessApplicationModelDialog = new BusinessApplicationDetails();
-
-  constructor(public dialogRef: MatDialogRef<EditBusinessApplicationSaveWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private businessApplicationService: BusinessApplicationService,
-    private changeDetectorRefs: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.businessApplicationModelDialog = data;
-  }
-
-  update() {
-    for (this.i = 0; this.i < this.businessApplicationModelDialog.transactions.length; this.i++) {
-      this.businessApplicationModelDialog.transactions[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
-    }
-    for (this.i = 0; this.i < this.businessApplicationModelDialog.channels.length; this.i++) {
-      this.businessApplicationModelDialog.channels[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
-    }
-    for (this.i = 0; this.i < this.businessApplicationModelDialog.products.length; this.i++) {
-      this.businessApplicationModelDialog.products[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
-    }
-    for (this.i = 0; this.i < this.businessApplicationModelDialog.users.length; this.i++) {
-      this.businessApplicationModelDialog.users[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
-    }
-    for (this.i = 0; this.i < this.businessApplicationModelDialog.businessApplicationQuestionAnswer.length; this.i++) {
-      this.businessApplicationModelDialog.businessApplicationQuestionAnswer[this.i].applicationId = Number(localStorage.getItem('savedApplicationID'));
-    }
-    this.businessApplicationService.storeBusinessApplicationDetails(this.businessApplicationModelDialog).subscribe((data: any) => {
-    })
-    this.openSnackBar();
-  }
-
-  openSnackBar() {
-    this._snackBar.open("Details are saved successfully", "Dismiss", {
-      duration: 2000,
-      verticalPosition: "top"
-    });
-  }
-
-  clickMethod() {
-    this.update();
-    this.dialogRef.close();
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
 

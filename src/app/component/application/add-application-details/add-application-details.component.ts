@@ -56,13 +56,7 @@ export class AddApplicationDetailsComponent implements OnInit {
     }
     this.selectedFunctionality = this.applicationModel.functionality;
   }
-  Method() {
 
-    this.showSpinner = true;
-    setTimeout(() => { this.showSpinner = false }
-      , 5000);
-
-  }
   onSelectDept(event: any) {
   }
 
@@ -80,6 +74,7 @@ export class AddApplicationDetailsComponent implements OnInit {
       this.departmentsRetrieved = data;
     })
   }
+
   clickMethod() {
 
     this.save();
@@ -156,6 +151,7 @@ export class AddApplicationDetailsComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['/landingPage']);
   }
+
   public checkError = (controlName: string, errorName: string) => {
     return this.addAppFormGroup.controls[controlName].hasError(errorName);
   }

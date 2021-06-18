@@ -27,7 +27,6 @@ export class BusinessapplicationdetailsComponent implements OnInit {
     showDialogue: Boolean;
     constructor(private _fb: FormBuilder, private dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router, private businessApplicationService: BusinessApplicationService) { }
 
-
     ngOnInit() {
         this.LocalStorageValue = Number(localStorage.getItem('savedApplicationID'));
         this.myForm = this._fb.group({
@@ -150,6 +149,7 @@ export class BusinessapplicationdetailsComponent implements OnInit {
     openDialog() {
         this.showDialogue = true;
     }
+
     checkAppId() {
         if (this.LocalStorageValue === Number(localStorage.getItem('savedApplicationID'))) {
             return true;
@@ -161,7 +161,6 @@ export class BusinessapplicationdetailsComponent implements OnInit {
 
     save() {
         this.showSpinner = true;
-
         this.existingAppId = Number(localStorage.getItem('savedApplicationID'));
         console.log(this.existingAppId);
         for (this.i = 0; this.i < this.businessApplicationModel.channels.length; this.i++) {

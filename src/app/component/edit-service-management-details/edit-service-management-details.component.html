@@ -164,8 +164,6 @@
             <input matInput [(ngModel)]="serviceManagementsRetrieved[16].answer" name="input17">
         </mat-form-field>
 
-
-
         <br />
         <mat-label class="sm-full-width">Breakup of Proactive Incidents Resolved at (Level 1/Level 2/Level 3)
         </mat-label>
@@ -185,9 +183,6 @@
             <mat-label>Level 3</mat-label>
             <input matInput [(ngModel)]="serviceManagementsRetrieved[19].answer" name="input20">
         </mat-form-field>
-
-
-
 
         <br />
 
@@ -239,10 +234,6 @@
         </mat-form-field>
         <br />
 
-
-
-
-
         <mat-form-field class="sm-full-width" [formGroup]="myForm">
             <mat-label>Number of Level "Critical Priority - Reactive Incident Requests</mat-label>
             <input matInput [(ngModel)]="serviceManagementsRetrieved[24].answer" name="input25" pattern="\d+"
@@ -251,7 +242,6 @@
         </mat-form-field>
         <br />
         <br />
-
 
         <mat-label class="sm-full-width">Number of Level "High" Priority - Reactive Incident Requests(active / closed)
         </mat-label>
@@ -265,8 +255,8 @@
             <mat-label>Closed</mat-label>
             <input matInput [(ngModel)]="serviceManagementsRetrieved[26].answer" name="input27">
         </mat-form-field>
-
         <br />
+
         <mat-label class="sm-full-width">Number of Level "Average" Priority - Reactive Incident Requests(active /
             closed)
         </mat-label>
@@ -280,8 +270,8 @@
             <mat-label>Closed</mat-label>
             <input matInput [(ngModel)]="serviceManagementsRetrieved[28].answer" name="input29">
         </mat-form-field>
-
         <br />
+
         <mat-label class="sm-full-width">Number of Level "Low" Priority - Reactive Incident Requests(active / closed)
         </mat-label>
 
@@ -294,8 +284,6 @@
             <mat-label>Closed</mat-label>
             <input matInput [(ngModel)]="serviceManagementsRetrieved[30].answer" name="input31">
         </mat-form-field>
-
-
 
         <mat-form-field class="sm-full-width">
             <mat-label>Percentage of Sev 1 Reactive incidents that breached SLAs</mat-label>
@@ -368,8 +356,6 @@
             </mat-select>
         </mat-form-field>
         <br />
-
-
 
         <mat-form-field class="sm-full-width">
             <mat-label>Ratio of Actual Application Availability vs Planned Application Availability</mat-label>
@@ -467,6 +453,7 @@
         </div>
 
     </form>
+
     <div class="example-button-row">
         <button mat-raised-button color="primary" (click)=" check() ? openDialog() : update()">Update</button>&nbsp;
         <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>

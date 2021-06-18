@@ -43,8 +43,6 @@ export class EditServiceManagementDetailsComponent implements OnInit {
 
   }
 
-
-
   ngOnInit(): void {
 
     for (this.i = 0; this.i < 47; this.i++) {
@@ -62,14 +60,6 @@ export class EditServiceManagementDetailsComponent implements OnInit {
         }
       })
     }
-  }
-
-  Method() {
-
-    this.showSpinner = true;
-    setTimeout(() => { this.showSpinner = false }
-      , 5000);
-
   }
 
   clickMethod() {
@@ -92,9 +82,6 @@ export class EditServiceManagementDetailsComponent implements OnInit {
   }
 
   openDialog() {
-    // this.dialog.open(EditServiceManagementWarningDialog, {
-    //   data: this.serviceManagementsRetrieved
-    // });
     this.showDialogue = true;
   }
 
@@ -113,14 +100,12 @@ export class EditServiceManagementDetailsComponent implements OnInit {
       this.openSnackBar();
     })
 
-    // this.openSnackBar();
   }
 
   cancel() {
     localStorage.clear();
     this.router.navigate(['/landingPage']);
   }
-
 
   onlyNumbers(event: { which: any; keyCode: any; }) {
 
@@ -135,40 +120,3 @@ export class EditServiceManagementDetailsComponent implements OnInit {
   }
 }
 
-// @Component({
-//   selector: 'edit-service-management-warning-dialog',
-//   templateUrl: 'edit-service-management-warning-dialog.html',
-// })
-
-// export class EditServiceManagementWarningDialog {
-
-//   serviceManagementModelDialog: ServiceManagement[] = [];
-
-//   constructor(public dialogRef: MatDialogRef<EditServiceManagementWarningDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private serviceManagementService: ServiceManagementService,
-//     private changeDetectorRefs: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public data: any) {
-//     this.serviceManagementModelDialog = data;
-//   }
-
-//   update() {
-//     this.serviceManagementService.storeAndupdateServiceManagementDetails(this.serviceManagementModelDialog).subscribe((data: any) => {
-//     })
-//     this.openSnackBar();
-//   }
-
-//   openSnackBar() {
-//     this._snackBar.open("Details are saved successfully", "Dismiss", {
-//       duration: 2000,
-//       verticalPosition: "top"
-//     });
-//   }
-
-//   clickMethod() {
-//     this.update();
-//     this.dialogRef.close();
-//   }
-
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
-
-// }

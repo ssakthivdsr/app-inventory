@@ -17,6 +17,10 @@ export class AddDeptDetailsComponent implements OnInit {
   departmentModel = new Department();
   departmentRetrieved = new Department();
   departmentsRetrieved: Department[] = [];
+  showSpinner: Boolean;
+  showDialogue: Boolean;
+
+
 
   constructor(private _snackBar: MatSnackBar, private router: Router, private userService: UserService,
     private changeDetectorRefs: ChangeDetectorRef) {
@@ -47,6 +51,7 @@ export class AddDeptDetailsComponent implements OnInit {
   }
 
   retrieveAllDepartmentDetails() {
+    this.showSpinner = false;
     this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
       //console.log(data);
       this.departmentsRetrieved = data;
@@ -55,16 +60,27 @@ export class AddDeptDetailsComponent implements OnInit {
     })
   }
 
+
   save() {
+    this.showSpinner = true;
+    console.log(this.showSpinner)
     this.userService.storeDepartmentDetails(this.departmentModel).subscribe((data: any) => {
-      //console.log(data);
+      this.showSpinner = false;
+      this.addDepFormGroup.reset();
+      this.retrieveAllDepartmentDetails();
+      console.log(this.showSpinner)
+      // this.showSpinner = false;
+      this.openSnackBar();
     })
-    this.addDepFormGroup.reset();
-    this.retrieveAllDepartmentDetails();
-    this.openSnackBar();
+    // console.log(this.showSpinner)
+    // this.showSpinner = false;
+    // this.addDepFormGroup.reset();
+    // this.retrieveAllDepartmentDetails();
+    // this.openSnackBar();
   }
 
   openSnackBar() {
+    this.showSpinner = false;
     this._snackBar.open("Details are saved successfully", "Dismiss", {
       duration: 2000,
       verticalPosition: "top"

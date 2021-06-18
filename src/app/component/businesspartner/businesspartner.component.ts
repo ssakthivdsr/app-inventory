@@ -7,12 +7,12 @@ import { Router } from '@angular/router';
 import { BusinessPartnerService } from 'src/app/service/businesspartner.service';
 import { BusinessPartner } from 'src/app/model/businesspartner.model';
 
-
 @Component({
   selector: 'app-businesspartner',
   templateUrl: './businesspartner.component.html',
   styleUrls: ['./businesspartner.component.css']
 })
+
 export class BusinesspartnerComponent implements OnInit {
   public addBusFormGroup: FormGroup;
   businesspartnerModel = new BusinessPartner();
@@ -21,12 +21,12 @@ export class BusinesspartnerComponent implements OnInit {
   showSpinner: Boolean;
   showDialogue: Boolean;
 
-
   public constructor(private titleService: Title, private _snackBar: MatSnackBar, private dialog: MatDialog, private router: Router, private businessPartnerService: BusinessPartnerService,
     private changeDetectorRefs: ChangeDetectorRef) {
     this.titleService.setTitle("Inventory - Business Partner Details");
     this.addBusFormGroup = new FormGroup({});
   }
+
   clickMethod() {
     this.save();
     this.showDialogue = false;
@@ -35,6 +35,7 @@ export class BusinesspartnerComponent implements OnInit {
   onNoClick(): void {
     this.showDialogue = false;
   }
+
   check() {
     if (this.businesspartnerModel.secondaryBusinessPartner === '' || this.businesspartnerModel.businessPartnerManagers === '' ||
       this.businesspartnerModel.businessPartnerDirectors === '')
@@ -53,6 +54,7 @@ export class BusinesspartnerComponent implements OnInit {
   openDialog() {
     this.showDialogue = true;
   }
+
   checkAppId() {
     if (this.LocalStorageValue === Number(localStorage.getItem('savedApplicationID'))) {
       return true;
@@ -61,6 +63,7 @@ export class BusinesspartnerComponent implements OnInit {
       return false;
     }
   }
+
   save() {
     this.showSpinner = true;
     this.businesspartnerModel.applicationId = Number(localStorage.getItem('savedApplicationID'));

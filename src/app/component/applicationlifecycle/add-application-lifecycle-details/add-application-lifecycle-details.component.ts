@@ -24,14 +24,14 @@ export class AddApplicationLifecycleDetailsComponent implements OnInit {
   public constructor(private titleService: Title, private dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router, private applicationlifecycleservice: ApplicationLifecycleService) {
     this.titleService.setTitle("Inventory - Application Lifecycle Details");
   }
+
   ngOnInit(): void {
     for (this.i = 0; this.i < 14; this.i++) {
       this.applicationlifecycleModel[this.i] = { id: 1, applicationId: 1, questionId: this.i + 1, answer: '' };
     }
     this.LocalStorageValue = Number(localStorage.getItem('savedApplicationID'));
-
-
   }
+
   clickMethod() {
     this.save();
     this.showDialogue = false;
@@ -40,6 +40,7 @@ export class AddApplicationLifecycleDetailsComponent implements OnInit {
   onNoClick(): void {
     this.showDialogue = false;
   }
+
   check() {
     for (this.checkId = 0; this.checkId <= 13; this.checkId++) {
       if (this.applicationlifecycleModel[this.checkId].answer === '')
@@ -84,7 +85,5 @@ export class AddApplicationLifecycleDetailsComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['/landingPage']);
   }
-
-
 }
 

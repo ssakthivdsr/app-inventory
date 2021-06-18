@@ -21,6 +21,7 @@ export class VendorpackageComponent implements OnInit {
   public constructor(private titleService: Title, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private vendorPackageService: VendorPackageService) {
     this.titleService.setTitle("Inventory - Vender Package Details");
   }
+
   clickMethod() {
     this.save();
     this.showDialogue = false;
@@ -63,6 +64,7 @@ export class VendorpackageComponent implements OnInit {
       verticalPosition: "top"
     });
   }
+
   checkAppId() {
     if (this.LocalStorageValue === Number(localStorage.getItem('savedApplicationID'))) {
       return true;
@@ -71,6 +73,7 @@ export class VendorpackageComponent implements OnInit {
       return false;
     }
   }
+
   save() {
     this.showSpinner = true;
     this.vendorPackageModel.applicationId = Number(localStorage.getItem('savedApplicationID'));

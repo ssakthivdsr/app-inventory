@@ -1,3 +1,5 @@
+@import "..\app.component.css";
+
 .bpd-form {
     min-width: 150px;
     max-width: 1800px;
@@ -34,3 +36,5 @@
   .valid-number{
     color:rgb(243, 16, 16);
   }
+  
+  

@@ -18,7 +18,6 @@ export class EditRegulatoryDetailsComponent implements OnInit {
   showSpinner: Boolean;
   showDialogue: Boolean;
 
-
   public constructor(private titleService: Title, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private regulatoryService: RegulatoryService, private route: ActivatedRoute) {
     this.titleService.setTitle("Inventory - Regulatory Details");
     for (this.i = 0; this.i < 10; this.i++)
@@ -28,7 +27,6 @@ export class EditRegulatoryDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.existingApplicationId = Number(localStorage.getItem('applicationID'));
-
     if (this.existingApplicationId != 0) {
       this.regulatoryService.retrieveRegulatoryByApplicationId(this.existingApplicationId).subscribe((data: Regulatory[]) => {
         if (data.length != 0) {
@@ -39,20 +37,12 @@ export class EditRegulatoryDetailsComponent implements OnInit {
             this.regulatoryRetrieved[this.i] = new Regulatory();
             this.regulatoryRetrieved[this.i].regulatoryValue = false;
           }
-          // console.log(this.regulatoryRetrieved);
+
         }
 
 
       })
     }
-  }
-
-  Method() {
-
-    this.showSpinner = true;
-    setTimeout(() => { this.showSpinner = false }
-      , 5000);
-
   }
 
   clickMethod() {
@@ -77,7 +67,6 @@ export class EditRegulatoryDetailsComponent implements OnInit {
   }
 
   openDialog() {
-    // this.dialog.open(EditRegulatoryDialog);
     this.showDialogue = true;
   }
 
@@ -98,9 +87,7 @@ export class EditRegulatoryDetailsComponent implements OnInit {
       this.showSpinner = false;
       this.openSnackBar();
     })
-    //console.log(this.regulatoryRetrieved);
 
-    // this.openSnackBar();
   }
 
   cancel() {
@@ -109,51 +96,3 @@ export class EditRegulatoryDetailsComponent implements OnInit {
   }
 }
 
-// @Component({
-//   selector: 'edit-regulatory-save-warning-dialog',
-//   templateUrl: 'edit-regulatory-save-warning-dialog.html',
-// })
-
-// export class EditRegulatoryDialog {
-
-//   i: number;
-//   public regulatoryRetrievedModel: Regulatory[] = [{ regulatoryId: 0, applicationId: Number(localStorage.getItem('savedApplicationID')), regulatoryValue: false },
-//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false },
-//   { regulatoryId: 0, applicationId: Number(localStorage.getItem('ApplicationID')), regulatoryValue: false }];
-
-
-//   constructor(public dialogRef: MatDialogRef<EditRegulatoryDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private regulatoryService: RegulatoryService) { }
-
-//   update() {
-//     for (this.i = 0; this.i < 10; this.i++) {
-//       this.regulatoryRetrievedModel[this.i].applicationId = Number(localStorage.getItem('applicationID'));
-//     }
-//     this.regulatoryService.updateRegulatoryDetails(this.regulatoryRetrievedModel).subscribe((data: any) => {
-//     })
-//     this.openSnackBar();
-//     //console.log(this.regulatoryRetrievedModel);
-//   }
-
-//   openSnackBar() {
-//     this._snackBar.open("Details are updated successfully", "Dismiss", {
-//       duration: 2000,
-//       verticalPosition: "top"
-//     });
-//   }
-
-//   clickMethod() {
-//     this.update();
-//     this.dialogRef.close();
-//   }
-
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
-// }

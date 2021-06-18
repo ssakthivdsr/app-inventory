@@ -7,7 +7,9 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <form [formGroup]="myForm" class="bpd-form">
+
                 <!--transactions-->
+
                 <div formArrayName="addresses">
                     <div *ngFor="let address of myForm.controls.addresses.controls; let i=index"
                         class="panel panel-default">
@@ -82,7 +84,9 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <form [formGroup]="myForm" class="bpd-form">
+
                 <!--users-->
+
                 <div formArrayName="users">
                     <div *ngFor="let address of myForm.controls.users.controls; let i=index"
                         class="panel panel-default">
@@ -156,7 +160,9 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <form [formGroup]="myForm" class="bpd-form">
+
                 <!--channels-->
+
                 <div formArrayName="channels">
                     <div *ngFor="let address of myForm.controls.channels.controls; let i=index"
                         class="panel panel-default">
@@ -227,7 +233,9 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <form [formGroup]="myForm" class="bpd-form">
+
                 <!--products-->
+
                 <div formArrayName="products">
                     <div *ngFor="let address of myForm.controls.products.controls; let i=index"
                         class="panel panel-default">
@@ -337,7 +345,9 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <form [formGroup]="myForm" class="bpd-form">
+
                 <!--others-->
+
                 <mat-radio-group class="bpd-full-width"
                     [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[0].answer"
                     [ngModelOptions]="{standalone: true}">
@@ -402,18 +412,9 @@
                 <br>
                 <mat-form-field class="bpd-full-width">
                     <mat-label>Different products sold by the PAS</mat-label>
-                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[6].answer"
+                    <input matInput [value]="businessApplicationModel.businessApplicationQuestionAnswer[6].answer"
+                        [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[6].answer"
                         [ngModelOptions]="{standalone: true}">
-                        <mat-option value="Auto">Auto</mat-option>
-                        <mat-option value="Motor cycle">Motor cycle</mat-option>
-                        <mat-option value="Boat">Boat</mat-option>
-                        <mat-option value="RV">RV</mat-option>
-                        <mat-option value="Antique">Antique</mat-option>
-                        <mat-option value="Dune buggy">Dune buggy</mat-option>
-                        <mat-option value="Homeowners">Homeowners</mat-option>
-                        <mat-option value="Rental">Rental</mat-option>
-                        <mat-option value="Condo">Condo</mat-option>
-                    </mat-select>
                 </mat-form-field>
                 <br>
                 <mat-form-field class="bpd-full-width">
@@ -475,18 +476,9 @@
                         interact with</mat-label>
                     <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[12].answer"
                         [ngModelOptions]="{standalone: true}">
-                        <mat-option value="CRM">CRM</mat-option>
-                        <mat-option value="Rating Engine">Rating Engine</mat-option>
-                        <mat-option value="Underwritten Engine">Underwritten Engine</mat-option>
-                        <mat-option value="Billing and Payments">Billing and Payments</mat-option>
-                        <mat-option value="Claims">Claims</mat-option>
-                        <mat-option value="Reinsurrance">Reinsurrance</mat-option>
-                        <mat-option value="Product Workbench">Product Workbench</mat-option>
-                        <mat-option value="Financial Reporting">Financial Reporting</mat-option>
-                        <mat-option value="State Reporting">State Reporting</mat-option>
-                        <mat-option value="Compensation">Compensation</mat-option>
-                        <mat-option value="Producer and License">Producer and License</mat-option>
-                        <mat-option value="others">others</mat-option>
+                        <mat-option value="less than 5 Interfaces">&lt; 5 Interfaces</mat-option>
+                        <mat-option value="5-10 Interfaces">5-10 Interfaces</mat-option>
+                        <mat-option value="greater 10 Interfaces">&gt; 10 Interfaces</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <br>
@@ -494,8 +486,12 @@
                     <mat-label>How many external interfacing applications(like MVR, Lexis Nexus, CLUE and so on) does it
                         interact
                         with? </mat-label>
-                    <input matInput [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[13].answer"
+                    <mat-select [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[13].answer"
                         [ngModelOptions]="{standalone: true}">
+                        <mat-option value="less than 5 Interfaces">&lt; 5 Interfaces</mat-option>
+                        <mat-option value="5-10 Interfaces">5-10 Interfaces</mat-option>
+                        <mat-option value="greater 10 Interfaces">&gt; 10 Interfaces</mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <br>
                 <mat-form-field class="bpd-full-width">
@@ -555,9 +551,27 @@
             </form>
         </mat-expansion-panel>
     </mat-accordion> <br />
+
+    <div class="overlay" *ngIf="showSpinner">
+        <div class="spinnerCenter">
+            <mat-spinner *ngIf="showSpinner" style="margin:0 auto;"></mat-spinner>
+        </div>
+    </div>
+
     <div class="margin-20">
         <button mat-raised-button color="primary" (click)="check() ? openDialog() : update()"> Update </button>&nbsp;
         <button mat-raised-button color="primary" (click)="cancel()"> Cancel </button>
-        <!-- <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Save</button> -->
     </div>
+
+    <div class="overlay" *ngIf="showDialogue">
+        <div class="center">
+            <h1 mat-dialog-title>Warning!</h1>
+            <div mat-dialog-content>Some fields are still empty. Do you still want to save it?</div>&nbsp;
+            <div mat-dialog-actions>
+                <button class="button" mat-button (click)="clickMethod()">Yes</button>&nbsp;
+                <button class="button" mat-button (click)="onNoClick()">No </button>
+            </div>
+        </div>
+    </div>
+
 </mat-card>

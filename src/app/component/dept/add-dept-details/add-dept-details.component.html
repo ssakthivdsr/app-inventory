@@ -11,6 +11,12 @@
     <mat-error *ngIf="checkError('DpOwner', 'required')">Department Owner is required</mat-error>
   </mat-form-field>
 
+  <div class="overlay" *ngIf="showSpinner">
+    <div class="spinnerCenter">
+      <mat-spinner *ngIf="showSpinner" style="margin:0 auto;"></mat-spinner>
+    </div>
+  </div>
+
 </form> <br />
 <div class="example-button-row">
   <button mat-raised-button color="primary" [disabled]="!addDepFormGroup.valid" mat-stroked-button

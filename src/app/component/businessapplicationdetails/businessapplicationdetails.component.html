@@ -7,7 +7,9 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <form [formGroup]="myForm" class="bpd-form">
+
         <!--transactions-->
+
         <div formArrayName="addresses">
           <div *ngFor="let address of myForm.controls.addresses.controls; let i=index" class="panel panel-default">
             <div class="panel-heading">
@@ -81,7 +83,9 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <form [formGroup]="myForm" class="bpd-form">
+
         <!--users-->
+
         <div formArrayName="users">
           <div *ngFor="let address of myForm.controls.users.controls; let i=index" class="panel panel-default">
             <div class="panel-heading">
@@ -153,7 +157,9 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <form [formGroup]="myForm" class="bpd-form">
+
         <!--channels-->
+
         <div formArrayName="channels">
           <div *ngFor="let address of myForm.controls.channels.controls; let i=index" class="panel panel-default">
             <div class="panel-heading">
@@ -222,7 +228,9 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <form [formGroup]="myForm" class="bpd-form">
+
         <!--products-->
+
         <div formArrayName="products">
           <div *ngFor="let address of myForm.controls.products.controls; let i=index" class="panel panel-default">
             <div class="panel-heading">
@@ -330,7 +338,9 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <form [formGroup]="myForm" class="bpd-form">
+
         <!--others-->
+
         <mat-radio-group class="bpd-full-width"
           [(ngModel)]="businessApplicationModel.businessApplicationQuestionAnswer[0].answer"
           [ngModelOptions]="{standalone: true}">
@@ -552,7 +562,7 @@
   </div>
 
   <div class="margin-20">
-    <!-- n -->
+
     <button mat-raised-button color="primary" [disabled]="checkAppId()" (click)="check() ? openDialog() : save() "
       [disabled]="checkAppId()"> Save </button>&nbsp;
     <button mat-raised-button color="primary" (click)="cancel()"> Cancel </button>

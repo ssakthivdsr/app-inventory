@@ -46,14 +46,11 @@ export class EditApplicationDetailsComponent implements OnInit {
 
     this.retrieveAllDepartmentDetails();
     this.existingApplicationId = Number(localStorage.getItem('applicationID'));
-    //console.log(this.existingApplicationId);
+
     if (this.existingApplicationId != 0) {
       this.applicationService.retrieveApplicationById(this.existingApplicationId).subscribe((data: ApplicationDetails) => {
         this.applicationModel = data;
         this.retrieveDepartmentById(this.applicationModel.departmentId);
-        //console.log(this.applicationModel.departmentId);
-        //console.log(this.applicationModel.departmentName);
-
         this.addAppFormGroup.setValue({
           AppName: this.applicationModel.applicationName,
           AppDesc: this.applicationModel.applicationDescription,
@@ -70,29 +67,17 @@ export class EditApplicationDetailsComponent implements OnInit {
           this.functionalities = ['Accounts', 'Loan', 'Mortgages', 'Payments', 'Fraud', 'Risk & Compliance', 'OutSourcing', 'Wealth & Retirement'];
         }
         this.selectedFunctionality = this.applicationModel.functionality;
-        //console.log(this.selectedFunctionality);
-        //this.addAppFormGroup.get("AppDept")?.setValue(this.applicationModel.departmentName);
-        //console.log("retrieved value:" + this.departmentsRetrieved);
-        //console.log(JSON.stringify(this.departmentsRetrieved));
+
       })
     }
   }
 
-  Method() {
-
-    this.showSpinner = true;
-    setTimeout(() => { this.showSpinner = false }
-      , 5000);
-
-  }
-
   onSelectDept(event: any) {
-    //console.log(event.value.selectedDepartment);
-    //this.functionalities = event.value.functionalities;
+
   }
 
   onSelectLob(event: any) {
-    //console.log(this.selectedLob);
+
     if (event.value === "Auto and Fire Insurance") {
       this.functionalities = ['Marketing', 'Sales and Distribution', 'Product management', 'Underwritting', 'Policy Acquisition & Servicing', 'Claims Management', 'Finance and Accounts', 'Reinsurance']
     }
@@ -102,22 +87,19 @@ export class EditApplicationDetailsComponent implements OnInit {
   }
 
   retrieveDepartmentById(id: number) {
+
     this.userService.retrieveDepartmentById(id).subscribe((data: Department) => {
-      //console.log(data);
       this.departmentRetrieved = data;
-      //this.applicationModel.departmentName = this.departmentRetrieved.departmentName;
-      //console.log("retrieved value:" + this.departmentsRetrieved);
-      //console.log(JSON.stringify(this.departmentsRetrieved));
+
     })
 
   }
 
   retrieveAllDepartmentDetails() {
+
     this.userService.retrieveAllDepartmentDetails().subscribe((data: Department[]) => {
-      //console.log(data);
       this.departmentsRetrieved = data;
-      //console.log("retrieved value:" + this.departmentsRetrieved);
-      //console.log(JSON.stringify(this.departmentsRetrieved));
+
     })
   }
 
@@ -142,16 +124,6 @@ export class EditApplicationDetailsComponent implements OnInit {
   }
 
   openDialog() {
-    // this.applicationModel.departmentId = this.selectedDepartmentID;
-    // this.applicationModel.lineOfBusiness = this.selectedLob;
-    // this.applicationModel.functionality = this.selectedFunctionality;
-    // this.applicationModel.businessValue = 0;
-    // this.applicationModel.agility = 0;
-    // this.applicationModel.businessTotal = 0;
-    // this.applicationModel.techTotal = 0;
-    // this.dialog.open(EditApplicationDetailsDialog, {
-    //   data: this.applicationModel
-    // });
 
     this.showDialogue = true;
 
@@ -175,7 +147,6 @@ export class EditApplicationDetailsComponent implements OnInit {
     this.applicationModel.businessTotal = 0;
     this.applicationModel.techTotal = 0;
     this.applicationService.updateApplicationDetails(this.applicationModel).subscribe((data: any) => {
-      // console.log(data);
       this.showSpinner = false;
       this.openSnackBar();
     })
@@ -192,42 +163,5 @@ export class EditApplicationDetailsComponent implements OnInit {
   }
 }
 
-// @Component({
-//   selector: 'edit-application-details-save-warning-dialog',
-//   templateUrl: 'edit-application-details-save-warning-dialog.html',
-// })
 
-// export class EditApplicationDetailsDialog {
-
-//   applicationModelDialog = new ApplicationDetails();
-
-
-//   constructor(public dialogRef: MatDialogRef<EditApplicationDetailsDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private applicationService: ApplicationService, @Inject(MAT_DIALOG_DATA) public data: any) {
-//     this.applicationModelDialog = data;
-//   }
-
-//   update() {
-//     // console.log("updated");
-//     this.applicationService.updateApplicationDetails(this.applicationModelDialog).subscribe((data: any) => {
-//       //   console.log(data);
-//     })
-//     this.openSnackBar();
-//   }
-
-//   openSnackBar() {
-//     this._snackBar.open("Details are updated successfully", "Dismiss", {
-//       duration: 2000,
-//       verticalPosition: "top"
-//     });
-//   }
-
-//   clickMethod() {
-//     this.update();
-//     this.dialogRef.close();
-//   }
-
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
-// }
 

@@ -3,10 +3,9 @@ import { Title } from '@angular/platform-browser';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-
 import { ApplicationLifecycleService } from 'src/app/service/applicationlifecycle.service';
 import { ApplicationLifecycle } from 'src/app/model/applicationlifecycle.model';
-// import { ApplicationLifecycle } from 'src/app/model/applicationlifecycle.model';
+
 
 @Component({
   selector: 'app-edit-applicationlifecycle',
@@ -15,7 +14,6 @@ import { ApplicationLifecycle } from 'src/app/model/applicationlifecycle.model';
 })
 export class EditApplicationlifecycleComponent implements OnInit {
   existingApplicationId: number = 0;
-  // public applicationlifecycleModel = new ApplicationLifecycle();
   applicationlifecycleRetrieve: ApplicationLifecycle[] = [];
   checkId: number;
   id: number;
@@ -27,11 +25,6 @@ export class EditApplicationlifecycleComponent implements OnInit {
 
   public constructor(private titleService: Title, private dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router, private applicationlifecycleservice: ApplicationLifecycleService) {
     this.titleService.setTitle("Inventory - Application Lifecycle Details");
-
-    // for (this.id = 0; this.id <= 13; this.id++) {
-    //   this.applicationlifecycleRetrieve[this.id] = new ApplicationLifecycle();
-    //   this.applicationlifecycleRetrieve[this.id].questionId = this.id + 1;
-    // }
 
   }
 
@@ -55,14 +48,6 @@ export class EditApplicationlifecycleComponent implements OnInit {
     }
   }
 
-  Method() {
-
-    this.showSpinner = true;
-    setTimeout(() => { this.showSpinner = false }
-      , 5000);
-
-  }
-
   clickMethod() {
 
     this.update();
@@ -83,7 +68,6 @@ export class EditApplicationlifecycleComponent implements OnInit {
   }
 
   openDialog() {
-    // this.dialog.open(EditApplicationLifecycleDialog, { data: this.applicationlifecycleRetrieve });
     this.showDialogue = true;
   }
 
@@ -105,7 +89,6 @@ export class EditApplicationlifecycleComponent implements OnInit {
 
     })
 
-    // this.openSnackBar();
   }
 
   cancel() {
@@ -115,45 +98,6 @@ export class EditApplicationlifecycleComponent implements OnInit {
   }
 }
 
-// @Component({
-//   selector: 'edit-application-lifecycle-dialog',
-//   templateUrl: 'edit-application-lifecycle-dialog.html',
-// })
-
-// export class EditApplicationLifecycleDialog {
-
-//   applicationlifecycleModel: ApplicationLifecycle[] = [];
-
-//   constructor(public dialogRef: MatDialogRef<EditApplicationLifecycleDialog>, public dialog: MatDialog, private _snackBar: MatSnackBar, private applicationlifecycleservice: ApplicationLifecycleService, @Inject(MAT_DIALOG_DATA) public data: any) {
-//     this.applicationlifecycleModel = data;
-//   }
-
-//   update() {
-
-//     console.log(this.applicationlifecycleModel);
-//     this.applicationlifecycleservice.storeAndupdateApplicationLifecycleDetails(this.applicationlifecycleModel).subscribe((data: any) => {
-
-//     })
-
-//     this.openSnackBar();
-//   }
-
-//   openSnackBar() {
-//     this._snackBar.open("Details are saved successfully", "Dismiss", {
-//       duration: 2000,
-//       verticalPosition: "top"
-//     });
-//   }
-
-//   clickMethod() {
-//     this.update();
-//     this.dialogRef.close();
-//   }
-
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
-// }
 
 
 
