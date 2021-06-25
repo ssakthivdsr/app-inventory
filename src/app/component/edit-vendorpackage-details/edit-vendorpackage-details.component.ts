@@ -9,7 +9,7 @@ import { VendorPackageService } from 'src/app/service/vendorPackage.service';
 @Component({
   selector: 'app-edit-vendorpackage-details',
   templateUrl: './edit-vendorpackage-details.component.html',
-  styleUrls: ['./edit-vendorpackage-details.component.css']
+  styleUrls: ['./edit-vendorpackage-details.component.css', '../../app.component.css']
 })
 
 export class EditVendorpackageDetailsComponent implements OnInit {
@@ -87,13 +87,11 @@ export class EditVendorpackageDetailsComponent implements OnInit {
     this.existingApplicationId = Number(localStorage.getItem('applicationID'));
     if (this.existingApplicationId != 0) {
       this.vendorPackageService.retrieveVendorPackageByApplicationId(this.existingApplicationId).subscribe((data: VendorPackage) => {
-        console.log(data);
         if (data == null) {
           this.vendorPackageModel = new VendorPackage();
         }
         else {
           this.vendorPackageModel = data;
-
         }
       })
     }

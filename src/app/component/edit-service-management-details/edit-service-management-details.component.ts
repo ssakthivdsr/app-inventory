@@ -11,7 +11,7 @@ import { ServiceManagement } from '../../model/servicemanagement.model';
 @Component({
   selector: 'app-edit-service-management-details',
   templateUrl: './edit-service-management-details.component.html',
-  styleUrls: ['./edit-service-management-details.component.css']
+  styleUrls: ['./edit-service-management-details.component.css', '../../app.component.css']
 })
 
 export class EditServiceManagementDetailsComponent implements OnInit {

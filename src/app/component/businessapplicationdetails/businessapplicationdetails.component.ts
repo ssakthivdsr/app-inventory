@@ -10,7 +10,7 @@ import { BusinessApplicationService } from '../../service/businessapplication.se
 @Component({
     selector: 'app-businessapplicationdetails',
     templateUrl: './businessapplicationdetails.component.html',
-    styleUrls: ['./businessapplicationdetails.component.css']
+    styleUrls: ['./businessapplicationdetails.component.css', '../../app.component.css']
 })
 
 
@@ -162,7 +162,6 @@ export class BusinessapplicationdetailsComponent implements OnInit {
     save() {
         this.showSpinner = true;
         this.existingAppId = Number(localStorage.getItem('savedApplicationID'));
-        console.log(this.existingAppId);
         for (this.i = 0; this.i < this.businessApplicationModel.channels.length; this.i++) {
             this.businessApplicationModel.channels[this.i].applicationId = this.existingAppId;
         }

@@ -11,7 +11,7 @@ import { ApplicationService } from 'src/app/service/application.service';
 @Component({
   selector: 'app-edit-application-details',
   templateUrl: './edit-application-details.component.html',
-  styleUrls: ['./edit-application-details.component.css']
+  styleUrls: ['./edit-application-details.component.css', '../../app.component.css']
 })
 export class EditApplicationDetailsComponent implements OnInit {
   i: number;
@@ -36,6 +36,7 @@ export class EditApplicationDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.showSpinner = true;
     this.addAppFormGroup = new FormGroup({
       AppName: new FormControl('', [Validators.required]),
       AppDesc: new FormControl('', [Validators.required]),
@@ -50,6 +51,7 @@ export class EditApplicationDetailsComponent implements OnInit {
     if (this.existingApplicationId != 0) {
       this.applicationService.retrieveApplicationById(this.existingApplicationId).subscribe((data: ApplicationDetails) => {
         this.applicationModel = data;
+        this.showSpinner = false;
         this.retrieveDepartmentById(this.applicationModel.departmentId);
         this.addAppFormGroup.setValue({
           AppName: this.applicationModel.applicationName,

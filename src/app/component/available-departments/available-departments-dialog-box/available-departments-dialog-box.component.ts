@@ -10,7 +10,7 @@ import { AvailableDepartmentsComponent } from '../available-departments.componen
 @Component({
   selector: 'app-available-departments-dialog-box',
   templateUrl: './available-departments-dialog-box.component.html',
-  styleUrls: ['./available-departments-dialog-box.component.css']
+  styleUrls: ['./available-departments-dialog-box.component.css', '../../../app.component.css']
 })
 
 export class AvailableDepartmentsDialogBoxComponent implements OnInit {

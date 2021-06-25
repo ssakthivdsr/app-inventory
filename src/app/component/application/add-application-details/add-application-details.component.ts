@@ -12,7 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-add-application-details',
   templateUrl: './add-application-details.component.html',
-  styleUrls: ['./add-application-details.component.css']
+  styleUrls: ['./add-application-details.component.css', '../../../app.component.css']
 })
 
 export class AddApplicationDetailsComponent implements OnInit {
@@ -34,7 +34,6 @@ export class AddApplicationDetailsComponent implements OnInit {
     this.addAppFormGroup = new FormGroup({});
     localStorage.setItem('savedApplicationID', 0 + '');
     this.initialId = Number(localStorage.getItem('savedApplicationID'));
-    console.log(this.initialId);
   }
 
   ngOnInit(): void {

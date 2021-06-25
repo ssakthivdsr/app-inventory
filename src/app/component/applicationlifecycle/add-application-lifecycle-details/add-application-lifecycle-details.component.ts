@@ -9,7 +9,7 @@ import { ApplicationLifecycleService } from 'src/app/service/applicationlifecycl
 @Component({
   selector: 'app-add-application-lifecycle-details',
   templateUrl: './add-application-lifecycle-details.component.html',
-  styleUrls: ['./add-application-lifecycle-details.component.css']
+  styleUrls: ['./add-application-lifecycle-details.component.css', '../../../app.component.css']
 })
 
 export class AddApplicationLifecycleDetailsComponent implements OnInit {

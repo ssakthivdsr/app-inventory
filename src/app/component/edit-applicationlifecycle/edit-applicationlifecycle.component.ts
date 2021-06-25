@@ -10,7 +10,7 @@ import { ApplicationLifecycle } from 'src/app/model/applicationlifecycle.model';
 @Component({
   selector: 'app-edit-applicationlifecycle',
   templateUrl: './edit-applicationlifecycle.component.html',
-  styleUrls: ['./edit-applicationlifecycle.component.css']
+  styleUrls: ['./edit-applicationlifecycle.component.css', '../../app.component.css']
 })
 export class EditApplicationlifecycleComponent implements OnInit {
   existingApplicationId: number = 0;

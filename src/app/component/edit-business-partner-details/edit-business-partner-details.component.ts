@@ -10,7 +10,7 @@ import { BusinessPartner } from 'src/app/model/businesspartner.model';
 @Component({
   selector: 'app-edit-business-partner-details',
   templateUrl: './edit-business-partner-details.component.html',
-  styleUrls: ['./edit-business-partner-details.component.css']
+  styleUrls: ['./edit-business-partner-details.component.css', '../../app.component.css']
 })
 export class EditBusinessPartnerDetailsComponent implements OnInit {
   existingApplicationId: number = 0;
@@ -35,7 +35,6 @@ export class EditBusinessPartnerDetailsComponent implements OnInit {
     this.existingApplicationId = Number(localStorage.getItem('applicationID'));
     if (this.existingApplicationId != 0) {
       this.businessPartnerService.retrieveBusinessPartnerByApplicationId(this.existingApplicationId).subscribe((data: BusinessPartner) => {
-        console.log(data);
         if (data == null) {
           this.businesspartnerModel = new BusinessPartner();
         }

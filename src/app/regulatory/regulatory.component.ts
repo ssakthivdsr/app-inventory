@@ -9,7 +9,7 @@ import { RegulatoryService } from '../service/regulatory.service';
 @Component({
   selector: 'app-regulatory',
   templateUrl: './regulatory.component.html',
-  styleUrls: ['./regulatory.component.css']
+  styleUrls: ['./regulatory.component.css', '../app.component.css']
 })
 
 export class RegulatoryComponent implements OnInit {
@@ -71,6 +71,7 @@ export class RegulatoryComponent implements OnInit {
 
     this.regulatoryService.storeRegulatoryDetails(this.regulatoryModel).subscribe((data: any) => {
       this.showSpinner = false;
+      this.openSnackBar();
     })
 
   }
